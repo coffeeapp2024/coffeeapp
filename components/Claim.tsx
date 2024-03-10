@@ -1,14 +1,13 @@
 import { BoltIcon, FireIcon } from "@heroicons/react/24/outline";
-import Link from "next/link";
 import React from "react";
-// import ProfileCard from "./ProfileCard";
 import QRScannerButton from "./QRScannerButton";
+import ProfileCard from "./ProfileCard";
 
-function Claim() {
+function Claim({ session }: any) {
   return (
     <div className="h-full">
       <div className="h-3/5 pt-4">
-        {/* <ProfileCard /> */}
+        <ProfileCard session={session} />
 
         <div className="pt-20 flex items-center justify-center flex-col">
           <div className="mb-16">
