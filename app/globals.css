@@ -1,3 +1,38 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  :root {
+    body {
+      @apply bg-black text-black max-w-screen-sm min-h-screen mx-auto;
+    }
+  }
+}
+
+@layer base {
+  @keyframes zoomOut {
+    from {
+      transform: scale(1);
+    }
+    to {
+      transform: scale(0.95);
+    }
+  }
+
+  .animate-zoom-out {
+    animation: zoomOut 0.5s infinite alternate;
+  }
+
+  .nav-item {
+    @apply flex flex-col items-center justify-center px-6 gap-1  scale-110;
+  }
+
+  .nav-icon {
+    @apply h-5 w-5;
+  }
+
+  .nav-item-name {
+    @apply text-xs text-neutral-600;
+  }
+}
