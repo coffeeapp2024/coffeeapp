@@ -31,6 +31,7 @@ const QRScannerButton: React.FC = () => {
           onResult={handleResult}
           onError={handleError}
           enabled={showScanner}
+          components={{ tracker: true }}
         />
         {scannedText && (
           <div>
