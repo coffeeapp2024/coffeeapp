@@ -2,6 +2,14 @@
 
 import React, { useState } from "react";
 import { Scanner } from "@yudiel/react-qr-scanner";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 const QRScannerButton: React.FC = () => {
   const [showScanner, setShowScanner] = useState(false);
@@ -20,22 +28,21 @@ const QRScannerButton: React.FC = () => {
     console.error("Scanner error:", error?.message);
     // setShowScanner(false); // Hide scanner if an error occurs
   };
-
+  // onOpenChange={}
   return (
-    <div>
-      <button
-        className=" bg-yellow-500 h-12 w-fit px-4 flex items-center justify-center rounded-2xl text-xl text-neutral-800 font-extrabold text-nowrap border-[1px] border-neutral-700"
-        onClick={toggleScanner}
-      >
-        {showScanner ? "Close" : "Scan Bill"}
-      </button>
-      {showScanner && <Scanner onResult={handleResult} onError={handleError} />}
-      {scannedText && (
-        <div>
-          <p>Scanned Text: {scannedText}</p>
-        </div>
-      )}
-    </div>
+    <Dialog>
+      <DialogTrigger className="bg-yellow-500 h-12 w-fit px-4 flex items-center justify-center rounded-2xl text-xl text-neutral-800 font-extrabold text-nowrap border-[1px] border-neutral-700">
+        Open
+      </DialogTrigger>
+      <DialogContent>
+        <Scanner onResult={handleResult} onError={handleError} />
+        {scannedText && (
+          <div>
+            <p>Scanned Text: {scannedText}</p>
+          </div>
+        )}
+      </DialogContent>
+    </Dialog>
   );
 };
 
