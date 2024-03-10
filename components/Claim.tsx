@@ -42,11 +42,6 @@ function Claim() {
           </div>
         </div>
         <div className="basis-1/4">
-          <Link href="/">
-            <div className="bg-yellow-500 h-12 w-fit px-4 flex items-center justify-center rounded-2xl text-xl text-neutral-800 font-extrabold text-nowrap border-[1px] border-neutral-700">
-              <span>Scan Bill</span>
-            </div>
-          </Link>
           <QRScannerButton />
         </div>
       </div>
