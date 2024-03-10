@@ -21,12 +21,12 @@ const QRScannerButton: React.FC = () => {
 
   const handleResult = (text: string, result: any) => {
     setScannedText(result);
-    // setShowScanner(false); // Hide scanner after successful scan
+    setShowScanner(false); // Hide scanner after successful scan
   };
 
   const handleError = (error: Error) => {
     console.error("Scanner error:", error?.message);
-    // setShowScanner(false); // Hide scanner if an error occurs
+    setShowScanner(false); // Hide scanner if an error occurs
   };
   // onOpenChange={}
   return (
