@@ -5,10 +5,20 @@ import { Scanner } from "@yudiel/react-qr-scanner";
 
 const QRScannerButton: React.FC = () => {
   const [showScanner, setShowScanner] = useState(false);
-  const [text, setText] = useState("");
+  const [scannedText, setScannedText] = useState<string | null>(null);
 
   const toggleScanner = () => {
     setShowScanner((prevShowScanner) => !prevShowScanner);
+  };
+
+  const handleResult = (text: string, result: any) => {
+    setScannedText(result);
+    // setShowScanner(false); // Hide scanner after successful scan
+  };
+
+  const handleError = (error: Error) => {
+    console.error("Scanner error:", error?.message);
+    // setShowScanner(false); // Hide scanner if an error occurs
   };
 
   return (
@@ -18,13 +28,12 @@ const QRScannerButton: React.FC = () => {
         onClick={toggleScanner}
       >
         {showScanner ? "Close" : "Scan Bill"}
-        {text}
       </button>
-      {showScanner && (
-        <Scanner
-          onResult={(text, result) => setText(text)}
-          onError={(error) => console.log(error?.message)}
-        />
+      {showScanner && <Scanner onResult={handleResult} onError={handleError} />}
+      {scannedText && (
+        <div>
+          <p>Scanned Text: {scannedText}</p>
+        </div>
       )}
     </div>
   );
