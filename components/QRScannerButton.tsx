@@ -2,14 +2,7 @@
 
 import React, { useState } from "react";
 import { Scanner } from "@yudiel/react-qr-scanner";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 
 const QRScannerButton: React.FC = () => {
   const [showScanner, setShowScanner] = useState(false);
