@@ -1,13 +1,13 @@
-"use client";
+// "use client";
 
-import { signIn, signOut, useSession } from "next-auth/react";
+// import { signIn, signOut, useSession } from "next-auth/react";
 
 function ProfileCard() {
-  const { data: session } = useSession();
+  // const { data: session } = useSession();
 
   return (
     <div>
-      {!session && (
+      {/* {!session && (
         <>
           Not signed in <br />
           <button onClick={() => signIn("google")}>Sign in with Google</button>
@@ -18,7 +18,7 @@ function ProfileCard() {
           Signed in as {session.user?.email} <br />
           <button onClick={() => signOut()}>Sign out</button>
         </>
-      )}
+      )} */}
     </div>
   );
 }
