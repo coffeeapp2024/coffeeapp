@@ -13,7 +13,7 @@ const QRScannerButton: React.FC = () => {
   };
 
   const handleResult = (text: string, result: any) => {
-    setScannedText(text);
+    setScannedText(result?.text);
     setShowScanner(false); // Hide scanner after successful scan
   };
 
