@@ -1,18 +1,21 @@
 import React from "react";
 import QRScannerButton from "./QRScannerButton";
 import { BoltIcon, FireIcon } from "@heroicons/react/24/outline";
+import Image from "next/image";
 
 function ScanClaimCard() {
   return (
     <div className="absolute bottom-1/3 w-full px-3">
-      <div className=" bg-white rounded-3xl border-[1px] border-neutral-300 h-24 flex p-3 items-center justify-center">
+      <div className=" bg-white bg-opacity-75 rounded-3xl border-[1px] border-neutral-300 h-24 flex p-3 items-center justify-center">
         <div className="basis-3/4 flex items-center gap-x-2">
           <div>
-            <BoltIcon className="h-12 w-12 text-yellow-500" />
+            <div className="relative w-[68px] h-[68px]">
+              <Image src="/hourclass.png" fill={true} alt="Coin Icon" />
+            </div>
           </div>
-          <div className="flex flex-col text-neutral-500 font-bold">
-            <span>11h 6m to fill</span>
-            <span>0.1 point/hour</span>
+          <div className="flex flex-col font-semibold">
+            <span className="text-neutral-800 ">11h 6m to fill</span>
+            <span className="text-neutral-500 ">0.1 coin/hour</span>
           </div>
         </div>
         <div className="basis-1/4">
