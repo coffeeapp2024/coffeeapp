@@ -23,7 +23,7 @@ function ProfileCard() {
   console.log("user:", user);
 
   return (
-    <div className="mx-3 h-16 bg-white bg-opacity-90 rounded-3xl border-[1px] border-neutral-300 shadow-sm">
+    <div className="mx-3 h-16 bg-white bg-opacity-90 rounded-3xl border-[1px] border-neutral-300 shadow-sm active:scale-[98%] transition-transform">
       {user ? <ProfileInfo /> : <LoginButton />}
     </div>
   );
