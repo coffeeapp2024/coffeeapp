@@ -14,7 +14,7 @@ function ScanClaimCard() {
             </div>
           </div>
           <div className="flex flex-col font-semibold">
-            <span className="text-neutral-800 ">11h 6m to fill</span>
+            <span className="text-neutral-800 -mb-1">11h 6m to fill</span>
             <span className="text-neutral-500 ">0.1 coin/hour</span>
           </div>
         </div>
