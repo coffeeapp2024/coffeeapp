@@ -6,8 +6,8 @@ import Image from "next/image";
 function ScanClaimCard() {
   return (
     <div className="absolute bottom-1/3 w-full px-3">
-      <div className=" bg-white bg-opacity-90 rounded-3xl border-[1px] border-neutral-300 flex px-3 py-3 items-center justify-center shadow-sm">
-        <div className="basis-3/4 flex items-center gap-x-2">
+      <div className=" bg-white bg-opacity-90 rounded-3xl border-[1px] border-neutral-300 flex px-3 py-3 items-center justify-between shadow-sm">
+        <div className="flex items-center gap-x-2">
           <div>
             <div className="relative w-[68px] h-[68px]">
               <Image src="/hourclass.png" fill={true} alt="Coin Icon" />
@@ -18,7 +18,7 @@ function ScanClaimCard() {
             <span className="text-neutral-500 text-sm">0.1 coin/hour</span>
           </div>
         </div>
-        <div className="basis-1/4">
+        <div className="mr-1">
           <QRScannerButton />
         </div>
       </div>
