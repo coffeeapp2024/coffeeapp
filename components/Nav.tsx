@@ -4,6 +4,7 @@ import {
   RocketLaunchIcon,
   StarIcon,
 } from "@heroicons/react/24/outline";
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
@@ -25,13 +26,17 @@ function Nav() {
         </Link>
         <Link href="/">
           <div className="nav-item">
-            <RocketLaunchIcon className="nav-icon" />
+            <div className="relative w-8 h-8">
+              <Image src="/rocket.png" fill={true} alt="Boost Icon" />
+            </div>
             <span className="nav-item-name">Boost</span>
           </div>
         </Link>
         <Link href="/">
           <div className="nav-item">
-            <StarIcon className="nav-icon" />
+            <div className="relative w-8 h-8">
+              <Image src="/game.png" fill={true} alt="Boost Icon" />
+            </div>
             <span className="nav-item-name">Game</span>
           </div>
         </Link>

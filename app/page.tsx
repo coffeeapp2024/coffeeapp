@@ -1,17 +1,45 @@
+"use client";
+
 import Claim from "@/components/Claim";
 import Logo from "@/components/Logo";
 import Nav from "@/components/Nav";
 import ProfileCard from "@/components/ProfileCard";
 import ScanClaimCard from "@/components/ScanClaimCard";
+import { useEffect, useState } from "react";
 
-export default async function Home() {
+const bgList = [
+  ["/bg/bg1.jpg", "white"],
+  ["/bg/bg7.jpg", "neutral-800"],
+  ["/bg/bg6.jpg", "white"],
+  ["/bg/bg5.jpg", "neutral-800"],
+];
+
+export default function Home() {
+  const [bg, setBg] = useState(bgList[0]);
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      const randomIndex = Math.floor(Math.random() * bgList.length);
+      setBg(bgList[randomIndex]);
+    }, 10000); // Change background every 1 minute (60000 milliseconds)
+    return () => clearInterval(intervalId);
+  }, []);
+
   return (
-    <main className="bg-gradient-to-b from-emerald-100 to-fuchsia-100 relative h-screen">
+    <main
+      style={{
+        backgroundImage: `url(${bg[0]})`,
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+      }}
+      className="relative h-screen"
+    >
       <div className="pt-4 pb-20">
         <ProfileCard />
       </div>
-      <Logo />
-      <Claim />
+      {/* <Logo textColor={bg[1]} /> */}
+      <Claim textColor={bg[1]} />
       <ScanClaimCard />
       <Nav />
     </main>
