@@ -22,12 +22,12 @@ const QRScannerButton: React.FC = () => {
     setShowScanner(false); // Hide scanner if an error occurs
   };
   return (
-    <Dialog open={showScanner} onOpenChange={toggleScanner}>
-      <DialogTrigger className="relative">
-        <div className=" z-20 bg-yellow-400 h-12 w-fit px-4 flex items-center justify-center rounded-2xl text-xl text-neutral-800 font-extrabold text-nowrap border-[1px] border-neutral-700">
+    <Dialog open={false} onOpenChange={toggleScanner}>
+      <DialogTrigger className="relative z-10 active:scale-[98%]">
+        <div className="bg-yellow-400 h-10 px-4 flex items-center justify-center rounded-xl text-xl text-neutral-800 font-bold text-nowrap border-[1px] border-neutral-800 -z-10">
           Scan Bill
+          <div className="absolute w-full h-full -z-20 top-[3px] left-[3px] rounded-xl bg-neutral-700 "></div>
         </div>
-        <div className="absolute w-full h-full bg-neutral-800 top-2 rounded-2xl"></div>
       </DialogTrigger>
       <DialogContent>
         <Scanner
