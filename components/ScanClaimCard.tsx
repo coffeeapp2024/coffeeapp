@@ -6,7 +6,7 @@ import Image from "next/image";
 function ScanClaimCard() {
   return (
     <div className="absolute bottom-1/3 w-full px-3">
-      <div className=" bg-white bg-opacity-80 rounded-3xl border-[1px] border-neutral-300 h-24 flex p-3 items-center justify-center shadow-sm">
+      <div className=" bg-white bg-opacity-90 rounded-3xl border-[1px] border-neutral-300 flex px-3 py-3 items-center justify-center shadow-sm">
         <div className="basis-3/4 flex items-center gap-x-2">
           <div>
             <div className="relative w-[68px] h-[68px]">
