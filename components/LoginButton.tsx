@@ -1,11 +1,10 @@
 "use client";
 
 import { signInWithPopup } from "firebase/auth";
-import { auth, provider } from "../../lib/firebase";
-import { useEffect, useState } from "react";
+import { auth, provider } from "@/lib/firebase";
 import { useRouter } from "next/navigation";
 
-export default function SignIn() {
+export default function LoginButton() {
   const router = useRouter();
 
   async function signIn() {
@@ -18,12 +17,12 @@ export default function SignIn() {
         Authorization: `Bearer ${idToken}`,
       },
     });
-    router.push("/user");
+    router.push("/");
   }
 
   return (
-    <div className="text-black bg-white h-screen">
-      <button onClick={() => signIn()}>Sign In</button>
-    </div>
+    <button className="user-card" onClick={() => signIn()}>
+      <div>Sign In</div>
+    </button>
   );
 }

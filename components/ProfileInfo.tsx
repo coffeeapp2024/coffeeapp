@@ -8,8 +8,8 @@ import React from "react";
 
 function ProfileInfo() {
   return (
-    <Link href="/login">
-      <div className="mx-3 bg-white rounded-3xl border-[1px] border-neutral-300 h-16 flex px-3 py-3 items-center justify-between ">
+    <Link href="/user">
+      <div className="user-card">
         <div className="flex items-center justify-center gap-x-2 h-full">
           <div className="bg-neutral-300 rounded-xl h-full aspect-square flex items-center justify-center">
             <UserCircleIcon className="h-6 w-6 text-neutral-700" />

@@ -18,7 +18,7 @@ function SignOutButton() {
       });
 
       if (response.status === 200) {
-        router.push("/login");
+        router.push("/");
       } else {
         throw new Error("Failed to sign out.");
       }
