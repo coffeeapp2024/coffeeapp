@@ -1,6 +1,6 @@
 "use client";
 
-import { getRedirectResult, signInWithPopup } from "firebase/auth";
+import { signInWithPopup } from "firebase/auth";
 import { auth, provider } from "../../lib/firebase";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
