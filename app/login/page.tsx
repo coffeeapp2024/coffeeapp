@@ -8,27 +8,20 @@ import { useRouter } from "next/navigation";
 export default function SignIn() {
   const router = useRouter();
 
-  useEffect(() => {
-    getRedirectResult(auth).then(async (userCred) => {
-      if (!userCred) {
-        return;
-      }
+  async function signIn() {
+    const result = await signInWithPopup(auth, provider);
 
-      fetch("/api/login", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${await userCred.user.getIdToken()}`,
-        },
-      }).then((response) => {
-        if (response.status === 200) {
-          router.push("/protected");
-        }
-      });
+    console.log("result:", result);
+
+    const idToken = await result?.user.getIdToken();
+
+    await fetch("/api/login", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${idToken}`,
+      },
     });
-  }, []);
-
-  function signIn() {
-    signInWithPopup(auth, provider);
+    router.push("/user");
   }
 
   return (
