@@ -3,6 +3,7 @@
 import { signInWithPopup } from "firebase/auth";
 import { auth, provider } from "@/lib/firebase";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 export default function LoginButton() {
   const router = useRouter();
@@ -21,8 +22,16 @@ export default function LoginButton() {
   }
 
   return (
-    <button className="user-card" onClick={() => signIn()}>
-      <div>Sign In</div>
+    <button
+      className="flex items-center justify-center w-full h-full p-3 gap-x-3"
+      onClick={() => signIn()}
+    >
+      <div className="w-10 h-10 relative">
+        <Image src="/google-icon.png" fill={true} alt="Google Icon" />
+      </div>
+      <p className="font-semibold text-lg text-neutral-900">
+        Sign in with Google
+      </p>
     </button>
   );
 }
