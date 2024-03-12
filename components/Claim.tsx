@@ -11,6 +11,7 @@ function Claim({ textColor }: { textColor: string }) {
         <span className="font-extrabold text-4xl">0.090301</span>
       </div>
       <div className="flex items-center justify-center">
+        {/* <span className={`text-opacity-80 text-${textColor} font-semibold`}> */}
         <span className={`text-opacity-80 text-${textColor} font-semibold`}>
           Balance:
         </span>

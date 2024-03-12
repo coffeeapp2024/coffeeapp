@@ -38,7 +38,6 @@ export default function Home() {
       <div className="pt-4 pb-20">
         <ProfileCard />
       </div>
-      {/* <Logo textColor={bg[1]} /> */}
       <Claim textColor={bg[1]} />
       <ScanClaimCard />
     </main>
