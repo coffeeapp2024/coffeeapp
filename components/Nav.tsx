@@ -18,7 +18,7 @@ function Nav() {
             <span className="nav-item-name">Info</span>
           </div>
         </Link>
-        <Link href="/" className="">
+        <Link href="/products" className="">
           <div className="nav-item">
             <GiftIcon className="nav-icon" />
             <span className="nav-item-name">Product</span>

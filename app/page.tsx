@@ -41,7 +41,6 @@ export default function Home() {
       {/* <Logo textColor={bg[1]} /> */}
       <Claim textColor={bg[1]} />
       <ScanClaimCard />
-      <Nav />
     </main>
   );
 }
