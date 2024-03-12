@@ -33,15 +33,13 @@ function RecommendProductCards() {
       </h2>
       <div>
         <Carousel>
-          <CarouselContent className="ml-0">
+          <CarouselContent className="ml-0 py-2">
             {productInfoList.map((productInfo, index) => (
               <CarouselItem key={index} className="basis-[46%] pl-2">
                 <ProductCard productInfo={productInfo} />
               </CarouselItem>
             ))}
           </CarouselContent>
-          {/* <CarouselPrevious /> */}
-          {/* <CarouselNext /> */}
         </Carousel>
       </div>
     </div>
