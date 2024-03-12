@@ -21,7 +21,7 @@ export default function Home() {
     const intervalId = setInterval(() => {
       const randomIndex = Math.floor(Math.random() * bgList.length);
       setBg(bgList[randomIndex]);
-    }, 10000); // Change background every 1 minute (60000 milliseconds)
+    }, 10000);
     return () => clearInterval(intervalId);
   }, []);
 
