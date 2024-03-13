@@ -2,7 +2,7 @@ import React from "react";
 
 function GiftCard() {
   return (
-    <div className="bg-white border-[1px] shadow-sm rounded-3xl h-48 flex items-center justify-center">
+    <div className="bg-white border-[1px] shadow-sm rounded-2xl h-48 flex items-center justify-center">
       GiftCard
     </div>
   );
