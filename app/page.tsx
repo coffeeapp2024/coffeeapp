@@ -23,7 +23,7 @@ export default function Home() {
     const intervalId = setInterval(() => {
       const randomIndex = Math.floor(Math.random() * bgList.length);
       setBg(bgList[randomIndex]);
-    }, 5000);
+    }, 3000);
     return () => clearInterval(intervalId);
   }, []);
 
