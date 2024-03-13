@@ -12,7 +12,7 @@ function page() {
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
       }}
-      className="bg-neutral-700 h-screen px-4 pt-16"
+      className="bg-neutral-700 h-screen px-4 pt-4"
     >
       <div className="grid grid-cols-2 gap-4">
         <RandomGame />
