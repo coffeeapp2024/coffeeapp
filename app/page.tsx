@@ -12,6 +12,8 @@ const bgList = [
   ["/bg/bg7.jpg", "neutral-800"],
   ["/bg/bg6.jpg", "white"],
   ["/bg/bg5.jpg", "neutral-800"],
+  ["/bg/bg8.jpg", "neutral-800"],
+  ["/bg/bg10.jpg", "neutral-800"],
 ];
 
 export default function Home() {
@@ -21,7 +23,7 @@ export default function Home() {
     const intervalId = setInterval(() => {
       const randomIndex = Math.floor(Math.random() * bgList.length);
       setBg(bgList[randomIndex]);
-    }, 10000);
+    }, 5000);
     return () => clearInterval(intervalId);
   }, []);
 

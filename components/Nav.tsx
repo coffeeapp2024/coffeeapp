@@ -27,9 +27,14 @@ function Nav() {
         <Link href="/">
           <div className="nav-item">
             <div className="relative w-8 h-8">
-              <Image src="/rocket.png" fill={true} alt="Boost Icon" />
+              <Image
+                src="/icons/mine.png"
+                fill={true}
+                alt="Boost Icon"
+                className="object-contain rotate-1"
+              />
             </div>
-            <span className="nav-item-name">Boost</span>
+            <span className="nav-item-name">Mine</span>
           </div>
         </Link>
         <Link href="/gift">
