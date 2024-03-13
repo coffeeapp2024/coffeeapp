@@ -5,8 +5,8 @@ import React from "react";
 
 function page() {
   return (
-    <div className="bg-neutral-100 h-screen px-2 pt-16">
-      <div className="grid grid-cols-2 gap-2">
+    <div className="bg-neutral-100 h-screen px-4 pt-16">
+      <div className="grid grid-cols-2 gap-4">
         <RandomGame />
         <Boost />
         <GiftCard />
