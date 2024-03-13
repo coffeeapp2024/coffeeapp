@@ -12,7 +12,7 @@ function GiftCard() {
       }}
       className="shadow-lg rounded-[30px] aspect-[6/7] pt-4 px-4 relative active:scale-95 duration-75 transition-transform"
     >
-      <div className="relative w-full aspect-square">
+      <div className="relative w-full aspect-square animate-zoom-out">
         <Image src="/icons/coupon.png" fill={true} alt="coupon" className="" />
       </div>
       <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 shadow-lg">
