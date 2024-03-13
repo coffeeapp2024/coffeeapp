@@ -32,7 +32,7 @@ function Nav() {
             <span className="nav-item-name">Boost</span>
           </div>
         </Link>
-        <Link href="/">
+        <Link href="/game">
           <div className="nav-item">
             <div className="relative w-8 h-8">
               <Image src="/game.png" fill={true} alt="Boost Icon" />
