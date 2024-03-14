@@ -1,12 +1,17 @@
 import Image from "next/image";
 import React from "react";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogTrigger,
+  DialogClose,
+} from "@/components/ui/dialog";
+import { ClockIcon, XCircleIcon, XMarkIcon } from "@heroicons/react/24/outline";
 
 function Boost() {
   return (
     <Dialog>
       <DialogTrigger>
-        {" "}
         <div className="relative active:scale-95 duration-75 transition-transform">
           <div className="shadow-lg rounded-[30px] aspect-[6/7] flex items-center justify-center overflow-hidden">
             <Image
@@ -27,7 +32,13 @@ function Boost() {
           </div>
         </div>
       </DialogTrigger>
-      <DialogContent className="max-w-sm min-h-96 rounded-2xl"></DialogContent>
+      <DialogContent className="max-w-sm min-h-96 rounded-3xl">
+        <DialogClose className="absolute right-4 top-4">
+          <div>
+            <XMarkIcon className="w-4 h-4" />
+          </div>
+        </DialogClose>
+      </DialogContent>
     </Dialog>
   );
 }
