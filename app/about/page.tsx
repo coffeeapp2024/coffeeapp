@@ -12,8 +12,8 @@ function page() {
         <Video url="https://www.youtube.com/watch?v=i8_X77znqxg" />
       </div>
       <Info />
-      {/* <div className="custom-divide"></div>
-      <Event /> */}
+      <div className="custom-divide"></div>
+      <Event />
       <div className="custom-divide"></div>
       <Gallery />
       <div className="custom-divide"></div>
