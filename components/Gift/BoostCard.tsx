@@ -37,7 +37,7 @@ function BoostCard({
           isHidden && "grayscale pointer-events-none"
         }`}
       >
-        <MainButton text="Buy" />
+        <MainButton text="Upgrade" />
       </button>
     </div>
   );

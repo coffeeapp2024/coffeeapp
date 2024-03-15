@@ -14,4 +14,5 @@ export type BoostInfo = {
 
 export type GameInfo = {
   imgUrl: string;
+  price: number;
 };

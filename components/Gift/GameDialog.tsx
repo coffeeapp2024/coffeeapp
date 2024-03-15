@@ -3,11 +3,12 @@ import React from "react";
 import MainButton from "../MainButton";
 import CloseDialogButton from "../CloseDialogButton";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import GameCardList from "./GameCardList";
 
 function GameDialog() {
   return (
     <Dialog>
-      <DialogTrigger className="col-span-2 ">
+      <DialogTrigger className="col-span-2">
         <div className="relative active:scale-95 duration-75 transition-transform">
           <div className="shadow-lg rounded-[30px] aspect-square flex items-center justify-center overflow-hidden">
             <Image
@@ -35,6 +36,7 @@ function GameDialog() {
         </div>
       </DialogTrigger>
       <DialogContent className="bg-transparent border-none p-0 py-8">
+        <GameCardList />
         <CloseDialogButton />
       </DialogContent>
     </Dialog>
