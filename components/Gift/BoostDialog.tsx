@@ -9,7 +9,7 @@ import {
 import BoostCardList from "./BoostCardList";
 import CloseDialogButton from "../CloseDialogButton";
 
-function Boost() {
+function BoostDialog() {
   return (
     <Dialog>
       <DialogTrigger>
@@ -42,4 +42,4 @@ function Boost() {
   );
 }
 
-export default Boost;
+export default BoostDialog;

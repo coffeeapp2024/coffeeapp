@@ -1,6 +1,6 @@
-import Boost from "@/components/Gift/Boost";
+import BoostDialog from "@/components/Gift/BoostDialog";
 import GiftCard from "@/components/GiftCard";
-import RandomGame from "@/components/RandomGame";
+import GameDialog from "@/components/Gift/GameDialog";
 import React from "react";
 
 function page() {
@@ -15,8 +15,8 @@ function page() {
       className="bg-neutral-700 h-screen px-4 pt-4"
     >
       <div className="grid grid-cols-2 gap-4">
-        <RandomGame />
-        <Boost />
+        <GameDialog />
+        <BoostDialog />
         <GiftCard />
       </div>
     </div>
