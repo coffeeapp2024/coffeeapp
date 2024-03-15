@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { Scanner } from "@yudiel/react-qr-scanner";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import MainButton from "./MainButton";
 
 const QRScannerButton: React.FC = () => {
   const [showScanner, setShowScanner] = useState(false);
@@ -23,11 +24,8 @@ const QRScannerButton: React.FC = () => {
   };
   return (
     <Dialog open={false} onOpenChange={toggleScanner}>
-      <DialogTrigger className="relative z-10 active:scale-[98%] transition-transform">
-        <div className="bg-gradient-to-tr from-amber-300 to-amber-400 h-11 px-4 flex items-center justify-center rounded-xl text-xl text-neutral-800 font-bold text-nowrap border-[1px] border-neutral-800 -z-10 shadow-lg">
-          Scan QR
-          <div className="absolute w-full h-full -z-20 top-[3px] left-1 rounded-xl bg-neutral-700 "></div>
-        </div>
+      <DialogTrigger>
+        <MainButton text="Scan QR" />
       </DialogTrigger>
       <DialogContent>
         <Scanner

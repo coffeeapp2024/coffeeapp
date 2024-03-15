@@ -6,7 +6,8 @@ import {
   DialogTrigger,
   DialogClose,
 } from "@/components/ui/dialog";
-import { ClockIcon, XCircleIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { XMarkIcon } from "@heroicons/react/24/outline";
+import BoostCardList from "./BoostCardList";
 
 function Boost() {
   return (
@@ -32,7 +33,9 @@ function Boost() {
           </div>
         </div>
       </DialogTrigger>
-      <DialogContent className="max-w-sm min-h-96 rounded-3xl">
+      <DialogContent className="bg-transparent border-none p-0 py-8">
+        <BoostCardList />
+
         <DialogClose className="absolute -bottom-24 left-1/2 -translate-x-1/2 text-white rounded-full bg-none border-[2px] p-1">
           <div>
             <XMarkIcon className="w-7 h-7 " />

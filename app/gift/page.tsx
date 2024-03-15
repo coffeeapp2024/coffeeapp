@@ -1,4 +1,4 @@
-import Boost from "@/components/Boost";
+import Boost from "@/components/Gift/Boost";
 import GiftCard from "@/components/GiftCard";
 import RandomGame from "@/components/RandomGame";
 import React from "react";
