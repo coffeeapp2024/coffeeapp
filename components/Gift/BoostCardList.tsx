@@ -43,7 +43,13 @@ const currentNextBalance = 0.3;
 
 function BoostCardList() {
   return (
-    <Carousel className="-mx-0">
+    <Carousel
+      opts={{
+        startIndex: 1,
+        dragFree: true,
+      }}
+      className="-mx-0"
+    >
       <CarouselContent className="-ml-0 pb-8">
         {boostInfoList.map((boostInfo, index) => (
           <CarouselItem key={index} className="basis-[60%] pl-6">
