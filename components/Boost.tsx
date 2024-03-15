@@ -33,9 +33,9 @@ function Boost() {
         </div>
       </DialogTrigger>
       <DialogContent className="max-w-sm min-h-96 rounded-3xl">
-        <DialogClose className="absolute right-4 top-4">
+        <DialogClose className="absolute -bottom-24 left-1/2 -translate-x-1/2 text-white rounded-full bg-none border-[2px] p-2">
           <div>
-            <XMarkIcon className="w-4 h-4" />
+            <XMarkIcon className="w-8 h-8 " />
           </div>
         </DialogClose>
       </DialogContent>
