@@ -1,6 +1,6 @@
 "use client";
 
-import { Post } from "@/lib/types";
+import type { Post } from "@/lib/types";
 import { HeartIcon } from "@heroicons/react/24/outline";
 import { HeartIcon as HeartSolidIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
