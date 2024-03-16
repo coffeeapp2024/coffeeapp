@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  Dialog,
-  DialogContent,
-  DialogTrigger,
-  DialogClose,
-} from "@/components/ui/dialog";
-import { InformationCircleIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import CloseDialogButton from "../CloseDialogButton";
 
 function AboutEventButton() {

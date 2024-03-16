@@ -22,3 +22,9 @@ export type VoucherInfo = {
   info: string;
   price: number;
 };
+
+export type UserVoucherInfo = {
+  imgUrl: string;
+  info: string;
+  qrCode: string;
+};

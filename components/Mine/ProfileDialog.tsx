@@ -27,7 +27,7 @@ function ProfileDialog() {
         </div>
         <ChevronRightIcon className="h-6 w-6" />
       </DrawerTrigger>
-      <DrawerContent className="h-3/5 w-full rounded-t-3xl">
+      <DrawerContent className="h-2/3 w-full rounded-t-3xl">
         <UserSection />
       </DrawerContent>
     </Drawer>
