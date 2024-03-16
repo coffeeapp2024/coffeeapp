@@ -17,7 +17,7 @@ function BoostCard({
 
   return (
     <div className="bg-neutral-50 aspect-square rounded-3xl pt-2 relative ">
-      <div className="relative h-1/2 mb-4">
+      <div className="relative h-1/2 mb-3">
         <Image
           src={imgUrl}
           fill={true}
