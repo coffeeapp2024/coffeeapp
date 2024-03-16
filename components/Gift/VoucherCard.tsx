@@ -8,7 +8,7 @@ function VoucherCard({ voucherInfo }: { voucherInfo: VoucherInfo }) {
   const { imgUrl, info, price } = voucherInfo;
 
   return (
-    <div className="bg-neutral-50 aspect-square   rounded-3xl pt-2 px-2 relative ">
+    <div className="bg-neutral-50 aspect-[8/7]   rounded-3xl pt-3 px-3 relative ">
       <div className="relative h-1/2 mb-4">
         <Image
           src={imgUrl}
