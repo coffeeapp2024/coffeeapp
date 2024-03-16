@@ -1,6 +1,6 @@
 "use client";
 
-import ProfileInfo from "./ProfileInfo";
+import ProfileDialog from "./ProfileDialog";
 import { useEffect, useState } from "react";
 import { auth } from "@/lib/firebase";
 import { User } from "firebase/auth";
@@ -18,7 +18,8 @@ function ProfileCard() {
 
   return (
     <div className="mx-3 h-16 bg-white bg-opacity-90 rounded-3xl border-[1px] border-neutral-300 shadow-sm active:scale-[98%] transition-transform">
-      {user ? <ProfileInfo /> : <LoginButton />}
+      {/* {user ? <ProfileDialog /> : <LoginButton />} */}
+      <ProfileDialog />
     </div>
   );
 }

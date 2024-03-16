@@ -3,7 +3,7 @@
 import Claim from "@/components/Claim";
 import Logo from "@/components/Logo";
 import Nav from "@/components/Nav";
-import ProfileCard from "@/components/ProfileCard";
+import ProfileCard from "@/components/Mine/ProfileCard";
 import ScanClaimCard from "@/components/ScanClaimCard";
 import { useEffect, useState } from "react";
 
