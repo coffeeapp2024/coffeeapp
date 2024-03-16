@@ -43,7 +43,7 @@ function VoucherCardList() {
       }}
       className="-mx-0"
     >
-      <CarouselContent className="-ml-0 pb-8">
+      <CarouselContent className="-ml-0 pb-20">
         {userVoucherInfoList.map((userVoucherInfo, index) => (
           <CarouselItem key={index} className="basis-[80%] pl-3">
             <UserVoucher userVoucherInfo={userVoucherInfo} />
