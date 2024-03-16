@@ -1,7 +1,7 @@
 import BoostDialog from "@/components/Gift/BoostDialog";
-import GiftCard from "@/components/GiftCard";
 import GameDialog from "@/components/Gift/GameDialog";
 import React from "react";
+import VoucherDialog from "@/components/Gift/VoucherDialog";
 
 function page() {
   return (
@@ -17,7 +17,7 @@ function page() {
       <div className="grid grid-cols-2 gap-4">
         <GameDialog />
         <BoostDialog />
-        <GiftCard />
+        <VoucherDialog />
       </div>
     </div>
   );

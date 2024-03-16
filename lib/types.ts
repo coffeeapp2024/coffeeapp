@@ -16,3 +16,9 @@ export type GameInfo = {
   imgUrl: string;
   price: number;
 };
+
+export type VoucherInfo = {
+  imgUrl: string;
+  info: string;
+  price: number;
+};

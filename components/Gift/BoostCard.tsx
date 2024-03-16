@@ -16,7 +16,7 @@ function BoostCard({
   const isHidden = currentNextBalance === balance ? false : true;
 
   return (
-    <div className="bg-white aspect-square rounded-3xl pt-2 relative ">
+    <div className="bg-neutral-50 aspect-square rounded-3xl pt-2 relative ">
       <div className="relative h-1/2 mb-4">
         <Image
           src={imgUrl}
@@ -25,7 +25,7 @@ function BoostCard({
           className="object-contain"
         />
       </div>
-      <div className="flex items-center justify-center flex-col gap-y-3">
+      <div className="flex items-center justify-center flex-col gap-y-2">
         <span className="font-semibold text-neutral-700">{info}</span>
         <div className="flex items-center justify-center pl-2">
           <span className="font-bold text-xl">{price}</span>
