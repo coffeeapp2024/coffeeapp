@@ -14,7 +14,7 @@ function BoostDialog() {
     <Dialog>
       <DialogTrigger>
         <div className="relative active:scale-95 duration-75 transition-transform">
-          <div className="shadow-lg rounded-[30px] aspect-[6/7] flex items-center justify-center overflow-hidden">
+          <div className="shadow-lg rounded-[30px] aspect-[7/8] flex items-center justify-center overflow-hidden">
             <Image
               src={"/icons/rocket.gif"}
               layout={"responsive"}

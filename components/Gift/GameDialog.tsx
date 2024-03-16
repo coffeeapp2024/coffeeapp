@@ -10,7 +10,7 @@ function GameDialog() {
     <Dialog>
       <DialogTrigger className="col-span-2">
         <div className="relative active:scale-95 duration-75 transition-transform">
-          <div className="shadow-lg rounded-[30px] aspect-square flex items-center justify-center overflow-hidden">
+          <div className="shadow-lg rounded-[30px] aspect-[7/6] flex items-center justify-center overflow-hidden">
             <Image
               src={"/icons/game.gif"}
               layout={"responsive"}

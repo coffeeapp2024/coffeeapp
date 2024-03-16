@@ -17,7 +17,7 @@ function VoucherDialog() {
             backgroundRepeat: "no-repeat",
             backgroundSize: "cover",
           }}
-          className="shadow-lg rounded-[30px] aspect-[6/7] pt-4 px-4 relative active:scale-[98%] duration-75 transition-transform"
+          className="shadow-lg rounded-[30px] aspect-[7/8] pt-4 px-4 relative active:scale-[98%] duration-75 transition-transform"
         >
           <div className="relative w-full aspect-square animate-zoom-out">
             <Image
