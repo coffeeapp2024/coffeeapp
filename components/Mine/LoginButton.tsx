@@ -4,7 +4,7 @@ import { signInWithPopup } from "firebase/auth";
 import { auth, provider } from "@/lib/firebase";
 import Image from "next/image";
 import { createUserInFirestore, fetchUserData } from "@/lib/firebaseFunctions";
-import useUserDataStore from "@/store/zustand";
+import { useUserDataStore } from "@/store/zustand";
 
 export default function LoginButton() {
   const { setUserData } = useUserDataStore();

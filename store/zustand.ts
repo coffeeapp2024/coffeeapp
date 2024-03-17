@@ -6,9 +6,24 @@ type UserDataStore = {
   setUserData: (userData: UserData | null) => void;
 };
 
-const useUserDataStore = create<UserDataStore>((set) => ({
+export const useUserDataStore = create<UserDataStore>((set) => ({
   userData: null,
   setUserData: (userData) => set({ userData }),
 }));
 
-export default useUserDataStore;
+type HomePageContent = {
+  videoURL: string;
+  open: string;
+  address: string;
+  name: string;
+};
+
+type HomePageContentStore = {
+  homePageContent: HomePageContent | null;
+  setHomePageContent: (setHomePageContent: HomePageContent | null) => void;
+};
+
+export const useHomePageContentStore = create<HomePageContentStore>((set) => ({
+  homePageContent: null,
+  setHomePageContent: (homePageContent) => set({ homePageContent }),
+}));

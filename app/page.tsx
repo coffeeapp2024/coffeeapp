@@ -3,13 +3,12 @@
 import Claim from "@/components/Mine/Claim";
 import ProfileCard from "@/components/Mine/ProfileCard";
 import ScanClaimCard from "@/components/Mine/ScanClaimCard";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { auth } from "@/lib/firebase";
 import Background from "@/components/Mine/Background";
-import { UserData } from "@/lib/types";
 import { fetchUserData } from "@/lib/firebaseFunctions";
 import {} from "@/lib/timeActions";
-import useUserDataStore from "@/store/zustand";
+import { useUserDataStore } from "@/store/zustand";
 
 export default function Home() {
   const { setUserData } = useUserDataStore();

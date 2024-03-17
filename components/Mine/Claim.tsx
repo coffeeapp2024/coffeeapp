@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import CoinIcon from "../CoinIcon";
 import { updateCurrentCoin } from "@/lib/coinActions";
-import useUserDataStore from "@/store/zustand";
+import { useUserDataStore } from "@/store/zustand";
 
 function Claim() {
   const { userData } = useUserDataStore();

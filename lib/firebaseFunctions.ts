@@ -1,18 +1,10 @@
-import {
-  onSnapshot,
-  doc,
-  DocumentData,
-  collection,
-  setDoc,
-  getDoc,
-  deleteDoc,
-  DocumentSnapshot,
-} from "firebase/firestore";
+import { doc, collection, setDoc, getDoc, deleteDoc } from "firebase/firestore";
 import { UserData } from "./types";
 import { User } from "firebase/auth";
 import { db } from "./firebase";
 
 const usersRef = collection(db, "users");
+const contentsRef = collection(db, "contents");
 
 export async function createUserInFirestore(
   user: User
@@ -28,7 +20,7 @@ export async function createUserInFirestore(
         displayName: user.displayName,
         coin: 9.888888,
         balance: 0.1,
-        lastTimeStartMine: "2024-03-17T17:00:00",
+        startTimeMine: "2024-03-17T17:00:00",
         endTimeMine: "2024-03-18T08:00:00",
         vouchers: [],
       };
@@ -85,5 +77,20 @@ export async function deleteUserInFirestore(userId: string): Promise<void> {
   } catch (error) {
     console.error("Error deleting user data:", error);
     throw error; // You may want to handle the error appropriately in your application
+  }
+}
+
+export async function fetchHomePageContent(): Promise<any | null> {
+  try {
+    const homePageContentSnapshot = await getDoc(doc(contentsRef, "homepage"));
+    if (homePageContentSnapshot.exists()) {
+      return homePageContentSnapshot.data();
+    } else {
+      console.log("Document 'info' does not exist");
+      return null;
+    }
+  } catch (error) {
+    console.error("Error fetching home page video URL:", error);
+    throw error;
   }
 }

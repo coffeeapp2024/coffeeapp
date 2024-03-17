@@ -5,7 +5,7 @@ import {
   calculateRemainingTimeInSeconds,
   formatSeconds,
 } from "@/lib/timeActions";
-import useUserDataStore from "@/store/zustand";
+import { useUserDataStore } from "@/store/zustand";
 
 function ScanClaimCard() {
   const { userData } = useUserDataStore();

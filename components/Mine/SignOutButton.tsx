@@ -4,7 +4,7 @@ import React from "react";
 import { auth } from "@/lib/firebase";
 import { signOut } from "firebase/auth";
 import { ArrowRightStartOnRectangleIcon } from "@heroicons/react/24/outline";
-import useUserDataStore from "@/store/zustand";
+import { useUserDataStore } from "@/store/zustand";
 
 function SignOutButton() {
   const { setUserData } = useUserDataStore();
