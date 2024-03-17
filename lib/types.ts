@@ -36,11 +36,13 @@ export type UserInfo = {
 };
 
 export type UserData = {
-  email: string;
-  displayName: string;
+  email: string | null;
+  displayName: string | null;
   coin: number;
   balance: number;
   lastTimeStartMine: string | null;
   endTimeMine: string | null;
   vouchers: UserVoucherInfo[] | null;
 };
+
+export type DateString = string | null | undefined;

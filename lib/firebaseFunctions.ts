@@ -1,7 +1,8 @@
 import {
-  getFirestore,
+  onSnapshot,
   doc,
   DocumentData,
+  collection,
   setDoc,
   getDoc,
   deleteDoc,
@@ -9,12 +10,17 @@ import {
 } from "firebase/firestore";
 import { UserData } from "./types";
 import { User } from "firebase/auth";
+import { db } from "./firebase";
 
-export async function createUserInFirestore(user: User): Promise<void> {
-  const firestore = getFirestore();
-  const userDoc = doc(firestore, "users", user.uid);
+const usersRef = collection(db, "users");
+
+export async function createUserInFirestore(
+  user: User
+): Promise<UserData | null> {
+  const userDoc = doc(usersRef, user.uid);
   const userSnapshot = await getDoc(userDoc);
 
+  // Check if the user data already exists
   if (!userSnapshot.exists() && user.email && user.displayName) {
     const userData: UserData = {
       email: user.email,
@@ -27,28 +33,40 @@ export async function createUserInFirestore(user: User): Promise<void> {
     };
 
     await setDoc(userDoc, userData);
+
+    return userData;
   }
+  return null;
 }
 
 export async function fetchUserData(userId: string): Promise<UserData | null> {
-  const firestore = getFirestore();
-  const userDoc = doc(firestore, "users", userId);
-  const userSnapshot: DocumentSnapshot<DocumentData> = await getDoc(userDoc);
+  const userDoc = doc(usersRef, userId);
 
-  if (userSnapshot.exists()) {
-    return userSnapshot.data() as UserData;
-  } else {
-    console.error("User data not found");
-    return null;
-  }
+  return new Promise<UserData | null>((resolve, reject) => {
+    const unsubscribe = onSnapshot(
+      userDoc,
+      (docSnapshot) => {
+        if (docSnapshot.exists()) {
+          const userData = docSnapshot.data() as UserData;
+          resolve(userData);
+        } else {
+          console.error("User data not found");
+          resolve(null);
+        }
+      },
+      (error) => {
+        console.error("Error fetching user data:", error);
+        reject(error);
+      }
+    );
+  });
 }
 
 export async function updateUserInFirestore(
   userId: string,
   newData: Partial<UserData>
 ): Promise<void> {
-  const firestore = getFirestore();
-  const userDoc = doc(firestore, "users", userId);
+  const userDoc = doc(usersRef, userId);
 
   try {
     await setDoc(userDoc, newData, { merge: true });
@@ -59,8 +77,7 @@ export async function updateUserInFirestore(
 }
 
 export async function deleteUserInFirestore(userId: string): Promise<void> {
-  const firestore = getFirestore();
-  const userDoc = doc(firestore, "users", userId);
+  const userDoc = doc(usersRef, userId);
 
   try {
     await deleteDoc(userDoc);

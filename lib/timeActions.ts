@@ -1,4 +1,4 @@
-type DateString = string | null | undefined;
+import { DateString } from "./types";
 
 export function calculateRemainingTimeInSeconds(
   endTime: DateString
@@ -25,4 +25,23 @@ export function formatSeconds(seconds: number): string {
   const remainingSeconds = seconds % 60;
 
   return `${hours}h ${minutes}m ${remainingSeconds} to fill`;
+}
+
+export function calculateRemainingBalancePerSecond(
+  balancePerHour: number,
+  currentBalance: number,
+  endTime: DateString
+): number {
+  if (!endTime) return currentBalance;
+
+  const remainingTimeInSeconds = calculateRemainingTimeInSeconds(endTime);
+  if (remainingTimeInSeconds === null || remainingTimeInSeconds <= 0) {
+    return currentBalance;
+  }
+
+  const balancePerSecond = balancePerHour / 3600;
+  const remainingBalance =
+    currentBalance + remainingTimeInSeconds * balancePerSecond;
+
+  return remainingBalance;
 }
