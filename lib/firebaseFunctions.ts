@@ -21,8 +21,8 @@ export async function createUserInFirestore(user: User): Promise<void> {
       displayName: user.displayName,
       coin: 9.888888,
       balance: 0.1,
-      lastTimeStartMine: null,
-      endTimeMine: null,
+      lastTimeStartMine: "2024-03-17T17:00:00",
+      endTimeMine: "2024-03-18T08:00:00",
       vouchers: [],
     };
 

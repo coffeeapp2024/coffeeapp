@@ -4,11 +4,15 @@ import { signInWithPopup } from "firebase/auth";
 import { auth, provider } from "@/lib/firebase";
 import Image from "next/image";
 import { createUserInFirestore } from "@/lib/firebaseFunctions";
+import { useRouter } from "next/navigation";
 
 export default function LoginButton() {
+  const router = useRouter();
+
   async function signIn() {
     const { user } = await signInWithPopup(auth, provider);
     await createUserInFirestore(user);
+    router.push("/");
   }
 
   return (

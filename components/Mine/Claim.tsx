@@ -1,5 +1,5 @@
 import React from "react";
-import CoinIcon from "./CoinIcon";
+import CoinIcon from "../CoinIcon";
 
 function Claim({
   coin,

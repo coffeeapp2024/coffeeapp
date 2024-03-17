@@ -1,9 +1,14 @@
 import React from "react";
-import QRScannerButton from "./QRScannerButton";
-import { BoltIcon, FireIcon } from "@heroicons/react/24/outline";
+import QRScannerButton from "../QRScannerButton";
 import Image from "next/image";
 
-function ScanClaimCard() {
+function ScanClaimCard({
+  remainingTime,
+  balance,
+}: {
+  remainingTime: string;
+  balance: number | undefined;
+}) {
   return (
     <div className="absolute bottom-1/4 sm:bottom-1/3 w-full px-3">
       <div className=" bg-white bg-opacity-90 rounded-3xl border-[1px] border-neutral-300 flex px-3 py-3 items-center justify-between shadow-sm">
@@ -14,8 +19,12 @@ function ScanClaimCard() {
             </div>
           </div>
           <div className="flex flex-col font-semibold">
-            <span className="text-neutral-800 ">11h 6m to fill</span>
-            <span className="text-neutral-500 text-sm">0.1 coin/hour</span>
+            <span className="text-neutral-800 ">
+              {remainingTime ? remainingTime : "0h 0m 0s to fill"}
+            </span>
+            <span className="text-neutral-500 text-sm">
+              {balance} coin/hour
+            </span>
           </div>
         </div>
         <div className="mr-1">
