@@ -8,16 +8,12 @@ import { auth } from "@/lib/firebase";
 import Background from "@/components/Mine/Background";
 import { UserData } from "@/lib/types";
 import { fetchUserData } from "@/lib/firebaseFunctions";
-import {
-  calculateRemainingTimeInSeconds,
-  formatSeconds,
-} from "@/lib/timeActions";
+import {} from "@/lib/timeActions";
+import { User } from "firebase/auth";
 
 export default function Home() {
   const [userData, setUserData] = useState<UserData | null>(null);
-  const [remainingTimeSeconds, setRemainingTimeSeconds] = useState<
-    number | null
-  >(null);
+  // const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(async (user) => {
@@ -25,12 +21,6 @@ export default function Home() {
         try {
           const fetchedUserData = await fetchUserData(user.uid);
           setUserData(fetchedUserData);
-
-          // Calculate remaining time in seconds
-          const remainingTime = calculateRemainingTimeInSeconds(
-            fetchedUserData?.endTimeMine
-          );
-          setRemainingTimeSeconds(remainingTime);
         } catch (error) {
           console.error("Error fetching or creating user data:", error);
         }
@@ -44,8 +34,7 @@ export default function Home() {
 
   console.log("user data:", userData);
 
-  const remainingTimeFormatted =
-    remainingTimeSeconds != null ? formatSeconds(remainingTimeSeconds) : "";
+  const { coin, balance, endTimeMine } = userData ?? {};
 
   return (
     <main className="relative h-screen">
@@ -53,11 +42,8 @@ export default function Home() {
       <div className="pt-4 pb-20">
         <ProfileCard />
       </div>
-      <Claim coin={userData?.coin} balance={userData?.balance} />
-      <ScanClaimCard
-        remainingTime={remainingTimeFormatted}
-        balance={userData?.balance}
-      />
+      <Claim coin={coin} balance={balance} />
+      <ScanClaimCard endTimeMine={endTimeMine} balance={balance} />
     </main>
   );
 }
