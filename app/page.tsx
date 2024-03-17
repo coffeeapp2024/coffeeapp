@@ -8,29 +8,26 @@ import { getFirestore, doc, getDoc } from "firebase/firestore";
 import { auth } from "@/lib/firebase";
 import Background from "@/components/Mine/Background";
 import { UserData } from "@/lib/types";
+import { fetchUserData } from "@/lib/firebaseFunctions";
 
 export default function Home() {
   const [userData, setUserData] = useState<UserData | null>(null);
 
   useEffect(() => {
-    auth.onAuthStateChanged(async (user) => {
+    const unsubscribe = auth.onAuthStateChanged(async (user) => {
       if (user) {
-        // User is signed in, fetch additional user data
-        const firestore = getFirestore();
-        const userDoc = doc(firestore, "users", user.uid);
-        const userSnapshot = await getDoc(userDoc);
-        if (userSnapshot.exists()) {
-          // User data exists, set it to state
-          setUserData(userSnapshot.data() as UserData);
-        } else {
-          // User data not found
-          console.error("User data not found");
+        try {
+          const fetchedUserData = await fetchUserData(user.uid);
+          setUserData(fetchedUserData);
+        } catch (error) {
+          console.error("Error fetching or creating user data:", error);
         }
       } else {
-        // User is signed out
         setUserData(null);
       }
     });
+
+    return () => unsubscribe();
   }, []);
 
   console.log("user data:", userData);

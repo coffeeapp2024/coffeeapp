@@ -2,25 +2,13 @@
 
 import { signInWithPopup } from "firebase/auth";
 import { auth, provider } from "@/lib/firebase";
-import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { createUserInFirestore } from "@/lib/firebaseFunctions";
 
 export default function LoginButton() {
-  const router = useRouter();
-
   async function signIn() {
-    const result = await signInWithPopup(auth, provider);
-    const idToken = await result?.user.getIdToken();
-
-    const response = await fetch("/api/login", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${idToken}`,
-      },
-    });
-    if (response.ok) {
-      router.push("/");
-    }
+    const { user } = await signInWithPopup(auth, provider);
+    await createUserInFirestore(user);
   }
 
   return (

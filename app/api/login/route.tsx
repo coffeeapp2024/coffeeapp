@@ -1,8 +1,7 @@
-import { auth, firestore } from "firebase-admin";
+import { auth } from "firebase-admin";
 import { customInitApp } from "@/lib/firebase-admin-config";
 import { cookies, headers } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
-import { UserData } from "@/lib/types";
 
 customInitApp();
 
@@ -28,33 +27,8 @@ export async function POST(request: NextRequest, response: NextResponse) {
 
       // Add the cookie to the browser
       cookies().set(options);
-
-      // Create data for the user
-      try {
-        const userId = decodedToken.uid;
-        const userData = {
-          email: decodedToken.email,
-          displayName: decodedToken.name,
-          coin: 9.888888,
-          balance: 0.1,
-          // lastTimeStartMine: undefined,
-          // endTimeMine: undefined,
-          // vouchers: undefined,
-        };
-
-        // Save user data to Firestore
-        await firestore().collection("users").doc(userId).set(userData);
-
-        return NextResponse.json({}, { status: 200 });
-      } catch (error) {
-        console.error("Error creating user data:", error);
-        return NextResponse.json(
-          { message: "Error creating user data" },
-          { status: 500 }
-        );
-      }
     }
   }
 
-  return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+  return NextResponse.json({}, { status: 200 });
 }

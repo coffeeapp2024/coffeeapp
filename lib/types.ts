@@ -40,4 +40,7 @@ export type UserData = {
   displayName: string;
   coin: number;
   balance: number;
+  lastTimeStartMine: string | null;
+  endTimeMine: string | null;
+  vouchers: UserVoucherInfo[] | null;
 };

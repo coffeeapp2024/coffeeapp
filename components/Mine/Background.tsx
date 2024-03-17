@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 const bgList = [
   "/bg/bg1.jpg",
   "/bg/bg7.jpg",
-  "/bg/bg6.jpg",
+  // "/bg/bg6.jpg",
   "/bg/bg5.jpg",
   "/bg/bg8.jpg",
   "/bg/bg10.jpg",

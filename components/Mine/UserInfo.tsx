@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React from "react";
-import SignOutButton from "../SignOutButton";
+import SignOutButton from "./SignOutButton";
 import { User } from "firebase/auth";
 
 function UserInfo({ user }: { user: User }) {
