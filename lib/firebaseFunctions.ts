@@ -2,6 +2,7 @@ import { doc, collection, setDoc, getDoc, deleteDoc } from "firebase/firestore";
 import { UserData } from "./types";
 import { User } from "firebase/auth";
 import { db } from "./firebase";
+import { HomePageContent } from "@/store/zustand";
 
 const usersRef = collection(db, "users");
 const contentsRef = collection(db, "contents");
@@ -80,17 +81,17 @@ export async function deleteUserInFirestore(userId: string): Promise<void> {
   }
 }
 
-export async function fetchHomePageContent(): Promise<any | null> {
+export async function fetchHomePageContent(): Promise<HomePageContent | null> {
   try {
     const homePageContentSnapshot = await getDoc(doc(contentsRef, "homepage"));
     if (homePageContentSnapshot.exists()) {
-      return homePageContentSnapshot.data();
+      return homePageContentSnapshot.data() as HomePageContent;
     } else {
-      console.log("Document 'info' does not exist");
+      console.log("Document 'homepage' does not exist");
       return null;
     }
   } catch (error) {
-    console.error("Error fetching home page video URL:", error);
+    console.error("Error fetching homepage content:", error);
     throw error;
   }
 }

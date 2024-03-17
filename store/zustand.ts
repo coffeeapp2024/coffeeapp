@@ -11,11 +11,12 @@ export const useUserDataStore = create<UserDataStore>((set) => ({
   setUserData: (userData) => set({ userData }),
 }));
 
-type HomePageContent = {
+export type HomePageContent = {
   videoURL: string;
   open: string;
   address: string;
   name: string;
+  gallery: string[];
 };
 
 type HomePageContentStore = {
