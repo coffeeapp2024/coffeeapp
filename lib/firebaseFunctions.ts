@@ -18,25 +18,31 @@ export async function createUserInFirestore(
   user: User
 ): Promise<UserData | null> {
   const userDoc = doc(usersRef, user.uid);
-  const userSnapshot = await getDoc(userDoc);
 
-  // Check if the user data already exists
-  if (!userSnapshot.exists() && user.email && user.displayName) {
-    const userData: UserData = {
-      email: user.email,
-      displayName: user.displayName,
-      coin: 9.888888,
-      balance: 0.1,
-      lastTimeStartMine: "2024-03-17T17:00:00",
-      endTimeMine: "2024-03-18T08:00:00",
-      vouchers: [],
-    };
+  try {
+    const userSnapshot = await getDoc(userDoc);
 
-    await setDoc(userDoc, userData);
+    if (!userSnapshot.exists() && user.email && user.displayName) {
+      const userData: UserData = {
+        email: user.email,
+        displayName: user.displayName,
+        coin: 9.888888,
+        balance: 0.1,
+        lastTimeStartMine: "2024-03-17T17:00:00",
+        endTimeMine: "2024-03-18T08:00:00",
+        vouchers: [],
+      };
 
-    return userData;
+      await setDoc(userDoc, userData);
+      return userData;
+    } else {
+      console.error("User data already exists or user data is incomplete");
+      return null;
+    }
+  } catch (error) {
+    console.error("Error creating user data:", error);
+    throw error; // Handle the error appropriately in your application
   }
-  return null;
 }
 
 export async function fetchUserData(userId: string): Promise<UserData | null> {
