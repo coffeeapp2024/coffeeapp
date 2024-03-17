@@ -18,8 +18,8 @@ function ProfileCard() {
 
   return (
     <div className="mx-3 h-16 bg-white bg-opacity-90 rounded-3xl border-[1px] border-neutral-300 shadow-sm active:scale-[98%] transition-transform">
-      {/* {user ? <ProfileDialog /> : <LoginButton />} */}
-      <ProfileDialog />
+      {user ? <ProfileDialog user={user} /> : <LoginButton />}
+      {/* <ProfileDialog /> */}
     </div>
   );
 }

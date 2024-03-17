@@ -28,3 +28,16 @@ export type UserVoucherInfo = {
   info: string;
   qrCode: string;
 };
+
+export type UserInfo = {
+  coin: number;
+  balance: number;
+  voucher: UserVoucherInfo[];
+};
+
+export type UserData = {
+  email: string;
+  displayName: string;
+  coin: number;
+  balance: number;
+};

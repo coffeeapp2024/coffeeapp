@@ -13,6 +13,7 @@ function VoucherCard({ voucherInfo }: { voucherInfo: VoucherInfo }) {
         <Image
           src={imgUrl}
           fill={true}
+          sizes="(max-width: 640px) 100vw, 640px"
           alt="level icon"
           className="object-contain"
         />

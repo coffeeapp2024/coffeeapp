@@ -13,6 +13,7 @@ function GameCard({ gameInfo }: { gameInfo: GameInfo }) {
         <Image
           src={imgUrl}
           fill={true}
+          sizes="(max-width: 640px) 100vw, 640px"
           alt="game icon"
           className="object-contain"
         />

@@ -4,6 +4,7 @@ import React from "react";
 import { auth } from "@/lib/firebase";
 import { signOut } from "firebase/auth";
 import { useRouter } from "next/navigation";
+import { ArrowRightStartOnRectangleIcon } from "@heroicons/react/24/outline";
 
 function SignOutButton() {
   const router = useRouter();
@@ -28,8 +29,8 @@ function SignOutButton() {
   }
 
   return (
-    <button className="bg-yellow-300" onClick={signOutUser}>
-      Sign Out
+    <button className="absolute right-3 top-6" onClick={signOutUser}>
+      <ArrowRightStartOnRectangleIcon className="w-7 h-7" />
     </button>
   );
 }

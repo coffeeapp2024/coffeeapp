@@ -23,8 +23,8 @@ function VoucherDialog() {
             <Image
               src="/icons/coupon.png"
               fill={true}
+              sizes="(max-width: 640px) 100vw, 640px"
               alt="coupon"
-              className=""
             />
           </div>
           <div className="absolute -bottom-4 left-1/2 -translate-x-1/2">

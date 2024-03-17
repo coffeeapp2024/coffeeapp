@@ -30,6 +30,7 @@ function Nav() {
               <Image
                 src="/icons/mine.png"
                 fill={true}
+                sizes="(max-width: 640px) 100vw, 640px"
                 alt="Boost Icon"
                 className="object-contain rotate-1"
               />
@@ -40,7 +41,12 @@ function Nav() {
         <Link href="/gift">
           <div className="nav-item">
             <div className="relative w-8 h-8">
-              <Image src="/game.png" fill={true} alt="Boost Icon" />
+              <Image
+                src="/game.png"
+                fill={true}
+                sizes="(max-width: 640px) 100vw, 640px"
+                alt="Boost Icon"
+              />
             </div>
             <span className="nav-item-name">Gift</span>
           </div>

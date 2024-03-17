@@ -17,12 +17,11 @@ function BoostDialog() {
           <div className="shadow-lg rounded-[30px] aspect-[7/8] flex items-center justify-center overflow-hidden">
             <Image
               src={"/icons/rocket.gif"}
-              layout={"responsive"}
               height={400}
               width={100}
               alt="boost"
               unoptimized={true}
-              className="scale-[1.6]"
+              className="scale-[1.6] w-full"
             />
           </div>
           <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 shadow-lg">

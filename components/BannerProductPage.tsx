@@ -8,6 +8,7 @@ function BannerProductPage() {
         <Image
           src="/cover.jpg"
           fill={true}
+          sizes="(max-width: 640px) 100vw, 640px"
           alt="cover"
           className="object-cover"
         />

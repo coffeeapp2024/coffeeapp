@@ -19,6 +19,7 @@ function Post({ postInfo }: { postInfo: Post }) {
       <Image
         src={imgUrl}
         fill={true}
+        sizes="(max-width: 640px) 100vw, 640px"
         alt="Post Image"
         className="object-center object-cover"
       />
