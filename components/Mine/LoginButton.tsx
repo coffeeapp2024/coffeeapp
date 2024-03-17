@@ -12,13 +12,15 @@ export default function LoginButton() {
     const result = await signInWithPopup(auth, provider);
     const idToken = await result?.user.getIdToken();
 
-    await fetch("/api/login", {
+    const response = await fetch("/api/login", {
       method: "POST",
       headers: {
         Authorization: `Bearer ${idToken}`,
       },
     });
-    router.push("/");
+    if (response.ok) {
+      router.push("/");
+    }
   }
 
   return (

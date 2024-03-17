@@ -44,6 +44,8 @@ export async function POST(request: NextRequest, response: NextResponse) {
 
         // Save user data to Firestore
         await firestore().collection("users").doc(userId).set(userData);
+
+        return NextResponse.json({}, { status: 200 });
       } catch (error) {
         console.error("Error creating user data:", error);
         return NextResponse.json(
@@ -54,5 +56,5 @@ export async function POST(request: NextRequest, response: NextResponse) {
     }
   }
 
-  return NextResponse.json({}, { status: 200 });
+  return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
 }
