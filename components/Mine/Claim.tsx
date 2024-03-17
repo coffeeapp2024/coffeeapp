@@ -1,17 +1,14 @@
 import React, { useEffect, useState } from "react";
 import CoinIcon from "../CoinIcon";
 import { updateCurrentCoin } from "@/lib/coinActions";
+import useUserDataStore from "@/store/zustand";
 
-function Claim({
-  coin,
-  balance,
-  endTimeMine,
-}: {
-  coin: number | undefined;
-  balance: number | undefined;
-  endTimeMine: string | null | undefined;
-}) {
-  const [currentCoin, setCurrentCoin] = useState<number | undefined>(coin);
+function Claim() {
+  const { userData } = useUserDataStore();
+
+  const { balance, coin, endTimeMine } = userData ?? {};
+
+  const [currentCoin, setCurrentCoin] = useState<number | undefined>();
 
   useEffect(() => {
     if (balance && coin) {

@@ -48,24 +48,19 @@ export async function createUserInFirestore(
 export async function fetchUserData(userId: string): Promise<UserData | null> {
   const userDoc = doc(usersRef, userId);
 
-  return new Promise<UserData | null>((resolve, reject) => {
-    const unsubscribe = onSnapshot(
-      userDoc,
-      (docSnapshot) => {
-        if (docSnapshot.exists()) {
-          const userData = docSnapshot.data() as UserData;
-          resolve(userData);
-        } else {
-          console.error("User data not found");
-          resolve(null);
-        }
-      },
-      (error) => {
-        console.error("Error fetching user data:", error);
-        reject(error);
-      }
-    );
-  });
+  try {
+    const userSnapshot = await getDoc(userDoc);
+
+    if (userSnapshot.exists()) {
+      return userSnapshot.data() as UserData;
+    } else {
+      console.log("User data not found");
+      return null;
+    }
+  } catch (error) {
+    console.error("Error fetching user data:", error);
+    throw error;
+  }
 }
 
 export async function updateUserInFirestore(

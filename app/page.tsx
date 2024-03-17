@@ -7,19 +7,20 @@ import { useEffect, useState } from "react";
 import { auth } from "@/lib/firebase";
 import Background from "@/components/Mine/Background";
 import { UserData } from "@/lib/types";
-import { createUserInFirestore, fetchUserData } from "@/lib/firebaseFunctions";
+import { fetchUserData } from "@/lib/firebaseFunctions";
 import {} from "@/lib/timeActions";
+import useUserDataStore from "@/store/zustand";
 
 export default function Home() {
-  const [userData, setUserData] = useState<UserData | null>(null);
+  const { setUserData } = useUserDataStore();
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(async (user) => {
       if (user) {
         try {
           const fetchedUserData = await fetchUserData(user.uid);
-          console.log("hi ");
           setUserData(fetchedUserData);
+          console.log("set done");
         } catch (error) {
           console.error("Error fetching or creating user data:", error);
         }
@@ -29,11 +30,7 @@ export default function Home() {
     });
 
     return () => unsubscribe();
-  }, []);
-
-  console.log("user data:", userData);
-
-  const { coin, balance, endTimeMine } = userData ?? {};
+  }, [setUserData]);
 
   return (
     <main className="relative h-screen">
@@ -41,8 +38,8 @@ export default function Home() {
       <div className="pt-4 pb-20">
         <ProfileCard />
       </div>
-      <Claim coin={coin} balance={balance} endTimeMine={endTimeMine} />
-      <ScanClaimCard endTimeMine={endTimeMine} balance={balance} />
+      <Claim />
+      <ScanClaimCard />
     </main>
   );
 }

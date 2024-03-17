@@ -3,16 +3,24 @@
 import { signInWithPopup } from "firebase/auth";
 import { auth, provider } from "@/lib/firebase";
 import Image from "next/image";
-import { createUserInFirestore } from "@/lib/firebaseFunctions";
-import { useRouter } from "next/navigation";
+import { createUserInFirestore, fetchUserData } from "@/lib/firebaseFunctions";
+import useUserDataStore from "@/store/zustand";
 
 export default function LoginButton() {
-  const router = useRouter();
+  const { setUserData } = useUserDataStore();
 
   async function signIn() {
-    const { user } = await signInWithPopup(auth, provider);
-    await createUserInFirestore(user);
-    router.push("/");
+    try {
+      const { user } = await signInWithPopup(auth, provider);
+      let fetchedUserData = await createUserInFirestore(user);
+      if (!fetchedUserData) {
+        fetchedUserData = await fetchUserData(user.uid);
+      }
+      setUserData(fetchedUserData);
+    } catch (error) {
+      console.error("Error signing in:", error);
+      throw error;
+    }
   }
 
   return (

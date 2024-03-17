@@ -5,14 +5,13 @@ import {
   calculateRemainingTimeInSeconds,
   formatSeconds,
 } from "@/lib/timeActions";
+import useUserDataStore from "@/store/zustand";
 
-function ScanClaimCard({
-  endTimeMine,
-  balance,
-}: {
-  endTimeMine: string | null | undefined;
-  balance: number | undefined;
-}) {
+function ScanClaimCard() {
+  const { userData } = useUserDataStore();
+
+  const { endTimeMine, balance } = userData ?? {};
+
   const [remainingTimeSeconds, setRemainingTimeSeconds] = useState<
     number | null
   >(null);
