@@ -37,9 +37,9 @@ export async function POST(request: NextRequest, response: NextResponse) {
           displayName: decodedToken.name,
           coin: 9.888888,
           balance: 0.1,
-          lastTimeStartMine: undefined,
-          endTimeMine: undefined,
-          vouchers: undefined,
+          // lastTimeStartMine: undefined,
+          // endTimeMine: undefined,
+          // vouchers: undefined,
         };
 
         // Save user data to Firestore

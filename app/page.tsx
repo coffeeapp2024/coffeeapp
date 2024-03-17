@@ -6,7 +6,6 @@ import ScanClaimCard from "@/components/ScanClaimCard";
 import { useEffect, useState } from "react";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 import { auth } from "@/lib/firebase";
-import { User } from "firebase/auth";
 import Background from "@/components/Mine/Background";
 import { UserData } from "@/lib/types";
 
