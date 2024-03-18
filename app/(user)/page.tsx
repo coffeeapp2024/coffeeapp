@@ -33,7 +33,7 @@ export default function Home() {
   }, [setUserData, setUserId]);
 
   return (
-    <main className="relative h-screen">
+    <main className="relative h-screen max-w-screen-sm">
       <Background />
       <div className="pt-4 pb-20">
         <ProfileCard />

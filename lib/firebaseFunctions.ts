@@ -1,4 +1,11 @@
-import { doc, collection, setDoc, getDoc, deleteDoc } from "firebase/firestore";
+import {
+  doc,
+  collection,
+  setDoc,
+  getDocs,
+  getDoc,
+  deleteDoc,
+} from "firebase/firestore";
 import { UserData } from "@/store/storeTypes";
 import { User } from "firebase/auth";
 import { db } from "./firebase";
@@ -6,6 +13,8 @@ import { HomePageContent } from "@/store/storeTypes";
 
 const usersRef = collection(db, "users");
 const contentsRef = collection(db, "contents");
+const keysRef = collection(db, "keys");
+const settingsRef = collection(db, "settings");
 
 export async function createUserInFirestore(
   user: User
@@ -93,6 +102,47 @@ export async function fetchHomePageContent(): Promise<HomePageContent | null> {
     }
   } catch (error) {
     console.error("Error fetching homepage content:", error);
+    throw error;
+  }
+}
+
+export async function generateKeysAndSaveToFirestore(count: number) {
+  const keys = [];
+  try {
+    for (let i = 0; i < count; i++) {
+      const keyRef = doc(keysRef);
+      const keyId = keyRef.id;
+      await setDoc(keyRef, { key: keyId });
+      keys.push(keyId);
+    }
+    return keys;
+  } catch (error) {
+    console.error("Error generating and saving keys:", error);
+    throw error;
+  }
+}
+
+export async function fetchKeysFromFirestore() {
+  try {
+    const keysSnapshot = await getDocs(keysRef);
+    const keys: string[] = [];
+    keysSnapshot.forEach((doc) => {
+      const key = doc.id;
+      keys.push(key);
+    });
+    return keys;
+  } catch (error) {
+    console.error("Error fetching keys from Firestore:", error);
+    throw error;
+  }
+}
+
+export async function deleteKeyFromFirestore(keyId: string) {
+  try {
+    await deleteDoc(doc(keysRef, keyId));
+    console.log("Key deleted successfully:", keyId);
+  } catch (error) {
+    console.error("Error deleting key from Firestore:", error);
     throw error;
   }
 }

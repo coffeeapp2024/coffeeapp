@@ -37,7 +37,7 @@ function ProfileDialog({ user }: { user: User }) {
       </DrawerTrigger>
 
       {/* User Content ------------------------------------- */}
-      <DrawerContent className="rounded-t-3xl">
+      <DrawerContent className="rounded-t-3xl max-w-screen-sm mx-auto">
         <div className="pt-6">
           <UserInfo user={user} />
           <UserVoucherList />
