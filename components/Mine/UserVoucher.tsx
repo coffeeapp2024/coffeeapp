@@ -1,14 +1,9 @@
-import type { UserVoucherInfo } from "@/lib/types";
 import Image from "next/image";
 import React from "react";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import CloseDialogButton from "../CloseDialogButton";
 
-function UserVoucher({
-  userVoucherInfo,
-}: {
-  userVoucherInfo: UserVoucherInfo;
-}) {
+function UserVoucher({ userVoucherInfo }: { userVoucherInfo: any }) {
   const { imgUrl, info, qrCode } = userVoucherInfo;
 
   return (
