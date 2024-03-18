@@ -12,7 +12,7 @@ import jsQR from "jsqr";
 import { useUserDataStore } from "@/store/zustand";
 import { updateMineTimes } from "@/lib/coinActions";
 
-const QRCodeScanner = () => {
+const ClaimCoinScanner = () => {
   const [showScanner, setShowScanner] = useState(false);
   const [scannedText, setScannedText] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -23,6 +23,7 @@ const QRCodeScanner = () => {
   };
 
   const handleResult = async (text: string) => {
+    setScannedText(text);
     setShowScanner(false);
 
     try {
@@ -89,7 +90,6 @@ const QRCodeScanner = () => {
             imageData.height
           );
           if (qrCode) {
-            setScannedText(qrCode.data);
             handleResult(qrCode.data);
           } else {
             console.log("No QR code found in the image.");
@@ -128,4 +128,4 @@ const QRCodeScanner = () => {
   );
 };
 
-export default QRCodeScanner;
+export default ClaimCoinScanner;

@@ -6,6 +6,7 @@ import {
   formatSeconds,
 } from "@/lib/timeActions";
 import { useTimeStore, useUserDataStore } from "@/store/zustand";
+import ClaimCoinScanner from "./ClaimCoinScanner";
 
 function ScanClaimCard() {
   const { remainingTimeSeconds, setRemainingTimeSeconds } = useTimeStore();
@@ -46,7 +47,7 @@ function ScanClaimCard() {
           </div>
         </div>
         <div className="mr-1">
-          <QRScannerButton />
+          <ClaimCoinScanner />
         </div>
       </div>
     </div>
