@@ -10,10 +10,10 @@ export function calculateRemainingTimeInSeconds(
   const startDate = new Date();
   const endDate = new Date(endTime);
 
-  // Calculate remaining time in milliseconds
-  const remainingTimeMillis = endDate.getTime() - startDate.getTime();
+  const now = new Date();
+  if (endDate < now) return null;
 
-  // Convert remaining time to seconds
+  const remainingTimeMillis = endDate.getTime() - startDate.getTime();
   const remainingTimeSeconds = Math.floor(remainingTimeMillis / 1000);
 
   return remainingTimeSeconds;

@@ -1,6 +1,6 @@
 "use client";
 
-import Claim from "@/components/Mine/Claim";
+import CurrentCoinInfo from "@/components/Mine/CurrentCoinInfo";
 import ProfileCard from "@/components/Mine/ProfileCard";
 import ScanClaimCard from "@/components/Mine/ScanClaimCard";
 import { useEffect } from "react";
@@ -19,7 +19,6 @@ export default function Home() {
         try {
           const fetchedUserData = await fetchUserData(user.uid);
           setUserData(fetchedUserData);
-          console.log("set done");
         } catch (error) {
           console.error("Error fetching or creating user data:", error);
         }
@@ -37,7 +36,7 @@ export default function Home() {
       <div className="pt-4 pb-20">
         <ProfileCard />
       </div>
-      <Claim />
+      <CurrentCoinInfo />
       <ScanClaimCard />
     </main>
   );

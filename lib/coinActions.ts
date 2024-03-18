@@ -16,3 +16,20 @@ export function updateCurrentCoin(
 
   return currentCoin;
 }
+
+export function calculateInitialCurrentCoin(
+  balancePerHour: number,
+  coin: number,
+  startTime: DateString
+): number {
+  const now = new Date();
+  const startDateTime = startTime ? new Date(startTime) : null;
+
+  if (startDateTime && now > startDateTime) {
+    const timeDiffSeconds = (now.getTime() - startDateTime.getTime()) / 1000;
+    const initialCoin = coin + balancePerHour * (timeDiffSeconds / 3600);
+    return initialCoin;
+  }
+
+  return 0;
+}

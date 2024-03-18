@@ -1,8 +1,8 @@
 import { doc, collection, setDoc, getDoc, deleteDoc } from "firebase/firestore";
-import { UserData } from "./types";
+import { UserData } from "@/store/storeTypes";
 import { User } from "firebase/auth";
 import { db } from "./firebase";
-import { HomePageContent } from "@/store/zustand";
+import { HomePageContent } from "@/store/storeTypes";
 
 const usersRef = collection(db, "users");
 const contentsRef = collection(db, "contents");
