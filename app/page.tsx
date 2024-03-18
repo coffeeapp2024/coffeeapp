@@ -9,9 +9,10 @@ import Background from "@/components/Mine/Background";
 import { fetchUserData } from "@/lib/firebaseFunctions";
 import {} from "@/lib/timeActions";
 import { useUserDataStore } from "@/store/zustand";
+import { setuid } from "process";
 
 export default function Home() {
-  const { setUserData } = useUserDataStore();
+  const { setUserData, setUserId } = useUserDataStore();
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(async (user) => {
@@ -19,6 +20,7 @@ export default function Home() {
         try {
           const fetchedUserData = await fetchUserData(user.uid);
           setUserData(fetchedUserData);
+          setUserId(user.uid);
         } catch (error) {
           console.error("Error fetching or creating user data:", error);
         }
@@ -28,7 +30,7 @@ export default function Home() {
     });
 
     return () => unsubscribe();
-  }, [setUserData]);
+  }, [setUserData, setUserId]);
 
   return (
     <main className="relative h-screen">

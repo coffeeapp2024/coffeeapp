@@ -8,7 +8,9 @@ import {
 
 export const useUserDataStore = create<UserDataStore>((set) => ({
   userData: null,
+  userId: null,
   setUserData: (userData) => set({ userData }),
+  setUserId: (userId) => set({ userId }),
 }));
 
 export const useHomePageContentStore = create<HomePageContentStore>((set) => ({

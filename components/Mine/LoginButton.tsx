@@ -7,7 +7,7 @@ import { createUserInFirestore, fetchUserData } from "@/lib/firebaseFunctions";
 import { useUserDataStore } from "@/store/zustand";
 
 export default function LoginButton() {
-  const { setUserData } = useUserDataStore();
+  const { setUserData, setUserId } = useUserDataStore();
 
   async function signIn() {
     try {
@@ -17,6 +17,7 @@ export default function LoginButton() {
         fetchedUserData = await fetchUserData(user.uid);
       }
       setUserData(fetchedUserData);
+      setUserId(user.uid);
     } catch (error) {
       console.error("Error signing in:", error);
       throw error;

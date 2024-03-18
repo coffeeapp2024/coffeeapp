@@ -19,10 +19,11 @@ export async function createUserInFirestore(
       const userData: UserData = {
         email: user.email,
         displayName: user.displayName,
-        coin: 9.888888,
+        coin: 0,
+        finalCoin: 0,
         balance: 0.1,
-        startTimeMine: "2024-03-17T17:00:00",
-        endTimeMine: "2024-03-18T08:00:00",
+        startTimeMine: null,
+        endTimeMine: null,
         vouchers: [],
       };
 

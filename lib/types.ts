@@ -22,5 +22,3 @@ export type VoucherInfo = {
   info: string;
   price: number;
 };
-
-export type DateString = string | null | undefined;

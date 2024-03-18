@@ -22,7 +22,7 @@ function CurrentCoinInfo() {
   }, [balance, startTimeMine, coin, setCurrentCoin]);
 
   useEffect(() => {
-    if (balance && coin && endTimeMine) {
+    if (balance && endTimeMine) {
       const intervalId = setInterval(() => {
         const updatedCoin = updateCurrentCoin(
           balance,

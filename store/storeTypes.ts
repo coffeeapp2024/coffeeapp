@@ -7,8 +7,9 @@ export type UserVoucherInfo = {
 export type UserData = {
   email: string | null;
   displayName: string | null;
-  coin: number;
-  balance: number;
+  coin: number | null;
+  finalCoin: number | null;
+  balance: number | null;
   startTimeMine: string | null;
   endTimeMine: string | null;
   vouchers: UserVoucherInfo[] | null;
@@ -16,7 +17,9 @@ export type UserData = {
 
 export type UserDataStore = {
   userData: UserData | null;
+  userId: string | null;
   setUserData: (userData: UserData | null) => void;
+  setUserId: (userId: string | null) => void;
 };
 
 export type HomePageContent = {

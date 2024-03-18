@@ -1,16 +1,14 @@
-import { DateString } from "./types";
-
 export function calculateRemainingTimeInSeconds(
-  endTime: DateString
+  endTime: string | null
 ): number | null {
   // If either start time or end time is null, return null
   if (!endTime) return null;
 
   // Convert start time and end time to Date objects
   const startDate = new Date();
-  const endDate = new Date(endTime);
 
   const now = new Date();
+  const endDate = new Date(endTime);
   if (endDate < now) return null;
 
   const remainingTimeMillis = endDate.getTime() - startDate.getTime();
@@ -30,7 +28,7 @@ export function formatSeconds(seconds: number): string {
 export function calculateRemainingBalancePerSecond(
   balancePerHour: number,
   currentBalance: number,
-  endTime: DateString
+  endTime: string | null
 ): number {
   if (!endTime) return currentBalance;
 
