@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import QRScannerButton from "../QRScannerButton";
+import QRScannerButton from "./QRScannerButton";
 import {
   calculateRemainingTimeInSeconds,
   formatSeconds,

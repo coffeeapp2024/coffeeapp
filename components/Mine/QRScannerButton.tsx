@@ -3,7 +3,7 @@
 import React, { useId, useState } from "react";
 import { Scanner } from "@yudiel/react-qr-scanner";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import MainButton from "./MainButton";
+import MainButton from "../MainButton";
 import { useUserDataStore } from "@/store/zustand";
 import { updateMineTimes } from "@/lib/coinActions";
 import { fetchUserData } from "@/lib/firebaseFunctions";

@@ -9,11 +9,14 @@ import {
   deleteKeyFromFirestore,
 } from "@/lib/firebaseFunctions";
 import jsQR from "jsqr";
+import { useUserDataStore } from "@/store/zustand";
+import { updateMineTimes } from "@/lib/coinActions";
 
 const QRCodeScanner = () => {
   const [showScanner, setShowScanner] = useState(false);
   const [scannedText, setScannedText] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const { userId, setUserData } = useUserDataStore();
 
   const toggleScanner = () => {
     setShowScanner((prevShowScanner) => !prevShowScanner);
@@ -25,6 +28,12 @@ const QRCodeScanner = () => {
     try {
       const keys = await fetchKeysFromFirestore(); // Fetch keys from Firestore
       if (keys.includes(text)) {
+        if (!userId) {
+          return;
+        }
+        const fetchedUserData = await updateMineTimes(userId, 24);
+
+        setUserData(fetchedUserData);
         // If the scanned text matches a key, delete the key
         await deleteKeyFromFirestore(text);
         console.log("Key deleted successfully:", text);
