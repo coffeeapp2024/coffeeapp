@@ -1,16 +1,13 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import QRCode from "qrcode.react";
 import { generateKeysAndSaveToFirestore } from "@/lib/firebaseFunctions";
 
 function GenerateQrCodeButton() {
-  const [qrValues, setQrValues] = useState<string[]>(["xinchaotraidat"]);
+  const [qrValues, setQrValues] = useState<string[]>([]);
 
-  const handleGenerateAndDownload = async () => {
-    try {
-      const keys = await generateKeysAndSaveToFirestore(1); // Generate 1 key
-      setQrValues(keys);
-
+  useEffect(() => {
+    if (qrValues.length > 0) {
       qrValues.forEach((qrValue, index) => {
         const canvas = document.getElementById(
           `qr-code-${index}`
@@ -25,6 +22,13 @@ function GenerateQrCodeButton() {
           document.body.removeChild(downloadLink);
         }
       });
+    }
+  }, [qrValues]);
+
+  const handleGenerateAndDownload = async () => {
+    try {
+      const keys = await generateKeysAndSaveToFirestore(1); // Generate 1 key
+      setQrValues(keys);
     } catch (error) {
       console.error("Error generating keys:", error);
     }
@@ -32,7 +36,7 @@ function GenerateQrCodeButton() {
 
   return (
     <div className="flex items-center flex-col justify-center">
-      <div className="">
+      <div className="hidden">
         {qrValues.map((qrValue, index) => (
           <div key={index}>
             <QRCode
@@ -44,7 +48,7 @@ function GenerateQrCodeButton() {
         ))}
       </div>
       <button
-        className="text-white bg-neutral-900"
+        className="text-white bg-neutral-900 p-4 rounded-3xl"
         onClick={handleGenerateAndDownload}
       >
         Generate QR Code

@@ -11,6 +11,7 @@ import {
 import jsQR from "jsqr";
 import { useUserDataStore } from "@/store/zustand";
 import { updateMineTimes } from "@/lib/coinActions";
+import { scanQRCodeFromFile } from "@/lib/scanQRCodeFromFile";
 
 const ClaimCoinScanner = () => {
   const [showScanner, setShowScanner] = useState(false);
@@ -63,41 +64,16 @@ const ClaimCoinScanner = () => {
     const file = event.target.files?.[0];
     if (!file) return;
 
-    const reader = new FileReader();
-    reader.onload = async (e) => {
-      if (e.target) {
-        const image = new Image();
-        image.src = e.target.result?.toString() || "";
-        image.onload = () => {
-          const canvas = document.createElement("canvas");
-          const context = canvas.getContext("2d");
-          if (!context) return;
-
-          canvas.width = image.width;
-          canvas.height = image.height;
-          context.drawImage(image, 0, 0, image.width, image.height);
-
-          const imageData = context.getImageData(
-            0,
-            0,
-            canvas.width,
-            canvas.height
-          );
-
-          const qrCode = jsQR(
-            imageData.data,
-            imageData.width,
-            imageData.height
-          );
-          if (qrCode) {
-            handleResult(qrCode.data);
-          } else {
-            console.log("No QR code found in the image.");
-          }
-        };
+    try {
+      const scannedText = await scanQRCodeFromFile(file);
+      if (scannedText) {
+        handleResult(scannedText);
+      } else {
+        console.log("No QR code found in the image.");
       }
-    };
-    reader.readAsDataURL(file);
+    } catch (error) {
+      console.error("Error scanning QR code:", error);
+    }
   };
 
   return (
