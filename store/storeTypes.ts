@@ -60,7 +60,7 @@ export type Case = {
   id: string;
   icon: string;
   price: number;
-  vouchers: string[];
+  voucherIdList: string[];
 };
 
 export type CaseStore = {

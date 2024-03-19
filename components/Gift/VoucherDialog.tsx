@@ -5,11 +5,19 @@ import BoostCardList from "./BoostCardList";
 import CloseDialogButton from "../CloseDialogButton";
 import VoucherCardList from "./VoucherCardList";
 import MainButton from "../MainButton";
+import { toast } from "sonner";
+import { useUserDataStore } from "@/store/zustand";
 
 function VoucherDialog() {
+  const { userData } = useUserDataStore();
+
   return (
     <Dialog>
-      <DialogTrigger>
+      <DialogTrigger
+        onClick={() => {
+          !userData && toast.warning("Sign in to buy voucher");
+        }}
+      >
         <div
           style={{
             backgroundImage: `url(/img/img9.jpg)`,

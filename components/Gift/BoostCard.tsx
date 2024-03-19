@@ -6,6 +6,7 @@ import { Level } from "@/store/storeTypes";
 import { useUserDataStore } from "@/store/zustand";
 import { calculateInitialCurrentCoin } from "@/lib/coinActions";
 import { updateUserInFirestore } from "@/lib/firebaseFunctions";
+import { toast } from "sonner";
 
 function BoostCard({
   level,
@@ -46,8 +47,8 @@ function BoostCard({
       };
 
       setUserData(newUserData);
-
       await updateUserInFirestore(userId, newUserData);
+      toast.success("Upgrade successfully");
     }
   };
 

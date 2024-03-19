@@ -8,11 +8,19 @@ import {
 } from "@/components/ui/dialog";
 import BoostCardList from "./BoostCardList";
 import CloseDialogButton from "../CloseDialogButton";
+import { toast } from "sonner";
+import { useUserDataStore } from "@/store/zustand";
 
 function BoostDialog() {
+  const { userData } = useUserDataStore();
+
   return (
     <Dialog>
-      <DialogTrigger>
+      <DialogTrigger
+        onClick={() => {
+          !userData && toast.warning("Sign in to boost your balance");
+        }}
+      >
         <div className="relative active:scale-95 duration-75 transition-transform">
           <div className="shadow-lg rounded-[30px] aspect-[7/8] flex items-center justify-center overflow-hidden">
             <Image

@@ -4,11 +4,20 @@ import MainButton from "../MainButton";
 import CloseDialogButton from "../CloseDialogButton";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import GameCardList from "./GameCardList";
+import { useUserDataStore } from "@/store/zustand";
+import { toast } from "sonner";
 
 function GameDialog() {
+  const { userData } = useUserDataStore();
+
   return (
     <Dialog>
-      <DialogTrigger className="col-span-2">
+      <DialogTrigger
+        className="col-span-2"
+        onClick={() => {
+          !userData && toast.warning("Sign in to play game");
+        }}
+      >
         <div className="relative active:scale-95 duration-75 transition-transform">
           <div className="shadow-lg rounded-[30px] aspect-[7/6] flex items-center justify-center overflow-hidden">
             <Image

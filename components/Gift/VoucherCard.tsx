@@ -6,6 +6,7 @@ import { Voucher } from "@/store/storeTypes";
 import { useUserDataStore } from "@/store/zustand";
 import { updateUserInFirestore } from "@/lib/firebaseFunctions";
 import { calculateInitialCurrentCoin } from "@/lib/coinActions";
+import { toast } from "sonner";
 
 function VoucherCard({ voucher }: { voucher: Voucher }) {
   const { userData, setUserData, userId } = useUserDataStore();
@@ -33,11 +34,13 @@ function VoucherCard({ voucher }: { voucher: Voucher }) {
 
         setUserData(newUserData);
         await updateUserInFirestore(userId, newUserData);
+        toast.success("Voucher purchased successfully!");
       } catch (error) {
         console.error("Error updating user data:", error);
       }
     } else {
-      console.warn("Insufficient balance or voucher already owned.");
+      toast.warning("Insufficient balance. Unable to purchase voucher.");
+      console.warn("Insufficient balance");
     }
   };
 

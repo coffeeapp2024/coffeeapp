@@ -13,6 +13,7 @@ import jsQR from "jsqr";
 import { useUserDataStore } from "@/store/zustand";
 import { updateMineTimes } from "@/lib/coinActions";
 import { scanQRCodeFromFile } from "@/lib/scanQRCodeFromFile";
+import { toast } from "sonner";
 
 const ClaimCoinScanner = () => {
   const [showScanner, setShowScanner] = useState(false);
@@ -25,6 +26,11 @@ const ClaimCoinScanner = () => {
   };
 
   const handleResult = async (text: string) => {
+    if (!userData) {
+      toast.warning("Sign in to scan QR Code");
+      return;
+    }
+
     setScannedText(text);
     setShowScanner(false);
 
@@ -35,22 +41,24 @@ const ClaimCoinScanner = () => {
           return;
         }
         const newUserData = await updateMineTimes(userData, 24);
+
         setUserData(newUserData);
         await updateUserInFirestore(userId, newUserData);
-
-        // If the scanned text matches a key, delete the key
         await deleteKeyFromFirestore(text);
-        console.log("Key deleted successfully:", text);
+        toast.success("QR Code scanned successfully");
       } else {
-        console.log("Scanned text is not a valid key.");
+        toast.error("Invalid QR Code. Please try again.");
       }
     } catch (error) {
+      toast.error("Error handling scan QR Code. Please try again.");
       console.error("Error handling scan result:", error);
     }
   };
 
   const handleError = (error: Error) => {
     console.error("Scanner error:", error?.message);
+    toast.error(error?.message);
+
     setShowScanner(false);
   };
 
@@ -71,7 +79,7 @@ const ClaimCoinScanner = () => {
       if (scannedText) {
         handleResult(scannedText);
       } else {
-        console.log("No QR code found in the image.");
+        toast.error("Not found QR code in the image. Please try again.");
       }
     } catch (error) {
       console.error("Error scanning QR code:", error);
@@ -80,7 +88,11 @@ const ClaimCoinScanner = () => {
 
   return (
     <Dialog open={showScanner} onOpenChange={toggleScanner}>
-      <DialogTrigger>
+      <DialogTrigger
+        onClick={() => {
+          !userData && toast.warning("Sign in to scan QR Code");
+        }}
+      >
         <MainButton text="Scan QR" />
       </DialogTrigger>
       <DialogContent>
@@ -100,7 +112,6 @@ const ClaimCoinScanner = () => {
           onChange={handleFileInputChange}
           style={{ display: "none" }}
         />
-        {scannedText && <p>Scanned QR Code: {scannedText}</p>}
       </DialogContent>
     </Dialog>
   );
