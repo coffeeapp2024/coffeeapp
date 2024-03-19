@@ -5,12 +5,35 @@ import Event from "@/components/Home/Event";
 import Gallery from "@/components/Home/Gallery";
 import Info from "@/components/Home/Info";
 import Video from "@/components/Video";
-import { fetchHomePageContent } from "@/lib/firebaseFunctions";
-import { useHomePageContentStore } from "@/store/zustand";
+import { fetchHomePageContent, fetchUserData } from "@/lib/firebaseFunctions";
+import { useHomePageContentStore, useUserDataStore } from "@/store/zustand";
 import React, { useEffect } from "react";
+import { auth } from "@/lib/firebase";
 
 function Page() {
+  const { userData, setUserData, setUserId } = useUserDataStore();
   const { setHomePageContent } = useHomePageContentStore();
+
+  useEffect(() => {
+    if (userData === null) {
+      const unsubscribe = auth.onAuthStateChanged(async (user) => {
+        if (user) {
+          try {
+            console.log("rerender page");
+            const fetchedUserData = await fetchUserData(user.uid);
+            setUserData(fetchedUserData);
+            setUserId(user.uid);
+          } catch (error) {
+            console.error("Error fetching or creating user data:", error);
+          }
+        } else {
+          setUserData(null);
+        }
+      });
+
+      return () => unsubscribe();
+    }
+  }, [userData, setUserData, setUserId]);
 
   useEffect(() => {
     const fetchData = async () => {

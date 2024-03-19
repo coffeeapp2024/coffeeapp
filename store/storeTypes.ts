@@ -11,7 +11,7 @@ export type UserData = {
   balance: number | null;
   startTimeMine: string | null;
   endTimeMine: string | null;
-  vouchers: string[] | null;
+  voucherIdList: string[] | null;
 };
 
 export type UserDataStore = {

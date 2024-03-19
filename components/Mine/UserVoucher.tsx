@@ -2,16 +2,22 @@ import Image from "next/image";
 import React from "react";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import CloseDialogButton from "../CloseDialogButton";
+import { useVoucherStore } from "@/store/zustand";
 
-function UserVoucher({ userVoucherInfo }: { userVoucherInfo: any }) {
-  const { imgUrl, info, qrCode } = userVoucherInfo;
+function UserVoucher({ voucherId }: { voucherId: string }) {
+  const { vouchers } = useVoucherStore();
+  const voucher = vouchers.find((voucher) => voucher.id === voucherId);
+
+  if (!voucher) return null;
+
+  const { imageURL, info } = voucher;
 
   return (
     <Dialog>
       <DialogTrigger className="bg-white shadow-lg aspect-[4/3] border-[2px] w-full rounded-3xl pt-3 px-3 relative ">
         <div className="relative h-3/4 mb-2">
           <Image
-            src={imgUrl}
+            src={imageURL}
             fill={true}
             sizes="(max-width: 640px) 100vw, 640px"
             alt="level icon"

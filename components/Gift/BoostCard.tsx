@@ -3,6 +3,9 @@ import React from "react";
 import MainButton from "../MainButton";
 import CoinIcon from "../CoinIcon";
 import { Level } from "@/store/storeTypes";
+import { useUserDataStore } from "@/store/zustand";
+import { calculateInitialCurrentCoin } from "@/lib/coinActions";
+import { updateUserInFirestore } from "@/lib/firebaseFunctions";
 
 function BoostCard({
   level,
@@ -11,8 +14,42 @@ function BoostCard({
   level: Level;
   nextBalance: number | null;
 }) {
-  const { icon, balance, price } = level;
-  const isHidden = nextBalance === balance ? false : true;
+  const { userData, userId, setUserData } = useUserDataStore();
+  const { coin, startTimeMine, balance: userBalance } = userData ?? {};
+
+  const { icon, balance: levelBalance, price } = level;
+  const isHidden = nextBalance === levelBalance ? false : true;
+
+  const handleUpgrade = async () => {
+    if (
+      userId &&
+      userData &&
+      startTimeMine &&
+      userBalance &&
+      coin &&
+      coin >= price &&
+      levelBalance > userBalance
+    ) {
+      const currentCoin = calculateInitialCurrentCoin(
+        userBalance,
+        coin,
+        startTimeMine
+      );
+
+      const updatedCoin = currentCoin - price;
+
+      const newUserData = {
+        ...userData,
+        coin: updatedCoin,
+        startTimeMine: new Date().toISOString(),
+        balance: levelBalance,
+      };
+
+      setUserData(newUserData);
+
+      await updateUserInFirestore(userId, newUserData);
+    }
+  };
 
   return (
     <div className="bg-neutral-50 aspect-square rounded-3xl pt-2 relative ">
@@ -27,7 +64,7 @@ function BoostCard({
       </div>
       <div className="flex items-center justify-center flex-col gap-y-2">
         <span className="font-semibold text-neutral-700">
-          {balance} coin per hour
+          {levelBalance} coin per hour
         </span>
         <div className="flex items-center justify-center pl-2">
           <span className="font-bold text-xl">{price}</span>
@@ -35,6 +72,7 @@ function BoostCard({
         </div>
       </div>
       <button
+        onClick={handleUpgrade}
         className={`absolute bottom-0 translate-y-1/2 left-1/2 -translate-x-1/2 ${
           isHidden && "grayscale pointer-events-none"
         }`}

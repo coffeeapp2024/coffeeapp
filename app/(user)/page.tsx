@@ -11,25 +11,28 @@ import {} from "@/lib/timeActions";
 import { useUserDataStore } from "@/store/zustand";
 
 export default function Home() {
-  const { setUserData, setUserId } = useUserDataStore();
+  const { userData, setUserData, setUserId } = useUserDataStore();
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged(async (user) => {
-      if (user) {
-        try {
-          const fetchedUserData = await fetchUserData(user.uid);
-          setUserData(fetchedUserData);
-          setUserId(user.uid);
-        } catch (error) {
-          console.error("Error fetching or creating user data:", error);
+    if (userData === null) {
+      const unsubscribe = auth.onAuthStateChanged(async (user) => {
+        if (user) {
+          try {
+            console.log("rerender page");
+            const fetchedUserData = await fetchUserData(user.uid);
+            setUserData(fetchedUserData);
+            setUserId(user.uid);
+          } catch (error) {
+            console.error("Error fetching or creating user data:", error);
+          }
+        } else {
+          setUserData(null);
         }
-      } else {
-        setUserData(null);
-      }
-    });
+      });
 
-    return () => unsubscribe();
-  }, [setUserData, setUserId]);
+      return () => unsubscribe();
+    }
+  }, [userData, setUserData, setUserId]);
 
   return (
     <main className="relative h-screen max-w-screen-sm">

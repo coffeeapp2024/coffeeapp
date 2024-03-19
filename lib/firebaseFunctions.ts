@@ -36,7 +36,7 @@ export async function createUserInFirestore(
         balance: 0.1,
         startTimeMine: null,
         endTimeMine: null,
-        vouchers: [],
+        voucherIdList: [],
       };
 
       await setDoc(userDoc, userData);

@@ -17,7 +17,6 @@ import {
   fetchVouchersFromFirestore,
 } from "@/lib/firebaseFunctions";
 import { auth } from "@/lib/firebase";
-import LoginDialog from "@/components/LoginDialog";
 
 function Page() {
   const { userData, setUserData, setUserId } = useUserDataStore();
@@ -27,21 +26,25 @@ function Page() {
   const { levels, setLevels } = useLevelStore();
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged(async (user) => {
-      if (user && !userData) {
-        try {
-          const fetchedUserData = await fetchUserData(user.uid);
-          setUserData(fetchedUserData);
-          setUserId(user.uid);
-        } catch (error) {
-          console.error("Error fetching or creating user data:", error);
+    if (userData === null) {
+      const unsubscribe = auth.onAuthStateChanged(async (user) => {
+        if (user) {
+          try {
+            console.log("rerender page");
+            const fetchedUserData = await fetchUserData(user.uid);
+            setUserData(fetchedUserData);
+            setUserId(user.uid);
+          } catch (error) {
+            console.error("Error fetching or creating user data:", error);
+          }
+        } else {
+          setUserData(null);
         }
-      } else {
-      }
-    });
+      });
 
-    return () => unsubscribe();
-  }, [setUserData, setUserId, userData]);
+      return () => unsubscribe();
+    }
+  }, [userData, setUserData, setUserId]);
 
   useEffect(() => {
     const fetchVouchers = async () => {

@@ -13,7 +13,7 @@ function VoucherCard({ voucher }: { voucher: Voucher }) {
 
   const handleBuy = async () => {
     if (!userData || !userId || !id) return;
-    const { coin, vouchers, balance, startTimeMine } = userData;
+    const { coin, voucherIdList, balance, startTimeMine } = userData;
     if (coin !== null && coin >= price) {
       try {
         const currentCoin = calculateInitialCurrentCoin(
@@ -22,13 +22,13 @@ function VoucherCard({ voucher }: { voucher: Voucher }) {
           startTimeMine
         );
         const updatedCoin = currentCoin - price;
-        const updatedVouchers = [...(vouchers || []), id];
+        const updatedVouchers = [...(voucherIdList || []), id];
 
         const newUserData = {
           ...userData,
           coin: updatedCoin,
           startTimeMine: new Date().toISOString(),
-          vouchers: updatedVouchers,
+          voucherIdList: updatedVouchers,
         };
 
         setUserData(newUserData);
