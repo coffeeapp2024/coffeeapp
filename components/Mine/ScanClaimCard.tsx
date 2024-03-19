@@ -38,7 +38,7 @@ function ScanClaimCard() {
               src="/icons/hourclass.png"
               width={200}
               height={200}
-              className="w-14 h-14 object-contain"
+              className="w-12 h-12 object-contain"
               alt="Time Icon"
             />
           </div>

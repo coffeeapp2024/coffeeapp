@@ -3,8 +3,8 @@
 import React from "react";
 import { auth } from "@/lib/firebase";
 import { signOut } from "firebase/auth";
-import { ArrowRightStartOnRectangleIcon } from "@heroicons/react/24/outline";
 import { useUserDataStore } from "@/store/zustand";
+import { ArrowRightStartOnRectangleIcon } from "@heroicons/react/24/outline";
 
 function SignOutButton() {
   const { setUserData } = useUserDataStore();
@@ -15,8 +15,12 @@ function SignOutButton() {
   }
 
   return (
-    <button className="absolute right-3 top-6" onClick={signOutUser}>
-      <ArrowRightStartOnRectangleIcon className="w-7 h-7" />
+    <button
+      className="px-3 py-2 flex items-center justify-center gap-x-1 rounded-2xl font-medium text-neutral-400 absolute bottom-3 left-1/2 -translate-x-1/2"
+      onClick={signOutUser}
+    >
+      <ArrowRightStartOnRectangleIcon className="w-5 h-5" />
+      Log out
     </button>
   );
 }

@@ -5,6 +5,7 @@ import UserInfo from "./UserInfo";
 import UserVoucherList from "./UserVoucherList";
 import { User } from "firebase/auth";
 import Image from "next/image";
+import SignOutButton from "./SignOutButton";
 
 function ProfileDialog({ user }: { user: User }) {
   return (
@@ -37,11 +38,12 @@ function ProfileDialog({ user }: { user: User }) {
       </DrawerTrigger>
 
       {/* User Content ------------------------------------- */}
-      <DrawerContent className="rounded-t-3xl min-h-[70vh] sm:max-w-screen-sm mx-auto">
+      <DrawerContent className="rounded-t-3xl h-[70vh] sm:max-w-screen-sm mx-auto">
         <div className="pt-6">
           <UserInfo user={user} />
           <UserVoucherList />
         </div>
+        <SignOutButton />
       </DrawerContent>
     </Drawer>
   );
