@@ -3,8 +3,10 @@ import MainButton from "../MainButton";
 import Image from "next/image";
 import CoinIcon from "../CoinIcon";
 import { Case } from "@/store/storeTypes";
+import { useUserDataStore } from "@/store/zustand";
 
 function GameCard({ gameCase }: { gameCase: Case }) {
+  const { userData } = useUserDataStore();
   const { icon, price } = gameCase;
 
   return (
@@ -23,7 +25,9 @@ function GameCard({ gameCase }: { gameCase: Case }) {
         <CoinIcon classname="w-6 h-6" />{" "}
       </div>
       <button
-        className={`absolute -bottom-4 translate-y-1/2 left-1/2 -translate-x-1/2`}
+        className={`${
+          !userData && "pointer-events-none grayscale "
+        } absolute -bottom-4 translate-y-1/2 left-1/2 -translate-x-1/2`}
       >
         <MainButton text="Open" />
       </button>

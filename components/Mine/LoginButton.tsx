@@ -26,7 +26,7 @@ export default function LoginButton() {
 
   return (
     <button
-      className="flex items-center justify-center w-full h-full p-3 gap-x-3"
+      className="flex items-center justify-center w-full h-full p-3 gap-x-3 bg-white rounded-3xl"
       onClick={() => signIn()}
     >
       <div className="w-10 h-10 relative">

@@ -2,19 +2,46 @@
 
 import BoostDialog from "@/components/Gift/BoostDialog";
 import GameDialog from "@/components/Gift/GameDialog";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import VoucherDialog from "@/components/Gift/VoucherDialog";
-import { useCaseStore, useLevelStore, useVoucherStore } from "@/store/zustand";
+import {
+  useCaseStore,
+  useLevelStore,
+  useUserDataStore,
+  useVoucherStore,
+} from "@/store/zustand";
 import {
   fetchCasesFromFirestore,
   fetchLevelsFromFirestore,
+  fetchUserData,
   fetchVouchersFromFirestore,
 } from "@/lib/firebaseFunctions";
+import { auth } from "@/lib/firebase";
+import LoginDialog from "@/components/LoginDialog";
 
 function Page() {
+  const { userData, setUserData, setUserId } = useUserDataStore();
+
   const { vouchers, setVouchers } = useVoucherStore();
   const { cases, setCases } = useCaseStore();
   const { levels, setLevels } = useLevelStore();
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged(async (user) => {
+      if (user && !userData) {
+        try {
+          const fetchedUserData = await fetchUserData(user.uid);
+          setUserData(fetchedUserData);
+          setUserId(user.uid);
+        } catch (error) {
+          console.error("Error fetching or creating user data:", error);
+        }
+      } else {
+      }
+    });
+
+    return () => unsubscribe();
+  }, [setUserData, setUserId, userData]);
 
   useEffect(() => {
     const fetchVouchers = async () => {
@@ -26,17 +53,17 @@ function Page() {
         const fetchedLevels = await fetchLevelsFromFirestore();
         setLevels(fetchedLevels);
       } catch (error) {
-        console.error("Error fetching vouchers:", error);
+        console.error("Error fetching:", error);
       }
     };
 
     fetchVouchers();
-  }, []);
+  }, [setCases, setVouchers, setLevels]);
 
   return (
     <div
       style={{
-        backgroundImage: `url(https://i.pinimg.com/564x/19/3a/27/193a2720e7f0edbc3508be3d29593a45.jpg)`,
+        backgroundImage: `url("/bg/bg11.jpg")`,
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",

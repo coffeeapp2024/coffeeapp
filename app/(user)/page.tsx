@@ -9,7 +9,6 @@ import Background from "@/components/Mine/Background";
 import { fetchUserData } from "@/lib/firebaseFunctions";
 import {} from "@/lib/timeActions";
 import { useUserDataStore } from "@/store/zustand";
-import { setuid } from "process";
 
 export default function Home() {
   const { setUserData, setUserId } = useUserDataStore();

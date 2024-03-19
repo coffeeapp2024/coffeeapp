@@ -3,8 +3,10 @@ import React from "react";
 import MainButton from "../MainButton";
 import CoinIcon from "../CoinIcon";
 import { Voucher } from "@/store/storeTypes";
+import { useUserDataStore } from "@/store/zustand";
 
 function VoucherCard({ voucher }: { voucher: Voucher }) {
+  const { userData } = useUserDataStore();
   const { imageURL, info, price } = voucher;
 
   return (
@@ -26,7 +28,9 @@ function VoucherCard({ voucher }: { voucher: Voucher }) {
         </div>
       </div>
       <button
-        className={`absolute bottom-0 translate-y-1/2 left-1/2 -translate-x-1/2`}
+        className={`${
+          !userData && "pointer-events-none grayscale "
+        } absolute bottom-0 translate-y-1/2 left-1/2 -translate-x-1/2`}
       >
         <MainButton text="Buy" />
       </button>

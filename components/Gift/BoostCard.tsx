@@ -1,4 +1,3 @@
-import type { BoostInfo } from "@/lib/types";
 import Image from "next/image";
 import React from "react";
 import MainButton from "../MainButton";
@@ -7,14 +6,13 @@ import { Level } from "@/store/storeTypes";
 
 function BoostCard({
   level,
-  currentNextBalance,
+  nextBalance,
 }: {
   level: Level;
-  currentNextBalance: number;
+  nextBalance: number | null;
 }) {
   const { icon, balance, price } = level;
-
-  const isHidden = currentNextBalance === balance ? false : true;
+  const isHidden = nextBalance === balance ? false : true;
 
   return (
     <div className="bg-neutral-50 aspect-square rounded-3xl pt-2 relative ">
