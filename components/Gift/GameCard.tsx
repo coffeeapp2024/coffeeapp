@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import MainButton from "../MainButton";
 import Image from "next/image";
 import CoinIcon from "../CoinIcon";
@@ -8,10 +8,14 @@ import { Case } from "@/store/storeTypes";
 import { useUserDataStore } from "@/store/zustand";
 import { updateUserInFirestore } from "@/lib/firebaseFunctions";
 import { calculateInitialCurrentCoin } from "@/lib/coinActions";
+import { toast } from "sonner";
+import LoginDialog from "../LoginDialog";
+import RandomVoucherDialog from "./RandomVoucherDialog";
 
 function GameCard({ gameCase }: { gameCase: Case }) {
   const { userData, setUserData, userId } = useUserDataStore();
   const { icon, price, voucherIdList: caseVoucherIdList, id } = gameCase;
+  const [randomVoucherId, setRandomVoucherId] = useState<string | null>(null);
 
   const isHidden =
     !caseVoucherIdList || caseVoucherIdList.length <= 0 || !userData;
@@ -41,6 +45,8 @@ function GameCard({ gameCase }: { gameCase: Case }) {
           Math.random() * caseVoucherIdList.length
         );
         const randomVoucherId = caseVoucherIdList[randomIndex];
+        setRandomVoucherId(randomVoucherId);
+
         // Update user data
         const newUserData = {
           ...userData,
@@ -82,6 +88,9 @@ function GameCard({ gameCase }: { gameCase: Case }) {
       >
         <MainButton text="Play" />
       </button>
+      {randomVoucherId && (
+        <RandomVoucherDialog randomVoucherId={randomVoucherId} />
+      )}
     </div>
   );
 }
