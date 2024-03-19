@@ -1,9 +1,38 @@
+"use client";
+
 import BoostDialog from "@/components/Gift/BoostDialog";
 import GameDialog from "@/components/Gift/GameDialog";
-import React from "react";
+import React, { useEffect } from "react";
 import VoucherDialog from "@/components/Gift/VoucherDialog";
+import { useCaseStore, useLevelStore, useVoucherStore } from "@/store/zustand";
+import {
+  fetchCasesFromFirestore,
+  fetchLevelsFromFirestore,
+  fetchVouchersFromFirestore,
+} from "@/lib/firebaseFunctions";
 
-function page() {
+function Page() {
+  const { vouchers, setVouchers } = useVoucherStore();
+  const { cases, setCases } = useCaseStore();
+  const { levels, setLevels } = useLevelStore();
+
+  useEffect(() => {
+    const fetchVouchers = async () => {
+      try {
+        const fetchedVouchers = await fetchVouchersFromFirestore();
+        setVouchers(fetchedVouchers);
+        const fetchedCases = await fetchCasesFromFirestore();
+        setCases(fetchedCases);
+        const fetchedLevels = await fetchLevelsFromFirestore();
+        setLevels(fetchedLevels);
+      } catch (error) {
+        console.error("Error fetching vouchers:", error);
+      }
+    };
+
+    fetchVouchers();
+  }, []);
+
   return (
     <div
       style={{
@@ -23,4 +52,4 @@ function page() {
   );
 }
 
-export default page;
+export default Page;

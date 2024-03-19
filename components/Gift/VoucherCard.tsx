@@ -1,17 +1,17 @@
-import type { VoucherInfo } from "@/lib/types";
 import Image from "next/image";
 import React from "react";
 import MainButton from "../MainButton";
 import CoinIcon from "../CoinIcon";
+import { Voucher } from "@/store/storeTypes";
 
-function VoucherCard({ voucherInfo }: { voucherInfo: VoucherInfo }) {
-  const { imgUrl, info, price } = voucherInfo;
+function VoucherCard({ voucher }: { voucher: Voucher }) {
+  const { imageURL, info, price } = voucher;
 
   return (
     <div className="bg-neutral-50 aspect-[8/7]   rounded-3xl pt-3 px-3 relative ">
       <div className="relative h-1/2 mb-4">
         <Image
-          src={imgUrl}
+          src={imageURL}
           fill={true}
           sizes="(max-width: 640px) 100vw, 640px"
           alt="level icon"

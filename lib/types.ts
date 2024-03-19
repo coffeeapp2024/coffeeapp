@@ -1,5 +1,3 @@
-import exp from "constants";
-
 export type Post = {
   imgUrl: string;
   liked: number;
@@ -18,7 +16,7 @@ export type GameInfo = {
 };
 
 export type VoucherInfo = {
-  imgUrl: string;
+  imageUrl: string;
   info: string;
   price: number;
 };

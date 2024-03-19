@@ -44,3 +44,39 @@ export type CoinStore = {
   currentCoin: number | null;
   setCurrentCoin: (coin: number | null) => void;
 };
+
+export type Voucher = {
+  id: string;
+  imageURL: string;
+  info: string;
+  price: number;
+};
+
+export type VoucherStore = {
+  vouchers: Voucher[];
+  setVouchers: (vouchers: Voucher[]) => void;
+};
+
+export type Case = {
+  id: string;
+  icon: string;
+  price: number;
+  vouchers: string[];
+};
+
+export type CaseStore = {
+  cases: Case[];
+  setCases: (cases: Case[]) => void;
+  addCase: (newCase: Case) => void;
+};
+
+export type Level = {
+  balance: number;
+  price: number;
+  icon: string;
+};
+
+export type LevelStore = {
+  levels: Level[];
+  setLevels: (levels: Level[]) => void;
+};

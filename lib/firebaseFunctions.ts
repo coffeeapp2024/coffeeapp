@@ -14,7 +14,10 @@ import { HomePageContent } from "@/store/storeTypes";
 const usersRef = collection(db, "users");
 const contentsRef = collection(db, "contents");
 const keysRef = collection(db, "keys");
-const settingsRef = collection(db, "settings");
+// const settingsRef = collection(db, "settings");
+const vouchersRef = collection(db, "vouchers");
+const casesRef = collection(db, "game_random_voucher");
+const levelsRef = collection(db, "levels");
 
 export async function createUserInFirestore(
   user: User
@@ -143,6 +146,61 @@ export async function deleteKeyFromFirestore(keyId: string) {
     console.log("Key deleted successfully:", keyId);
   } catch (error) {
     console.error("Error deleting key from Firestore:", error);
+    throw error;
+  }
+}
+
+export async function fetchVouchersFromFirestore() {
+  try {
+    const vouchersSnapshot = await getDocs(vouchersRef);
+    const vouchers: any = [];
+    vouchersSnapshot.forEach((doc) => {
+      vouchers.push({
+        id: doc.id,
+        ...doc.data(),
+      });
+    });
+    return vouchers;
+  } catch (error) {
+    console.error("Error fetching vouchers from Firestore:", error);
+    throw error;
+  }
+}
+
+export async function fetchCasesFromFirestore() {
+  try {
+    const casesSnapshot = await getDocs(casesRef);
+    const cases: any[] = [];
+
+    casesSnapshot.forEach((doc) => {
+      cases.push({
+        id: doc.id,
+        ...doc.data(),
+      });
+    });
+
+    return cases;
+  } catch (error) {
+    console.error("Error fetching cases from Firestore:", error);
+    throw error;
+  }
+}
+
+export async function fetchLevelsFromFirestore() {
+  try {
+    const levelsSnapshot = await getDocs(levelsRef);
+    const levels: any[] = [];
+
+    levelsSnapshot.forEach((doc) => {
+      levels.push({
+        id: doc.id,
+        ...doc.data(),
+      });
+    });
+
+    return levels;
+  } catch (error) {
+    console.error("Error fetching levels from Firestore:", error);
     throw error;
   }
 }

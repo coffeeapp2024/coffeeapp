@@ -5,36 +5,11 @@ import {
   CarouselItem,
 } from "@/components/ui/carousel";
 import VoucherCard from "./VoucherCard";
-
-const voucherInfoList = [
-  {
-    imgUrl: "/vouchers/vc1.png",
-    info: "sale off 20%",
-    price: 8,
-  },
-  {
-    imgUrl: "/vouchers/vc2.png",
-    info: "sale off 20%",
-    price: 8,
-  },
-  {
-    imgUrl: "/vouchers/vc3.png",
-    info: "sale off 20%",
-    price: 8,
-  },
-  {
-    imgUrl: "/vouchers/vc4.png",
-    info: "sale off 20%",
-    price: 8,
-  },
-  {
-    imgUrl: "/vouchers/vc5.png",
-    info: "sale off 20%",
-    price: 8,
-  },
-];
+import { useVoucherStore } from "@/store/zustand";
 
 function VoucherCardList() {
+  const { vouchers } = useVoucherStore();
+
   return (
     <Carousel
       opts={{
@@ -44,9 +19,9 @@ function VoucherCardList() {
       className="-mx-0"
     >
       <CarouselContent className="-ml-0 pb-8">
-        {voucherInfoList.map((voucherInfo, index) => (
+        {vouchers.map((voucher, index) => (
           <CarouselItem key={index} className="basis-[75%] pl-4">
-            <VoucherCard voucherInfo={voucherInfo} />
+            <VoucherCard voucher={voucher} />
           </CarouselItem>
         ))}
       </CarouselContent>

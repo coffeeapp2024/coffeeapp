@@ -3,15 +3,16 @@ import Image from "next/image";
 import React from "react";
 import MainButton from "../MainButton";
 import CoinIcon from "../CoinIcon";
+import { Level } from "@/store/storeTypes";
 
 function BoostCard({
-  boostInfo,
+  level,
   currentNextBalance,
 }: {
-  boostInfo: BoostInfo;
+  level: Level;
   currentNextBalance: number;
 }) {
-  const { imgUrl, info, balance, price } = boostInfo;
+  const { icon, balance, price } = level;
 
   const isHidden = currentNextBalance === balance ? false : true;
 
@@ -19,7 +20,7 @@ function BoostCard({
     <div className="bg-neutral-50 aspect-square rounded-3xl pt-2 relative ">
       <div className="relative h-1/2 mb-3">
         <Image
-          src={imgUrl}
+          src={icon}
           fill={true}
           sizes="(max-width: 640px) 100vw, 640px"
           alt="level icon"
@@ -27,7 +28,9 @@ function BoostCard({
         />
       </div>
       <div className="flex items-center justify-center flex-col gap-y-2">
-        <span className="font-semibold text-neutral-700">{info}</span>
+        <span className="font-semibold text-neutral-700">
+          {balance} coin per hour
+        </span>
         <div className="flex items-center justify-center pl-2">
           <span className="font-bold text-xl">{price}</span>
           <CoinIcon classname="w-6 h-6  " />

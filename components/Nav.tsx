@@ -14,38 +14,49 @@ function Nav() {
       <div className="flex items-center justify-center w-fit mx-auto px-3 py-2 bg-white bg-opacity-90 rounded-3xl border-[1px] border-neutral-300 divide-neutral-300  divide-x-[1px]">
         <Link href="/home">
           <div className="nav-item">
-            <HomeIcon className="nav-icon" />
-            <span className="nav-item-name">About</span>
+            <Image
+              src="/icons/navbar/home.png"
+              width={200}
+              height={200}
+              className="object-cover overflow-visible w-7 h-7"
+              alt="Home Icon"
+            />
+            <span className="nav-item-name">Home</span>
           </div>
         </Link>
         <Link href="/products" className="">
           <div className="nav-item">
-            <GiftIcon className="nav-icon" />
-            <span className="nav-item-name">Product</span>
+            <Image
+              src="/icons/navbar/shop.png"
+              width={200}
+              height={200}
+              className="object-cover overflow-visible w-7 h-7"
+              alt="Shop Icon"
+            />
+            <span className="nav-item-name">Shop</span>
           </div>
         </Link>
         <Link href="/">
           <div className="nav-item">
-            <div className="relative w-8 h-8">
-              <Image
-                src="/icons/mine.png"
-                fill={true}
-                sizes="(max-width: 640px) 100vw, 640px"
-                alt="Boost Icon"
-                className="object-contain rotate-1"
-              />
-            </div>
+            <Image
+              src="/icons/navbar/mine.png"
+              width={200}
+              height={200}
+              alt="Mine Icon"
+              className="object-cover overflow-visible w-7 h-7 "
+            />
             <span className="nav-item-name">Mine</span>
           </div>
         </Link>
         <Link href="/gift">
           <div className="nav-item">
-            <div className="relative w-8 h-8">
+            <div className="relative ">
               <Image
-                src="/game.png"
-                fill={true}
-                sizes="(max-width: 640px) 100vw, 640px"
-                alt="Boost Icon"
+                src="/icons/navbar/game.png"
+                width={200}
+                height={200}
+                className="w-7 h-7 object-cover overflow-visible"
+                alt="Gift Icon"
               />
             </div>
             <span className="nav-item-name">Gift</span>
