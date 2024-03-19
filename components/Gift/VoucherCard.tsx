@@ -4,10 +4,34 @@ import MainButton from "../MainButton";
 import CoinIcon from "../CoinIcon";
 import { Voucher } from "@/store/storeTypes";
 import { useUserDataStore } from "@/store/zustand";
+import { updateUserInFirestore } from "@/lib/firebaseFunctions";
 
 function VoucherCard({ voucher }: { voucher: Voucher }) {
-  const { userData } = useUserDataStore();
-  const { imageURL, info, price } = voucher;
+  const { userData, setUserData, userId } = useUserDataStore();
+  const { imageURL, info, price, id } = voucher;
+
+  const handleBuy = async () => {
+    if (!userData || !userId || !id) return;
+    const { coin, vouchers } = userData;
+
+    if (coin !== null && coin >= price) {
+      const updatedCoin = coin - price;
+      const updatedVouchers = [...(vouchers || []), id];
+
+      try {
+        setUserData({
+          ...userData,
+          coin: updatedCoin,
+          vouchers: updatedVouchers,
+        });
+        await updateUserInFirestore(userId, userData);
+      } catch (error) {
+        console.error("Error updating user data:", error);
+      }
+    } else {
+      console.warn("Insufficient balance or voucher already owned.");
+    }
+  };
 
   return (
     <div className="bg-neutral-50 aspect-[8/7]   rounded-3xl pt-3 px-3 relative ">
@@ -31,6 +55,7 @@ function VoucherCard({ voucher }: { voucher: Voucher }) {
         className={`${
           !userData && "pointer-events-none grayscale "
         } absolute bottom-0 translate-y-1/2 left-1/2 -translate-x-1/2`}
+        onClick={handleBuy}
       >
         <MainButton text="Buy" />
       </button>

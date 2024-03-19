@@ -5,6 +5,7 @@ import {
   getDocs,
   getDoc,
   deleteDoc,
+  updateDoc,
 } from "firebase/firestore";
 import { UserData } from "@/store/storeTypes";
 import { User } from "firebase/auth";

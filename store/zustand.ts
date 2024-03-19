@@ -9,7 +9,7 @@ import {
   VoucherStore,
 } from "./storeTypes";
 
-export const useUserDataStore = create<UserDataStore>((set) => ({
+export const useUserDataStore = create<UserDataStore>((set: any) => ({
   userData: null,
   userId: null,
   setUserData: (userData) => set({ userData }),
