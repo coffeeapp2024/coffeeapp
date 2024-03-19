@@ -5,6 +5,7 @@ import CoinIcon from "../CoinIcon";
 import { Voucher } from "@/store/storeTypes";
 import { useUserDataStore } from "@/store/zustand";
 import { updateUserInFirestore } from "@/lib/firebaseFunctions";
+import { calculateInitialCurrentCoin } from "@/lib/coinActions";
 
 function VoucherCard({ voucher }: { voucher: Voucher }) {
   const { userData, setUserData, userId } = useUserDataStore();
@@ -12,19 +13,26 @@ function VoucherCard({ voucher }: { voucher: Voucher }) {
 
   const handleBuy = async () => {
     if (!userData || !userId || !id) return;
-    const { coin, vouchers } = userData;
-
+    const { coin, vouchers, balance, startTimeMine } = userData;
     if (coin !== null && coin >= price) {
-      const updatedCoin = coin - price;
-      const updatedVouchers = [...(vouchers || []), id];
-
       try {
-        setUserData({
+        const currentCoin = calculateInitialCurrentCoin(
+          balance,
+          coin,
+          startTimeMine
+        );
+        const updatedCoin = currentCoin - price;
+        const updatedVouchers = [...(vouchers || []), id];
+
+        const newUserData = {
           ...userData,
           coin: updatedCoin,
+          startTimeMine: new Date().toISOString(),
           vouchers: updatedVouchers,
-        });
-        await updateUserInFirestore(userId, userData);
+        };
+
+        setUserData(newUserData);
+        await updateUserInFirestore(userId, newUserData);
       } catch (error) {
         console.error("Error updating user data:", error);
       }

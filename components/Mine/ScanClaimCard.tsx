@@ -1,6 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Image from "next/image";
-import QRScannerButton from "./QRScannerButton";
 import {
   calculateRemainingTimeInSeconds,
   formatSeconds,
@@ -33,11 +32,15 @@ function ScanClaimCard() {
   return (
     <div className="absolute bottom-1/4 sm:bottom-1/3 w-full max-w-screen-sm px-3">
       <div className=" bg-white bg-opacity-90 rounded-3xl border-[1px] border-neutral-300 flex px-3 py-3 items-center justify-between shadow-sm">
-        <div className="flex items-center gap-x-2">
+        <div className="flex items-center gap-x-1">
           <div>
-            <div className="relative w-[68px] h-[68px]">
-              <Image src="/hourclass.png" fill={true} alt="Coin Icon" />
-            </div>
+            <Image
+              src="/icons/hourclass.png"
+              width={200}
+              height={200}
+              className="w-14 h-14 object-contain"
+              alt="Time Icon"
+            />
           </div>
           <div className="flex flex-col font-semibold">
             <span className="text-neutral-800 ">{remainingTimeFormatted}</span>

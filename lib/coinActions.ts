@@ -1,4 +1,4 @@
-import { fetchUserData, updateUserInFirestore } from "./firebaseFunctions";
+import { UserData } from "@/store/storeTypes";
 
 export function updateCurrentCoin(
   balancePerHour: number,
@@ -56,53 +56,32 @@ export function calculateFinalCoin(
   return parseFloat(accumulatedCoin.toFixed(5));
 }
 
-export const updateMineTimes = async (userId: string, mineHour: number) => {
+export const updateMineTimes = async (userData: UserData, mineHour: number) => {
   const millisecondsPerHour = 60 * 60 * 1000;
   const mineDurationInMillis = mineHour * millisecondsPerHour;
 
-  try {
-    const fetchedUserData = await fetchUserData(userId);
-    if (fetchedUserData) {
-      const { balance, coin, startTimeMine, endTimeMine } = fetchedUserData;
+  const { balance, coin, startTimeMine, endTimeMine } = userData;
 
-      const now = new Date();
-      const endDate = endTimeMine ? new Date(endTimeMine) : null;
+  const now = new Date();
+  const endDate = endTimeMine ? new Date(endTimeMine) : null;
 
-      const newEndTime =
-        endDate && endDate > now
-          ? new Date(endDate.getTime() + mineDurationInMillis)
-          : new Date(Date.now() + mineDurationInMillis);
+  const newEndTimeMine =
+    endDate && endDate > now
+      ? new Date(endDate.getTime() + mineDurationInMillis).toISOString()
+      : new Date(Date.now() + mineDurationInMillis).toISOString();
 
-      const newEndTimeMine = newEndTime.toISOString();
+  const currentCoin = await calculateInitialCurrentCoin(
+    balance,
+    coin || 0,
+    startTimeMine
+  );
 
-      const currentCoin = await calculateInitialCurrentCoin(
-        balance,
-        coin || 0,
-        startTimeMine
-      );
+  const newUserData = {
+    ...userData,
+    coin: currentCoin,
+    startTimeMine: now.toISOString(),
+    endTimeMine: newEndTimeMine,
+  };
 
-      const newFinalCoin = calculateFinalCoin(
-        balance,
-        now.toISOString(),
-        newEndTimeMine,
-        currentCoin
-      );
-
-      await updateUserInFirestore(userId, {
-        coin: currentCoin,
-        finalCoin: newFinalCoin,
-        startTimeMine: now.toISOString(),
-        endTimeMine: newEndTimeMine,
-      });
-
-      const userData = await fetchUserData(userId);
-
-      return userData;
-    } else {
-      return null;
-    }
-  } catch (error) {
-    console.error("Error updating mine times:", error);
-    return null;
-  }
+  return newUserData;
 };

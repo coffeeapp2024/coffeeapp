@@ -7,6 +7,7 @@ import MainButton from "../MainButton";
 import {
   fetchKeysFromFirestore,
   deleteKeyFromFirestore,
+  updateUserInFirestore,
 } from "@/lib/firebaseFunctions";
 import jsQR from "jsqr";
 import { useUserDataStore } from "@/store/zustand";
@@ -17,7 +18,7 @@ const ClaimCoinScanner = () => {
   const [showScanner, setShowScanner] = useState(false);
   const [scannedText, setScannedText] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const { userId, setUserData } = useUserDataStore();
+  const { userData, userId, setUserData } = useUserDataStore();
 
   const toggleScanner = () => {
     setShowScanner((prevShowScanner) => !prevShowScanner);
@@ -30,12 +31,13 @@ const ClaimCoinScanner = () => {
     try {
       const keys = await fetchKeysFromFirestore(); // Fetch keys from Firestore
       if (keys.includes(text)) {
-        if (!userId) {
+        if (!userId || !userData) {
           return;
         }
-        const fetchedUserData = await updateMineTimes(userId, 24);
+        const newUserData = await updateMineTimes(userData, 24);
+        setUserData(newUserData);
+        await updateUserInFirestore(userId, newUserData);
 
-        setUserData(fetchedUserData);
         // If the scanned text matches a key, delete the key
         await deleteKeyFromFirestore(text);
         console.log("Key deleted successfully:", text);

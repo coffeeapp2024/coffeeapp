@@ -8,7 +8,6 @@ export type UserData = {
   email: string | null;
   displayName: string | null;
   coin: number | null;
-  finalCoin: number | null;
   balance: number | null;
   startTimeMine: string | null;
   endTimeMine: string | null;

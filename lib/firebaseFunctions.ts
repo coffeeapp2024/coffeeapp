@@ -33,7 +33,6 @@ export async function createUserInFirestore(
         email: user.email,
         displayName: user.displayName,
         coin: 0,
-        finalCoin: 0,
         balance: 0.1,
         startTimeMine: null,
         endTimeMine: null,
