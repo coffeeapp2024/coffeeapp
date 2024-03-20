@@ -5,8 +5,8 @@ import {
   getDocs,
   getDoc,
   deleteDoc,
-  updateDoc,
   onSnapshot,
+  Unsubscribe,
 } from "firebase/firestore";
 import { UserData } from "@/store/storeTypes";
 import { User } from "firebase/auth";
@@ -205,10 +205,11 @@ export async function fetchLevelsFromFirestore() {
     throw error;
   }
 }
-export async function listenForVoucherIdListChanges(
+
+export function listenForVoucherIdListChanges(
   userId: string,
   callback: (voucherIdList: string[]) => void
-) {
+): Unsubscribe {
   const userDoc = doc(usersRef, userId);
 
   try {
@@ -226,7 +227,7 @@ export async function listenForVoucherIdListChanges(
       }
     });
 
-    // Return a cleanup function to unsubscribe from the listener
+    // Return the unsubscribe function
     return unsubscribe;
   } catch (error) {
     console.error("Error listening for voucherIdList changes:", error);

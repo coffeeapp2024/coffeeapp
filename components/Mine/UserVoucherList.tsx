@@ -9,6 +9,7 @@ import { useUserDataStore } from "@/store/zustand";
 
 function VoucherCardList() {
   const { userData } = useUserDataStore();
+
   const { voucherIdList } = userData ?? {};
 
   return (

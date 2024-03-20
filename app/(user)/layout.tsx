@@ -2,7 +2,7 @@
 
 import Nav from "@/components/Nav";
 import { auth } from "@/lib/firebase";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   fetchHomePageContent,
   fetchCasesFromFirestore,
@@ -12,6 +12,7 @@ import {
   updateUserInFirestore,
   listenForVoucherIdListChanges,
 } from "@/lib/firebaseFunctions";
+import { Unsubscribe } from "firebase/firestore";
 import {
   useCaseStore,
   useHomePageContentStore,
@@ -20,6 +21,7 @@ import {
   useVoucherStore,
 } from "@/store/zustand";
 import { UserData } from "@/store/storeTypes";
+import { isEqual } from "lodash";
 
 function useFetchVouchersEffect() {
   const { setVouchers, vouchers } = useVoucherStore();
@@ -100,8 +102,10 @@ function useHomePageContentEffect() {
 
 function useAuthEffect() {
   const { userData, userId, setUserData, setUserId } = useUserDataStore();
+  const { setShouldUpdate } = useUpdateUserEffect();
 
   useEffect(() => {
+    setShouldUpdate(false);
     if (!userData || !userId) {
       const unsubscribe = auth.onAuthStateChanged(async (user) => {
         if (user) {
@@ -109,6 +113,7 @@ function useAuthEffect() {
             const fetchedUserData = await fetchUserData(user.uid);
             setUserData(fetchedUserData);
             setUserId(user.uid);
+            console.log("login");
           } catch (error) {
             console.error("Error fetching user data:", error);
           }
@@ -119,12 +124,15 @@ function useAuthEffect() {
 
       return () => unsubscribe();
     }
-  }, [userData, userId, setUserData, setUserId]);
+  }, [userData, userId, setUserData, setUserId, setShouldUpdate]);
 }
 
-function useUpdateUserEffect(userData: UserData | null, userId: string | null) {
+function useUpdateUserEffect() {
+  const { userData, userId } = useUserDataStore();
+  const [shouldUpdate, setShouldUpdate] = useState(true); // Flag to control update
+
   useEffect(() => {
-    if (userData && userId) {
+    if (shouldUpdate && userData && userId) {
       const updateUser = async () => {
         try {
           await updateUserInFirestore(userId, userData);
@@ -134,25 +142,34 @@ function useUpdateUserEffect(userData: UserData | null, userId: string | null) {
       };
 
       updateUser();
+      console.log("update firebase");
     }
-  }, [userData, userId]);
+  }, [shouldUpdate, userData, userId]);
+
+  return { setShouldUpdate };
 }
 
-function UserVoucherIdListListener() {
+export async function UserVoucherIdListListener() {
   const { userId, userData, setUserData } = useUserDataStore();
+  const { setShouldUpdate } = useUpdateUserEffect();
 
   useEffect(() => {
-    let unsubscribe: any;
+    setShouldUpdate(false);
+
+    let unsubscribe: Unsubscribe | undefined = undefined;
     if (userId && userData) {
       unsubscribe = listenForVoucherIdListChanges(userId, (voucherIdList) => {
+        if (isEqual(voucherIdList, userData.voucherIdList)) {
+          console.log("equal");
+          return;
+        }
         // Update the user data with the new voucherIdList
         const updatedUserData: UserData = {
           ...userData,
           voucherIdList: voucherIdList,
         };
+        console.log("update");
         setUserData(updatedUserData);
-
-        // updateUserInFirestore(userId, updatedUserData);
       });
     }
     return () => {
@@ -160,9 +177,7 @@ function UserVoucherIdListListener() {
         unsubscribe();
       }
     };
-  }, [userId, userData, setUserData]);
-
-  return <div>Component content here</div>;
+  }, [userId, userData, setUserData, setShouldUpdate]);
 }
 
 export default function RootLayout({
@@ -170,19 +185,15 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const { userData, userId, setUserData, setUserId } = useUserDataStore();
-  const { homePageContent, setHomePageContent } = useHomePageContentStore();
-  const { vouchers, setVouchers } = useVoucherStore();
-  const { cases, setCases } = useCaseStore();
-  const { levels, setLevels } = useLevelStore();
-
   useAuthEffect();
   useHomePageContentEffect();
   useFetchVouchersEffect();
   useFetchCasesEffect();
   useFetchLevelsEffect();
 
-  useUpdateUserEffect(userData, userId);
+  UserVoucherIdListListener();
+
+  useUpdateUserEffect();
 
   return (
     <main>
