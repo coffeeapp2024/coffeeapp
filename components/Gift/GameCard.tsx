@@ -6,10 +6,7 @@ import Image from "next/image";
 import CoinIcon from "../CoinIcon";
 import { Case } from "@/store/storeTypes";
 import { useUserDataStore } from "@/store/zustand";
-import { updateUserInFirestore } from "@/lib/firebaseFunctions";
 import { calculateInitialCurrentCoin } from "@/lib/coinActions";
-import { toast } from "sonner";
-import LoginDialog from "../LoginDialog";
 import RandomVoucherDialog from "./RandomVoucherDialog";
 
 function GameCard({ gameCase }: { gameCase: Case }) {
@@ -30,38 +27,34 @@ function GameCard({ gameCase }: { gameCase: Case }) {
     )
       return;
     const { coin, voucherIdList, balance, startTimeMine } = userData;
-    if (coin !== null && coin >= price) {
-      try {
-        // Deduct the price of the case from the user's coin balance
-        const currentCoin = calculateInitialCurrentCoin(
-          balance,
-          coin,
-          startTimeMine
-        );
-        const updatedCoin = currentCoin - price;
-
-        // Get a random voucher ID from the list of vouchers associated with the case
-        const randomIndex = Math.floor(
-          Math.random() * caseVoucherIdList.length
-        );
-        const randomVoucherId = caseVoucherIdList[randomIndex];
-        setRandomVoucherId(randomVoucherId);
-
-        // Update user data
-        const newUserData = {
-          ...userData,
-          coin: updatedCoin,
-          startTimeMine: new Date().toISOString(),
-          voucherIdList: [...(voucherIdList || []), randomVoucherId],
-        };
-
-        setUserData(newUserData);
-        await updateUserInFirestore(userId, newUserData);
-      } catch (error) {
-        console.error("Error updating user data:", error);
-      }
-    } else {
+    if (!coin) return;
+    const currentCoin = calculateInitialCurrentCoin(
+      balance,
+      coin,
+      startTimeMine
+    );
+    if (currentCoin < price) {
       console.warn("Insufficient balance or voucher already owned.");
+      return;
+    }
+    try {
+      const updatedCoin = currentCoin - price;
+
+      const randomIndex = Math.floor(Math.random() * caseVoucherIdList.length);
+      const randomVoucherId = caseVoucherIdList[randomIndex];
+      setRandomVoucherId(randomVoucherId);
+
+      // Update user data
+      const newUserData = {
+        ...userData,
+        coin: updatedCoin,
+        startTimeMine: new Date().toISOString(),
+        voucherIdList: [...(voucherIdList || []), randomVoucherId],
+      };
+
+      setUserData(newUserData);
+    } catch (error) {
+      console.error("Error updating user data:", error);
     }
   };
 

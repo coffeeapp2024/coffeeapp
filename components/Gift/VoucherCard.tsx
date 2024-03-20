@@ -4,7 +4,6 @@ import MainButton from "../MainButton";
 import CoinIcon from "../CoinIcon";
 import { Voucher } from "@/store/storeTypes";
 import { useUserDataStore } from "@/store/zustand";
-import { updateUserInFirestore } from "@/lib/firebaseFunctions";
 import { calculateInitialCurrentCoin } from "@/lib/coinActions";
 import { toast } from "sonner";
 
@@ -14,33 +13,34 @@ function VoucherCard({ voucher }: { voucher: Voucher }) {
 
   const handleBuy = async () => {
     if (!userData || !userId || !id) return;
+
     const { coin, voucherIdList, balance, startTimeMine } = userData;
-    if (coin !== null && coin >= price) {
-      try {
-        const currentCoin = calculateInitialCurrentCoin(
-          balance,
-          coin,
-          startTimeMine
-        );
-        const updatedCoin = currentCoin - price;
-        const updatedVouchers = [...(voucherIdList || []), id];
+    if (!coin) return;
 
-        const newUserData = {
-          ...userData,
-          coin: updatedCoin,
-          startTimeMine: new Date().toISOString(),
-          voucherIdList: updatedVouchers,
-        };
+    const currentCoin = calculateInitialCurrentCoin(
+      balance,
+      coin,
+      startTimeMine
+    );
+    if (currentCoin < price) {
+      toast.warning("Not enough coins to purchase voucher.");
+      return;
+    }
+    try {
+      const updatedCoin = currentCoin - price;
+      const updatedVouchers = [...(voucherIdList || []), id];
 
-        setUserData(newUserData);
-        await updateUserInFirestore(userId, newUserData);
-        toast.success("Voucher purchased successfully!");
-      } catch (error) {
-        console.error("Error updating user data:", error);
-      }
-    } else {
-      toast.warning("Insufficient balance. Unable to purchase voucher.");
-      console.warn("Insufficient balance");
+      const newUserData = {
+        ...userData,
+        coin: updatedCoin,
+        startTimeMine: new Date().toISOString(),
+        voucherIdList: updatedVouchers,
+      };
+
+      setUserData(newUserData);
+      toast.success("Voucher purchased successfully!");
+    } catch (error) {
+      console.error("Error updating user data:", error);
     }
   };
 

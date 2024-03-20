@@ -55,7 +55,7 @@ function BoostCard({
     };
 
     setUserData(newUserData);
-    await updateUserInFirestore(userId, newUserData);
+    // await updateUserInFirestore(userId, newUserData);
     toast.success("Upgrade successfully");
   };
 
