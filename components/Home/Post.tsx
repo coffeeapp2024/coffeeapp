@@ -1,28 +1,35 @@
 "use client";
 
 import type { Post } from "@/lib/types";
+import { CheckinImage } from "@/store/storeTypes";
+import { useCheckinStore } from "@/store/zustand";
 import { HeartIcon } from "@heroicons/react/24/outline";
 import { HeartIcon as HeartSolidIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
 import React, { useState } from "react";
 
-function Post({ postInfo }: { postInfo: Post }) {
-  const { imgUrl, liked } = postInfo;
+function Post({ checkin }: { checkin: CheckinImage }) {
+  const { decreaseLikedNumber, increaseLikedNumber } = useCheckinStore();
+  const { imageURL, likedNumber, id } = checkin;
   const [isLiked, setIsLiked] = useState(false);
 
   const handleLikeClicked = () => {
     setIsLiked(!isLiked);
+
+    isLiked ? decreaseLikedNumber(id) : increaseLikedNumber(id);
   };
 
   return (
     <div className="relative aspect-square overflow-hidden bg-black w-full rounded-2xl">
-      <Image
-        src={imgUrl}
-        fill={true}
-        sizes="(max-width: 640px) 100vw, 640px"
-        alt="Post Image"
-        className="object-center object-cover"
-      />
+      {imageURL && (
+        <Image
+          src={imageURL}
+          fill={true}
+          sizes="(max-width: 640px) 100vw, 640px"
+          alt="Post Image"
+          className="object-center object-cover"
+        />
+      )}
 
       <button
         onClick={handleLikeClicked}
@@ -34,7 +41,7 @@ function Post({ postInfo }: { postInfo: Post }) {
           <HeartIcon className="w-8 h-8" />
         )}
 
-        <span>{liked}</span>
+        <span>{likedNumber ?? 0}</span>
       </button>
     </div>
   );

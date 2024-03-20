@@ -78,3 +78,19 @@ export type LevelStore = {
   levels: Level[] | null;
   setLevels: (levels: Level[]) => void;
 };
+
+export type CheckinImage = {
+  id: string;
+  userEmail: string | null;
+  userId: string | null;
+  imageURL: string | null;
+  likedNumber: number | null;
+};
+
+export interface CheckinStore {
+  checkins: CheckinImage[];
+  setCheckins: (checkins: CheckinImage[]) => void;
+  addCheckin: (file: File, userId: string, userEmail: string) => Promise<void>;
+  increaseLikedNumber: (id: string) => Promise<void>;
+  decreaseLikedNumber: (id: string) => Promise<void>;
+}

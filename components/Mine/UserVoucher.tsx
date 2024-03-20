@@ -2,15 +2,17 @@ import Image from "next/image";
 import React from "react";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import CloseDialogButton from "../CloseDialogButton";
-import { useVoucherStore } from "@/store/zustand";
+import { useUserDataStore, useVoucherStore } from "@/store/zustand";
+import QRCode from "qrcode.react";
 
 function UserVoucher({ voucherId }: { voucherId: string }) {
   const { vouchers } = useVoucherStore();
-  const voucher = vouchers.find((voucher) => voucher.id === voucherId);
+  const { userId } = useUserDataStore();
+  const voucher = vouchers?.find((voucher) => voucher.id === voucherId);
 
   if (!voucher) return null;
 
-  const { imageURL, info } = voucher;
+  const { imageURL, info, id } = voucher;
 
   return (
     <Dialog>
@@ -29,6 +31,13 @@ function UserVoucher({ voucherId }: { voucherId: string }) {
         </div>
       </DialogTrigger>
       <DialogContent className="max-w-sm rounded-2xl w-full min-h-96 bg-white border-none">
+        <QRCode
+          id={`qr-code-voucher-${id}`}
+          scale={4}
+          value={`${id}-${userId}`}
+          // marginSize={3}
+          includeMargin={true}
+        />
         <CloseDialogButton />
       </DialogContent>
     </Dialog>

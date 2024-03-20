@@ -7,11 +7,13 @@ import {
   deleteDoc,
   onSnapshot,
   Unsubscribe,
+  addDoc,
+  updateDoc,
 } from "firebase/firestore";
-import { UserData } from "@/store/storeTypes";
+import { UserData, HomePageContent, CheckinImage } from "@/store/storeTypes";
 import { User } from "firebase/auth";
-import { db } from "./firebase";
-import { HomePageContent } from "@/store/storeTypes";
+import { db, storage } from "./firebase";
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
 export const usersRef = collection(db, "users");
 const contentsRef = collection(db, "contents");
@@ -20,6 +22,7 @@ const keysRef = collection(db, "keys");
 const vouchersRef = collection(db, "vouchers");
 const casesRef = collection(db, "game_random_voucher");
 const levelsRef = collection(db, "levels");
+export const checkinImagesRef = collection(db, "checkin_images");
 
 export async function createUserInFirestore(
   user: User
@@ -231,6 +234,95 @@ export function listenForVoucherIdListChanges(
     return unsubscribe;
   } catch (error) {
     console.error("Error listening for voucherIdList changes:", error);
+    throw error;
+  }
+}
+
+export async function uploadImageToFirebase(file: File): Promise<string> {
+  try {
+    // Create a storage reference with a unique name
+    const storageRef = ref(storage, `checkin_images/${file.name}`);
+
+    // Upload the file to Firebase Storage
+    const snapshot = await uploadBytesResumable(storageRef, file);
+
+    // Get the download URL of the uploaded image
+    const downloadURL = await getDownloadURL(snapshot.ref);
+
+    return downloadURL;
+  } catch (error) {
+    console.error("Error uploading image to Firebase Storage:", error);
+    throw error;
+  }
+}
+
+export async function uploadImageToFirebaseAndAddToCheckinImages(
+  file: File,
+  userId: string,
+  userEmail: string
+): Promise<CheckinImage> {
+  try {
+    // Upload the image to Firebase Storage
+    const imageURL = await uploadImageToFirebase(file);
+
+    // Create a new document in checkin_images collection
+    const checkinImage: CheckinImage = {
+      id: "", // Will be assigned by Firestore
+      userId: userId,
+      userEmail: userEmail,
+      imageURL: imageURL,
+      likedNumber: null,
+    };
+
+    // Add the checkin image to Firestore collection
+    const docRef = await addDoc(checkinImagesRef, checkinImage);
+
+    // Update the checkinImage object with the generated document ID
+    checkinImage.id = docRef.id;
+
+    return checkinImage;
+  } catch (error) {
+    console.error("Error uploading image and adding to checkin_images:", error);
+    throw error;
+  }
+}
+
+export async function updateLikedNumberInFirestore(
+  id: string,
+  likedNumber: number
+): Promise<void> {
+  try {
+    if (!id) {
+      console.error("Error updating liked number: ID is empty");
+      return;
+    }
+    const checkinRef = doc(checkinImagesRef, id);
+    await updateDoc(checkinRef, {
+      likedNumber: likedNumber,
+    });
+    console.log("Liked number updated successfully.");
+  } catch (error) {
+    console.error("Error updating liked number:", error);
+    throw error; // Propagate the error if necessary
+  }
+}
+
+export async function getAllCheckinImages(): Promise<CheckinImage[]> {
+  try {
+    const querySnapshot = await getDocs(checkinImagesRef);
+    const checkinImages: CheckinImage[] = [];
+
+    querySnapshot.forEach((doc) => {
+      const checkinImage = {
+        id: doc.id,
+        ...doc.data(),
+      } as CheckinImage;
+      checkinImages.push(checkinImage);
+    });
+
+    return checkinImages;
+  } catch (error) {
+    console.error("Error fetching checkin images:", error);
     throw error;
   }
 }

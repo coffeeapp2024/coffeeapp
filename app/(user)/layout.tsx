@@ -11,10 +11,12 @@ import {
   fetchVouchersFromFirestore,
   updateUserInFirestore,
   listenForVoucherIdListChanges,
+  getAllCheckinImages,
 } from "@/lib/firebaseFunctions";
 import { Unsubscribe } from "firebase/firestore";
 import {
   useCaseStore,
+  useCheckinStore,
   useHomePageContentStore,
   useLevelStore,
   useUserDataStore,
@@ -161,15 +163,15 @@ export async function UserVoucherIdListListener() {
       unsubscribe = listenForVoucherIdListChanges(userId, (voucherIdList) => {
         if (isEqual(voucherIdList, userData.voucherIdList)) {
           console.log("equal");
-          return;
+        } else {
+          // Update the user data with the new voucherIdList
+          const updatedUserData: UserData = {
+            ...userData,
+            voucherIdList: voucherIdList,
+          };
+          console.log("update");
+          setUserData(updatedUserData);
         }
-        // Update the user data with the new voucherIdList
-        const updatedUserData: UserData = {
-          ...userData,
-          voucherIdList: voucherIdList,
-        };
-        console.log("update");
-        setUserData(updatedUserData);
       });
     }
     return () => {
@@ -178,6 +180,25 @@ export async function UserVoucherIdListListener() {
       }
     };
   }, [userId, userData, setUserData, setShouldUpdate]);
+}
+
+function useFetchCheckinImagesEffect() {
+  const { setCheckins, checkins } = useCheckinStore();
+
+  useEffect(() => {
+    if (checkins.length === 0) {
+      const fetchCheckinImages = async () => {
+        try {
+          const fetchedCheckinImages = await getAllCheckinImages();
+          setCheckins(fetchedCheckinImages);
+        } catch (error) {
+          console.error("Error fetching checkin images:", error);
+        }
+      };
+
+      fetchCheckinImages();
+    }
+  }, [setCheckins, checkins]);
 }
 
 export default function RootLayout({
@@ -194,6 +215,8 @@ export default function RootLayout({
   UserVoucherIdListListener();
 
   useUpdateUserEffect();
+
+  useFetchCheckinImagesEffect();
 
   return (
     <main>
