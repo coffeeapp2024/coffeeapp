@@ -52,7 +52,7 @@ export type Voucher = {
 };
 
 export type VoucherStore = {
-  vouchers: Voucher[];
+  vouchers: Voucher[] | null;
   setVouchers: (vouchers: Voucher[]) => void;
 };
 
@@ -64,9 +64,8 @@ export type Case = {
 };
 
 export type CaseStore = {
-  cases: Case[];
+  cases: Case[] | null;
   setCases: (cases: Case[]) => void;
-  addCase: (newCase: Case) => void;
 };
 
 export type Level = {
@@ -76,6 +75,6 @@ export type Level = {
 };
 
 export type LevelStore = {
-  levels: Level[];
+  levels: Level[] | null;
   setLevels: (levels: Level[]) => void;
 };

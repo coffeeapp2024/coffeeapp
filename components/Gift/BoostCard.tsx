@@ -1,5 +1,5 @@
 import Image from "next/image";
-import React from "react";
+import React, { useId } from "react";
 import MainButton from "../MainButton";
 import CoinIcon from "../CoinIcon";
 import { Level } from "@/store/storeTypes";
@@ -23,33 +23,40 @@ function BoostCard({
 
   const handleUpgrade = async () => {
     if (
-      userId &&
-      userData &&
-      startTimeMine &&
-      userBalance &&
-      coin &&
-      coin >= price &&
+      !userBalance ||
+      !coin ||
+      !startTimeMine ||
+      !userData ||
+      !userId ||
       levelBalance > userBalance
     ) {
-      const currentCoin = calculateInitialCurrentCoin(
-        userBalance,
-        coin,
-        startTimeMine
-      );
-
-      const updatedCoin = currentCoin - price;
-
-      const newUserData = {
-        ...userData,
-        coin: updatedCoin,
-        startTimeMine: new Date().toISOString(),
-        balance: levelBalance,
-      };
-
-      setUserData(newUserData);
-      await updateUserInFirestore(userId, newUserData);
-      toast.success("Upgrade successfully");
+      toast.error("Can't not upgrade. Please try again.");
+      return;
     }
+
+    const currentCoin = calculateInitialCurrentCoin(
+      userBalance,
+      coin,
+      startTimeMine
+    );
+
+    if (currentCoin < price) {
+      toast.error("Not enough coins to upgrade");
+      return;
+    }
+
+    const updatedCoin = currentCoin - price;
+
+    const newUserData = {
+      ...userData,
+      coin: updatedCoin,
+      startTimeMine: new Date().toISOString(),
+      balance: levelBalance,
+    };
+
+    setUserData(newUserData);
+    await updateUserInFirestore(userId, newUserData);
+    toast.success("Upgrade successfully");
   };
 
   return (

@@ -4,29 +4,30 @@ import {
   calculateInitialCurrentCoin,
   updateCurrentCoin,
 } from "@/lib/coinActions";
-import { useCoinStore, useUserDataStore } from "@/store/zustand";
+import { useCoinStore, useLevelStore, useUserDataStore } from "@/store/zustand";
 function CurrentCoinInfo() {
   const { userData } = useUserDataStore();
+  const { levels } = useLevelStore();
   const { balance, coin, startTimeMine, endTimeMine } = userData ?? {};
   const { currentCoin, setCurrentCoin } = useCoinStore();
 
   useEffect(() => {
-    if (balance && startTimeMine) {
+    if (balance && startTimeMine && coin) {
       const initialCoin = calculateInitialCurrentCoin(
         balance,
-        coin || 0,
+        coin,
         startTimeMine
       );
       setCurrentCoin(initialCoin);
     }
-  }, [balance, startTimeMine, coin, setCurrentCoin]);
+  }, [balance, startTimeMine, coin, setCurrentCoin, userData]);
 
   useEffect(() => {
-    if (balance && endTimeMine) {
+    if (balance && endTimeMine && currentCoin) {
       const intervalId = setInterval(() => {
         const updatedCoin = updateCurrentCoin(
           balance,
-          currentCoin || 0,
+          currentCoin,
           endTimeMine
         );
         setCurrentCoin(updatedCoin);
@@ -36,14 +37,14 @@ function CurrentCoinInfo() {
     } else {
       setCurrentCoin(null);
     }
-  }, [balance, endTimeMine, coin, currentCoin, setCurrentCoin]);
+  }, [balance, endTimeMine, currentCoin, setCurrentCoin]);
 
   return (
     <div className="flex items-center justify-center flex-col text-white mt-24 ">
       <div className="flex items-center mb-1 ">
         <CoinIcon classname="w-12 h-12" />
         <span className="text-shadow font-extrabold text-4xl rounded-xl">
-          {currentCoin ? currentCoin.toFixed(5) : "0.00000"}
+          {currentCoin?.toFixed(5) ?? Number(0).toFixed(5)}
         </span>
       </div>
       <div className="flex items-center justify-center">
@@ -53,7 +54,7 @@ function CurrentCoinInfo() {
         <div className="flex items-center">
           <CoinIcon classname="w-6 h-6 ml-1 " />
           <span className="font-bold text-shadow">
-            {balance ? balance : 0.1}
+            {balance ?? (levels ? levels[0]?.balance : "N/A")}
           </span>
         </div>
       </div>

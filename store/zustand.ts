@@ -32,17 +32,16 @@ export const useCoinStore = create<CoinStore>((set) => ({
 }));
 
 export const useVoucherStore = create<VoucherStore>((set) => ({
-  vouchers: [],
+  vouchers: null,
   setVouchers: (vouchers) => set({ vouchers }),
 }));
 
 export const useCaseStore = create<CaseStore>((set) => ({
-  cases: [],
-  setCases: (cases) => set({ cases }),
-  addCase: (newCase) => set((state) => ({ cases: [...state.cases, newCase] })),
+  cases: null,
+  setCases: (cases) => set({ cases: [...cases] }),
 }));
 
 export const useLevelStore = create<LevelStore>((set) => ({
-  levels: [],
+  levels: null,
   setLevels: (levels) => set({ levels }),
 }));

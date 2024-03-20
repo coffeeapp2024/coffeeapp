@@ -9,6 +9,7 @@ import { useCaseStore } from "@/store/zustand";
 
 export default function GameCardList() {
   const { cases } = useCaseStore();
+  console.log("cases", cases);
 
   return (
     <Carousel
@@ -19,7 +20,7 @@ export default function GameCardList() {
       className="-mx-0"
     >
       <CarouselContent className="-ml-0 pb-12">
-        {cases.map((gameCase, index) => (
+        {cases?.map((gameCase, index) => (
           <CarouselItem key={index} className="basis-[60%] pl-6">
             <GameCard gameCase={gameCase} />
           </CarouselItem>

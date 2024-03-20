@@ -19,10 +19,8 @@ function BoostCardList() {
 
   const { balance } = userData ?? {};
 
-  const nextBalance = balance ? getNextBalance(balance, levels) : null;
-
-  console.log("nextbl", nextBalance);
-  console.log("bl", balance);
+  const nextBalance =
+    balance && levels ? getNextBalance(balance, levels) : null;
 
   return (
     <Carousel
@@ -33,7 +31,7 @@ function BoostCardList() {
       className="-mx-0"
     >
       <CarouselContent className="-ml-0 pb-8">
-        {levels.map((level, index) => (
+        {levels?.map((level, index) => (
           <CarouselItem key={index} className="basis-[60%] pl-6">
             <BoostCard nextBalance={nextBalance} level={level} />
           </CarouselItem>
