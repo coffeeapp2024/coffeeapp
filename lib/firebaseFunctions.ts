@@ -15,14 +15,14 @@ import { User } from "firebase/auth";
 import { db, storage } from "./firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
-export const usersRef = collection(db, "users");
+const usersRef = collection(db, "users");
 const contentsRef = collection(db, "contents");
 const keysRef = collection(db, "keys");
 // const settingsRef = collection(db, "settings");
 const vouchersRef = collection(db, "vouchers");
 const casesRef = collection(db, "game_random_voucher");
 const levelsRef = collection(db, "levels");
-export const checkinImagesRef = collection(db, "checkin_images");
+const checkinImagesRef = collection(db, "checkin_images");
 
 export async function createUserInFirestore(
   user: User
@@ -238,10 +238,13 @@ export function listenForVoucherIdListChanges(
   }
 }
 
-export async function uploadImageToFirebase(file: File): Promise<string> {
+export async function uploadImageToFirebase(
+  file: File,
+  folder: string
+): Promise<string> {
   try {
-    // Create a storage reference with a unique name
-    const storageRef = ref(storage, `checkin_images/${file.name}`);
+    // Create a storage reference with a unique name within the specified folder
+    const storageRef = ref(storage, `${folder}/${file.name}`);
 
     // Upload the file to Firebase Storage
     const snapshot = await uploadBytesResumable(storageRef, file);
@@ -263,13 +266,13 @@ export async function uploadImageToFirebaseAndAddToCheckinImages(
 ): Promise<CheckinImage> {
   try {
     // Upload the image to Firebase Storage
-    const imageURL = await uploadImageToFirebase(file);
+    const imageURL = await uploadImageToFirebase(file, "checkin_images");
 
     // Create a new document in checkin_images collection
     const checkinImage: CheckinImage = {
       id: "", // Will be assigned by Firestore
-      userId: userId,
       userEmail: userEmail,
+      userId: userId,
       imageURL: imageURL,
       likedNumber: null,
     };
@@ -318,6 +321,7 @@ export async function getAllCheckinImages(): Promise<CheckinImage[]> {
         ...doc.data(),
       } as CheckinImage;
       checkinImages.push(checkinImage);
+      console.log(checkinImage);
     });
 
     return checkinImages;

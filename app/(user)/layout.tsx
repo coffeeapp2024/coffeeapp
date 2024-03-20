@@ -59,7 +59,6 @@ function useFetchCasesEffect() {
       };
 
       fetchCases();
-      console.log("fetch cases");
     }
   }, [setCases, cases]);
 }

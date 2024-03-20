@@ -60,8 +60,8 @@ export const useCheckinStore = create<CheckinStore>((set) => ({
     try {
       const checkinImage = await uploadImageToFirebaseAndAddToCheckinImages(
         file,
-        userId,
-        userEmail
+        userEmail,
+        userId
       );
       set((state) => ({ checkins: [...state.checkins, checkinImage] }));
     } catch (error) {

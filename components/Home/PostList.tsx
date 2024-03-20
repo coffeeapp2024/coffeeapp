@@ -10,8 +10,6 @@ import { useCheckinStore } from "@/store/zustand";
 function PostList() {
   const { checkins } = useCheckinStore();
 
-  console.log("checkins", checkins);
-
   return (
     <Carousel className="-mx-2 mb-4">
       <CarouselContent className="-ml-0">
