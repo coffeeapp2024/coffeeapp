@@ -39,6 +39,7 @@ function CurrentCoinInfo() {
     } else {
       setCurrentCoin(null);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentCoin, setCurrentCoin]);
 
   return (

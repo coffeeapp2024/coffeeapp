@@ -9,7 +9,6 @@ import { useCaseStore } from "@/store/zustand";
 
 export default function GameCardList() {
   const { cases } = useCaseStore();
-  console.log("cases", cases);
 
   return (
     <Carousel
