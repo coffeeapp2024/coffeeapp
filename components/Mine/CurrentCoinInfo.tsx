@@ -8,10 +8,11 @@ import { useCoinStore, useLevelStore, useUserDataStore } from "@/store/zustand";
 function CurrentCoinInfo() {
   const { userData } = useUserDataStore();
   const { levels } = useLevelStore();
-  const { balance, coin, startTimeMine, endTimeMine } = userData ?? {};
   const { currentCoin, setCurrentCoin } = useCoinStore();
 
   useEffect(() => {
+    const { balance, coin, startTimeMine } = userData ?? {};
+
     if (balance && startTimeMine && coin) {
       const initialCoin = calculateInitialCurrentCoin(
         balance,
@@ -20,9 +21,10 @@ function CurrentCoinInfo() {
       );
       setCurrentCoin(initialCoin);
     }
-  }, [balance, startTimeMine, coin, setCurrentCoin, userData]);
+  }, [setCurrentCoin, userData]);
 
   useEffect(() => {
+    const { balance, endTimeMine } = userData ?? {};
     if (balance && endTimeMine && currentCoin) {
       const intervalId = setInterval(() => {
         const updatedCoin = updateCurrentCoin(
@@ -37,7 +39,7 @@ function CurrentCoinInfo() {
     } else {
       setCurrentCoin(null);
     }
-  }, [balance, endTimeMine, currentCoin, setCurrentCoin]);
+  }, [currentCoin, setCurrentCoin]);
 
   return (
     <div className="flex items-center justify-center flex-col text-white mt-24 ">
@@ -54,7 +56,7 @@ function CurrentCoinInfo() {
         <div className="flex items-center">
           <CoinIcon classname="w-6 h-6 ml-1 " />
           <span className="font-bold text-shadow">
-            {balance ?? (levels ? levels[0]?.balance : "N/A")}
+            {userData?.balance ?? (levels ? levels[0]?.balance : "N/A")}
           </span>
         </div>
       </div>

@@ -15,7 +15,7 @@ function VoucherCard({ voucher }: { voucher: Voucher }) {
     if (!userData || !userId || !id) return;
 
     const { coin, voucherIdList, balance, startTimeMine } = userData;
-    if (!coin) return;
+    if (!coin || !balance || !startTimeMine) return;
 
     const currentCoin = calculateInitialCurrentCoin(
       balance,

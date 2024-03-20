@@ -6,13 +6,14 @@ import {
   getDoc,
   deleteDoc,
   updateDoc,
+  onSnapshot,
 } from "firebase/firestore";
 import { UserData } from "@/store/storeTypes";
 import { User } from "firebase/auth";
 import { db } from "./firebase";
 import { HomePageContent } from "@/store/storeTypes";
 
-const usersRef = collection(db, "users");
+export const usersRef = collection(db, "users");
 const contentsRef = collection(db, "contents");
 const keysRef = collection(db, "keys");
 // const settingsRef = collection(db, "settings");
@@ -201,6 +202,34 @@ export async function fetchLevelsFromFirestore() {
     return levels;
   } catch (error) {
     console.error("Error fetching levels from Firestore:", error);
+    throw error;
+  }
+}
+export async function listenForVoucherIdListChanges(
+  userId: string,
+  callback: (voucherIdList: string[]) => void
+) {
+  const userDoc = doc(usersRef, userId);
+
+  try {
+    // Use onSnapshot to listen for real-time updates to the document
+    const unsubscribe = onSnapshot(userDoc, (snapshot) => {
+      if (snapshot.exists()) {
+        const userData = snapshot.data() as UserData;
+        // Get the current voucherIdList
+        const voucherIdList = userData.voucherIdList || [];
+        // Invoke the callback with the current voucherIdList
+        callback(voucherIdList);
+      } else {
+        console.log("User data not found");
+        // Handle the situation when user data doesn't exist
+      }
+    });
+
+    // Return a cleanup function to unsubscribe from the listener
+    return unsubscribe;
+  } catch (error) {
+    console.error("Error listening for voucherIdList changes:", error);
     throw error;
   }
 }

@@ -41,7 +41,9 @@ const ClaimCoinScanner = () => {
           return;
         }
         const newUserData = await updateMineTimes(userData, 24);
-
+        if (!newUserData) {
+          return;
+        }
         setUserData(newUserData);
         await updateUserInFirestore(userId, newUserData);
         await deleteKeyFromFirestore(text);

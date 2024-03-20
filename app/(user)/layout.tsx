@@ -10,6 +10,7 @@ import {
   fetchUserData,
   fetchVouchersFromFirestore,
   updateUserInFirestore,
+  listenForVoucherIdListChanges,
 } from "@/lib/firebaseFunctions";
 import {
   useCaseStore,
@@ -137,6 +138,33 @@ function useUpdateUserEffect(userData: UserData | null, userId: string | null) {
   }, [userData, userId]);
 }
 
+function UserVoucherIdListListener() {
+  const { userId, userData, setUserData } = useUserDataStore();
+
+  useEffect(() => {
+    let unsubscribe: any;
+    if (userId && userData) {
+      unsubscribe = listenForVoucherIdListChanges(userId, (voucherIdList) => {
+        // Update the user data with the new voucherIdList
+        const updatedUserData: UserData = {
+          ...userData,
+          voucherIdList: voucherIdList,
+        };
+        setUserData(updatedUserData);
+
+        // updateUserInFirestore(userId, updatedUserData);
+      });
+    }
+    return () => {
+      if (unsubscribe) {
+        unsubscribe();
+      }
+    };
+  }, [userId, userData, setUserData]);
+
+  return <div>Component content here</div>;
+}
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -147,26 +175,6 @@ export default function RootLayout({
   const { vouchers, setVouchers } = useVoucherStore();
   const { cases, setCases } = useCaseStore();
   const { levels, setLevels } = useLevelStore();
-
-  useEffect(() => {
-    if (!userData || !userId) {
-      const unsubscribe = auth.onAuthStateChanged(async (user) => {
-        if (user) {
-          try {
-            const fetchedUserData = await fetchUserData(user.uid);
-            setUserData(fetchedUserData);
-            setUserId(user.uid);
-          } catch (error) {
-            console.error("Error fetching user data:", error);
-          }
-        } else {
-          setUserData(null);
-        }
-      });
-
-      return () => unsubscribe();
-    }
-  }, [userData, userId, setUserData, setUserId]);
 
   useAuthEffect();
   useHomePageContentEffect();
