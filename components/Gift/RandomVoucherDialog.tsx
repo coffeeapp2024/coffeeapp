@@ -27,8 +27,8 @@ function RandomVoucherDialog({ randomVoucherId }: { randomVoucherId: string }) {
     >
       <DialogTrigger></DialogTrigger>
       <DialogContent className="bg-transparent border-none shadow-none px-6">
-        <div className="bg-neutral-50 aspect-video  rounded-3xl pt-3 px-3 relative ">
-          <div className="relative h-1/2 mb-4">
+        <div className="relative bg-neutral-50 w-full aspect-[3/2] rounded-3xl py-4 px-4  flex items-center justify-between flex-col ">
+          <div className="overflow-hidden">
             {imageURL && (
               <Image
                 src={imageURL}
@@ -39,11 +39,7 @@ function RandomVoucherDialog({ randomVoucherId }: { randomVoucherId: string }) {
               />
             )}
           </div>
-          <div className="flex items-center justify-center flex-col gap-y-4">
-            <span className="font-semibold text-neutral-700 text-xl">
-              {info}
-            </span>
-          </div>
+          <span className="font-semibold text-neutral-700 text-xl">{info}</span>
         </div>
         <DialogClose className="w-0 h-0"></DialogClose>
         {/* <CloseDialogButton /> */}
