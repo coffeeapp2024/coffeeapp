@@ -111,7 +111,27 @@ export interface CheckinStore {
   decreaseLikedNumber: (id: string) => Promise<void>;
 }
 
-export type GalleryStore = {
-  imageURLs: string[];
-  setImageURLs: (imageURLs: string[]) => void;
+export type Product = {
+  id: string;
+  img: string;
+  name: string;
+  price: number;
+  tags: string[];
+};
+
+export type ProductStore = {
+  products: Product[] | null;
+  setProducts: (products: Product[]) => void;
+};
+
+export type ProductTag = {
+  name: string;
+  tag: string;
+};
+
+export type ProductTagStore = {
+  productTags: ProductTag[] | null;
+  currentTag: string | undefined;
+  setProductTags: (productTags: ProductTag[]) => void;
+  setCurrentTag: (tag: string | undefined) => void;
 };

@@ -9,7 +9,8 @@ import {
   TimeStore,
   UserDataStore,
   VoucherStore,
-  GalleryStore,
+  ProductStore,
+  ProductTagStore,
 } from "./storeTypes";
 
 export const useUserDataStore = create<UserDataStore>((set: any) => ({
@@ -84,3 +85,15 @@ function createPostStore(
 
 export const useEventPostStore = createPostStore("event_images", []);
 export const useCheckinPostStore = createPostStore("checkin_images", []);
+
+export const useProductStore = create<ProductStore>((set) => ({
+  products: null,
+  setProducts: (products) => set({ products }),
+}));
+
+export const useProductTagStore = create<ProductTagStore>((set) => ({
+  productTags: null,
+  currentTag: undefined,
+  setProductTags: (productTags) => set({ productTags }),
+  setCurrentTag: (tag) => set({ currentTag: tag }),
+}));

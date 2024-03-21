@@ -10,19 +10,26 @@ import {
   addDoc,
   updateDoc,
 } from "firebase/firestore";
-import { UserData, HomePageContent, PostType } from "@/store/storeTypes";
+import {
+  UserData,
+  HomePageContent,
+  PostType,
+  Product,
+  ProductTag,
+} from "@/store/storeTypes";
 import { User } from "firebase/auth";
 import { db, storage } from "./firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
+// const settingsRef = collection(db, "settings");
 const usersRef = collection(db, "users");
 const contentsRef = collection(db, "contents");
 const keysRef = collection(db, "keys");
-// const settingsRef = collection(db, "settings");
 const vouchersRef = collection(db, "vouchers");
 const casesRef = collection(db, "game_random_voucher");
 const levelsRef = collection(db, "levels");
-const checkinImagesRef = collection(db, "checkin_images");
+const productsRef = collection(db, "products");
+const productTagsRef = collection(db, "productTags");
 
 export async function createUserInFirestore(
   user: User
@@ -336,6 +343,54 @@ export async function getAllPostImages(
     return postImages;
   } catch (error) {
     console.error("Error fetching post images:", error);
+    throw error;
+  }
+}
+
+export async function fetchProductsFromFirestore(): Promise<Product[]> {
+  try {
+    const productsSnapshot = await getDocs(productsRef);
+    const products: Product[] = [];
+
+    productsSnapshot.forEach((doc) => {
+      const data = doc.data();
+      const product: Product = {
+        id: doc.id,
+        img: data.img,
+        name: data.name,
+        price: data.price,
+        tags: data.tags,
+      };
+      products.push(product);
+    });
+
+    return products;
+  } catch (error) {
+    console.error("Error fetching products from Firestore:", error);
+    throw error;
+  }
+}
+
+export async function fetchProductTagsFromFirestore(): Promise<ProductTag[]> {
+  try {
+    const productTagsSnapshot = await getDocs(productTagsRef);
+    const productTags: ProductTag[] = [];
+
+    productTagsSnapshot.forEach((doc) => {
+      const data = doc.data();
+      if (data.name && data.tag) {
+        // Ensure both name and tag exist
+        const productTag: ProductTag = {
+          name: data.name,
+          tag: data.tag,
+        };
+        productTags.push(productTag);
+      }
+    });
+
+    return productTags;
+  } catch (error) {
+    console.error("Error fetching product tags from Firestore:", error);
     throw error;
   }
 }

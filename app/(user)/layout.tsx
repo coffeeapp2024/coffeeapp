@@ -12,13 +12,18 @@ import {
   updateUserInFirestore,
   listenForVoucherIdListChanges,
   getAllPostImages,
+  fetchProductsFromFirestore,
+  fetchProductTagsFromFirestore,
 } from "@/lib/firebaseFunctions";
 import { Unsubscribe } from "firebase/firestore";
 import {
   useCaseStore,
+  useCheckinPostStore,
   useEventPostStore,
   useHomePageContentStore,
   useLevelStore,
+  useProductStore,
+  useProductTagStore,
   useUserDataStore,
   useVoucherStore,
 } from "@/store/zustand";
@@ -186,7 +191,7 @@ function useFetchPostImagesEffect(usePostStore: PostStore) {
   useEffect(() => {
     const fetchPostImages = async () => {
       try {
-        if (!name) return;
+        if (!name || posts.length > 0) return;
         const fetchedPostImages = await getAllPostImages(name);
         if (fetchedPostImages.length > 0 && posts.length === 0) {
           setPosts(fetchedPostImages);
@@ -209,6 +214,53 @@ function useFetchPostImagesEffect(usePostStore: PostStore) {
   }, []); // No dependencies as we only want this effect to run once
 }
 
+function useFetchProductsEffect() {
+  const [productsFetched, setProductsFetched] = useState(false);
+  const { setProducts } = useProductStore();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const products = await fetchProductsFromFirestore();
+        setProducts(products);
+        console.log("Fetched products from Firestore:", products);
+        setProductsFetched(true); // Set productsFetched to true after fetching
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
+    };
+
+    if (!productsFetched) {
+      // Only fetch products if they haven't been fetched before
+      fetchData();
+    }
+  }, [productsFetched, setProducts]); // Include productsFetched in the dependency array
+
+  return productsFetched; // Return the state variable if needed externally
+}
+
+function useFetchProductTagsEffect() {
+  const { productTags, setProductTags } = useProductTagStore();
+
+  useEffect(() => {
+    const fetchProductTags = async () => {
+      try {
+        if (!productTags) {
+          const tags = await fetchProductTagsFromFirestore();
+          setProductTags(tags);
+          console.log("Fetched product tags from Firestore:", tags);
+        }
+      } catch (error) {
+        console.error("Error fetching product tags:", error);
+      }
+    };
+
+    fetchProductTags();
+  }, [productTags, setProductTags]);
+
+  return productTags; // Return the productTags if needed externally
+}
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -225,6 +277,11 @@ export default function RootLayout({
   useUpdateUserEffect();
 
   useFetchPostImagesEffect(useEventPostStore());
+  useFetchPostImagesEffect(useCheckinPostStore());
+
+  useFetchProductTagsEffect();
+
+  useFetchProductsEffect();
 
   return (
     <main>
