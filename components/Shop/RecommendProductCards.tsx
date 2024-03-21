@@ -30,7 +30,12 @@ function RecommendProductCards() {
         {popularTagName}
       </h2>
       <div>
-        <Carousel>
+        <Carousel
+          opts={{
+            startIndex: 1,
+            dragFree: true,
+          }}
+        >
           <CarouselContent className="ml-0 pb-2">
             {filteredProducts.map((product, index) => (
               <CarouselItem key={index} className="basis-[46%] pl-2">
