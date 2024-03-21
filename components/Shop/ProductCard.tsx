@@ -6,7 +6,7 @@ function ProductCard({ product }: { product: Product }) {
   const { img, name, price } = product ?? {};
 
   return (
-    <div className="rounded-3xl overflow-hidden shadow-md bg-neutral-50">
+    <div className="rounded-3xl overflow-hidden shadow-sm bg-neutral-50">
       <div className="relative aspect-square rounded-2xl overflow-hidden shadow-sm">
         {img && (
           <Image

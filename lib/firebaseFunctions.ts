@@ -394,3 +394,26 @@ export async function fetchProductTagsFromFirestore(): Promise<ProductTag[]> {
     throw error;
   }
 }
+
+export async function fetchShopContent(): Promise<string | null> {
+  try {
+    const shopContentSnapshot = await getDoc(doc(contentsRef, "shop"));
+    if (shopContentSnapshot.exists()) {
+      const shopData = shopContentSnapshot.data();
+      // Assuming "banner" is the field you want to fetch
+      const banner = shopData?.banner as string | undefined;
+      if (banner) {
+        return banner;
+      } else {
+        console.log("Banner not found in shop content");
+        return null;
+      }
+    } else {
+      console.log("Document 'shop' does not exist");
+      return null;
+    }
+  } catch (error) {
+    console.error("Error fetching shop content:", error);
+    throw error;
+  }
+}

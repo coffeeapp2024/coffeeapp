@@ -11,6 +11,7 @@ import {
   VoucherStore,
   ProductStore,
   ProductTagStore,
+  ShopStore,
 } from "./storeTypes";
 
 export const useUserDataStore = create<UserDataStore>((set: any) => ({
@@ -96,4 +97,9 @@ export const useProductTagStore = create<ProductTagStore>((set) => ({
   currentTag: "all",
   setProductTags: (productTags) => set({ productTags }),
   setCurrentTag: (tag) => set({ currentTag: tag }),
+}));
+
+export const useShopStore = create<ShopStore>((set) => ({
+  banner: null,
+  setBanner: (banner) => set({ banner }),
 }));

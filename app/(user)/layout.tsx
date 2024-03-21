@@ -14,6 +14,7 @@ import {
   getAllPostImages,
   fetchProductsFromFirestore,
   fetchProductTagsFromFirestore,
+  fetchShopContent,
 } from "@/lib/firebaseFunctions";
 import { Unsubscribe } from "firebase/firestore";
 import {
@@ -24,6 +25,7 @@ import {
   useLevelStore,
   useProductStore,
   useProductTagStore,
+  useShopStore,
   useUserDataStore,
   useVoucherStore,
 } from "@/store/zustand";
@@ -261,6 +263,26 @@ function useFetchProductTagsEffect() {
   return productTags; // Return the productTags if needed externally
 }
 
+function useFetchShopContentEffect() {
+  const { banner, setBanner } = useShopStore();
+
+  useEffect(() => {
+    const fetchShopData = async () => {
+      try {
+        // Fetch shop content only if banner is not already set in the store
+        if (!banner) {
+          const fetchedBanner = await fetchShopContent();
+          setBanner(fetchedBanner);
+        }
+      } catch (error) {
+        console.error("Error fetching shop content:", error);
+      }
+    };
+
+    fetchShopData();
+  }, [banner, setBanner]);
+}
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -282,6 +304,8 @@ export default function RootLayout({
   useFetchProductTagsEffect();
 
   useFetchProductsEffect();
+
+  useFetchShopContentEffect();
 
   return (
     <main>

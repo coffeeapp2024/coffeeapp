@@ -135,3 +135,8 @@ export type ProductTagStore = {
   setProductTags: (productTags: ProductTag[]) => void;
   setCurrentTag: (tag: string | undefined) => void;
 };
+
+export type ShopStore = {
+  banner: string | null;
+  setBanner: (banner: string | null) => void;
+};

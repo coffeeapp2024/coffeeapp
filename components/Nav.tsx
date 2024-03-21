@@ -18,7 +18,7 @@ function Nav() {
             <span className="nav-item-name">Home</span>
           </div>
         </Link>
-        <Link href="/products" className="">
+        <Link href="/shop" className="">
           <div className="nav-item">
             <Image
               src="/icons/navbar/shop.png"
