@@ -10,7 +10,7 @@ import {
   addDoc,
   updateDoc,
 } from "firebase/firestore";
-import { UserData, HomePageContent, PostImage } from "@/store/storeTypes";
+import { UserData, HomePageContent, PostType } from "@/store/storeTypes";
 import { User } from "firebase/auth";
 import { db, storage } from "./firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
@@ -41,6 +41,7 @@ export async function createUserInFirestore(
         startTimeMine: null,
         endTimeMine: null,
         voucherIdList: [],
+        LikedEventImageIdList: [],
         LikedCheckinImageIdList: [],
       };
 
@@ -260,47 +261,50 @@ export async function uploadImageToFirebase(
   }
 }
 
-export async function uploadImageToFirebaseAndAddToCheckinImages(
+export async function uploadImageToFirebaseAndAddToCollection(
   file: File,
   userId: string,
-  userEmail: string
-): Promise<PostImage> {
+  userEmail: string,
+  collectionName: string // Assuming collectionName is the name of the collection to add the document to
+): Promise<PostType> {
   try {
     // Upload the image to Firebase Storage
-    const imageURL = await uploadImageToFirebase(file, "checkin_images");
+    const imageURL = await uploadImageToFirebase(file, collectionName);
 
-    // Create a new document in checkin_images collection
-    const checkinImage: any = {
+    // Create a new document in the specified collection
+    const docRef = await addDoc(collection(db, collectionName), {
       userEmail: userEmail,
       userId: userId,
       imageURL: imageURL,
-      likedNumber: null,
+      likedNumber: 0,
+    });
+
+    // Return the newly created document
+    return {
+      id: docRef.id,
+      userEmail: userEmail,
+      userId: userId,
+      imageURL: imageURL,
+      likedNumber: 0,
     };
-
-    // Add the checkin image to Firestore collection
-    const docRef = await addDoc(checkinImagesRef, checkinImage);
-
-    // Update the checkinImage object with the generated document ID
-    checkinImage.id = docRef.id;
-
-    return checkinImage;
   } catch (error) {
-    console.error("Error uploading image and adding to checkin_images:", error);
+    console.error("Error uploading image and adding to collection:", error);
     throw error;
   }
 }
 
 export async function updateLikedNumberInFirestore(
   id: string,
-  likedNumber: number
+  likedNumber: number,
+  collectionName: string
 ): Promise<void> {
   try {
     if (!id) {
       console.error("Error updating liked number: ID is empty");
       return;
     }
-    const checkinRef = doc(checkinImagesRef, id);
-    await updateDoc(checkinRef, {
+    const postCollection = doc(collection(db, collectionName), id);
+    await updateDoc(postCollection, {
       likedNumber: likedNumber,
     });
     console.log("Liked number updated successfully.");
@@ -310,22 +314,28 @@ export async function updateLikedNumberInFirestore(
   }
 }
 
-export async function getAllCheckinImages(): Promise<PostImage[]> {
+export async function getAllPostImages(
+  collectionName: string
+): Promise<PostType[]> {
   try {
-    const querySnapshot = await getDocs(checkinImagesRef);
-    const checkinImages: PostImage[] = [];
+    const querySnapshot = await getDocs(collection(db, collectionName));
+    const postImages: PostType[] = [];
 
     querySnapshot.forEach((doc) => {
-      const checkinImage = {
+      const postData = doc.data();
+      const post: PostType = {
         id: doc.id,
-        ...doc.data(),
-      } as PostImage;
-      checkinImages.push(checkinImage);
+        userEmail: postData.userEmail ?? null,
+        userId: postData.userId ?? null,
+        imageURL: postData.imageURL ?? null,
+        likedNumber: postData.likedNumber ?? 0,
+      };
+      postImages.push(post);
     });
 
-    return checkinImages;
+    return postImages;
   } catch (error) {
-    console.error("Error fetching checkin images:", error);
+    console.error("Error fetching post images:", error);
     throw error;
   }
 }

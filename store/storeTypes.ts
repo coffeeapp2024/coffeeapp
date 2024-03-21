@@ -12,6 +12,7 @@ export type UserData = {
   startTimeMine: string | null;
   endTimeMine: string | null;
   voucherIdList: string[] | null;
+  LikedEventImageIdList: string[];
   LikedCheckinImageIdList: string[];
 };
 
@@ -80,26 +81,28 @@ export type LevelStore = {
   setLevels: (levels: Level[]) => void;
 };
 
-export type PostImage = {
+export type PostType = {
   id: string | undefined;
   userEmail: string | null;
   userId: string | null;
   imageURL: string | null;
-  likedNumber: number | null;
+  likedNumber: number;
+};
+
+// Define the type for the store
+export type PostStore = {
+  name: string | null;
+  posts: PostType[];
+  setName: (name: string) => void;
+  setPosts: (posts: PostType[]) => void;
+  addPost: (post: PostType) => Promise<void>;
+  setLikedNumber: (id: string, liked: boolean) => Promise<number>;
 };
 
 export interface CheckinStore {
-  checkins: PostImage[];
-  setCheckins: (checkins: PostImage[]) => void;
+  checkins: PostType[];
+  setCheckins: (checkins: PostType[]) => void;
   addCheckin: (file: File, userId: string, userEmail: string) => Promise<void>;
   increaseLikedNumber: (id: string) => Promise<void>;
   decreaseLikedNumber: (id: string) => Promise<void>;
 }
-
-export type PostImageStore = {
-  postImages: PostImage[];
-  setPostImages: (postImages: PostImage[]) => void;
-  addPostImage: (postImage: PostImage) => Promise<void>;
-  increaseLikedNumber: (id: string) => Promise<void>;
-  decreaseLikedNumber: (id: string) => Promise<void>;
-};

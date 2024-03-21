@@ -11,18 +11,18 @@ import {
   fetchVouchersFromFirestore,
   updateUserInFirestore,
   listenForVoucherIdListChanges,
-  getAllCheckinImages,
+  getAllPostImages,
 } from "@/lib/firebaseFunctions";
 import { Unsubscribe } from "firebase/firestore";
 import {
   useCaseStore,
-  useCheckinStore,
+  useEventPostStore,
   useHomePageContentStore,
   useLevelStore,
   useUserDataStore,
   useVoucherStore,
 } from "@/store/zustand";
-import { UserData } from "@/store/storeTypes";
+import { PostStore, UserData } from "@/store/storeTypes";
 import { isEqual } from "lodash";
 
 function useFetchVouchersEffect() {
@@ -181,25 +181,32 @@ export async function UserVoucherIdListListener() {
   }, [userId, userData, setUserData, setShouldUpdate]);
 }
 
-function useFetchCheckinImagesEffect() {
-  const { setCheckins, checkins } = useCheckinStore();
-
+function useFetchPostImagesEffect(usePostStore: PostStore) {
+  const { setPosts, posts, name } = usePostStore;
   useEffect(() => {
-    const fetchCheckinImages = async () => {
+    const fetchPostImages = async () => {
       try {
-        const fetchedCheckinImages = await getAllCheckinImages();
-        if (fetchedCheckinImages.length > 0 && checkins.length === 0) {
-          setCheckins(fetchedCheckinImages);
-          console.log("Fetched and set checkin images from Firestore.");
+        if (!name) return;
+        const fetchedPostImages = await getAllPostImages(name);
+        if (fetchedPostImages.length > 0 && posts.length === 0) {
+          setPosts(fetchedPostImages);
+          console.log(
+            `Fetched and set post images from Firestore for collection ${name}.`
+          );
+        } else {
+          console.log(`No post images found for collection ${name}.`);
         }
       } catch (error) {
-        console.error("Error fetching checkin images:", error);
+        console.error(
+          `Error fetching post images for collection ${name}:`,
+          error
+        );
       }
     };
 
-    fetchCheckinImages();
+    fetchPostImages();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, []); // No dependencies as we only want this effect to run once
 }
 
 export default function RootLayout({
@@ -217,7 +224,7 @@ export default function RootLayout({
 
   useUpdateUserEffect();
 
-  useFetchCheckinImagesEffect();
+  useFetchPostImagesEffect(useEventPostStore());
 
   return (
     <main>
