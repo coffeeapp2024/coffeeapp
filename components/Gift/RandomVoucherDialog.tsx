@@ -9,7 +9,7 @@ function RandomVoucherDialog({ randomVoucherId }: { randomVoucherId: string }) {
 
   const { vouchers } = useVoucherStore();
 
-  const voucher = vouchers.find((voucher) => voucher.id === randomVoucherId);
+  const voucher = vouchers?.find((voucher) => voucher.id === randomVoucherId);
 
   const { imageURL, info } = voucher ?? {};
 
