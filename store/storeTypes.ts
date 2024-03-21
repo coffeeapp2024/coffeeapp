@@ -106,3 +106,8 @@ export interface CheckinStore {
   increaseLikedNumber: (id: string) => Promise<void>;
   decreaseLikedNumber: (id: string) => Promise<void>;
 }
+
+export type GalleryStore = {
+  imageURLs: string[];
+  setImageURLs: (imageURLs: string[]) => void;
+};

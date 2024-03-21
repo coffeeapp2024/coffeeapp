@@ -9,7 +9,7 @@ import {
 } from "@/lib/firebaseFunctions";
 import PostList from "../PostTemplate/PostList";
 
-function Gallery() {
+function Checkin() {
   const { addPost, posts, name, setLikedNumber } = useCheckinPostStore();
   const { setUserData, userData, userId } = useUserDataStore();
   const LikedCheckinImageIdList = userData?.LikedCheckinImageIdList ?? [];
@@ -60,7 +60,7 @@ function Gallery() {
   return (
     <div className="w-full">
       <div className="flex items-center gap-x-2 pr-2 mb-2">
-        <h3 className="font-bold text-2xl text-white">Check in Gallery</h3>
+        <h3 className="font-bold text-2xl text-white">Check in Checkin</h3>
       </div>
       <PostList
         onLikeClicked={handleLikeClicked}
@@ -74,4 +74,4 @@ function Gallery() {
   );
 }
 
-export default Gallery;
+export default Checkin;

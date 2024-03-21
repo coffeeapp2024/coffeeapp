@@ -9,6 +9,7 @@ import {
   TimeStore,
   UserDataStore,
   VoucherStore,
+  GalleryStore,
 } from "./storeTypes";
 
 export const useUserDataStore = create<UserDataStore>((set: any) => ({
@@ -46,6 +47,11 @@ export const useCaseStore = create<CaseStore>((set) => ({
 export const useLevelStore = create<LevelStore>((set) => ({
   levels: null,
   setLevels: (levels) => set({ levels }),
+}));
+
+export const useGalleryStore = create<GalleryStore>((set) => ({
+  imageURLs: [],
+  setImageURLs: (imageURLs: string[]) => set({ imageURLs }),
 }));
 
 function createPostStore(

@@ -2,7 +2,7 @@
 
 import AboutImageList from "@/components/Home/AboutImageList";
 import Event from "@/components/Home/Post/Event";
-import Gallery from "@/components/Home/Post/Gallery";
+import Checkin from "@/components/Home/Post/Checkin";
 import Info from "@/components/Home/Info";
 import Video from "@/components/Video";
 import React from "react";
@@ -17,7 +17,7 @@ function Page() {
       <div className="custom-divide"></div>
       <Event />
       <div className="custom-divide"></div>
-      <Gallery />
+      <Checkin />
       <div className="custom-divide"></div>
       <AboutImageList />
     </div>
