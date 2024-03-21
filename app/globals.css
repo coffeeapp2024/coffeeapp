@@ -25,11 +25,11 @@
   }
 
   .nav-item {
-    @apply flex flex-col items-center justify-between px-5 gap-1  scale-110;
+    @apply flex flex-col items-center justify-between px-6 gap-1  scale-110;
   }
 
   .nav-icon {
-    @apply h-5 w-5;
+    @apply h-6 w-full object-contain;
   }
 
   .nav-item-name {
