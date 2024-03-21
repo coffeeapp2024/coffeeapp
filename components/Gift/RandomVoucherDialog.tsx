@@ -33,8 +33,8 @@ function RandomVoucherDialog() {
               <Image
                 src={imageURL}
                 alt="level icon"
-                width={400}
-                height={200}
+                width={700}
+                height={300}
                 className="object-contain"
               />
             )}
