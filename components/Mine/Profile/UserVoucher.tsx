@@ -17,7 +17,7 @@ function UserVoucher({ voucherId }: { voucherId: string }) {
 
   return (
     <Dialog>
-      <DialogTrigger className="bg-white shadow-sm aspect-[4/3] border-[1px] w-full rounded-3xl pt-3 px-3 relative ">
+      <DialogTrigger className="bg-white shadow-sm aspect-[3/2] border-[1px] w-full rounded-3xl pt-3 px-3 relative ">
         <div className="relative h-3/4 mb-2">
           <Image
             src={imageURL}
@@ -28,11 +28,11 @@ function UserVoucher({ voucherId }: { voucherId: string }) {
           />
         </div>
         <div className="flex items-center justify-center">
-          <span className="text-lg font-medium">{info}</span>
+          <span className="text-lg text-neutral-900 font-medium">{info}</span>
         </div>
       </DialogTrigger>
-      <DialogContent className="w-full px-6 aspect-square bg-transparent border-none   shadow-none">
-        <div className="flex items-center justify-center rounded-2xl bg-white shadow-sm">
+      <DialogContent className="w-full px-10  bg-transparent border-none   shadow-none">
+        <div className="flex items-center justify-center aspect-square rounded-2xl bg-white shadow-sm overflow-hidden">
           <QRCode
             id={`qr-code-voucher-${id}`}
             size={340}
