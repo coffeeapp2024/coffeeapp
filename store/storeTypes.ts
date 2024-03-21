@@ -140,3 +140,10 @@ export type ShopStore = {
   banner: string | null;
   setBanner: (banner: string | null) => void;
 };
+
+export type RandomVoucherStore = {
+  randomVoucherId: string | null;
+  open: boolean;
+  setRandomVoucherId: (randomVoucherId: string | null) => void;
+  setOpen: (open: boolean) => void;
+};

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Dialog,
   DialogClose,
@@ -7,10 +7,10 @@ import {
 } from "@/components/ui/dialog";
 import CloseDialogButton from "../CloseDialogButton";
 import Image from "next/image";
-import { useVoucherStore } from "@/store/zustand";
+import { useRandomVoucherStore, useVoucherStore } from "@/store/zustand";
 
-function RandomVoucherDialog({ randomVoucherId }: { randomVoucherId: string }) {
-  const [open, setOpen] = useState(true);
+function RandomVoucherDialog() {
+  const { open, randomVoucherId, setOpen } = useRandomVoucherStore();
 
   const { vouchers } = useVoucherStore();
 
@@ -27,14 +27,14 @@ function RandomVoucherDialog({ randomVoucherId }: { randomVoucherId: string }) {
     >
       <DialogTrigger></DialogTrigger>
       <DialogContent className="bg-transparent border-none shadow-none px-6">
-        <div className="relative bg-neutral-50 w-full aspect-[3/2] rounded-3xl py-4 px-4  flex items-center justify-between flex-col ">
+        <div className="relative bg-neutral-50 w-full aspect-[3/2] rounded-3xl py-4 px-4 h-fit  flex items-center justify-between flex-col ">
           <div className="overflow-hidden">
             {imageURL && (
               <Image
                 src={imageURL}
                 alt="level icon"
                 width={400}
-                height={400}
+                height={200}
                 className="object-contain"
               />
             )}

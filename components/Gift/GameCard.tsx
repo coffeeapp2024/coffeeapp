@@ -5,15 +5,14 @@ import MainButton from "../MainButton";
 import Image from "next/image";
 import CoinIcon from "../CoinIcon";
 import { Case } from "@/store/storeTypes";
-import { useUserDataStore } from "@/store/zustand";
+import { useRandomVoucherStore, useUserDataStore } from "@/store/zustand";
 import { calculateInitialCurrentCoin } from "@/lib/coinActions";
-import RandomVoucherDialog from "./RandomVoucherDialog";
 import { toast } from "sonner";
 
 function GameCard({ gameCase }: { gameCase: Case }) {
   const { userData, setUserData, userId } = useUserDataStore();
   const { icon, price, voucherIdList: caseVoucherIdList, id } = gameCase;
-  const [randomVoucherId, setRandomVoucherId] = useState<string | null>(null);
+  const { setOpen, setRandomVoucherId } = useRandomVoucherStore();
 
   const isHidden =
     !caseVoucherIdList || caseVoucherIdList.length <= 0 || !userData;
@@ -44,6 +43,7 @@ function GameCard({ gameCase }: { gameCase: Case }) {
       const randomIndex = Math.floor(Math.random() * caseVoucherIdList.length);
       const randomVoucherId = caseVoucherIdList[randomIndex];
       setRandomVoucherId(randomVoucherId);
+      setOpen(true);
       toast.success("Well done! You've earned  a random voucher!");
 
       // Update user data
@@ -83,9 +83,6 @@ function GameCard({ gameCase }: { gameCase: Case }) {
       >
         <MainButton text="Play" />
       </button>
-      {randomVoucherId && (
-        <RandomVoucherDialog randomVoucherId={randomVoucherId} />
-      )}
     </div>
   );
 }
