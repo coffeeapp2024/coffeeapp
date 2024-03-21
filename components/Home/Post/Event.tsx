@@ -46,25 +46,38 @@ function Event() {
   };
 
   const handleFileSelect = async (file: File) => {
-    try {
-      if (!userData || !userData.email || !userId || !name) {
-        throw new Error("User data is incomplete");
+    const promise = async () => {
+      try {
+        if (!userData || !userData.email || !userId || !name) {
+          throw new Error("User data is incomplete");
+        }
+
+        // Upload the image and add it to the collection
+        const newEventPost = await uploadImageToFirebaseAndAddToCollection(
+          file,
+          userId,
+          userData.email,
+          name
+        );
+
+        // Add the new post to the store
+        addPost(newEventPost);
+
+        // Return any data you want to be displayed in the success message
+        return;
+      } catch (error) {
+        // Throw the error to be caught by toast.promise
+        throw error;
       }
+    };
 
-      // Upload the image and add it to the collection
-      const newEventPost = await uploadImageToFirebaseAndAddToCollection(
-        file,
-        userId,
-        userData.email,
-        name
-      );
-
-      // Add the new post to the store
-      addPost(newEventPost);
-    } catch (error) {
-      console.error("Error uploading image and adding to collection:", error);
-      toast.error("Error");
-    }
+    toast.promise(promise(), {
+      loading: "Uploading...",
+      success: (data) => {
+        return `Image uploaded successfully!`;
+      },
+      error: "Error uploading image",
+    });
   };
 
   return (

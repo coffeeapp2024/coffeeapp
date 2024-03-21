@@ -8,6 +8,7 @@ import { Case } from "@/store/storeTypes";
 import { useUserDataStore } from "@/store/zustand";
 import { calculateInitialCurrentCoin } from "@/lib/coinActions";
 import RandomVoucherDialog from "./RandomVoucherDialog";
+import { toast } from "sonner";
 
 function GameCard({ gameCase }: { gameCase: Case }) {
   const { userData, setUserData, userId } = useUserDataStore();
@@ -43,6 +44,7 @@ function GameCard({ gameCase }: { gameCase: Case }) {
       const randomIndex = Math.floor(Math.random() * caseVoucherIdList.length);
       const randomVoucherId = caseVoucherIdList[randomIndex];
       setRandomVoucherId(randomVoucherId);
+      toast.success("Well done! You've earned  a random voucher!");
 
       // Update user data
       const newUserData = {
