@@ -16,7 +16,7 @@ function UserVoucher({ voucherId }: { voucherId: string }) {
 
   return (
     <Dialog>
-      <DialogTrigger className="bg-white shadow-lg aspect-[4/3] border-[2px] w-full rounded-3xl pt-3 px-3 relative ">
+      <DialogTrigger className="bg-white shadow-sm aspect-[4/3] border-[1px] w-full rounded-3xl pt-3 px-3 relative ">
         <div className="relative h-3/4 mb-2">
           <Image
             src={imageURL}

@@ -4,7 +4,7 @@ import React from "react";
 
 function Nav() {
   return (
-    <div className="fixed bottom-10 w-screen max-w-screen-sm z-10 shadow-sm px-3">
+    <div className="fixed bottom-10 w-screen max-w-screen-sm z-10 shadow-sm px-4">
       <div className="grid grid-cols-4 items-center justify-center px-3 py-2 w-fit mx-auto bg-white bg-opacity-90 rounded-3xl border-[1px] border-neutral-300 divide-neutral-300  divide-x-[1px]">
         <Link href="/home">
           <div className="nav-item">
