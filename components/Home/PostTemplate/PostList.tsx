@@ -20,7 +20,7 @@ function PostList({
     <Carousel className="-mx-2 mb-4">
       <CarouselContent className="-ml-0">
         {posts.map((post) => (
-          <CarouselItem key={post.id} className="basis-[80%] pl-2">
+          <CarouselItem key={post.id} className="basis-[90%] pl-2">
             <PostTemplate
               post={post}
               userLikedPostList={userLikedPostList}

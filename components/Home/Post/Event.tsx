@@ -3,7 +3,11 @@
 import React from "react";
 import PostList from "../PostTemplate/PostList";
 import AboutEventButton from "./AboutEventButton";
-import { useEventPostStore, useUserDataStore } from "@/store/zustand";
+import {
+  useEventPostStore,
+  useHomePageContentStore,
+  useUserDataStore,
+} from "@/store/zustand";
 import { toast } from "sonner";
 import UploadImageButton from "../PostTemplate/UploadImageButton";
 import {
@@ -13,6 +17,8 @@ import {
 import { onLikedClickedType } from "../PostTemplate/PostTemplate";
 
 function Event() {
+  const { homePageContent } = useHomePageContentStore();
+  const { eventTitle, eventPosterURL, eventText } = homePageContent ?? {};
   const { addPost, posts, name, setLikedNumber } = useEventPostStore();
   const { setUserData, userData, userId } = useUserDataStore();
   const likedEventImageIdList = userData?.LikedEventImageIdList ?? [];
@@ -64,12 +70,12 @@ function Event() {
   return (
     <div className="w-full">
       <div className="flex items-center gap-x-2 pr-2 mb-2">
-        <h3 className="font-bold text-2xl text-white">Event this month</h3>
-        <AboutEventButton />
+        <h3 className="font-bold text-2xl text-white">
+          {eventTitle ?? "Event this month"}
+        </h3>
+        {eventPosterURL && <AboutEventButton eventPosterURL={eventPosterURL} />}
       </div>
-      <p className="text-white opacity-90 mb-2">
-        Lorem ipsum dolor sit amet elit. Neque, veritatis?
-      </p>
+      <p className="text-white opacity-90 mb-2">{eventText}</p>
       <PostList
         onLikeClicked={handleLikeClicked}
         userLikedPostList={likedEventImageIdList}

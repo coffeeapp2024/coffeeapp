@@ -29,6 +29,10 @@ export type HomePageContent = {
   address: string;
   name: string;
   gallery: string[];
+  eventText: string;
+  eventTitle: string;
+  eventPosterURL: string;
+  checkinTitle: string;
 };
 
 export type HomePageContentStore = {

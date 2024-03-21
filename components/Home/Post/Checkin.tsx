@@ -1,7 +1,11 @@
 import React from "react";
 import UploadImageButton from "../PostTemplate/UploadImageButton";
 import { toast } from "sonner";
-import { useCheckinPostStore, useUserDataStore } from "@/store/zustand";
+import {
+  useCheckinPostStore,
+  useHomePageContentStore,
+  useUserDataStore,
+} from "@/store/zustand";
 import { onLikedClickedType } from "../PostTemplate/PostTemplate";
 import {
   updateLikedNumberInFirestore,
@@ -10,6 +14,7 @@ import {
 import PostList from "../PostTemplate/PostList";
 
 function Checkin() {
+  const { homePageContent } = useHomePageContentStore();
   const { addPost, posts, name, setLikedNumber } = useCheckinPostStore();
   const { setUserData, userData, userId } = useUserDataStore();
   const LikedCheckinImageIdList = userData?.LikedCheckinImageIdList ?? [];
@@ -60,7 +65,9 @@ function Checkin() {
   return (
     <div className="w-full">
       <div className="flex items-center gap-x-2 pr-2 mb-2">
-        <h3 className="font-bold text-2xl text-white">Check in Checkin</h3>
+        <h3 className="font-bold text-2xl text-white">
+          {homePageContent?.checkinTitle ?? "Check in Gallery"}
+        </h3>
       </div>
       <PostList
         onLikeClicked={handleLikeClicked}

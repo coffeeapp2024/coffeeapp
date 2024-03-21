@@ -31,7 +31,7 @@ function PostTemplate({
   };
 
   return (
-    <div className="relative aspect-square overflow-hidden bg-black w-full rounded-2xl">
+    <div className="relative aspect-square overflow-hidden bg-black w-full rounded-xl">
       {imageURL && (
         <Image
           src={imageURL}
