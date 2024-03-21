@@ -109,7 +109,7 @@ const ClaimCoinScanner = () => {
             />
           </div>
           <button
-            className="absolute bg-neutral-900 p-2 rounded-full -bottom-12 left-1/2 -translate-x-1/2"
+            className="absolute bg-neutral-900 p-2 rounded-full -bottom-16 left-1/2 -translate-x-1/2"
             onClick={handleImageUpload}
           >
             <ArrowUpTrayIcon className="text-white w-5 h-5" />
