@@ -11,8 +11,10 @@ function ProductCard({ product }: { product: Product }) {
         {img && <Image src={img} fill={true} alt="drink" />}
       </div>
       <div className="px-3 pt-2 pb-3">
-        <h3 className="font-bold text-neutral-600">{name}</h3>
-        <span className="font-bold text-neutral-800">${price}</span>
+        <h3 className="font-bold text-neutral-600 text-sm truncate">
+          {name} fdsf fs
+        </h3>
+        <span className="font-bold text-sm text-neutral-800">{price}k</span>
       </div>
     </div>
   );

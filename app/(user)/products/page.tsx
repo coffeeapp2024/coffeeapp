@@ -1,6 +1,6 @@
 import BannerProductPage from "@/components/Shop/BannerProductPage";
 import Menu from "@/components/Shop/Menu";
-import RecommendProductCards from "@/components/RecommendProductCards";
+import RecommendProductCards from "@/components/Shop/RecommendProductCards";
 import React from "react";
 
 function page() {
