@@ -15,7 +15,7 @@ function MenuNav() {
     setCurrentTag(tag);
   };
   return (
-    <Carousel className="w-full -ml-2 my-7">
+    <Carousel className="w-full -ml-2 mt-4 mb-6">
       <CarouselContent className="-ml-0">
         {filteredTags?.map((tag) => (
           <CarouselItem className="basis-auto pl-2" key={tag.tag}>
