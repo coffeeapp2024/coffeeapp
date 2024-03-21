@@ -1,5 +1,10 @@
 import React, { useState } from "react";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import CloseDialogButton from "../CloseDialogButton";
 import Image from "next/image";
 import { useVoucherStore } from "@/store/zustand";
@@ -21,8 +26,8 @@ function RandomVoucherDialog({ randomVoucherId }: { randomVoucherId: string }) {
       }}
     >
       <DialogTrigger></DialogTrigger>
-      <DialogContent className="bg-transparent px-2">
-        <div className="bg-neutral-50 aspect-[8/7]   rounded-3xl pt-3 px-3 relative ">
+      <DialogContent className="bg-transparent border-none shadow-none px-6">
+        <div className="bg-neutral-50 aspect-video  rounded-3xl pt-3 px-3 relative ">
           <div className="relative h-1/2 mb-4">
             {imageURL && (
               <Image
@@ -40,7 +45,8 @@ function RandomVoucherDialog({ randomVoucherId }: { randomVoucherId: string }) {
             </span>
           </div>
         </div>
-        <CloseDialogButton />
+        <DialogClose className="w-0 h-0"></DialogClose>
+        {/* <CloseDialogButton /> */}
       </DialogContent>
     </Dialog>
   );
