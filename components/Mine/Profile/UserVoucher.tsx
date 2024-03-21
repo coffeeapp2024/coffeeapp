@@ -5,6 +5,7 @@ import CloseDialogButton from "../../CloseDialogButton";
 import { useUserDataStore, useVoucherStore } from "@/store/zustand";
 import QRCode from "qrcode.react";
 import { DialogClose } from "@radix-ui/react-dialog";
+import { toast } from "sonner";
 
 function UserVoucher({ voucherId }: { voucherId: string }) {
   const { vouchers } = useVoucherStore();
@@ -17,7 +18,14 @@ function UserVoucher({ voucherId }: { voucherId: string }) {
 
   return (
     <Dialog>
-      <DialogTrigger className="bg-white shadow-sm aspect-[3/2] border-[1px] w-full rounded-3xl pt-3 px-3 relative ">
+      <DialogTrigger
+        onClick={() =>
+          toast.info(
+            "Scan this voucher at the coffee shop to claim your offer."
+          )
+        }
+        className="bg-white shadow-sm aspect-[3/2] border-[1px] w-full rounded-3xl pt-3 px-3 relative "
+      >
         <div className="relative h-3/4 mb-2">
           <Image
             src={imageURL}
