@@ -16,7 +16,7 @@ function Gallery() {
   }
 
   return (
-    <div className="flex flex-col gap-y-3 pt-4 -mx-2 px-3">
+    <div className="flex flex-col gap-y-3 pt-2 -mx-2 px-3">
       {homePageContent.gallery.map((imageURL, index) => (
         <GalleryImage key={index} imageURL={imageURL} />
       ))}
