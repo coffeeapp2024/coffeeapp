@@ -217,28 +217,25 @@ function useFetchPostImagesEffect(usePostStore: PostStore) {
 }
 
 function useFetchProductsEffect() {
-  const [productsFetched, setProductsFetched] = useState(false);
-  const { setProducts } = useProductStore();
+  const { products, setProducts } = useProductStore();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const products = await fetchProductsFromFirestore();
-        setProducts(products);
-        console.log("Fetched products from Firestore:", products);
-        setProductsFetched(true); // Set productsFetched to true after fetching
+        if (!products) {
+          const products = await fetchProductsFromFirestore();
+          setProducts(products);
+          console.log("Fetched products from Firestore:", products);
+        }
       } catch (error) {
         console.error("Error fetching products:", error);
       }
     };
 
-    if (!productsFetched) {
-      // Only fetch products if they haven't been fetched before
-      fetchData();
-    }
-  }, [productsFetched, setProducts]); // Include productsFetched in the dependency array
+    fetchData();
+  }, [setProducts, products]); // Include productsFetched in the dependency array
 
-  return productsFetched; // Return the state variable if needed externally
+  return products; // Return the state variable if needed externally
 }
 
 function useFetchProductTagsEffect() {
