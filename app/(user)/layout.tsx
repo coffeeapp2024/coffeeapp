@@ -308,7 +308,7 @@ export default function RootLayout({
   useFetchShopContentEffect();
 
   return (
-    <main>
+    <main className="mx-auto w-full">
       <Nav />
       {children}
     </main>

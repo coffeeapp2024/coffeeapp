@@ -4,6 +4,7 @@ import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import CloseDialogButton from "../../CloseDialogButton";
 import { useUserDataStore, useVoucherStore } from "@/store/zustand";
 import QRCode from "qrcode.react";
+import { DialogClose } from "@radix-ui/react-dialog";
 
 function UserVoucher({ voucherId }: { voucherId: string }) {
   const { vouchers } = useVoucherStore();
@@ -20,8 +21,8 @@ function UserVoucher({ voucherId }: { voucherId: string }) {
         <div className="relative h-3/4 mb-2">
           <Image
             src={imageURL}
-            fill={true}
-            sizes="(max-width: 640px) 100vw, 640px"
+            width={600}
+            height={600}
             alt="level icon"
             className="object-contain"
           />
@@ -30,15 +31,17 @@ function UserVoucher({ voucherId }: { voucherId: string }) {
           <span className="text-lg font-medium">{info}</span>
         </div>
       </DialogTrigger>
-      <DialogContent className="max-w-sm rounded-2xl w-full min-h-96 bg-white border-none">
-        <QRCode
-          id={`qr-code-voucher-${id}`}
-          scale={4}
-          value={`${id}-${userId}`}
-          // marginSize={3}
-          includeMargin={true}
-        />
-        <CloseDialogButton />
+      <DialogContent className="w-full px-6 aspect-square bg-transparent border-none   shadow-none">
+        <div className="flex items-center justify-center rounded-2xl bg-white shadow-sm">
+          <QRCode
+            id={`qr-code-voucher-${id}`}
+            size={340}
+            value={`${userId}-${id}`}
+            includeMargin={true}
+          />
+        </div>
+        <DialogClose className="w-0 h-0"></DialogClose>
+        {/* <CloseDialogButton /> */}
       </DialogContent>
     </Dialog>
   );
