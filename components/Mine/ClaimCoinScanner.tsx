@@ -99,7 +99,7 @@ const ClaimCoinScanner = () => {
         <MainButton text="Scan QR" />
       </DialogTrigger>
       <DialogContent className="bg-transparent border-none shadow-none px-4">
-        <div className="relative rounded-3xl">
+        <div className="relative rounded-3xl border-[2px] border-red-600">
           <div className="rounded-3xl overflow-hidden">
             <Scanner
               onResult={handleResult}
