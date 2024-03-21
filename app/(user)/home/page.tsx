@@ -1,8 +1,8 @@
 "use client";
 
 import AboutImageList from "@/components/Home/AboutImageList";
-import Event from "@/components/Home/Event";
-import Gallery from "@/components/Home/Gallery";
+import Event from "@/components/Home/Event/Event";
+import Gallery from "@/components/Home/Checkin/Gallery";
 import Info from "@/components/Home/Info";
 import Video from "@/components/Video";
 import React from "react";

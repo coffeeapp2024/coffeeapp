@@ -12,6 +12,7 @@ export type UserData = {
   startTimeMine: string | null;
   endTimeMine: string | null;
   voucherIdList: string[] | null;
+  LikedCheckinImageIdList: string[];
 };
 
 export type UserDataStore = {
@@ -79,8 +80,8 @@ export type LevelStore = {
   setLevels: (levels: Level[]) => void;
 };
 
-export type CheckinImage = {
-  id: string;
+export type PostImage = {
+  id: string | undefined;
   userEmail: string | null;
   userId: string | null;
   imageURL: string | null;
@@ -88,9 +89,17 @@ export type CheckinImage = {
 };
 
 export interface CheckinStore {
-  checkins: CheckinImage[];
-  setCheckins: (checkins: CheckinImage[]) => void;
+  checkins: PostImage[];
+  setCheckins: (checkins: PostImage[]) => void;
   addCheckin: (file: File, userId: string, userEmail: string) => Promise<void>;
   increaseLikedNumber: (id: string) => Promise<void>;
   decreaseLikedNumber: (id: string) => Promise<void>;
 }
+
+export type PostImageStore = {
+  postImages: PostImage[];
+  setPostImages: (postImages: PostImage[]) => void;
+  addPostImage: (postImage: PostImage) => Promise<void>;
+  increaseLikedNumber: (id: string) => Promise<void>;
+  decreaseLikedNumber: (id: string) => Promise<void>;
+};

@@ -10,7 +10,7 @@ import {
   addDoc,
   updateDoc,
 } from "firebase/firestore";
-import { UserData, HomePageContent, CheckinImage } from "@/store/storeTypes";
+import { UserData, HomePageContent, PostImage } from "@/store/storeTypes";
 import { User } from "firebase/auth";
 import { db, storage } from "./firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
@@ -41,6 +41,7 @@ export async function createUserInFirestore(
         startTimeMine: null,
         endTimeMine: null,
         voucherIdList: [],
+        LikedCheckinImageIdList: [],
       };
 
       await setDoc(userDoc, userData);
@@ -263,14 +264,13 @@ export async function uploadImageToFirebaseAndAddToCheckinImages(
   file: File,
   userId: string,
   userEmail: string
-): Promise<CheckinImage> {
+): Promise<PostImage> {
   try {
     // Upload the image to Firebase Storage
     const imageURL = await uploadImageToFirebase(file, "checkin_images");
 
     // Create a new document in checkin_images collection
-    const checkinImage: CheckinImage = {
-      id: "", // Will be assigned by Firestore
+    const checkinImage: any = {
       userEmail: userEmail,
       userId: userId,
       imageURL: imageURL,
@@ -310,18 +310,17 @@ export async function updateLikedNumberInFirestore(
   }
 }
 
-export async function getAllCheckinImages(): Promise<CheckinImage[]> {
+export async function getAllCheckinImages(): Promise<PostImage[]> {
   try {
     const querySnapshot = await getDocs(checkinImagesRef);
-    const checkinImages: CheckinImage[] = [];
+    const checkinImages: PostImage[] = [];
 
     querySnapshot.forEach((doc) => {
       const checkinImage = {
         id: doc.id,
         ...doc.data(),
-      } as CheckinImage;
+      } as PostImage;
       checkinImages.push(checkinImage);
-      console.log(checkinImage);
     });
 
     return checkinImages;

@@ -185,19 +185,21 @@ function useFetchCheckinImagesEffect() {
   const { setCheckins, checkins } = useCheckinStore();
 
   useEffect(() => {
-    if (checkins.length === 0) {
-      const fetchCheckinImages = async () => {
-        try {
-          const fetchedCheckinImages = await getAllCheckinImages();
+    const fetchCheckinImages = async () => {
+      try {
+        const fetchedCheckinImages = await getAllCheckinImages();
+        if (fetchedCheckinImages.length > 0 && checkins.length === 0) {
           setCheckins(fetchedCheckinImages);
-        } catch (error) {
-          console.error("Error fetching checkin images:", error);
+          console.log("Fetched and set checkin images from Firestore.");
         }
-      };
+      } catch (error) {
+        console.error("Error fetching checkin images:", error);
+      }
+    };
 
-      fetchCheckinImages();
-    }
-  }, [setCheckins, checkins]);
+    fetchCheckinImages();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 }
 
 export default function RootLayout({

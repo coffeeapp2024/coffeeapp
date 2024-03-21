@@ -7,7 +7,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { DialogTrigger } from "@radix-ui/react-dialog";
-import LoginButton from "./Mine/LoginButton";
+import LoginButton from "./Mine/Profile/LoginButton";
 import Link from "next/link";
 import { ArrowUturnLeftIcon } from "@heroicons/react/24/outline";
 

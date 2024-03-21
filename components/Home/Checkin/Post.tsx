@@ -1,22 +1,45 @@
 "use client";
 
 import type { Post } from "@/lib/types";
-import { CheckinImage } from "@/store/storeTypes";
-import { useCheckinStore } from "@/store/zustand";
+import { PostImage } from "@/store/storeTypes";
+import { useCheckinStore, useUserDataStore } from "@/store/zustand";
 import { HeartIcon } from "@heroicons/react/24/outline";
 import { HeartIcon as HeartSolidIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-function Post({ checkin }: { checkin: CheckinImage }) {
+function Post({ checkin }: { checkin: PostImage }) {
   const { decreaseLikedNumber, increaseLikedNumber } = useCheckinStore();
+  const { userData, setUserData } = useUserDataStore();
   const { imageURL, likedNumber, id } = checkin;
   const [isLiked, setIsLiked] = useState(false);
 
+  useEffect(() => {
+    const isInitiallyLiked =
+      userData && userData.LikedCheckinImageIdList?.includes(id || "");
+    setIsLiked(!!isInitiallyLiked);
+  }, [userData, id]);
+
   const handleLikeClicked = () => {
     setIsLiked(!isLiked);
+    if (!id || !userData) return;
 
-    isLiked ? decreaseLikedNumber(id) : increaseLikedNumber(id);
+    let updatedLikedCheckinImageIdList = userData.LikedCheckinImageIdList || [];
+
+    if (isLiked) {
+      decreaseLikedNumber(id);
+      updatedLikedCheckinImageIdList = updatedLikedCheckinImageIdList.filter(
+        (imageId) => imageId !== id
+      );
+    } else {
+      increaseLikedNumber(id);
+      updatedLikedCheckinImageIdList.push(id);
+    }
+
+    setUserData({
+      ...userData,
+      LikedCheckinImageIdList: updatedLikedCheckinImageIdList,
+    });
   };
 
   return (

@@ -5,6 +5,8 @@ import {
   CoinStore,
   HomePageContentStore,
   LevelStore,
+  PostImage,
+  PostImageStore,
   TimeStore,
   UserDataStore,
   VoucherStore,
@@ -63,7 +65,8 @@ export const useCheckinStore = create<CheckinStore>((set) => ({
         userEmail,
         userId
       );
-      set((state) => ({ checkins: [...state.checkins, checkinImage] }));
+      console.log("addCheckin", checkinImage);
+      set((state) => ({ checkins: [checkinImage, ...state.checkins] }));
     } catch (error) {
       console.error("Error adding checkin:", error);
       throw error;
@@ -101,6 +104,47 @@ export const useCheckinStore = create<CheckinStore>((set) => ({
       updateLikedNumberInFirestore(id, likedNumber);
 
       return { ...state, checkins: updatedCheckins };
+    });
+  },
+}));
+
+export const usePostImageStore = create<PostImageStore>((set) => ({
+  postImages: [],
+
+  // Action to set post images
+  setPostImages: (postImages: PostImage[]) => {
+    set({ postImages });
+  },
+
+  // Action to add a new post image
+  addPostImage: async (postImage: PostImage) => {
+    set((state) => ({ postImages: [postImage, ...state.postImages] }));
+  },
+
+  // Action to increase the liked number of a post image
+  increaseLikedNumber: async (id: string) => {
+    set((state) => {
+      const updatedPostImages = state.postImages.map((postImage) =>
+        postImage.id === id
+          ? { ...postImage, likedNumber: (postImage.likedNumber ?? 0) + 1 }
+          : postImage
+      );
+      return { ...state, postImages: updatedPostImages };
+    });
+  },
+
+  // Action to decrease the liked number of a post image
+  decreaseLikedNumber: async (id: string) => {
+    set((state) => {
+      const updatedPostImages = state.postImages.map((postImage) =>
+        postImage.id === id
+          ? {
+              ...postImage,
+              likedNumber: Math.max(0, (postImage.likedNumber ?? 0) - 1),
+            }
+          : postImage
+      );
+      return { ...state, postImages: updatedPostImages };
     });
   },
 }));

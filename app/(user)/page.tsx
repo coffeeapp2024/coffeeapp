@@ -1,7 +1,7 @@
 "use client";
 
 import CurrentCoinInfo from "@/components/Mine/CurrentCoinInfo";
-import ProfileCard from "@/components/Mine/ProfileCard";
+import ProfileCard from "@/components/Mine/Profile/ProfileCard";
 import ScanClaimCard from "@/components/Mine/ScanClaimCard";
 import Background from "@/components/Mine/Background";
 import {} from "@/lib/timeActions";
