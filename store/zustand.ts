@@ -93,7 +93,7 @@ export const useProductStore = create<ProductStore>((set) => ({
 
 export const useProductTagStore = create<ProductTagStore>((set) => ({
   productTags: null,
-  currentTag: undefined,
+  currentTag: "all",
   setProductTags: (productTags) => set({ productTags }),
   setCurrentTag: (tag) => set({ currentTag: tag }),
 }));

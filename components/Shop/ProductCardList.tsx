@@ -9,9 +9,12 @@ function ProductCardList() {
   if (!products) return;
 
   // Filter products by currentTag if it exists and is not empty
-  const filteredProducts = currentTag
-    ? products.filter((product) => product.tags.includes(currentTag))
-    : products;
+  const filteredProducts =
+    currentTag && currentTag !== "all"
+      ? products.filter(
+          (product) => product.tags && product.tags.includes(currentTag)
+        )
+      : products;
 
   return (
     <div className="grid grid-cols-2 gap-2">

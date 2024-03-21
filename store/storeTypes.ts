@@ -131,7 +131,7 @@ export type ProductTag = {
 
 export type ProductTagStore = {
   productTags: ProductTag[] | null;
-  currentTag: string | undefined;
+  currentTag: string;
   setProductTags: (productTags: ProductTag[]) => void;
   setCurrentTag: (tag: string | undefined) => void;
 };
