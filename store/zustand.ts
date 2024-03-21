@@ -1,7 +1,6 @@
 import { create } from "zustand";
 import {
   CaseStore,
-  CheckinStore,
   CoinStore,
   HomePageContentStore,
   LevelStore,
@@ -11,7 +10,6 @@ import {
   UserDataStore,
   VoucherStore,
 } from "./storeTypes";
-import { updateLikedNumberInFirestore } from "@/lib/firebaseFunctions";
 
 export const useUserDataStore = create<UserDataStore>((set: any) => ({
   userData: null,
@@ -50,61 +48,6 @@ export const useLevelStore = create<LevelStore>((set) => ({
   setLevels: (levels) => set({ levels }),
 }));
 
-// Import necessary dependencies and types
-
-// export const useCheckinStore = create<CheckinStore>((set) => ({
-//   checkins: [],
-//   setCheckins: (checkins) => set({ checkins }),
-//   addCheckin: async (file: File, userId: string, userEmail: string) => {
-//     try {
-//       const checkinImage = await uploadImageToFirebaseAndAddToCheckinImages(
-//         file,
-//         userEmail,
-//         userId
-//       );
-//       console.log("addCheckin", checkinImage);
-//       set((state) => ({ checkins: [checkinImage, ...state.checkins] }));
-//     } catch (error) {
-//       console.error("Error adding checkin:", error);
-//       throw error;
-//     }
-//   },
-//   increaseLikedNumber: async (id: string) => {
-//     set((state) => {
-//       const updatedCheckins = state.checkins.map((image) =>
-//         image.id === id
-//           ? { ...image, likedNumber: (image.likedNumber ?? 0) + 1 }
-//           : image
-//       );
-
-//       // Update the liked number in Firestore
-//       const likedNumber =
-//         updatedCheckins.find((image) => image.id === id)?.likedNumber ?? 0;
-//       updateLikedNumberInFirestore(id, likedNumber);
-
-//       return { ...state, checkins: updatedCheckins };
-//     });
-//   },
-//   decreaseLikedNumber: async (id: string) => {
-//     set((state) => {
-//       const updatedCheckins = state.checkins.map((image) =>
-//         image.id === id
-//           ? { ...image, likedNumber: Math.max(0, (image.likedNumber ?? 0) - 1) }
-//           : image
-//       );
-
-//       // Update the liked number in Firestore
-//       const likedNumber = Math.max(
-//         0,
-//         updatedCheckins.find((image) => image.id === id)?.likedNumber ?? 0
-//       );
-//       updateLikedNumberInFirestore(id, likedNumber);
-
-//       return { ...state, checkins: updatedCheckins };
-//     });
-//   },
-// }));
-
 function createPostStore(
   name: string,
   initialState: PostType[]
@@ -139,5 +82,4 @@ function createPostStore(
 }
 
 export const useEventPostStore = createPostStore("event_images", []);
-
 export const useCheckinPostStore = createPostStore("checkin_images", []);
