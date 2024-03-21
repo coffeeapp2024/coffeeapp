@@ -12,7 +12,7 @@ function Nav() {
               src="/icons/navbar/home.png"
               width={200}
               height={200}
-              className="object-contain w-full h-8"
+              className="object-contain w-full h-8 scale-[1.2]"
               alt="Home Icon"
             />
             <span className="nav-item-name">Home</span>
