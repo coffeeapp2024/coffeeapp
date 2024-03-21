@@ -19,7 +19,7 @@ function VoucherCardList() {
       className="-mx-0"
     >
       <CarouselContent className="-ml-0 pb-8">
-        {vouchers.map((voucher, index) => (
+        {vouchers?.map((voucher, index) => (
           <CarouselItem key={index} className="basis-[75%] pl-4">
             <VoucherCard voucher={voucher} />
           </CarouselItem>
