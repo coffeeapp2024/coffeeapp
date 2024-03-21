@@ -2,7 +2,7 @@
 
 import React from "react";
 import PostList from "../PostTemplate/PostList";
-import AboutEventButton from "../AboutEventButton";
+import AboutEventButton from "./AboutEventButton";
 import { useEventPostStore, useUserDataStore } from "@/store/zustand";
 import { toast } from "sonner";
 import UploadImageButton from "../PostTemplate/UploadImageButton";

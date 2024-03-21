@@ -40,7 +40,7 @@
     @apply bg-gradient-to-tr from-amber-300 to-amber-400 flex items-center justify-center rounded-xl text-xl text-neutral-800 font-bold text-nowrap border-[1px] border-neutral-800 -z-10 shadow-lg;
   }
   .custom-divide {
-    @apply border-t-[2px] border-neutral-500 -mx-2 my-4;
+    @apply border-t-[2px] border-neutral-900 -mx-2 my-4;
   }
 
   .text-shadow {

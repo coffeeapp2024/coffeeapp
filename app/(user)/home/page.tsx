@@ -1,11 +1,11 @@
 "use client";
 
-import AboutImageList from "@/components/Home/AboutImageList";
 import Event from "@/components/Home/Post/Event";
 import Checkin from "@/components/Home/Post/Checkin";
 import Info from "@/components/Home/Info";
 import Video from "@/components/Video";
 import React from "react";
+import Gallery from "@/components/Home/Gallery";
 
 function Page() {
   return (
@@ -19,7 +19,7 @@ function Page() {
       <div className="custom-divide"></div>
       <Checkin />
       <div className="custom-divide"></div>
-      <AboutImageList />
+      <Gallery />
     </div>
   );
 }

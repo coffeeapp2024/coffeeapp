@@ -49,11 +49,6 @@ export const useLevelStore = create<LevelStore>((set) => ({
   setLevels: (levels) => set({ levels }),
 }));
 
-export const useGalleryStore = create<GalleryStore>((set) => ({
-  imageURLs: [],
-  setImageURLs: (imageURLs: string[]) => set({ imageURLs }),
-}));
-
 function createPostStore(
   name: string,
   initialState: PostType[]
