@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import { Metadata } from "next";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
+import Head from "next/head";
 const inter = Inter({ subsets: ["latin"] });
 
 // Define metadata for the page
@@ -19,6 +20,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <Head>
+        <link rel="manifest" href="/manifest.json" />
+      </Head>
       <body className={inter.className}>{children}</body>
       <Toaster position="top-center" />
     </html>
