@@ -57,8 +57,8 @@ const QRCodeScanner = ({
               components={{ tracker: true }}
             />
           </div>
-          <UploadQRCodeButton handleResult={handleResult} />
         </div>
+        <UploadQRCodeButton handleResult={handleResult} />
       </DialogContent>
     </Dialog>
   );
