@@ -52,7 +52,7 @@ function Event() {
     const promise = async () => {
       try {
         if (!userData || !userData.email || !userId || !name) {
-          throw new Error("User data is incomplete");
+          throw new Error("Please sign in to upload");
         }
 
         // Upload the image and add it to the collection
@@ -67,7 +67,7 @@ function Event() {
         addPost(newEventPost);
 
         // Return any data you want to be displayed in the success message
-        return;
+        return "Image uploaded successfully!";
       } catch (error) {
         // Throw the error to be caught by toast.promise
         throw error;
@@ -76,10 +76,8 @@ function Event() {
 
     toast.promise(promise(), {
       loading: "Uploading...",
-      success: (data) => {
-        return `Image uploaded successfully!`;
-      },
-      error: "Error uploading image",
+      success: (data) => data,
+      error: (error) => error.message,
     });
   };
 

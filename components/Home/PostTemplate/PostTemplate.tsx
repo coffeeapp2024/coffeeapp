@@ -17,6 +17,7 @@ function PostTemplate({
   userLikedPostList,
 }: PostTemplateProps) {
   const [isLiked, setIsLiked] = useState(false);
+  const [isScaledDown, setIsScaledDown] = useState(false);
   const { id, imageURL, likedNumber } = post;
 
   useEffect(() => {
@@ -30,16 +31,25 @@ function PostTemplate({
     onLikeClicked(id, !isLiked); // Toggle liked state and call parent callback
   };
 
+  const handleImageClicked = () => {
+    setIsScaledDown(!isScaledDown);
+  };
+
   return (
-    <div className="relative aspect-square overflow-hidden bg-black w-full rounded-xl">
+    <div className="relative aspect-square overflow-hidden bg-neutral-950 w-full rounded-xl">
       {imageURL && (
-        <Image
-          src={imageURL}
-          fill={true}
-          sizes="(max-width: 640px) 100vw, 640px"
-          alt="PostTemplate Image"
-          className="object-center object-cover"
-        />
+        <div>
+          <Image
+            onClick={handleImageClicked}
+            src={imageURL}
+            fill={true}
+            sizes="(max-width: 640px) 100vw, 640px"
+            alt="PostTemplate Image"
+            className={`object-center transition-all duration-700 ${
+              isScaledDown ? "object-scale-down" : "object-cover"
+            }`}
+          />
+        </div>
       )}
 
       <button
