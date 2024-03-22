@@ -6,6 +6,7 @@ import {
 } from "@/components/ui/carousel";
 import UserVoucher from "./UserVoucher";
 import { useUserDataStore } from "@/store/zustand";
+import QrCodeUserVoucher from "./QrCodeUserVoucher";
 
 function VoucherCardList() {
   const { userData } = useUserDataStore();
@@ -34,6 +35,7 @@ function VoucherCardList() {
           ))}
         </CarouselContent>
       </Carousel>
+      <QrCodeUserVoucher />
     </div>
   );
 }

@@ -149,6 +149,10 @@ export type RandomVoucherStore = {
 };
 
 export type OpenQrVoucherStore = {
+  voucherId: string | null;
+  index: number | null;
   open: boolean;
   setOpen: (open: boolean) => void;
+  setVoucherId: (voucherId: string | null) => void;
+  setIndex: (Index: number | null) => void;
 };

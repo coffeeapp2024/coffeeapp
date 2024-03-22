@@ -114,6 +114,10 @@ export const useRandomVoucherStore = create<RandomVoucherStore>((set) => ({
 }));
 
 export const useOpenQrVoucherStore = create<OpenQrVoucherStore>((set) => ({
+  voucherId: null,
+  index: null,
   open: false,
+  setVoucherId: (voucherId) => set({ voucherId }),
+  setIndex: (index) => set({ index }),
   setOpen: (open) => set({ open }),
 }));
