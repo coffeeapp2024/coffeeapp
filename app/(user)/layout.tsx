@@ -2,21 +2,18 @@
 
 import Nav from "@/components/Nav";
 import { auth } from "@/lib/firebase";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import {
   fetchHomePageContent,
   fetchCasesFromFirestore,
   fetchLevelsFromFirestore,
   fetchUserData,
   fetchVouchersFromFirestore,
-  updateUserInFirestore,
-  listenForVoucherIdListChanges,
   getAllPostImages,
   fetchProductsFromFirestore,
   fetchProductTagsFromFirestore,
   fetchShopContent,
 } from "@/lib/firebaseFunctions";
-import { Unsubscribe } from "firebase/firestore";
 import {
   useCaseStore,
   useCheckinPostStore,
@@ -24,7 +21,6 @@ import {
   useEventPostStore,
   useHomePageContentStore,
   useLevelStore,
-  useOpenQrVoucherStore,
   useProductStore,
   useProductTagStore,
   useShopStore,
@@ -240,14 +236,16 @@ export default function RootLayout({
   useEffect(() => {
     const fetchShopData = async () => {
       try {
-        const fetchedBanner = await fetchShopContent();
-        setBanner(fetchedBanner);
+        if (!banner) {
+          const fetchedBanner = await fetchShopContent();
+          setBanner(fetchedBanner);
+        }
       } catch (error) {
         console.error("Error fetching shop content:", error);
       }
     };
 
-    if (!banner) fetchShopData();
+    fetchShopData();
   });
 
   useFetchPostImagesEffect(useEventPostStore());

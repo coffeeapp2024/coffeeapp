@@ -12,6 +12,7 @@ import { toast } from "sonner";
 import UploadImageButton from "../PostTemplate/UploadImageButton";
 import {
   updateLikedNumberInFirestore,
+  updateUserInFirestore,
   uploadImageToFirebaseAndAddToCollection,
 } from "@/lib/firebaseFunctions";
 import { onLikedClickedType } from "../PostTemplate/PostTemplate";
@@ -27,7 +28,7 @@ function Event() {
     postId: string,
     liked: boolean
   ) => {
-    if (!userData || !name) return;
+    if (!userData || !userId || !name) return;
 
     // Update the liked number for the post
     const newLikedNumber = await setLikedNumber(postId, liked);
@@ -38,11 +39,13 @@ function Event() {
       ? [...likedEventImageIdList, postId]
       : likedEventImageIdList.filter((id) => id !== postId);
 
-    // Update user data
-    setUserData({
+    const newUserData = {
       ...userData,
       LikedEventImageIdList: updatedLikedEventImageIdList,
-    });
+    };
+    // Update user data
+    setUserData(newUserData);
+    await updateUserInFirestore(userId, newUserData);
   };
 
   const handleFileSelect = async (file: File) => {

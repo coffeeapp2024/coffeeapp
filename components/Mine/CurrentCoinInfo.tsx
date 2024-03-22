@@ -41,7 +41,7 @@ function CurrentCoinInfo() {
         <div className="flex items-center">
           <CoinIcon classname="w-6 h-6 ml-1 " />
           <span className="font-bold text-shadow">
-            {userData?.balance ?? (levels ? levels[0]?.balance : "N/A")}
+            {userData?.balance ?? (levels ? levels[0]?.balance : 0)}
           </span>
         </div>
       </div>

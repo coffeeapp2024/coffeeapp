@@ -9,6 +9,7 @@ import {
 import { onLikedClickedType } from "../PostTemplate/PostTemplate";
 import {
   updateLikedNumberInFirestore,
+  updateUserInFirestore,
   uploadImageToFirebaseAndAddToCollection,
 } from "@/lib/firebaseFunctions";
 import PostList from "../PostTemplate/PostList";
@@ -23,22 +24,25 @@ function Checkin() {
     postId: string,
     liked: boolean
   ) => {
-    if (!userData || !name) return;
+    if (!userData || !userId || !name) return;
 
     // Update the liked number for the post
     const newLikedNumber = await setLikedNumber(postId, liked);
     await updateLikedNumberInFirestore(postId, newLikedNumber, name);
 
     // Add or remove postId from the liked list in user data
-    const updatedLikedEventImageIdList = liked
+    const updatedLikedCheckinImageIdList = liked
       ? [...LikedCheckinImageIdList, postId]
       : LikedCheckinImageIdList.filter((id) => id !== postId);
 
-    // Update user data
-    setUserData({
+    const newUserData = {
       ...userData,
-      LikedCheckinImageIdList: updatedLikedEventImageIdList,
-    });
+      LikedCheckinImageIdList: updatedLikedCheckinImageIdList,
+    };
+
+    // Update user data
+    setUserData(newUserData);
+    await updateUserInFirestore(userId, newUserData);
   };
 
   const handleFileSelect = async (file: File) => {
