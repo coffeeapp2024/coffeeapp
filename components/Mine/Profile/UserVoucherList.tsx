@@ -13,21 +13,23 @@ function VoucherCardList() {
   const { voucherIdList } = userData ?? {};
 
   return (
-    <Carousel
-      opts={{
-        startIndex: 1,
-        dragFree: true,
-      }}
-      className="-mx-0"
-    >
-      <CarouselContent className="-ml-0 pb-20">
-        {voucherIdList?.map((voucherId, index) => (
-          <CarouselItem key={index} className="basis-[80%] pl-3">
-            <UserVoucher voucherId={voucherId} />
-          </CarouselItem>
-        ))}
-      </CarouselContent>
-    </Carousel>
+    <div className="">
+      <Carousel
+        opts={{
+          startIndex: 1,
+          dragFree: true,
+        }}
+        className="-mx-0x"
+      >
+        <CarouselContent className="-ml-0 pb-20">
+          {voucherIdList?.map((voucherId, index) => (
+            <CarouselItem key={index} className="basis-[80%] pl-3">
+              <UserVoucher voucherId={voucherId} />
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+      </Carousel>
+    </div>
   );
 }
 
