@@ -46,7 +46,7 @@ function InstallButton() {
       {showButton && (
         <button
           onClick={handleInstallButtonClick}
-          className="fixed top-28 left-1/2 -translate-x-1/2 rounded-3xl bg-neutral-800 text-white font-semibold py-3 px-6 z-50 flex items-center justify-center gap-x-2 shadow-sm active:scale-95 transition-transform"
+          className="fixed top-28 left-1/2 -translate-x-1/2 rounded-3xl bg-neutral-900 text-white font-semibold py-3 px-6 z-50 flex items-center justify-center gap-x-2 shadow-sm active:scale-95 transition-transform"
         >
           <ArrowDownTrayIcon className="w-5 h-5" />
           <span>Install App</span>
