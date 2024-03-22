@@ -21,7 +21,7 @@ function CurrentCoinInfo() {
       );
       setCurrentCoin(initialCoin);
     }
-  }, [setCurrentCoin, userData]);
+  }, [setCurrentCoin, currentCoin, userData]);
 
   useEffect(() => {
     const { balance, endTimeMine } = userData ?? {};
