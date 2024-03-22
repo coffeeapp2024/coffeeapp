@@ -30,7 +30,7 @@ export default function LoginButton() {
       onClick={() => signIn()}
     >
       <div className="w-10 h-10 relative">
-        <Image src="/google-icon.png" fill={true} alt="Google Icon" />
+        <Image src="/icons/google-icon.png" fill={true} alt="Google Icon" />
       </div>
       <p className="font-semibold text-lg text-neutral-900">
         Sign in with Google
