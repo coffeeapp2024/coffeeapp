@@ -256,8 +256,6 @@ export default function RootLayout({
 
   return (
     <main className="relative mx-auto w-full">
-      <InstallButton />
-
       <Nav />
       {children}
     </main>
