@@ -148,15 +148,16 @@ function useUpdateUserEffect() {
       const updateUser = async () => {
         try {
           await updateUserInFirestore(userId, userData);
+          console.log("Update user data in firebase");
         } catch (error) {
           console.error("Error updating user data:", error);
         }
       };
 
       updateUser();
-      console.log("update firebase");
     }
-  }, [shouldUpdate, userData, userId]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [shouldUpdate === true, userData]);
 
   return { setShouldUpdate };
 }
@@ -182,7 +183,9 @@ export async function UserVoucherIdListListener() {
           };
 
           setOpen(false);
-          setUserData(updatedUserData);
+          setTimeout(() => {
+            setUserData(updatedUserData);
+          }, 1000);
 
           toast.success("Voucher has been successfully scanned!");
 
@@ -245,7 +248,8 @@ function useFetchProductsEffect() {
     };
 
     fetchData();
-  }, [setProducts, products]); // Include productsFetched in the dependency array
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [setProducts]); // Include productsFetched in the dependency array
 
   return products; // Return the state variable if needed externally
 }
@@ -298,14 +302,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   useAuthEffect();
+  useUpdateUserEffect();
   useHomePageContentEffect();
   useFetchVouchersEffect();
   useFetchCasesEffect();
   useFetchLevelsEffect();
 
   UserVoucherIdListListener();
-
-  useUpdateUserEffect();
 
   useFetchPostImagesEffect(useEventPostStore());
   useFetchPostImagesEffect(useCheckinPostStore());
