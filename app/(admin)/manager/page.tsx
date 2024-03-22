@@ -1,5 +1,5 @@
-import GenerateQrCodeButton from "@/components/Scan/GenerateQrCodeButton";
-import VoucherScanner from "@/components/Scan/VoucherScanner";
+import GenerateQrCodeButton from "@/components/Admin/GenerateQrCodeButton";
+import VoucherScanner from "@/components/Admin/VoucherScanner";
 import Link from "next/link";
 
 function Page() {
@@ -15,12 +15,6 @@ function Page() {
     >
       <div className="flex flex-col items-center justify-center pt-48">
         <GenerateQrCodeButton />
-        <Link
-          className="absolute bottom-4 left-1/2 -translate-x-1/2 px-4 py-2 rounded-3xl bg-neutral-800 text-white text-sm font-semibold"
-          href="/staff"
-        >
-          Go to Staff
-        </Link>
       </div>
     </div>
   );

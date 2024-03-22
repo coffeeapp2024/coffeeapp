@@ -1,4 +1,5 @@
-import VoucherScanner from "@/components/Scan/VoucherScanner";
+import NavGoto from "@/components/Admin/NavGoto";
+import VoucherScanner from "@/components/Admin/VoucherScanner";
 import Link from "next/link";
 
 function Page() {
@@ -15,12 +16,6 @@ function Page() {
       <div className="flex flex-col items-center justify-center pt-48">
         <VoucherScanner />
       </div>
-      <Link
-        className="absolute bottom-4 left-1/2 -translate-x-1/2 px-4 py-2 rounded-3xl bg-neutral-800 text-white text-sm font-semibold"
-        href="/manager"
-      >
-        Go to Manager
-      </Link>
     </div>
   );
 }
