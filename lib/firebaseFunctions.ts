@@ -42,6 +42,7 @@ export async function createUserInFirestore(
     if (!userSnapshot.exists() && user.email && user.displayName) {
       const userData: UserData = {
         email: user.email,
+        role: "user",
         displayName: user.displayName,
         coin: 0,
         balance: 0.1,

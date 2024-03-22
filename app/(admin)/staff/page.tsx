@@ -1,6 +1,4 @@
-import NavGoto from "@/components/Admin/NavGoto";
 import VoucherScanner from "@/components/Admin/VoucherScanner";
-import Link from "next/link";
 
 function Page() {
   return (

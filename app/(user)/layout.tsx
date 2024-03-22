@@ -256,6 +256,7 @@ export default function RootLayout({
   useFetchVouchersEffect();
   useFetchCasesEffect();
   useFetchLevelsEffect();
+  useHomePageContentEffect();
 
   useFetchProductTagsEffect();
   useFetchProductsEffect();

@@ -6,6 +6,7 @@ export type UserVoucherInfo = {
 
 export type UserData = {
   email: string | null;
+  role: string;
   displayName: string | null;
   coin: number | null;
   balance: number | null;
