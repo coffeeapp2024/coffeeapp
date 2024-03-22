@@ -43,7 +43,7 @@ function InstallButton() {
 
   return (
     <>
-      {true && (
+      {showButton && (
         <button
           onClick={handleInstallButtonClick}
           className="fixed top-28 left-1/2 -translate-x-1/2 rounded-3xl bg-neutral-800 text-white font-semibold py-3 px-6 z-50 flex items-center justify-center gap-x-2 shadow-sm active:scale-95 transition-transform"
