@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import { Metadata } from "next";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
+import { useEffect } from "react";
 const inter = Inter({ subsets: ["latin"] });
 
 // Define metadata for the page
@@ -18,6 +19,48 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  useEffect(() => {
+    if ("serviceWorker" in navigator && "PushManager" in window) {
+      window.addEventListener("beforeinstallprompt", (e: any) => {
+        e.preventDefault();
+
+        const deferredPrompt = e;
+
+        const installButton = document.createElement("button");
+        installButton.textContent = "Install App";
+        installButton.style.position = "fixed";
+        installButton.style.top = "10px";
+        installButton.style.left = "50%";
+        installButton.style.transform = "translateX(-50%)";
+        installButton.style.zIndex = "9999";
+        installButton.style.padding = "10px 20px";
+        installButton.style.color = "white";
+        installButton.style.backgroundColor = "#007bff"; // Change color as needed
+        installButton.style.border = "none";
+        installButton.style.borderRadius = "5px";
+        installButton.style.cursor = "pointer";
+
+        installButton.addEventListener("click", () => {
+          if (deferredPrompt) {
+            deferredPrompt.prompt();
+
+            deferredPrompt.userChoice.then((choiceResult: any) => {
+              if (choiceResult.outcome === "accepted") {
+                console.log("App installed");
+              } else {
+                console.log("App installation declined");
+              }
+
+              installButton.style.display = "none";
+            });
+          }
+        });
+
+        document.body.appendChild(installButton);
+      });
+    }
+  }, []);
+
   return (
     <html lang="en">
       <body className={inter.className}>{children}</body>
