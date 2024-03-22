@@ -10,14 +10,12 @@ function QrCodeUserVoucher() {
   const { userId } = useUserDataStore();
 
   return (
-    <Dialog open={open}>
+    <Dialog open={open} onOpenChange={() => setOpen(!open)}>
       <DialogTrigger
         onClick={() => {
           toast.info(
             "Scan this voucher at the coffee shop to claim your offer."
           );
-
-          setOpen(true);
         }}
       ></DialogTrigger>
       <DialogContent className="w-full px-10  bg-transparent border-none   shadow-none">
