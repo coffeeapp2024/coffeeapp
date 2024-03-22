@@ -256,10 +256,11 @@ export default function RootLayout({
   useFetchProductTagsEffect();
   useFetchProductsEffect();
 
+  InstallButton();
+
   return (
     <main className="mx-auto w-full">
       <Nav />
-      <InstallButton />
       {children}
     </main>
   );
