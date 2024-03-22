@@ -417,3 +417,42 @@ export async function fetchShopContent(): Promise<string | null> {
     throw error;
   }
 }
+
+export async function deleteVoucherIdFromUser(
+  userId: string,
+  voucherId: string,
+  index: number
+): Promise<void> {
+  try {
+    // Create a reference to the user document
+    const userDoc = doc(usersRef, userId);
+
+    // Get the user data
+    const userSnapshot = await getDoc(userDoc);
+
+    if (userSnapshot.exists()) {
+      // Extract the voucherIdList from the user data
+      const userData = userSnapshot.data() as UserData;
+      let { voucherIdList } = userData;
+
+      // Check if the voucherIdList exists and the index is within bounds
+      if (!voucherIdList || index >= voucherIdList.length) {
+        throw new Error("Invalid index or missing voucherIdList");
+      }
+
+      // Remove the voucher ID at the specified index
+      voucherIdList.splice(index, 1);
+
+      // Update the user document with the modified voucherIdList
+      await updateUserInFirestore(userId, { voucherIdList });
+      console.log(
+        `Voucher ID ${voucherId} deleted successfully from user ${userId}`
+      );
+    } else {
+      console.log(`User ${userId} not found`);
+    }
+  } catch (error) {
+    console.error("Error deleting voucher ID from user:", error);
+    throw error;
+  }
+}
