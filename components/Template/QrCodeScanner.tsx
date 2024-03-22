@@ -48,8 +48,8 @@ const QRCodeScanner = ({
         <MainButton text={buttonName} />
       </DialogTrigger>
       <DialogContent className="bg-transparent border-none shadow-none px-4">
-        <div className="relative rounded-3xl border-[3px] border-red-800">
-          <div className="rounded-3xl overflow-hidden">
+        <div className="relative rounded-3xl border-[3px] border-red-800 overflow-hidden">
+          <div className="overflow-hidden">
             <Scanner
               onResult={handleResult}
               onError={handleError}
