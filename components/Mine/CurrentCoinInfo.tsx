@@ -9,7 +9,7 @@ function CurrentCoinInfo() {
 
   useEffect(() => {
     const { balance, endTimeMine } = userData ?? {};
-    if (balance && endTimeMine && currentCoin) {
+    if (balance && currentCoin) {
       const intervalId = setInterval(() => {
         const updatedCoin = updateCurrentCoin(
           balance,
@@ -21,7 +21,7 @@ function CurrentCoinInfo() {
 
       return () => clearInterval(intervalId);
     } else {
-      setCurrentCoin(null);
+      setCurrentCoin(0);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentCoin, setCurrentCoin]);

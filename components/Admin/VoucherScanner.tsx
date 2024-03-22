@@ -4,8 +4,11 @@ import QRCodeScanner from "../Template/QrCodeScanner";
 
 import React, { useState } from "react";
 import { toast } from "sonner";
+import { useUserDataStore } from "@/store/zustand";
 
 const VoucherScanner = () => {
+  const { role } = useUserDataStore();
+
   const handleQrCode = async (text: string) => {
     const [userId, voucherId, indexStr] = text.split("-");
     const index = parseInt(indexStr);
@@ -16,11 +19,13 @@ const VoucherScanner = () => {
   };
 
   return (
-    <QRCodeScanner
-      buttonName="Scan Me!"
-      handleOnClick={() => {}}
-      handleQrCode={handleQrCode}
-    />
+    <div className={`${role ? "" : "pointer-events-none grayscale"}`}>
+      <QRCodeScanner
+        buttonName="Scan Me!"
+        handleOnClick={() => {}}
+        handleQrCode={handleQrCode}
+      />
+    </div>
   );
 };
 

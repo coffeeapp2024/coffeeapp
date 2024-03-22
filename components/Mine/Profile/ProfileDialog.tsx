@@ -6,9 +6,11 @@ import UserVoucherList from "./UserVoucherList";
 import { User } from "firebase/auth";
 import Image from "next/image";
 import SignOutButton from "./SignOutButton";
-import Admin from "./Admin";
+import Admin from "./AdminNav";
+import { useUserDataStore } from "@/store/zustand";
 
 function ProfileDialog({ user }: { user: User }) {
+  const { role } = useUserDataStore();
   return (
     <Drawer>
       <DrawerTrigger className="flex items-center justify-between w-full h-full p-3">
@@ -44,7 +46,7 @@ function ProfileDialog({ user }: { user: User }) {
           <UserInfo user={user} />
           <UserVoucherList />
         </div>
-        <Admin />
+        {role && <Admin />}
         <SignOutButton />
       </DrawerContent>
     </Drawer>

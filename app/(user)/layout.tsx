@@ -28,6 +28,7 @@ import {
   useVoucherStore,
 } from "@/store/zustand";
 import {
+  Account,
   HomePageContent,
   MinePageContent,
   PostStore,
@@ -35,6 +36,7 @@ import {
 } from "@/store/storeTypes";
 import { calculateInitialCurrentCoin } from "@/lib/coinActions";
 import { collection, doc, getDoc } from "firebase/firestore";
+import { toast } from "sonner";
 
 function useFetchVouchersEffect() {
   const { setVouchers, vouchers } = useVoucherStore();
@@ -195,7 +197,8 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const { userData, userId, setUserData, setUserId } = useUserDataStore();
+  const { userData, userId, setRole, setUserData, setUserId } =
+    useUserDataStore();
   const { setCurrentCoin } = useCoinStore();
   const { banner, setBanner } = useShopStore();
 
@@ -203,11 +206,40 @@ export default function RootLayout({
   useEffect(() => {
     if (!userData || !userId) {
       const unsubscribe = auth.onAuthStateChanged(async (user) => {
-        if (user) {
+        if (user && user.email) {
           try {
             const fetchedUserData = await fetchUserData(user.uid);
-            setUserData(fetchedUserData);
+            const fetchedAccounts = (
+              await getDoc(doc(collection(db, "admin"), "accounts"))
+            ).data() as Account;
+            console.log("Fetched Account:", fetchedAccounts);
+
+            const {
+              staff = [],
+              manager = [],
+              testing = false,
+            } = fetchedAccounts;
+
+            const role = testing
+              ? "manager"
+              : staff?.includes(user.email)
+              ? "staff"
+              : manager?.includes(user.email)
+              ? "manager"
+              : null;
+            console.log("user role:", role);
+
+            setRole(role);
             setUserId(user.uid);
+
+            if (testing && fetchedUserData && fetchedUserData.coin) {
+              fetchedUserData.coin += 100;
+              toast.info("Tesing Mode! +100 coin"); // Add 1000 to coin if role is testing
+              console.log("+100");
+            }
+
+            setUserData(fetchedUserData);
+
             console.log("Login successfully");
           } catch (error) {
             console.error("Error fetching user data:", error);
@@ -219,18 +251,19 @@ export default function RootLayout({
 
       return () => unsubscribe();
     }
-  }, [userData, userId, setUserData, setUserId]);
+  }, [userData, userId, setUserData, setUserId, setRole]);
 
   useEffect(() => {
     const { balance, coin, startTimeMine } = userData ?? {};
 
-    if (balance && startTimeMine && coin) {
+    if (balance && coin) {
       const initialCoin = calculateInitialCurrentCoin(
         balance,
         coin,
         startTimeMine
       );
       setCurrentCoin(initialCoin);
+      console.log("initialCurrentCoin:", initialCoin);
     }
   }, [setCurrentCoin, userData]);
 

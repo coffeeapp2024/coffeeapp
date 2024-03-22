@@ -3,8 +3,10 @@ import { useState, useEffect } from "react";
 import QRCode from "qrcode.react";
 import { generateKeysAndSaveToFirestore } from "@/lib/firebaseFunctions";
 import MainButton from "../MainButton";
+import { useUserDataStore } from "@/store/zustand";
 
 function GenerateQrCodeButton() {
+  const { role } = useUserDataStore();
   const [qrValues, setQrValues] = useState<string[]>([]);
 
   useEffect(() => {
@@ -48,7 +50,12 @@ function GenerateQrCodeButton() {
           </div>
         ))}
       </div>
-      <button onClick={handleGenerateAndDownload}>
+      <button
+        className={`${
+          role === "manager" ? "" : "pointer-events-none grayscale"
+        }`}
+        onClick={handleGenerateAndDownload}
+      >
         <MainButton text="Create QR" />
       </button>
     </div>

@@ -20,8 +20,10 @@ import {
 export const useUserDataStore = create<UserDataStore>((set: any) => ({
   userData: null,
   userId: null,
+  role: null,
   setUserData: (userData) => set({ userData }),
   setUserId: (userId) => set({ userId }),
+  setRole: (role) => set({ role }),
 }));
 
 export const useHomePageContentStore = create<HomePageContentStore>((set) => ({

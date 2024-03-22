@@ -1,6 +1,4 @@
 import GenerateQrCodeButton from "@/components/Admin/GenerateQrCodeButton";
-import VoucherScanner from "@/components/Admin/VoucherScanner";
-import Link from "next/link";
 
 function Page() {
   return (

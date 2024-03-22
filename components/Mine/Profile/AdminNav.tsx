@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
 
-function Admin() {
+function AdminNav() {
   return (
     <div className="absolute bottom-16 left-1/2 -translate-x-1/2 text-neutral-400 text-sm font-semibold flex gap-x-2">
       <Link
@@ -20,4 +20,4 @@ function Admin() {
   );
 }
 
-export default Admin;
+export default AdminNav;

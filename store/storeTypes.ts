@@ -19,8 +19,10 @@ export type UserData = {
 export type UserDataStore = {
   userData: UserData | null;
   userId: string | null;
+  role: string | null;
   setUserData: (userData: UserData | null) => void;
   setUserId: (userId: string | null) => void;
+  setRole: (Role: string | null) => void;
 };
 
 export type HomePageContent = {
@@ -164,4 +166,10 @@ export type MinePageContent = {
 export type MinePageContentStore = {
   minePageContent: MinePageContent | null;
   setMinePageContent: (minePageContent: MinePageContent) => void;
+};
+
+export type Account = {
+  staff: string[];
+  manager: string[];
+  testing: boolean;
 };

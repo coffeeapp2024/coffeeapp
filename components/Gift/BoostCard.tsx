@@ -25,7 +25,6 @@ function BoostCard({
     if (
       !userBalance ||
       !coin ||
-      !startTimeMine ||
       !userData ||
       !userId ||
       userBalance > levelBalance

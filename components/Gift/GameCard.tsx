@@ -28,7 +28,7 @@ function GameCard({ gameCase }: { gameCase: Case }) {
     )
       return;
     const { coin, voucherIdList, balance, startTimeMine } = userData;
-    if (!coin || !balance || !startTimeMine) return;
+    if (!coin || !balance) return;
     const currentCoin = calculateInitialCurrentCoin(
       balance,
       coin,

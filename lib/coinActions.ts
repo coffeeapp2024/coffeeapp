@@ -3,7 +3,7 @@ import { UserData } from "@/store/storeTypes";
 export function updateCurrentCoin(
   balancePerHour: number,
   currentCoin: number,
-  endTime: string
+  endTime: string | null | undefined
 ): number | null {
   const now = new Date();
   const endDate = endTime ? new Date(endTime) : null;
@@ -14,17 +14,16 @@ export function updateCurrentCoin(
     return updatedCoin;
   }
 
-  return null;
+  return currentCoin;
 }
 
 export function calculateInitialCurrentCoin(
   balancePerHour: number,
   coin: number,
-  startTime: string
+  startTime: string | null | undefined
 ) {
-  const startDate = new Date(startTime);
-
   const now = new Date();
+  const startDate = startTime ? new Date(startTime) : now;
 
   if (startDate && balancePerHour && now > startDate) {
     const timeDiffSeconds = (now.getTime() - startDate.getTime()) / 1000;
@@ -32,7 +31,7 @@ export function calculateInitialCurrentCoin(
     return parseFloat(initialCoin.toFixed(5));
   }
 
-  return 0;
+  return coin;
 }
 
 export function calculateFinalCoin(
@@ -59,7 +58,7 @@ export const updateMineTimes = async (userData: UserData, mineHour: number) => {
   const mineDurationInMillis = mineHour * millisecondsPerHour;
 
   const { balance, coin, startTimeMine, endTimeMine } = userData;
-  if (!balance || !startTimeMine || !coin) {
+  if (!balance || !coin) {
     return;
   }
 
