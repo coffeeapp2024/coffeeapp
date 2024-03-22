@@ -109,21 +109,6 @@ export async function deleteUserInFirestore(userId: string): Promise<void> {
   }
 }
 
-// export async function fetchHomePageContent(): Promise<HomePageContent | null> {
-//   try {
-//     const homePageContentSnapshot = await getDoc(doc(contentsRef, "homepage"));
-//     if (homePageContentSnapshot.exists()) {
-//       return homePageContentSnapshot.data() as HomePageContent;
-//     } else {
-//       console.log("Document 'homepage' does not exist");
-//       return null;
-//     }
-//   } catch (error) {
-//     console.error("Error fetching homepage content:", error);
-//     throw error;
-//   }
-// }
-
 export async function generateKeysAndSaveToFirestore(count: number) {
   const keys = [];
   try {
@@ -274,7 +259,7 @@ export async function uploadImageToFirebaseAndAddToCollection(
   file: File,
   userId: string,
   userEmail: string,
-  collectionName: string // Assuming collectionName is the name of the collection to add the document to
+  collectionName: string
 ): Promise<PostType> {
   try {
     // Upload the image to Firebase Storage

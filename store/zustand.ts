@@ -87,8 +87,8 @@ function createPostStore(
   }));
 }
 
-export const useEventPostStore = createPostStore("event_images", []);
-export const useCheckinPostStore = createPostStore("checkin_images", []);
+export const useEventPostStore = createPostStore("eventImages", []);
+export const useCheckinPostStore = createPostStore("checkinImages", []);
 
 export const useProductStore = create<ProductStore>((set) => ({
   products: null,
