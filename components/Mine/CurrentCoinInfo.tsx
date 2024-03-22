@@ -1,27 +1,11 @@
 import React, { useEffect } from "react";
 import CoinIcon from "../CoinIcon";
-import {
-  calculateInitialCurrentCoin,
-  updateCurrentCoin,
-} from "@/lib/coinActions";
+import { updateCurrentCoin } from "@/lib/coinActions";
 import { useCoinStore, useLevelStore, useUserDataStore } from "@/store/zustand";
 function CurrentCoinInfo() {
   const { userData } = useUserDataStore();
   const { levels } = useLevelStore();
   const { currentCoin, setCurrentCoin } = useCoinStore();
-
-  useEffect(() => {
-    const { balance, coin, startTimeMine } = userData ?? {};
-
-    if (balance && startTimeMine && coin) {
-      const initialCoin = calculateInitialCurrentCoin(
-        balance,
-        coin,
-        startTimeMine
-      );
-      setCurrentCoin(initialCoin);
-    }
-  }, [setCurrentCoin, currentCoin, userData]);
 
   useEffect(() => {
     const { balance, endTimeMine } = userData ?? {};

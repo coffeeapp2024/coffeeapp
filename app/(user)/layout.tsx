@@ -20,6 +20,7 @@ import { Unsubscribe } from "firebase/firestore";
 import {
   useCaseStore,
   useCheckinPostStore,
+  useCoinStore,
   useEventPostStore,
   useHomePageContentStore,
   useLevelStore,
@@ -31,6 +32,7 @@ import {
 } from "@/store/zustand";
 import { PostStore, UserData } from "@/store/storeTypes";
 import { isEqual } from "lodash";
+import { calculateInitialCurrentCoin } from "@/lib/coinActions";
 
 function useFetchVouchersEffect() {
   const { setVouchers, vouchers } = useVoucherStore();
@@ -303,6 +305,21 @@ export default function RootLayout({
   useFetchProductsEffect();
 
   useFetchShopContentEffect();
+
+  const { userData } = useUserDataStore();
+  const { setCurrentCoin } = useCoinStore();
+  useEffect(() => {
+    const { balance, coin, startTimeMine } = userData ?? {};
+
+    if (balance && startTimeMine && coin) {
+      const initialCoin = calculateInitialCurrentCoin(
+        balance,
+        coin,
+        startTimeMine
+      );
+      setCurrentCoin(initialCoin);
+    }
+  }, [setCurrentCoin, userData]);
 
   return (
     <main className="mx-auto w-full">
