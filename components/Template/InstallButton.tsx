@@ -19,7 +19,7 @@ function InstallButton() {
       const installButton = document.createElement("button");
       installButton.textContent = "Install App";
       installButton.style.position = "fixed";
-      installButton.style.top = "10px";
+      installButton.style.top = "50px";
       installButton.style.left = "50%";
       installButton.style.transform = "translateX(-50%)";
       installButton.style.zIndex = "9999";
@@ -27,7 +27,7 @@ function InstallButton() {
       installButton.style.color = "white";
       installButton.style.backgroundColor = "#007bff";
       installButton.style.border = "none";
-      installButton.style.borderRadius = "5px";
+      installButton.style.borderRadius = "50px";
       installButton.style.cursor = "pointer";
 
       installButton.addEventListener("click", () => {
