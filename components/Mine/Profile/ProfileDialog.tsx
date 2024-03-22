@@ -6,6 +6,7 @@ import UserVoucherList from "./UserVoucherList";
 import { User } from "firebase/auth";
 import Image from "next/image";
 import SignOutButton from "./SignOutButton";
+import Admin from "./Admin";
 
 function ProfileDialog({ user }: { user: User }) {
   return (
@@ -43,6 +44,7 @@ function ProfileDialog({ user }: { user: User }) {
           <UserInfo user={user} />
           <UserVoucherList />
         </div>
+        <Admin />
         <SignOutButton />
       </DrawerContent>
     </Drawer>

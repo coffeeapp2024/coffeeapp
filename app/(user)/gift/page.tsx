@@ -9,7 +9,7 @@ function Page() {
   return (
     <div
       style={{
-        backgroundImage: `url("/bg/bg11.jpg")`,
+        backgroundImage: `url("/bg/bg-scan.jpg")`,
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",

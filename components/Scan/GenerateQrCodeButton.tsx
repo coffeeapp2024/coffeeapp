@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import QRCode from "qrcode.react";
 import { generateKeysAndSaveToFirestore } from "@/lib/firebaseFunctions";
+import MainButton from "../MainButton";
 
 function GenerateQrCodeButton() {
   const [qrValues, setQrValues] = useState<string[]>([]);
@@ -16,7 +17,7 @@ function GenerateQrCodeButton() {
           const pngUrl = canvas.toDataURL(); // Default format is PNG
           const downloadLink = document.createElement("a");
           downloadLink.href = pngUrl;
-          downloadLink.download = `qr-code-${index}.png`;
+          downloadLink.download = `qr-code.png`;
           document.body.appendChild(downloadLink);
           downloadLink.click();
           document.body.removeChild(downloadLink);
@@ -47,11 +48,8 @@ function GenerateQrCodeButton() {
           </div>
         ))}
       </div>
-      <button
-        className="text-white bg-neutral-900 p-4 rounded-3xl"
-        onClick={handleGenerateAndDownload}
-      >
-        Generate QR Code
+      <button onClick={handleGenerateAndDownload}>
+        <MainButton text="Create QR" />
       </button>
     </div>
   );

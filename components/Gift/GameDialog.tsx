@@ -38,7 +38,7 @@ function GameDialog() {
             />
           </div>
           <div className="absolute bottom-4 left-1/2 -translate-x-1/2">
-            <MainButton text="Play" />
+            <MainButton text="Open" />
           </div>
         </div>
       </DialogTrigger>

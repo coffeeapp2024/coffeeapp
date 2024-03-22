@@ -81,7 +81,7 @@ function GameCard({ gameCase }: { gameCase: Case }) {
           isHidden && "pointer-events-none grayscale"
         } absolute -bottom-4 translate-y-1/2 left-1/2 -translate-x-1/2`}
       >
-        <MainButton text="Play" />
+        <MainButton text="Open" />
       </button>
     </div>
   );
