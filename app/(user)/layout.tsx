@@ -199,6 +199,7 @@ export default function RootLayout({
   const { setCurrentCoin } = useCoinStore();
   const { banner, setBanner } = useShopStore();
 
+  // Login
   useEffect(() => {
     if (!userData || !userId) {
       const unsubscribe = auth.onAuthStateChanged(async (user) => {
