@@ -16,6 +16,7 @@ import {
   PostType,
   Product,
   ProductTag,
+  MinePageContent,
 } from "@/store/storeTypes";
 import { User } from "firebase/auth";
 import { db, storage } from "./firebase";
@@ -42,7 +43,6 @@ export async function createUserInFirestore(
     if (!userSnapshot.exists() && user.email && user.displayName) {
       const userData: UserData = {
         email: user.email,
-        role: "user",
         displayName: user.displayName,
         coin: 0,
         balance: 0.1,
@@ -109,20 +109,20 @@ export async function deleteUserInFirestore(userId: string): Promise<void> {
   }
 }
 
-export async function fetchHomePageContent(): Promise<HomePageContent | null> {
-  try {
-    const homePageContentSnapshot = await getDoc(doc(contentsRef, "homepage"));
-    if (homePageContentSnapshot.exists()) {
-      return homePageContentSnapshot.data() as HomePageContent;
-    } else {
-      console.log("Document 'homepage' does not exist");
-      return null;
-    }
-  } catch (error) {
-    console.error("Error fetching homepage content:", error);
-    throw error;
-  }
-}
+// export async function fetchHomePageContent(): Promise<HomePageContent | null> {
+//   try {
+//     const homePageContentSnapshot = await getDoc(doc(contentsRef, "homepage"));
+//     if (homePageContentSnapshot.exists()) {
+//       return homePageContentSnapshot.data() as HomePageContent;
+//     } else {
+//       console.log("Document 'homepage' does not exist");
+//       return null;
+//     }
+//   } catch (error) {
+//     console.error("Error fetching homepage content:", error);
+//     throw error;
+//   }
+// }
 
 export async function generateKeysAndSaveToFirestore(count: number) {
   const keys = [];
@@ -399,7 +399,7 @@ export async function fetchProductTagsFromFirestore(): Promise<ProductTag[]> {
 
 export async function fetchShopContent(): Promise<string | null> {
   try {
-    const shopContentSnapshot = await getDoc(doc(contentsRef, "shop"));
+    const shopContentSnapshot = await getDoc(doc(contentsRef, "shopPage"));
     if (shopContentSnapshot.exists()) {
       const shopData = shopContentSnapshot.data();
       // Assuming "banner" is the field you want to fetch
@@ -417,6 +417,21 @@ export async function fetchShopContent(): Promise<string | null> {
     }
   } catch (error) {
     console.error("Error fetching shop content:", error);
+    throw error;
+  }
+}
+
+export async function fetchMinePageContent(): Promise<MinePageContent | null> {
+  try {
+    const MinePageContentSnapshot = await getDoc(doc(contentsRef, "minePage"));
+    if (MinePageContentSnapshot.exists()) {
+      return MinePageContentSnapshot.data() as MinePageContent;
+    } else {
+      console.log("Document 'minePage' does not exist");
+      return null;
+    }
+  } catch (error) {
+    console.error("Error fetching homepage content:", error);
     throw error;
   }
 }

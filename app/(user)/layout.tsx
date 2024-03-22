@@ -1,10 +1,9 @@
 "use client";
 
 import Nav from "@/components/Nav";
-import { auth } from "@/lib/firebase";
-import { useEffect, useState } from "react";
+import { auth, db } from "@/lib/firebase";
+import { useEffect } from "react";
 import {
-  fetchHomePageContent,
   fetchCasesFromFirestore,
   fetchLevelsFromFirestore,
   fetchUserData,
@@ -21,15 +20,21 @@ import {
   useEventPostStore,
   useHomePageContentStore,
   useLevelStore,
+  useMinePageContentStore,
   useProductStore,
   useProductTagStore,
   useShopStore,
   useUserDataStore,
   useVoucherStore,
 } from "@/store/zustand";
-import { PostStore, UserData } from "@/store/storeTypes";
+import {
+  HomePageContent,
+  MinePageContent,
+  PostStore,
+  UserData,
+} from "@/store/storeTypes";
 import { calculateInitialCurrentCoin } from "@/lib/coinActions";
-import InstallButton from "@/components/Template/InstallButton";
+import { collection, doc, getDoc } from "firebase/firestore";
 
 function useFetchVouchersEffect() {
   const { setVouchers, vouchers } = useVoucherStore();
@@ -91,25 +96,25 @@ function useFetchLevelsEffect() {
   }, [setLevels, levels]);
 }
 
-function useHomePageContentEffect() {
-  const { homePageContent, setHomePageContent } = useHomePageContentStore();
+// function useHomePageContentEffect() {
+//   const { homePageContent, setHomePageContent } = useHomePageContentStore();
 
-  useEffect(() => {
-    if (!homePageContent) {
-      const fetchData = async () => {
-        try {
-          const homePageContent = await fetchHomePageContent();
-          setHomePageContent(homePageContent);
-          console.log("Homepage content fetched");
-        } catch (error) {
-          console.error("Error fetching home page content:", error);
-        }
-      };
+//   useEffect(() => {
+//     if (!homePageContent) {
+//       const fetchData = async () => {
+//         try {
+//           const homePageContent = await fetchHomePageContent();
+//           setHomePageContent(homePageContent);
+//           console.log("Homepage content fetched");
+//         } catch (error) {
+//           console.error("Error fetching home page content:", error);
+//         }
+//       };
 
-      fetchData();
-    }
-  }, [setHomePageContent, homePageContent]);
-}
+//       fetchData();
+//     }
+//   }, [setHomePageContent, homePageContent]);
+// }
 
 function useFetchPostImagesEffect(usePostStore: PostStore) {
   const { setPosts, posts, name } = usePostStore;
@@ -249,10 +254,33 @@ export default function RootLayout({
   useFetchVouchersEffect();
   useFetchCasesEffect();
   useFetchLevelsEffect();
-  useHomePageContentEffect();
 
   useFetchProductTagsEffect();
   useFetchProductsEffect();
+
+  // Shortest fetching way -------------------------------------------------------------------------
+
+  // Fetch MinePageContent
+  const { minePageContent, setMinePageContent } = useMinePageContentStore();
+  useEffect(() => {
+    !minePageContent &&
+      getDoc(doc(collection(db, "contents"), "minePage")).then((snapshot) => {
+        const data = snapshot.data() as MinePageContent;
+        console.log("Fetched minePageContent:", data);
+        setMinePageContent(data);
+      });
+  }, [minePageContent, setMinePageContent]);
+
+  // Fetch HomePageContent
+  const { homePageContent, setHomePageContent } = useHomePageContentStore();
+  useEffect(() => {
+    !homePageContent &&
+      getDoc(doc(collection(db, "contents"), "homepage")).then((snapshot) => {
+        const data = snapshot.data() as HomePageContent;
+        console.log("Fetched HomePageContent:", data);
+        setHomePageContent(data);
+      });
+  }, [homePageContent, setHomePageContent]);
 
   return (
     <main className="relative mx-auto w-full">

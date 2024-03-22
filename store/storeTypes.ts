@@ -6,7 +6,6 @@ export type UserVoucherInfo = {
 
 export type UserData = {
   email: string | null;
-  role: string;
   displayName: string | null;
   coin: number | null;
   balance: number | null;
@@ -156,4 +155,13 @@ export type OpenQrVoucherStore = {
   setOpen: (open: boolean) => void;
   setVoucherId: (voucherId: string | null) => void;
   setIndex: (Index: number | null) => void;
+};
+
+export type MinePageContent = {
+  backgrounds: string[] | null;
+};
+
+export type MinePageContentStore = {
+  minePageContent: MinePageContent | null;
+  setMinePageContent: (minePageContent: MinePageContent) => void;
 };

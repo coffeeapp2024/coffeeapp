@@ -14,6 +14,7 @@ import {
   ShopStore,
   RandomVoucherStore,
   OpenQrVoucherStore,
+  MinePageContentStore,
 } from "./storeTypes";
 
 export const useUserDataStore = create<UserDataStore>((set: any) => ({
@@ -120,4 +121,9 @@ export const useOpenQrVoucherStore = create<OpenQrVoucherStore>((set) => ({
   setVoucherId: (voucherId) => set({ voucherId }),
   setIndex: (index) => set({ index }),
   setOpen: (open) => set({ open }),
+}));
+
+export const useMinePageContentStore = create<MinePageContentStore>((set) => ({
+  minePageContent: null,
+  setMinePageContent: (minePageContent) => set({ minePageContent }),
 }));
