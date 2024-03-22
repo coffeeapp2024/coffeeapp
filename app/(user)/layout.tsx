@@ -232,7 +232,12 @@ export default function RootLayout({
 
             setRole(role);
             setUserId(user.uid);
-            if (testing && fetchedUserData && fetchedUserData.coin >= 0) {
+            if (
+              testing &&
+              fetchedUserData &&
+              fetchedUserData.coin &&
+              fetchedUserData.coin >= 0
+            ) {
               fetchedUserData.coin += 100;
               toast.info("Tesing Mode! +100 coin"); // Add 1000 to coin if role is testing
               console.log("+100");
