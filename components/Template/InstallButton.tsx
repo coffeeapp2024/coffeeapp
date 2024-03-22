@@ -18,21 +18,17 @@ function InstallButton() {
       // Show install button
       const installButton = document.createElement("button");
       installButton.textContent = "Install App";
-      installButton.classList.add(
-        "fixed",
-        "top-10",
-        "left-1/2",
-        "transform",
-        "-translate-x-1/2",
-        "z-50",
-        "px-4",
-        "py-2",
-        "bg-blue-500",
-        "text-white",
-        "rounded-md",
-        "shadow-lg",
-        "cursor-pointer"
-      );
+      installButton.style.position = "fixed";
+      installButton.style.top = "10px";
+      installButton.style.left = "50%";
+      installButton.style.transform = "translateX(-50%)";
+      installButton.style.zIndex = "9999";
+      installButton.style.padding = "10px 20px";
+      installButton.style.color = "white";
+      installButton.style.backgroundColor = "#007bff";
+      installButton.style.border = "none";
+      installButton.style.borderRadius = "5px";
+      installButton.style.cursor = "pointer";
 
       installButton.addEventListener("click", () => {
         // Prompt installation
