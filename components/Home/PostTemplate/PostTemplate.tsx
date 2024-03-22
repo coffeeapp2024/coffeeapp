@@ -43,7 +43,6 @@ function PostTemplate({
             onClick={handleImageClicked}
             src={imageURL}
             fill={true}
-            sizes="(max-width: 640px) 100vw, 640px"
             alt="PostTemplate Image"
             className={`object-center transition-all duration-700 ${
               isScaledDown ? "object-scale-down" : "object-cover"
