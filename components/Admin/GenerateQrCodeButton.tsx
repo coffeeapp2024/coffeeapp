@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import QRCode from "qrcode.react";
 import { generateKeysAndSaveToFirestore } from "@/lib/firebaseFunctions";
-import MainButton from "../MainButton";
+import MainButton from "../Template/MainButton";
 
 function GenerateQrCodeButton() {
   const [qrValues, setQrValues] = useState<string[]>([]);

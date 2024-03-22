@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { Scanner } from "@yudiel/react-qr-scanner";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import MainButton from "../MainButton";
+import MainButton from "./MainButton";
 import { toast } from "sonner";
 import UploadQRCodeButton from "../Template/UploadQRCodeButton";
 
@@ -48,7 +48,7 @@ const QRCodeScanner = ({
         <MainButton text={buttonName} />
       </DialogTrigger>
       <DialogContent className="bg-transparent border-none shadow-none px-4">
-        <div className="relative rounded-3xl border-[2px] border-red-800">
+        <div className="relative rounded-3xl border-[3px] border-red-800">
           <div className="rounded-3xl overflow-hidden">
             <Scanner
               onResult={handleResult}

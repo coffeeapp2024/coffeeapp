@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useState } from "react";
-import MainButton from "../MainButton";
+import MainButton from "../Template/MainButton";
 import Image from "next/image";
-import CoinIcon from "../CoinIcon";
+import CoinIcon from "../Template/CoinIcon";
 import { Case } from "@/store/storeTypes";
 import { useRandomVoucherStore, useUserDataStore } from "@/store/zustand";
 import { calculateInitialCurrentCoin } from "@/lib/coinActions";

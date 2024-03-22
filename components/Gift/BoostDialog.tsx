@@ -2,7 +2,7 @@ import Image from "next/image";
 import React from "react";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import BoostCardList from "./BoostCardList";
-import CloseDialogButton from "../CloseDialogButton";
+import CloseDialogButton from "../Template/CloseDialogButton";
 import { toast } from "sonner";
 import { useUserDataStore } from "@/store/zustand";
 

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React from "react";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import CloseDialogButton from "../../CloseDialogButton";
+import CloseDialogButton from "../../Template/CloseDialogButton";
 import {
   useOpenQrVoucherStore,
   useUserDataStore,

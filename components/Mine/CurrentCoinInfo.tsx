@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import CoinIcon from "../CoinIcon";
+import CoinIcon from "../Template/CoinIcon";
 import { updateCurrentCoin } from "@/lib/coinActions";
 import { useCoinStore, useLevelStore, useUserDataStore } from "@/store/zustand";
 function CurrentCoinInfo() {

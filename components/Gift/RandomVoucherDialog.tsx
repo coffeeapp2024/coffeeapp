@@ -5,7 +5,7 @@ import {
   DialogContent,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import CloseDialogButton from "../CloseDialogButton";
+import CloseDialogButton from "../Template/CloseDialogButton";
 import Image from "next/image";
 import { useRandomVoucherStore, useVoucherStore } from "@/store/zustand";
 
