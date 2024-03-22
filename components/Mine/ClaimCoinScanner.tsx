@@ -28,7 +28,7 @@ const ClaimCoinScanner = () => {
       await updateUserInFirestore(userId, newUserData);
       await deleteKeyFromFirestore(text);
 
-      toast.success("QR Code scanned successfully");
+      toast.success("QR Code scanned successfully  +24h");
     } else {
       toast.error("Invalid QR Code. Please try again.");
     }
