@@ -1,52 +1,16 @@
-import React, { useEffect } from "react";
+"use client";
+
+import React, { useEffect, useState, useRef } from "react";
 
 function InstallButton() {
-  useEffect(() => {
-    let deferredPrompt: any;
+  const [showButton, setShowButton] = useState(false);
+  const deferredPrompt = useRef<any>(null);
 
+  useEffect(() => {
     const handleBeforeInstallPrompt = (e: any) => {
       e.preventDefault();
-      deferredPrompt = e;
-
-      // Check if the app is already installed
-      if (window.matchMedia("(display-mode: standalone)").matches) {
-        // App is already installed
-        console.log("App is already installed");
-        return;
-      }
-
-      // Show install button
-      const installButton = document.createElement("button");
-      installButton.textContent = "Install App";
-      installButton.style.position = "fixed";
-      installButton.style.top = "50px";
-      installButton.style.left = "50%";
-      installButton.style.transform = "translateX(-50%)";
-      installButton.style.zIndex = "9999";
-      installButton.style.padding = "10px 20px";
-      installButton.style.color = "white";
-      installButton.style.backgroundColor = "#007bff";
-      installButton.style.border = "none";
-      installButton.style.borderRadius = "50px";
-      installButton.style.cursor = "pointer";
-
-      installButton.addEventListener("click", () => {
-        // Prompt installation
-        deferredPrompt.prompt();
-
-        // Wait for the user to respond to the prompt
-        deferredPrompt.userChoice.then((choiceResult: any) => {
-          if (choiceResult.outcome === "accepted") {
-            console.log("App installed");
-            // Hide install button after installation
-            installButton.style.display = "none";
-          } else {
-            console.log("App installation declined");
-          }
-        });
-      });
-
-      document.body.appendChild(installButton);
+      deferredPrompt.current = e;
+      setShowButton(true);
     };
 
     window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
@@ -59,7 +23,35 @@ function InstallButton() {
     };
   }, []);
 
-  return null;
+  const handleInstallButtonClick = () => {
+    if (deferredPrompt.current) {
+      // Prompt installation
+      deferredPrompt.current.prompt();
+
+      // Wait for the user to respond to the prompt
+      deferredPrompt.current.userChoice.then((choiceResult: any) => {
+        if (choiceResult.outcome === "accepted") {
+          console.log("App installed");
+          setShowButton(false);
+        } else {
+          console.log("App installation declined");
+        }
+      });
+    }
+  };
+
+  return (
+    <>
+      {true && (
+        <button
+          onClick={handleInstallButtonClick}
+          className="fixed bottom-10 right-10 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline z-50"
+        >
+          Install App
+        </button>
+      )}
+    </>
+  );
 }
 
 export default InstallButton;

@@ -5,6 +5,7 @@ import { Metadata } from "next";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
 import { useEffect } from "react";
+import InstallButton from "@/components/Template/InstallButton";
 const inter = Inter({ subsets: ["latin"] });
 
 // Define metadata for the page

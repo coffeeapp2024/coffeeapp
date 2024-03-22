@@ -28,9 +28,7 @@ import {
   useVoucherStore,
 } from "@/store/zustand";
 import { PostStore, UserData } from "@/store/storeTypes";
-import { isEqual } from "lodash";
 import { calculateInitialCurrentCoin } from "@/lib/coinActions";
-import { toast } from "sonner";
 import InstallButton from "@/components/Template/InstallButton";
 
 function useFetchVouchersEffect() {
@@ -256,12 +254,11 @@ export default function RootLayout({
   useFetchProductTagsEffect();
   useFetchProductsEffect();
 
-  InstallButton();
-
   return (
-    <main className="mx-auto w-full">
-      <Nav />
+    <main className="relative mx-auto w-full">
       <InstallButton />
+
+      <Nav />
       {children}
     </main>
   );
