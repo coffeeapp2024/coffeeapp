@@ -14,6 +14,11 @@ function VoucherCardList() {
 
   return (
     <div className="">
+      <div className="flex items-center justify-center mb-14">
+        <span className="text-neutral-900 text-sm font-medium">
+          Vouchers: {voucherIdList?.length}
+        </span>
+      </div>
       <Carousel
         opts={{
           startIndex: 1,

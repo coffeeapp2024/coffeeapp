@@ -4,7 +4,7 @@ import { User } from "firebase/auth";
 
 function UserInfo({ user }: { user: User }) {
   return (
-    <div className="relative flex items-center justify-center flex-col mb-20">
+    <div className="relative flex items-center justify-center flex-col mb-4">
       <div className="w-24 h-24 mb-2">
         {user.photoURL && (
           <Image
