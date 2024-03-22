@@ -2,7 +2,7 @@
 
 import Nav from "@/components/Nav";
 import { auth } from "@/lib/firebase";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   fetchHomePageContent,
   fetchCasesFromFirestore,
@@ -187,10 +187,6 @@ function useFetchProductTagsEffect() {
   return productTags; // Return the productTags if needed externally
 }
 
-function useFetchShopContentEffect() {
-  const { banner, setBanner } = useShopStore();
-}
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -261,7 +257,7 @@ export default function RootLayout({
   useFetchProductsEffect();
 
   return (
-    <main className="relative mx-auto w-full">
+    <main className="mx-auto w-full">
       <Nav />
       <InstallButton />
       {children}

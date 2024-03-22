@@ -1,10 +1,10 @@
 {
-  "name": "PWA App",
-  "short_name": "App",
-  "description": "An example of a PWA using Next.js and TypeScript",
+  "name": "Coffee Coin App",
+  "short_name": "Coffee Coin",
+  "description": "",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#FFFFFF",
+  "background_color": "none",
   "theme_color": "#FFFFFF",
   "orientation": "portrait",
   "icons": [
