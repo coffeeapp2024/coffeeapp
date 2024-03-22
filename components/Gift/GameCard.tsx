@@ -8,6 +8,7 @@ import { Case } from "@/store/storeTypes";
 import { useRandomVoucherStore, useUserDataStore } from "@/store/zustand";
 import { calculateInitialCurrentCoin } from "@/lib/coinActions";
 import { toast } from "sonner";
+import { updateUserInFirestore } from "@/lib/firebaseFunctions";
 
 function GameCard({ gameCase }: { gameCase: Case }) {
   const { userData, setUserData, userId } = useUserDataStore();
@@ -55,6 +56,7 @@ function GameCard({ gameCase }: { gameCase: Case }) {
       };
 
       setUserData(newUserData);
+      await updateUserInFirestore(userId, newUserData);
     } catch (error) {
       console.error("Error updating user data:", error);
     }

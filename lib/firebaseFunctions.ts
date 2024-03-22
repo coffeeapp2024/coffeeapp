@@ -90,6 +90,7 @@ export async function updateUserInFirestore(
 
   try {
     await setDoc(userDoc, newData, { merge: true });
+    console.log("User data updated successfully");
   } catch (error) {
     console.error("Error updating user data:", error);
     throw error; // You may want to handle the error appropriately in your application
@@ -103,7 +104,7 @@ export async function deleteUserInFirestore(userId: string): Promise<void> {
     await deleteDoc(userDoc);
   } catch (error) {
     console.error("Error deleting user data:", error);
-    throw error; // You may want to handle the error appropriately in your application
+    throw error;
   }
 }
 
@@ -403,6 +404,7 @@ export async function fetchShopContent(): Promise<string | null> {
       // Assuming "banner" is the field you want to fetch
       const banner = shopData?.banner as string | undefined;
       if (banner) {
+        console.log("Banner fetched");
         return banner;
       } else {
         console.log("Banner not found in shop content");

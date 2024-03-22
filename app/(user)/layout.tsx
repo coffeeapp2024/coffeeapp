@@ -45,6 +45,7 @@ function useFetchVouchersEffect() {
         try {
           const fetchedVouchers = await fetchVouchersFromFirestore();
           setVouchers(fetchedVouchers);
+          console.log("Voucher fetched");
         } catch (error) {
           console.error("Error fetching vouchers:", error);
         }
@@ -64,6 +65,7 @@ function useFetchCasesEffect() {
         try {
           const fetchedCases = await fetchCasesFromFirestore();
           setCases(fetchedCases);
+          console.log("Cases fetched");
         } catch (error) {
           console.error("Error fetching cases:", error);
         }
@@ -83,6 +85,7 @@ function useFetchLevelsEffect() {
         try {
           const fetchedLevels = await fetchLevelsFromFirestore();
           setLevels(fetchedLevels);
+          console.log("Levels fetched");
         } catch (error) {
           console.error("Error fetching levels:", error);
         }
@@ -102,6 +105,7 @@ function useHomePageContentEffect() {
         try {
           const homePageContent = await fetchHomePageContent();
           setHomePageContent(homePageContent);
+          console.log("Homepage content fetched");
         } catch (error) {
           console.error("Error fetching home page content:", error);
         }
@@ -110,96 +114,6 @@ function useHomePageContentEffect() {
       fetchData();
     }
   }, [setHomePageContent, homePageContent]);
-}
-
-function useAuthEffect() {
-  const { userData, userId, setUserData, setUserId } = useUserDataStore();
-  const { setShouldUpdate } = useUpdateUserEffect();
-
-  useEffect(() => {
-    setShouldUpdate(false);
-    if (!userData || !userId) {
-      const unsubscribe = auth.onAuthStateChanged(async (user) => {
-        if (user) {
-          try {
-            const fetchedUserData = await fetchUserData(user.uid);
-            setUserData(fetchedUserData);
-            setUserId(user.uid);
-            console.log("login");
-          } catch (error) {
-            console.error("Error fetching user data:", error);
-          }
-        } else {
-          setUserData(null);
-        }
-      });
-
-      return () => unsubscribe();
-    }
-  }, [userData, userId, setUserData, setUserId, setShouldUpdate]);
-}
-
-function useUpdateUserEffect() {
-  const { userData, userId } = useUserDataStore();
-  const [shouldUpdate, setShouldUpdate] = useState(true); // Flag to control update
-
-  useEffect(() => {
-    if (shouldUpdate && userData && userId) {
-      const updateUser = async () => {
-        try {
-          await updateUserInFirestore(userId, userData);
-          console.log("Update user data in firebase");
-        } catch (error) {
-          console.error("Error updating user data:", error);
-        }
-      };
-
-      updateUser();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [shouldUpdate === true, userData]);
-
-  return { setShouldUpdate };
-}
-
-export async function UserVoucherIdListListener() {
-  const { userId, userData, setUserData } = useUserDataStore();
-  const { setShouldUpdate } = useUpdateUserEffect();
-  const { open, setOpen } = useOpenQrVoucherStore();
-
-  useEffect(() => {
-    setShouldUpdate(false);
-
-    let unsubscribe: Unsubscribe | undefined = undefined;
-    if (userId && userData) {
-      unsubscribe = listenForVoucherIdListChanges(userId, (voucherIdList) => {
-        if (isEqual(voucherIdList, userData.voucherIdList)) {
-          console.log("equal");
-        } else {
-          // Update the user data with the new voucherIdList
-          const updatedUserData: UserData = {
-            ...userData,
-            voucherIdList: voucherIdList,
-          };
-
-          setOpen(false);
-          setTimeout(() => {
-            setUserData(updatedUserData);
-          }, 1000);
-
-          toast.success("Voucher has been successfully scanned!");
-
-          console.log("Update the user data with the new voucherIDList");
-        }
-      });
-    }
-    return () => {
-      if (unsubscribe) {
-        unsubscribe();
-      }
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [open, setOpen, setUserData, setShouldUpdate]);
 }
 
 function useFetchPostImagesEffect(usePostStore: PostStore) {
@@ -228,7 +142,7 @@ function useFetchPostImagesEffect(usePostStore: PostStore) {
 
     fetchPostImages();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []); // No dependencies as we only want this effect to run once
+  }, []);
 }
 
 function useFetchProductsEffect() {
@@ -278,22 +192,6 @@ function useFetchProductTagsEffect() {
 
 function useFetchShopContentEffect() {
   const { banner, setBanner } = useShopStore();
-
-  useEffect(() => {
-    const fetchShopData = async () => {
-      try {
-        // Fetch shop content only if banner is not already set in the store
-        if (!banner) {
-          const fetchedBanner = await fetchShopContent();
-          setBanner(fetchedBanner);
-        }
-      } catch (error) {
-        console.error("Error fetching shop content:", error);
-      }
-    };
-
-    fetchShopData();
-  }, [banner, setBanner]);
 }
 
 export default function RootLayout({
@@ -301,26 +199,31 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  useAuthEffect();
-  useUpdateUserEffect();
-  useHomePageContentEffect();
-  useFetchVouchersEffect();
-  useFetchCasesEffect();
-  useFetchLevelsEffect();
-
-  UserVoucherIdListListener();
-
-  useFetchPostImagesEffect(useEventPostStore());
-  useFetchPostImagesEffect(useCheckinPostStore());
-
-  useFetchProductTagsEffect();
-
-  useFetchProductsEffect();
-
-  useFetchShopContentEffect();
-
-  const { userData } = useUserDataStore();
+  const { userData, userId, setUserData, setUserId } = useUserDataStore();
   const { setCurrentCoin } = useCoinStore();
+  const { banner, setBanner } = useShopStore();
+
+  useEffect(() => {
+    if (!userData || !userId) {
+      const unsubscribe = auth.onAuthStateChanged(async (user) => {
+        if (user) {
+          try {
+            const fetchedUserData = await fetchUserData(user.uid);
+            setUserData(fetchedUserData);
+            setUserId(user.uid);
+            console.log("Login successfully");
+          } catch (error) {
+            console.error("Error fetching user data:", error);
+          }
+        } else {
+          setUserData(null);
+        }
+      });
+
+      return () => unsubscribe();
+    }
+  }, [userData, userId, setUserData, setUserId]);
+
   useEffect(() => {
     const { balance, coin, startTimeMine } = userData ?? {};
 
@@ -333,6 +236,29 @@ export default function RootLayout({
       setCurrentCoin(initialCoin);
     }
   }, [setCurrentCoin, userData]);
+
+  useEffect(() => {
+    const fetchShopData = async () => {
+      try {
+        const fetchedBanner = await fetchShopContent();
+        setBanner(fetchedBanner);
+      } catch (error) {
+        console.error("Error fetching shop content:", error);
+      }
+    };
+
+    if (!banner) fetchShopData();
+  });
+
+  useFetchPostImagesEffect(useEventPostStore());
+  useFetchPostImagesEffect(useCheckinPostStore());
+
+  useFetchVouchersEffect();
+  useFetchCasesEffect();
+  useFetchLevelsEffect();
+
+  useFetchProductTagsEffect();
+  useFetchProductsEffect();
 
   return (
     <main className="mx-auto w-full">
