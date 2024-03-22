@@ -9,7 +9,7 @@ import Gallery from "@/components/Home/Gallery";
 
 function Page() {
   return (
-    <div className="bg-neutral-950 min-h-[200vh] text-white px-2">
+    <div className="bg-[#0d0d0d] min-h-[200vh] text-white px-2">
       <div className="-mx-2 mb-2">
         <Video />
       </div>

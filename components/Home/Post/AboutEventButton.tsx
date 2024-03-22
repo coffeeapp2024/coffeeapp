@@ -6,7 +6,7 @@ import Image from "next/image";
 function AboutEventButton({ eventPosterURL }: { eventPosterURL: string }) {
   return (
     <Dialog>
-      <DialogTrigger className="bg-neutral-800 rounded-xl px-3 py-1 flex items-center justify-center">
+      <DialogTrigger className="bg-neutral-900 rounded-xl px-3 py-1 flex items-center justify-center">
         info
       </DialogTrigger>
       <DialogContent className="max-w-sm aspect-square p-0 w-full bg-transparent  border-none">

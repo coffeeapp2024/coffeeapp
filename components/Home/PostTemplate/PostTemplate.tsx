@@ -53,7 +53,7 @@ function PostTemplate({
 
       <button
         onClick={handleLikeClicked}
-        className="absolute bottom-2 left-1/2 -translate-x-1/2 flex items-center justify-center bg-neutral-800 rounded-3xl px-3 py-1 gap-x-1 opacity-90"
+        className="absolute bottom-2 left-1/2 -translate-x-1/2 flex items-center justify-center bg-neutral-900 rounded-3xl px-3 py-1 gap-x-1 opacity-90"
       >
         {isLiked ? (
           <HeartSolidIcon className="w-8 h-8 text-red-600" />
