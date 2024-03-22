@@ -13,6 +13,7 @@ import {
   ProductTagStore,
   ShopStore,
   RandomVoucherStore,
+  OpenQrVoucherStore,
 } from "./storeTypes";
 
 export const useUserDataStore = create<UserDataStore>((set: any) => ({
@@ -109,5 +110,10 @@ export const useRandomVoucherStore = create<RandomVoucherStore>((set) => ({
   randomVoucherId: null,
   open: false,
   setRandomVoucherId: (randomVoucherId) => set({ randomVoucherId }),
+  setOpen: (open) => set({ open }),
+}));
+
+export const useOpenQrVoucherStore = create<OpenQrVoucherStore>((set) => ({
+  open: false,
   setOpen: (open) => set({ open }),
 }));

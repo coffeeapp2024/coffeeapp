@@ -147,3 +147,8 @@ export type RandomVoucherStore = {
   setRandomVoucherId: (randomVoucherId: string | null) => void;
   setOpen: (open: boolean) => void;
 };
+
+export type OpenQrVoucherStore = {
+  open: boolean;
+  setOpen: (open: boolean) => void;
+};

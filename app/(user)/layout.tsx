@@ -24,6 +24,7 @@ import {
   useEventPostStore,
   useHomePageContentStore,
   useLevelStore,
+  useOpenQrVoucherStore,
   useProductStore,
   useProductTagStore,
   useShopStore,
@@ -33,6 +34,7 @@ import {
 import { PostStore, UserData } from "@/store/storeTypes";
 import { isEqual } from "lodash";
 import { calculateInitialCurrentCoin } from "@/lib/coinActions";
+import { toast } from "sonner";
 
 function useFetchVouchersEffect() {
   const { setVouchers, vouchers } = useVoucherStore();
@@ -162,6 +164,7 @@ function useUpdateUserEffect() {
 export async function UserVoucherIdListListener() {
   const { userId, userData, setUserData } = useUserDataStore();
   const { setShouldUpdate } = useUpdateUserEffect();
+  const { open, setOpen } = useOpenQrVoucherStore();
 
   useEffect(() => {
     setShouldUpdate(false);
@@ -177,8 +180,13 @@ export async function UserVoucherIdListListener() {
             ...userData,
             voucherIdList: voucherIdList,
           };
-          console.log("update");
+
+          setOpen(false);
           setUserData(updatedUserData);
+
+          toast.success("Voucher has been successfully scanned!");
+
+          console.log("Update the user data with the new voucherIDList");
         }
       });
     }
@@ -187,7 +195,8 @@ export async function UserVoucherIdListListener() {
         unsubscribe();
       }
     };
-  }, [userId, userData, setUserData, setShouldUpdate]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open, setOpen, setUserData, setShouldUpdate]);
 }
 
 function useFetchPostImagesEffect(usePostStore: PostStore) {
@@ -199,6 +208,7 @@ function useFetchPostImagesEffect(usePostStore: PostStore) {
         const fetchedPostImages = await getAllPostImages(name);
         if (fetchedPostImages.length > 0 && posts.length === 0) {
           setPosts(fetchedPostImages);
+
           console.log(
             `Fetched and set post images from Firestore for collection ${name}.`
           );
