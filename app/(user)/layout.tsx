@@ -209,6 +209,7 @@ export default function RootLayout({
         if (user && user.email) {
           try {
             const fetchedUserData = await fetchUserData(user.uid);
+            console.log("fetchedUserData:", fetchUserData);
             const fetchedAccounts = (
               await getDoc(doc(collection(db, "admin"), "accounts"))
             ).data() as Account;
@@ -231,8 +232,7 @@ export default function RootLayout({
 
             setRole(role);
             setUserId(user.uid);
-
-            if (testing && fetchedUserData && fetchedUserData.coin) {
+            if (testing && fetchedUserData && fetchedUserData.coin >= 0) {
               fetchedUserData.coin += 100;
               toast.info("Tesing Mode! +100 coin"); // Add 1000 to coin if role is testing
               console.log("+100");
