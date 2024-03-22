@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { Scanner } from "@yudiel/react-qr-scanner";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import MainButton from "./MainButton";
+import MainButton from "../MainButton";
 import { toast } from "sonner";
 import UploadQRCodeButton from "../Template/UploadQRCodeButton";
 

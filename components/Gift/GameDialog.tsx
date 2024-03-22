@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React from "react";
-import MainButton from "../Template/MainButton";
+import MainButton from "../MainButton";
 import CloseDialogButton from "../Template/CloseDialogButton";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import GameCardList from "./GameCardList";

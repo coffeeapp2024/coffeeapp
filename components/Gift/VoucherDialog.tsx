@@ -3,7 +3,7 @@ import React from "react";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import CloseDialogButton from "../Template/CloseDialogButton";
 import VoucherCardList from "./VoucherCardList";
-import MainButton from "../Template/MainButton";
+import MainButton from "../MainButton";
 import { toast } from "sonner";
 import { useUserDataStore } from "@/store/zustand";
 

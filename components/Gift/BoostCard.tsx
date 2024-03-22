@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React, { useId } from "react";
-import MainButton from "../Template/MainButton";
+import MainButton from "../MainButton";
 import CoinIcon from "../Template/CoinIcon";
 import { Level } from "@/store/storeTypes";
 import { useUserDataStore } from "@/store/zustand";

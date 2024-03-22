@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import MainButton from "../Template/MainButton";
+import MainButton from "../MainButton";
 import Image from "next/image";
 import CoinIcon from "../Template/CoinIcon";
 import { Case } from "@/store/storeTypes";
