@@ -259,7 +259,7 @@ export default function RootLayout({
       setCurrentCoin(initialCoin);
       console.log("initialCurrentCoin:", initialCoin);
     }
-  }, [setCurrentCoin, userData, currentCoin]);
+  }, [setCurrentCoin, userData]);
 
   useEffect(() => {
     const fetchShopData = async () => {
