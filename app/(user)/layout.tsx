@@ -215,7 +215,6 @@ export default function RootLayout({
             console.log("Fetched Account:", fetchedAccounts);
 
             const { staff, manager, testing } = fetchedAccounts;
-
             const role = testing
               ? "manager"
               : staff?.includes(user.email)
@@ -227,12 +226,7 @@ export default function RootLayout({
 
             setRole(role);
             setUserId(user.uid);
-            if (
-              testing &&
-              fetchedUserData &&
-              fetchedUserData.coin &&
-              fetchedUserData.coin >= 0
-            ) {
+            if (testing && fetchedUserData) {
               fetchedUserData.coin += 100;
               toast.info("Tesing Mode! +100 coin");
               console.log("Tesing Mode! +100 coin");
@@ -240,7 +234,6 @@ export default function RootLayout({
 
             console.log("fetchedUserData:", fetchedUserData);
             setUserData(fetchedUserData);
-
             console.log("Login successfully");
           } catch (error) {
             console.error("Error fetching user data:", error);
