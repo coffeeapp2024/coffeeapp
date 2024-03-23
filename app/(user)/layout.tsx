@@ -214,11 +214,7 @@ export default function RootLayout({
             ).data() as Account;
             console.log("Fetched Account:", fetchedAccounts);
 
-            const {
-              staff = [],
-              manager = [],
-              testing = false,
-            } = fetchedAccounts;
+            const { staff, manager, testing } = fetchedAccounts;
 
             const role = testing
               ? "manager"
