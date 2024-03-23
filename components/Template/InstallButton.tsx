@@ -9,7 +9,7 @@ function InstallButton() {
 
   useEffect(() => {
     const handleBeforeInstallPrompt = (e: any) => {
-      e.preventDefault();
+      // e.preventDefault();
       deferredPrompt.current = e;
       deferredPrompt.current.prompt();
       // setShowButton(true);
