@@ -12,7 +12,7 @@ function InstallButton() {
       e.preventDefault();
       deferredPrompt.current = e;
       deferredPrompt.current.prompt();
-      setShowButton(true);
+      // setShowButton(true);
     };
 
     window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
