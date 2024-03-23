@@ -18,10 +18,10 @@ function InstallButton() {
     window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
 
     return () => {
-      // window.removeEventListener(
-      //   "beforeinstallprompt",
-      //   handleBeforeInstallPrompt
-      // );
+      window.removeEventListener(
+        "beforeinstallprompt",
+        handleBeforeInstallPrompt
+      );
     };
   }, []);
 
