@@ -209,7 +209,6 @@ export default function RootLayout({
         if (user && user.email) {
           try {
             const fetchedUserData = await fetchUserData(user.uid);
-            console.log("fetchedUserData:", fetchUserData);
             const fetchedAccounts = (
               await getDoc(doc(collection(db, "admin"), "accounts"))
             ).data() as Account;
@@ -236,14 +235,14 @@ export default function RootLayout({
               testing &&
               fetchedUserData &&
               fetchedUserData.coin &&
-              fetchedUserData.coin >= 0 &&
-              fetchedUserData.coin < 500
+              fetchedUserData.coin >= 0
             ) {
               fetchedUserData.coin += 100;
               toast.info("Tesing Mode! +100 coin");
               console.log("Tesing Mode! +100 coin");
             }
 
+            console.log("fetchedUserData:", fetchedUserData);
             setUserData(fetchedUserData);
 
             console.log("Login successfully");

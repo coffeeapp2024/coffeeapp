@@ -20,8 +20,6 @@ function CurrentCoinInfo() {
       }, 1000);
 
       return () => clearInterval(intervalId);
-    } else {
-      setCurrentCoin(0);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentCoin, setCurrentCoin]);
