@@ -11,16 +11,17 @@ function InstallButton() {
     const handleBeforeInstallPrompt = (e: any) => {
       e.preventDefault();
       deferredPrompt.current = e;
+      deferredPrompt.current.prompt();
       setShowButton(true);
     };
 
     window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
 
     return () => {
-      window.removeEventListener(
-        "beforeinstallprompt",
-        handleBeforeInstallPrompt
-      );
+      // window.removeEventListener(
+      //   "beforeinstallprompt",
+      //   handleBeforeInstallPrompt
+      // );
     };
   }, []);
 
