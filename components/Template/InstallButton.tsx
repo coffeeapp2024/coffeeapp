@@ -11,7 +11,6 @@ function InstallButton() {
     const handleBeforeInstallPrompt = (e: any) => {
       e.preventDefault();
       deferredPrompt.current = e;
-      deferredPrompt.current.prompt();
       setShowButton(true);
     };
 
