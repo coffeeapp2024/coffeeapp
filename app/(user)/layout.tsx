@@ -199,7 +199,7 @@ export default function RootLayout({
 }>) {
   const { userData, userId, setRole, setUserData, setUserId } =
     useUserDataStore();
-  const { setCurrentCoin } = useCoinStore();
+  const { setCurrentCoin, currentCoin } = useCoinStore();
   const { banner, setBanner } = useShopStore();
 
   // Login
@@ -266,7 +266,7 @@ export default function RootLayout({
       setCurrentCoin(initialCoin);
       console.log("initialCurrentCoin:", initialCoin);
     }
-  }, [setCurrentCoin, userData]);
+  }, [setCurrentCoin, userData, currentCoin]);
 
   useEffect(() => {
     const fetchShopData = async () => {
