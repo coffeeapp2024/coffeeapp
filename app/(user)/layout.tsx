@@ -240,8 +240,8 @@ export default function RootLayout({
               fetchedUserData.coin < 500
             ) {
               fetchedUserData.coin += 100;
-              toast.info("Tesing Mode! +100 coin"); // Add 1000 to coin if role is testing
-              console.log("+100");
+              toast.info("Tesing Mode! +100 coin");
+              console.log("Tesing Mode! +100 coin");
             }
 
             setUserData(fetchedUserData);
