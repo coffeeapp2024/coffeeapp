@@ -228,8 +228,8 @@ export default function RootLayout({
             setUserId(user.uid);
             if (testing && fetchedUserData) {
               fetchedUserData.coin += 100;
-              toast.info("Tesing Mode! +100 coin");
-              console.log("Tesing Mode! +100 coin");
+              toast.info("Testing Mode! +100 coin");
+              console.log("Testing Mode! +100 coin");
             }
 
             console.log("fetchedUserData:", fetchedUserData);
