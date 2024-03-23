@@ -22,7 +22,7 @@ function CurrentCoinInfo() {
       return () => clearInterval(intervalId);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentCoin, setCurrentCoin]);
+  }, [currentCoin, userData, setCurrentCoin]);
 
   return (
     <div className="flex items-center justify-center flex-col text-white mt-24 ">
