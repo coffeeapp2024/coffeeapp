@@ -1,0 +1,11 @@
+{
+  "/_not-found": "app/_not-found.js",
+  "/api/login/route": "app/api/login/route.js",
+  "/api/signOut/route": "app/api/signOut/route.js",
+  "/(admin)/manager/page": "app/(admin)/manager/page.js",
+  "/(user)/home/page": "app/(user)/home/page.js",
+  "/(admin)/staff/page": "app/(admin)/staff/page.js",
+  "/(user)/gift/page": "app/(user)/gift/page.js",
+  "/(user)/shop/page": "app/(user)/shop/page.js",
+  "/(user)/page": "app/(user)/page.js"
+}

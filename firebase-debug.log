@@ -1,0 +1,739 @@
+[debug] [2024-03-23T17:53:07.673Z] ----------------------------------------------------------------------
+[debug] [2024-03-23T17:53:07.676Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\xinch\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js hosting:channel:deploy feature-import
+[debug] [2024-03-23T17:53:07.676Z] CLI Version:   13.5.2
+[debug] [2024-03-23T17:53:07.677Z] Platform:      win32
+[debug] [2024-03-23T17:53:07.677Z] Node Version:  v20.9.0
+[debug] [2024-03-23T17:53:07.677Z] Time:          Sun Mar 24 2024 00:53:07 GMT+0700 (Indochina Time)
+[debug] [2024-03-23T17:53:07.677Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2024-03-23T17:53:07.752Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-03-23T17:53:07.752Z] > authorizing via signed-in user (coffeecoinapp@gmail.com)
+[debug] [2024-03-23T17:53:07.752Z] [iam] checking project coffee-coin-app for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2024-03-23T17:53:07.755Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/coffee-coin-app:testIamPermissions [none]
+[debug] [2024-03-23T17:53:07.755Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/coffee-coin-app:testIamPermissions x-goog-quota-user=projects/coffee-coin-app
+[debug] [2024-03-23T17:53:07.755Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/coffee-coin-app:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2024-03-23T17:53:08.760Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/coffee-coin-app:testIamPermissions 200
+[debug] [2024-03-23T17:53:08.761Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/coffee-coin-app:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2024-03-23T17:53:08.761Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/coffee-coin-app [none]
+[debug] [2024-03-23T17:53:09.164Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/coffee-coin-app 200
+[debug] [2024-03-23T17:53:09.164Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/coffee-coin-app {"projectId":"coffee-coin-app","projectNumber":"53756991092","displayName":"coffee coin app","name":"projects/coffee-coin-app","resources":{"hostingSite":"coffee-coin-app","storageBucket":"coffee-coin-app.appspot.com","locationId":"us-central"},"state":"ACTIVE","etag":"1_fafa1674-0280-405a-9a83-b0a4cf753485"}
+[debug] [2024-03-23T17:53:09.166Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/coffee-coin-app/sites/coffee-coin-app/channels/feature-import [none]
+[debug] [2024-03-23T17:53:09.582Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/coffee-coin-app/sites/coffee-coin-app/channels/feature-import 200
+[debug] [2024-03-23T17:53:09.583Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/coffee-coin-app/sites/coffee-coin-app/channels/feature-import {"name":"projects/coffee-coin-app/sites/coffee-coin-app/channels/feature-import","url":"https://coffee-coin-app--feature-import-glua14lt.web.app","release":{"name":"projects/coffee-coin-app/sites/coffee-coin-app/channels/feature-import/releases/1711216206447000","version":{"name":"projects/coffee-coin-app/sites/coffee-coin-app/versions/80218b04ec988c17","status":"FINALIZED","config":{"rewrites":[{"glob":"**","path":"/index.html"}]},"labels":{"deployment-tool":"cli-firebase"},"createTime":"2024-03-23T17:50:03.836866Z","createUser":{"email":"coffeecoinapp@gmail.com"},"finalizeTime":"2024-03-23T17:50:06.349422Z","finalizeUser":{"email":"coffeecoinapp@gmail.com"},"fileCount":"27","versionBytes":"9493687"},"type":"DEPLOY","releaseTime":"2024-03-23T17:50:06.447Z","releaseUser":{"email":"coffeecoinapp@gmail.com"}},"createTime":"2024-03-23T17:42:06.409671455Z","updateTime":"2024-03-23T17:52:40.513824799Z","retainedReleaseCount":10,"expireTime":"2024-03-30T17:52:40.513824799Z"}
+[debug] [2024-03-23T17:53:09.583Z] [hosting] found existing channel for site coffee-coin-app {"name":"projects/coffee-coin-app/sites/coffee-coin-app/channels/feature-import","url":"https://coffee-coin-app--feature-import-glua14lt.web.app","release":{"name":"projects/coffee-coin-app/sites/coffee-coin-app/channels/feature-import/releases/1711216206447000","version":{"name":"projects/coffee-coin-app/sites/coffee-coin-app/versions/80218b04ec988c17","status":"FINALIZED","config":{"rewrites":[{"glob":"**","path":"/index.html"}]},"labels":{"deployment-tool":"cli-firebase"},"createTime":"2024-03-23T17:50:03.836866Z","createUser":{"email":"coffeecoinapp@gmail.com"},"finalizeTime":"2024-03-23T17:50:06.349422Z","finalizeUser":{"email":"coffeecoinapp@gmail.com"},"fileCount":"27","versionBytes":"9493687"},"type":"DEPLOY","releaseTime":"2024-03-23T17:50:06.447Z","releaseUser":{"email":"coffeecoinapp@gmail.com"}},"createTime":"2024-03-23T17:42:06.409671455Z","updateTime":"2024-03-23T17:52:40.513824799Z","retainedReleaseCount":10,"expireTime":"2024-03-30T17:52:40.513824799Z"}
+[debug] [2024-03-23T17:53:09.583Z] >>> [apiv2][query] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/coffee-coin-app/sites/coffee-coin-app/channels/feature-import updateMask=ttl
+[debug] [2024-03-23T17:53:09.583Z] >>> [apiv2][body] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/coffee-coin-app/sites/coffee-coin-app/channels/feature-import {"ttl":"604800s"}
+[debug] [2024-03-23T17:53:09.992Z] <<< [apiv2][status] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/coffee-coin-app/sites/coffee-coin-app/channels/feature-import 200
+[debug] [2024-03-23T17:53:09.992Z] <<< [apiv2][body] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/coffee-coin-app/sites/coffee-coin-app/channels/feature-import {"name":"projects/coffee-coin-app/sites/coffee-coin-app/channels/feature-import","url":"https://coffee-coin-app--feature-import-glua14lt.web.app","release":{"name":"projects/coffee-coin-app/sites/coffee-coin-app/channels/feature-import/releases/1711216206447000","version":{"name":"projects/coffee-coin-app/sites/coffee-coin-app/versions/80218b04ec988c17","status":"FINALIZED","config":{"rewrites":[{"glob":"**","path":"/index.html"}]},"labels":{"deployment-tool":"cli-firebase"},"createTime":"2024-03-23T17:50:03.836866Z","createUser":{"email":"coffeecoinapp@gmail.com"},"finalizeTime":"2024-03-23T17:50:06.349422Z","finalizeUser":{"email":"coffeecoinapp@gmail.com"},"fileCount":"27","versionBytes":"9493687"},"type":"DEPLOY","releaseTime":"2024-03-23T17:50:06.447Z","releaseUser":{"email":"coffeecoinapp@gmail.com"}},"createTime":"2024-03-23T17:42:06.409671455Z","updateTime":"2024-03-23T17:53:10.396111913Z","retainedReleaseCount":10,"expireTime":"2024-03-30T17:53:10.396111913Z"}
+[debug] [2024-03-23T17:53:09.992Z] [hosting] updated TTL for existing channel for site coffee-coin-app {"name":"projects/coffee-coin-app/sites/coffee-coin-app/channels/feature-import","url":"https://coffee-coin-app--feature-import-glua14lt.web.app","release":{"name":"projects/coffee-coin-app/sites/coffee-coin-app/channels/feature-import/releases/1711216206447000","version":{"name":"projects/coffee-coin-app/sites/coffee-coin-app/versions/80218b04ec988c17","status":"FINALIZED","config":{"rewrites":[{"glob":"**","path":"/index.html"}]},"labels":{"deployment-tool":"cli-firebase"},"createTime":"2024-03-23T17:50:03.836866Z","createUser":{"email":"coffeecoinapp@gmail.com"},"finalizeTime":"2024-03-23T17:50:06.349422Z","finalizeUser":{"email":"coffeecoinapp@gmail.com"},"fileCount":"27","versionBytes":"9493687"},"type":"DEPLOY","releaseTime":"2024-03-23T17:50:06.447Z","releaseUser":{"email":"coffeecoinapp@gmail.com"}},"createTime":"2024-03-23T17:42:06.409671455Z","updateTime":"2024-03-23T17:53:10.396111913Z","retainedReleaseCount":10,"expireTime":"2024-03-30T17:53:10.396111913Z"}
+[debug] [2024-03-23T17:53:14.738Z] defaultcredentials: writing to file C:\Users\xinch\AppData\Roaming\firebase\coffeecoinapp_gmail_com_application_default_credentials.json
+[debug] [2024-03-23T17:53:14.741Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/coffee-coin-app/sites pageToken=&pageSize=10
+[debug] [2024-03-23T17:53:15.129Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/coffee-coin-app/sites 200
+[debug] [2024-03-23T17:53:15.129Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/coffee-coin-app/sites {"sites":[{"name":"projects/coffee-coin-app/sites/coffee-coin-app","defaultUrl":"https://coffee-coin-app.web.app","appId":"1:53756991092:web:abb9e522247df5f0f6e321","type":"DEFAULT_SITE"}]}
+[debug] [2024-03-23T17:53:15.129Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:53756991092:web:abb9e522247df5f0f6e321/config [none]
+[debug] [2024-03-23T17:53:16.781Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:53756991092:web:abb9e522247df5f0f6e321/config 200
+[debug] [2024-03-23T17:53:16.782Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:53756991092:web:abb9e522247df5f0f6e321/config {"projectId":"coffee-coin-app","appId":"1:53756991092:web:abb9e522247df5f0f6e321","storageBucket":"coffee-coin-app.appspot.com","locationId":"us-central","apiKey":"AIzaSyC5L-FI5QWb_uDeUdEbeSEmpMwAr9P8ze4","authDomain":"coffee-coin-app.firebaseapp.com","messagingSenderId":"53756991092","measurementId":"G-PV6MFHBST4"}
+[info] 
+   Thank you for trying our early preview of Next.js support on Firebase Hosting.
+   During the preview, support is best-effort and breaking changes can be expected. Proceed with caution.
+   The integration is known to work with Next.js version 12 - 14.0. You may encounter errors.
+
+   Documentation: https://firebase.google.com/docs/hosting/frameworks/nextjs
+   File a bug: https://github.com/firebase/firebase-tools/issues/new?template=bug_report.md
+   Submit a feature request: https://github.com/firebase/firebase-tools/issues/new?template=feature_request.md
+
+   We'd love to learn from you. Express your interest in helping us shape the future of Firebase Hosting: https://goo.gle/41enW5X
+
+[debug] [2024-03-23T17:53:26.539Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/coffee-coin-app/sites/coffee-coin-app/channels/feature-import [none]
+[debug] [2024-03-23T17:53:26.965Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/coffee-coin-app/sites/coffee-coin-app/channels/feature-import 200
+[debug] [2024-03-23T17:53:26.965Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/coffee-coin-app/sites/coffee-coin-app/channels/feature-import {"name":"projects/coffee-coin-app/sites/coffee-coin-app/channels/feature-import","url":"https://coffee-coin-app--feature-import-glua14lt.web.app","release":{"name":"projects/coffee-coin-app/sites/coffee-coin-app/channels/feature-import/releases/1711216206447000","version":{"name":"projects/coffee-coin-app/sites/coffee-coin-app/versions/80218b04ec988c17","status":"FINALIZED","config":{"rewrites":[{"glob":"**","path":"/index.html"}]},"labels":{"deployment-tool":"cli-firebase"},"createTime":"2024-03-23T17:50:03.836866Z","createUser":{"email":"coffeecoinapp@gmail.com"},"finalizeTime":"2024-03-23T17:50:06.349422Z","finalizeUser":{"email":"coffeecoinapp@gmail.com"},"fileCount":"27","versionBytes":"9493687"},"type":"DEPLOY","releaseTime":"2024-03-23T17:50:06.447Z","releaseUser":{"email":"coffeecoinapp@gmail.com"}},"createTime":"2024-03-23T17:42:06.409671455Z","updateTime":"2024-03-23T17:53:10.396111913Z","retainedReleaseCount":10,"expireTime":"2024-03-30T17:53:10.396111913Z"}
+[info]    ▲ Next.js 14.1.3
+
+[info]    - Environments: .env.local
+
+
+[info]    Creating an optimized production build ...
+
+[info] > [PWA] Compile server
+
+[info] > [PWA] Compile server
+
+[info] > [PWA] Compile client (static)
+
+[info] > [PWA] Auto register service worker with: C:\Users\xinch\Desktop\claim_web_app\node_modules\next-pwa\register.js
+
+[info] > [PWA] Service worker: C:\Users\xinch\Desktop\claim_web_app\public\sw.js
+> [PWA]   url: /sw.js
+> [PWA]   scope: /
+
+[info] <w> [webpack.cache.PackFileCacheStrategy] Skipped not serializable cache item 'Compilation/modules|C:\Users\xinch\Desktop\claim_web_app\node_modules\next\dist\build\webpack\loaders\css-loader\src\index.js??ruleSet[1].rules[11].oneOf[12].use[2]!C:\Users\xinch\Desktop\claim_web_app\node_modules\next\dist\build\webpack\loaders\postcss-loader\src\index.js??ruleSet[1].rules[11].oneOf[12].use[3]!C:\Users\xinch\Desktop\claim_web_app\app\globals.css': No serializer registered for Warning
+<w> while serializing webpack/lib/cache/PackFileCacheStrategy.PackContentItems -> webpack/lib/NormalModule -> Array { 1 items } -> webpack/lib/ModuleWarning -> Warning
+
+[info]  ⚠ Compiled with warnings
+
+
+[info] ./app/globals.css.webpack[javascript/auto]!=!./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[11].oneOf[12].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[11].oneOf[12].use[3]!./app/globals.css
+Warning
+
+(7:5) Nested CSS was detected, but CSS nesting has not been configured correctly.
+Please enable a CSS nesting plugin *before* Tailwind in your configuration.
+See how here: https://tailwindcss.com/docs/using-with-preprocessors#nesting
+
+Import trace for requested module:
+./app/globals.css.webpack[javascript/auto]!=!./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[11].oneOf[12].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[11].oneOf[12].use[3]!./app/globals.css
+./app/globals.css
+
+
+[info]    Linting and checking validity of types ...
+
+[info]    Collecting page data ...
+
+[info]    Generating static pages (0/11) ...
+
+[info]    Generating static pages (2/11) 
+
+[info]    Generating static pages (5/11) 
+
+[info]    Generating static pages (8/11) 
+
+[info]  ✓ Generating static pages (11/11) 
+
+[info]    Finalizing page optimization ...
+
+[info]    Collecting build traces ...
+
+[info] 
+
+[info] Route (app)                              Size     First Load JS
+┌ ○ /                                    17.9 kB         452 kB
+├ ○ /_not-found                          885 B          85.7 kB
+├ λ /api/login                           0 B                0 B
+├ λ /api/signOut                         0 B                0 B
+├ ○ /gift                                4.64 kB         247 kB
+├ ○ /home                                5.03 kB         248 kB
+├ ○ /manager                             3.25 kB         210 kB
+├ ○ /shop                                4.66 kB         110 kB
+└ ○ /staff                               1.89 kB         411 kB
++ First Load JS shared by all            84.8 kB
+  ├ chunks/69-8201ffd4476d26e8.js        29 kB
+  ├ chunks/fd9d1056-b402d0c7c6a759b3.js  53.4 kB
+  └ other shared chunks (total)          2.42 kB
+
+
+ƒ Middleware                             26.5 kB
+
+
+[info] ○  (Static)   prerendered as static content
+λ  (Dynamic)  server-rendered on demand using Node.js
+
+
+[info] Building a Cloud Function to run this application. This is needed due to:
+[info]  • middleware
+[info]  • non-static component /api/login/route
+[info]  • non-static component /api/signOut/route
+[info] 
+[debug] [2024-03-23T17:54:41.630Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/coffee-coin-app/sites/coffee-coin-app/channels/feature-import [none]
+[debug] [2024-03-23T17:54:42.068Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/coffee-coin-app/sites/coffee-coin-app/channels/feature-import 200
+[debug] [2024-03-23T17:54:42.068Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/coffee-coin-app/sites/coffee-coin-app/channels/feature-import {"name":"projects/coffee-coin-app/sites/coffee-coin-app/channels/feature-import","url":"https://coffee-coin-app--feature-import-glua14lt.web.app","release":{"name":"projects/coffee-coin-app/sites/coffee-coin-app/channels/feature-import/releases/1711216206447000","version":{"name":"projects/coffee-coin-app/sites/coffee-coin-app/versions/80218b04ec988c17","status":"FINALIZED","config":{"rewrites":[{"glob":"**","path":"/index.html"}]},"labels":{"deployment-tool":"cli-firebase"},"createTime":"2024-03-23T17:50:03.836866Z","createUser":{"email":"coffeecoinapp@gmail.com"},"finalizeTime":"2024-03-23T17:50:06.349422Z","finalizeUser":{"email":"coffeecoinapp@gmail.com"},"fileCount":"27","versionBytes":"9493687"},"type":"DEPLOY","releaseTime":"2024-03-23T17:50:06.447Z","releaseUser":{"email":"coffeecoinapp@gmail.com"}},"createTime":"2024-03-23T17:42:06.409671455Z","updateTime":"2024-03-23T17:53:10.396111913Z","retainedReleaseCount":10,"expireTime":"2024-03-30T17:53:10.396111913Z"}
+[debug] [2024-03-23T17:54:53.874Z] Error: Command failed: npm i --omit dev --no-audit
+    at checkExecSyncError (node:child_process:890:11)
+    at execSync (node:child_process:962:15)
+    at prepareFrameworks (C:\Users\xinch\AppData\Roaming\npm\node_modules\firebase-tools\lib\frameworks\index.js:375:42)
+    at async deploy (C:\Users\xinch\AppData\Roaming\npm\node_modules\firebase-tools\lib\deploy\index.js:55:13)
+    at async Command.hostingChannelDeployAction [as actionFn] (C:\Users\xinch\AppData\Roaming\npm\node_modules\firebase-tools\lib\commands\hosting-channel-deploy.js:90:25)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2024-03-23T17:57:54.794Z] ----------------------------------------------------------------------
+[debug] [2024-03-23T17:57:54.797Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\xinch\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2024-03-23T17:57:54.797Z] CLI Version:   13.5.2
+[debug] [2024-03-23T17:57:54.797Z] Platform:      win32
+[debug] [2024-03-23T17:57:54.797Z] Node Version:  v20.9.0
+[debug] [2024-03-23T17:57:54.797Z] Time:          Sun Mar 24 2024 00:57:54 GMT+0700 (Indochina Time)
+[debug] [2024-03-23T17:57:54.797Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2024-03-23T17:57:54.870Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-03-23T17:57:54.870Z] > authorizing via signed-in user (coffeecoinapp@gmail.com)
+[debug] [2024-03-23T17:57:54.870Z] [iam] checking project coffee-coin-app for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2024-03-23T17:57:54.872Z] > refreshing access token with scopes: []
+[debug] [2024-03-23T17:57:54.874Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2024-03-23T17:57:54.874Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2024-03-23T17:57:55.137Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2024-03-23T17:57:55.138Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2024-03-23T17:57:55.144Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/coffee-coin-app:testIamPermissions [none]
+[debug] [2024-03-23T17:57:55.145Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/coffee-coin-app:testIamPermissions x-goog-quota-user=projects/coffee-coin-app
+[debug] [2024-03-23T17:57:55.145Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/coffee-coin-app:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2024-03-23T17:57:56.160Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/coffee-coin-app:testIamPermissions 200
+[debug] [2024-03-23T17:57:56.160Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/coffee-coin-app:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2024-03-23T17:57:56.161Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/coffee-coin-app [none]
+[debug] [2024-03-23T17:57:56.563Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/coffee-coin-app 200
+[debug] [2024-03-23T17:57:56.564Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/coffee-coin-app {"projectId":"coffee-coin-app","projectNumber":"53756991092","displayName":"coffee coin app","name":"projects/coffee-coin-app","resources":{"hostingSite":"coffee-coin-app","storageBucket":"coffee-coin-app.appspot.com","locationId":"us-central"},"state":"ACTIVE","etag":"1_fafa1674-0280-405a-9a83-b0a4cf753485"}
+[debug] [2024-03-23T17:58:00.979Z] defaultcredentials: writing to file C:\Users\xinch\AppData\Roaming\firebase\coffeecoinapp_gmail_com_application_default_credentials.json
+[debug] [2024-03-23T17:58:00.981Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/coffee-coin-app/sites pageToken=&pageSize=10
+[debug] [2024-03-23T17:58:01.572Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/coffee-coin-app/sites 200
+[debug] [2024-03-23T17:58:01.572Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/coffee-coin-app/sites {"sites":[{"name":"projects/coffee-coin-app/sites/coffee-coin-app","defaultUrl":"https://coffee-coin-app.web.app","appId":"1:53756991092:web:abb9e522247df5f0f6e321","type":"DEFAULT_SITE"}]}
+[debug] [2024-03-23T17:58:01.573Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:53756991092:web:abb9e522247df5f0f6e321/config [none]
+[debug] [2024-03-23T17:58:02.850Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:53756991092:web:abb9e522247df5f0f6e321/config 200
+[debug] [2024-03-23T17:58:02.850Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:53756991092:web:abb9e522247df5f0f6e321/config {"projectId":"coffee-coin-app","appId":"1:53756991092:web:abb9e522247df5f0f6e321","storageBucket":"coffee-coin-app.appspot.com","locationId":"us-central","apiKey":"AIzaSyC5L-FI5QWb_uDeUdEbeSEmpMwAr9P8ze4","authDomain":"coffee-coin-app.firebaseapp.com","messagingSenderId":"53756991092","measurementId":"G-PV6MFHBST4"}
+[info] 
+   Thank you for trying our early preview of Next.js support on Firebase Hosting.
+   During the preview, support is best-effort and breaking changes can be expected. Proceed with caution.
+   The integration is known to work with Next.js version 12 - 14.0. You may encounter errors.
+
+   Documentation: https://firebase.google.com/docs/hosting/frameworks/nextjs
+   File a bug: https://github.com/firebase/firebase-tools/issues/new?template=bug_report.md
+   Submit a feature request: https://github.com/firebase/firebase-tools/issues/new?template=feature_request.md
+
+   We'd love to learn from you. Express your interest in helping us shape the future of Firebase Hosting: https://goo.gle/41enW5X
+
+[debug] [2024-03-23T17:58:12.904Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/coffee-coin-app/sites/coffee-coin-app [none]
+[debug] [2024-03-23T17:58:13.362Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/coffee-coin-app/sites/coffee-coin-app 200
+[debug] [2024-03-23T17:58:13.363Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/coffee-coin-app/sites/coffee-coin-app {"name":"projects/coffee-coin-app/sites/coffee-coin-app","defaultUrl":"https://coffee-coin-app.web.app","appId":"1:53756991092:web:abb9e522247df5f0f6e321","type":"DEFAULT_SITE"}
+[info]    ▲ Next.js 14.1.3
+
+[info]    - Environments: .env.local
+
+
+[info]    Creating an optimized production build ...
+
+[info] > [PWA] Compile server
+
+[info] > [PWA] Compile server
+
+[info] > [PWA] Compile client (static)
+
+[info] > [PWA] Auto register service worker with: C:\Users\xinch\Desktop\claim_web_app\node_modules\next-pwa\register.js
+> [PWA] Service worker: C:\Users\xinch\Desktop\claim_web_app\public\sw.js
+> [PWA]   url: /sw.js
+> [PWA]   scope: /
+
+[info]  ✓ Compiled successfully
+
+[info]    Linting and checking validity of types ...
+
+[info]    Collecting page data ...
+
+[info]    Generating static pages (0/11) ...
+
+[info]    Generating static pages (2/11) 
+
+[info]    Generating static pages (5/11) 
+
+[info]    Generating static pages (8/11) 
+
+[info]  ✓ Generating static pages (11/11) 
+
+[info]    Finalizing page optimization ...
+
+[info]    Collecting build traces ...
+
+[info] 
+
+[info] Route (app)                              Size     First Load JS
+┌ ○ /                                    17.9 kB         452 kB
+├ ○ /_not-found                          885 B          85.7 kB
+├ λ /api/login                           0 B                0 B
+├ λ /api/signOut                         0 B                0 B
+├ ○ /gift                                4.64 kB         247 kB
+├ ○ /home                                5.03 kB         248 kB
+├ ○ /manager                             3.25 kB         210 kB
+├ ○ /shop                                4.66 kB         110 kB
+└ ○ /staff                               1.89 kB         411 kB
++ First Load JS shared by all            84.8 kB
+  ├ chunks/69-8201ffd4476d26e8.js        29 kB
+  ├ chunks/fd9d1056-b402d0c7c6a759b3.js  53.4 kB
+  └ other shared chunks (total)          2.42 kB
+
+
+ƒ Middleware                             26.5 kB
+
+[info] 
+○  (Static)   prerendered as static content
+λ  (Dynamic)  server-rendered on demand using Node.js
+
+
+[info] Building a Cloud Function to run this application. This is needed due to:
+[info]  • middleware
+[info]  • non-static component /api/login/route
+[info]  • non-static component /api/signOut/route
+[info] 
+[debug] [2024-03-23T17:59:08.255Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/coffee-coin-app/sites/coffee-coin-app [none]
+[debug] [2024-03-23T17:59:08.737Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/coffee-coin-app/sites/coffee-coin-app 200
+[debug] [2024-03-23T17:59:08.738Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/coffee-coin-app/sites/coffee-coin-app {"name":"projects/coffee-coin-app/sites/coffee-coin-app","defaultUrl":"https://coffee-coin-app.web.app","appId":"1:53756991092:web:abb9e522247df5f0f6e321","type":"DEFAULT_SITE"}
+[debug] [2024-03-23T17:59:14.621Z] Error: Command failed: npm i --omit dev --no-audit
+    at checkExecSyncError (node:child_process:890:11)
+    at execSync (node:child_process:962:15)
+    at prepareFrameworks (C:\Users\xinch\AppData\Roaming\npm\node_modules\firebase-tools\lib\frameworks\index.js:375:42)
+    at async deploy (C:\Users\xinch\AppData\Roaming\npm\node_modules\firebase-tools\lib\deploy\index.js:55:13)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2024-03-23T18:08:46.168Z] ----------------------------------------------------------------------
+[debug] [2024-03-23T18:08:46.172Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\xinch\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2024-03-23T18:08:46.172Z] CLI Version:   13.5.2
+[debug] [2024-03-23T18:08:46.172Z] Platform:      win32
+[debug] [2024-03-23T18:08:46.173Z] Node Version:  v20.9.0
+[debug] [2024-03-23T18:08:46.173Z] Time:          Sun Mar 24 2024 01:08:46 GMT+0700 (Indochina Time)
+[debug] [2024-03-23T18:08:46.173Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2024-03-23T18:08:46.255Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-03-23T18:08:46.255Z] > authorizing via signed-in user (coffeecoinapp@gmail.com)
+[debug] [2024-03-23T18:08:46.256Z] [iam] checking project coffee-coin-app for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2024-03-23T18:08:46.258Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/coffee-coin-app:testIamPermissions [none]
+[debug] [2024-03-23T18:08:46.258Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/coffee-coin-app:testIamPermissions x-goog-quota-user=projects/coffee-coin-app
+[debug] [2024-03-23T18:08:46.258Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/coffee-coin-app:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2024-03-23T18:08:47.278Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/coffee-coin-app:testIamPermissions 200
+[debug] [2024-03-23T18:08:47.278Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/coffee-coin-app:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2024-03-23T18:08:47.279Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/coffee-coin-app [none]
+[debug] [2024-03-23T18:08:47.689Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/coffee-coin-app 200
+[debug] [2024-03-23T18:08:47.689Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/coffee-coin-app {"projectId":"coffee-coin-app","projectNumber":"53756991092","displayName":"coffee coin app","name":"projects/coffee-coin-app","resources":{"hostingSite":"coffee-coin-app","storageBucket":"coffee-coin-app.appspot.com","locationId":"us-central"},"state":"ACTIVE","etag":"1_fafa1674-0280-405a-9a83-b0a4cf753485"}
+[debug] [2024-03-23T18:08:52.472Z] defaultcredentials: writing to file C:\Users\xinch\AppData\Roaming\firebase\coffeecoinapp_gmail_com_application_default_credentials.json
+[debug] [2024-03-23T18:08:52.474Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/coffee-coin-app/sites pageToken=&pageSize=10
+[debug] [2024-03-23T18:08:53.105Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/coffee-coin-app/sites 200
+[debug] [2024-03-23T18:08:53.105Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/coffee-coin-app/sites {"sites":[{"name":"projects/coffee-coin-app/sites/coffee-coin-app","defaultUrl":"https://coffee-coin-app.web.app","appId":"1:53756991092:web:abb9e522247df5f0f6e321","type":"DEFAULT_SITE"}]}
+[debug] [2024-03-23T18:08:53.106Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:53756991092:web:abb9e522247df5f0f6e321/config [none]
+[debug] [2024-03-23T18:08:54.705Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:53756991092:web:abb9e522247df5f0f6e321/config 200
+[debug] [2024-03-23T18:08:54.705Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:53756991092:web:abb9e522247df5f0f6e321/config {"projectId":"coffee-coin-app","appId":"1:53756991092:web:abb9e522247df5f0f6e321","storageBucket":"coffee-coin-app.appspot.com","locationId":"us-central","apiKey":"AIzaSyC5L-FI5QWb_uDeUdEbeSEmpMwAr9P8ze4","authDomain":"coffee-coin-app.firebaseapp.com","messagingSenderId":"53756991092","measurementId":"G-PV6MFHBST4"}
+[info] 
+   Thank you for trying our early preview of Next.js support on Firebase Hosting.
+   During the preview, support is best-effort and breaking changes can be expected. Proceed with caution.
+   The integration is known to work with Next.js version 12 - 14.0. You may encounter errors.
+
+   Documentation: https://firebase.google.com/docs/hosting/frameworks/nextjs
+   File a bug: https://github.com/firebase/firebase-tools/issues/new?template=bug_report.md
+   Submit a feature request: https://github.com/firebase/firebase-tools/issues/new?template=feature_request.md
+
+   We'd love to learn from you. Express your interest in helping us shape the future of Firebase Hosting: https://goo.gle/41enW5X
+
+[debug] [2024-03-23T18:09:05.129Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/coffee-coin-app/sites/coffee-coin-app [none]
+[debug] [2024-03-23T18:09:05.590Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/coffee-coin-app/sites/coffee-coin-app 200
+[debug] [2024-03-23T18:09:05.591Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/coffee-coin-app/sites/coffee-coin-app {"name":"projects/coffee-coin-app/sites/coffee-coin-app","defaultUrl":"https://coffee-coin-app.web.app","appId":"1:53756991092:web:abb9e522247df5f0f6e321","type":"DEFAULT_SITE"}
+[info]    ▲ Next.js 14.1.3
+
+[info]    - Environments: .env.local
+
+
+[info]    Creating an optimized production build ...
+
+[info] > [PWA] Compile server
+
+[info] > [PWA] Compile server
+
+[info] > [PWA] Compile client (static)
+
+[info] > [PWA] Auto register service worker with: C:\Users\xinch\Desktop\claim_web_app\node_modules\next-pwa\register.js
+
+[info] > [PWA] Service worker: C:\Users\xinch\Desktop\claim_web_app\public\sw.js
+> [PWA]   url: /sw.js
+> [PWA]   scope: /
+
+[info] <w> [webpack.cache.PackFileCacheStrategy] Skipped not serializable cache item 'Compilation/modules|C:\Users\xinch\Desktop\claim_web_app\node_modules\next\dist\build\webpack\loaders\css-loader\src\index.js??ruleSet[1].rules[11].oneOf[12].use[2]!C:\Users\xinch\Desktop\claim_web_app\node_modules\next\dist\build\webpack\loaders\postcss-loader\src\index.js??ruleSet[1].rules[11].oneOf[12].use[3]!C:\Users\xinch\Desktop\claim_web_app\app\globals.css': No serializer registered for Warning
+<w> while serializing webpack/lib/cache/PackFileCacheStrategy.PackContentItems -> webpack/lib/NormalModule -> Array { 1 items } -> webpack/lib/ModuleWarning -> Warning
+
+[info]  ⚠ Compiled with warnings
+
+
+[info] ./app/globals.css.webpack[javascript/auto]!=!./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[11].oneOf[12].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[11].oneOf[12].use[3]!./app/globals.css
+Warning
+
+(7:5) Nested CSS was detected, but CSS nesting has not been configured correctly.
+Please enable a CSS nesting plugin *before* Tailwind in your configuration.
+See how here: https://tailwindcss.com/docs/using-with-preprocessors#nesting
+
+Import trace for requested module:
+./app/globals.css.webpack[javascript/auto]!=!./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[11].oneOf[12].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[11].oneOf[12].use[3]!./app/globals.css
+./app/globals.css
+
+
+[info]    Linting and checking validity of types ...
+
+[info]    Collecting page data ...
+
+[info]    Generating static pages (0/11) ...
+
+[info]    Generating static pages (2/11) 
+
+[info]    Generating static pages (5/11) 
+
+[info]    Generating static pages (8/11) 
+
+[info]  ✓ Generating static pages (11/11) 
+
+[info]    Finalizing page optimization ...
+
+[info]    Collecting build traces ...
+
+[info] 
+
+[info] Route (app)                              Size     First Load JS
+┌ ○ /                                    17.9 kB         452 kB
+├ ○ /_not-found                          885 B          85.7 kB
+├ λ /api/login                           0 B                0 B
+├ λ /api/signOut                         0 B                0 B
+├ ○ /gift                                4.64 kB         247 kB
+├ ○ /home                                5.03 kB         248 kB
+├ ○ /manager                             3.25 kB         210 kB
+├ ○ /shop                                4.66 kB         110 kB
+└ ○ /staff                               1.89 kB         411 kB
++ First Load JS shared by all            84.8 kB
+  ├ chunks/69-8201ffd4476d26e8.js        29 kB
+  ├ chunks/fd9d1056-b402d0c7c6a759b3.js  53.4 kB
+  └ other shared chunks (total)          2.42 kB
+
+
+ƒ Middleware                             26.5 kB
+
+[info] 
+○  (Static)   prerendered as static content
+λ  (Dynamic)  server-rendered on demand using Node.js
+
+
+[info] Building a Cloud Function to run this application. This is needed due to:
+[info]  • middleware
+[info]  • non-static component /api/login/route
+[info]  • non-static component /api/signOut/route
+[info] 
+[debug] [2024-03-23T18:10:03.704Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/coffee-coin-app/sites/coffee-coin-app [none]
+[debug] [2024-03-23T18:10:04.158Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/coffee-coin-app/sites/coffee-coin-app 200
+[debug] [2024-03-23T18:10:04.159Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/coffee-coin-app/sites/coffee-coin-app {"name":"projects/coffee-coin-app/sites/coffee-coin-app","defaultUrl":"https://coffee-coin-app.web.app","appId":"1:53756991092:web:abb9e522247df5f0f6e321","type":"DEFAULT_SITE"}
+[debug] [2024-03-23T18:10:14.089Z] Error: Command failed: npm i --omit dev --no-audit
+    at checkExecSyncError (node:child_process:890:11)
+    at execSync (node:child_process:962:15)
+    at prepareFrameworks (C:\Users\xinch\AppData\Roaming\npm\node_modules\firebase-tools\lib\frameworks\index.js:375:42)
+    at async deploy (C:\Users\xinch\AppData\Roaming\npm\node_modules\firebase-tools\lib\deploy\index.js:55:13)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2024-03-23T18:45:21.530Z] ----------------------------------------------------------------------
+[debug] [2024-03-23T18:45:21.533Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\xinch\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2024-03-23T18:45:21.534Z] CLI Version:   13.5.2
+[debug] [2024-03-23T18:45:21.534Z] Platform:      win32
+[debug] [2024-03-23T18:45:21.534Z] Node Version:  v20.9.0
+[debug] [2024-03-23T18:45:21.534Z] Time:          Sun Mar 24 2024 01:45:21 GMT+0700 (Indochina Time)
+[debug] [2024-03-23T18:45:21.534Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2024-03-23T18:45:21.615Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-03-23T18:45:21.616Z] > authorizing via signed-in user (coffeecoinapp@gmail.com)
+[debug] [2024-03-23T18:45:21.616Z] [iam] checking project coffee-coin-app for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2024-03-23T18:45:21.618Z] > refreshing access token with scopes: []
+[debug] [2024-03-23T18:45:21.620Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2024-03-23T18:45:21.620Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2024-03-23T18:45:21.922Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2024-03-23T18:45:21.922Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2024-03-23T18:45:21.930Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/coffee-coin-app:testIamPermissions [none]
+[debug] [2024-03-23T18:45:21.930Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/coffee-coin-app:testIamPermissions x-goog-quota-user=projects/coffee-coin-app
+[debug] [2024-03-23T18:45:21.930Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/coffee-coin-app:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2024-03-23T18:45:22.916Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/coffee-coin-app:testIamPermissions 200
+[debug] [2024-03-23T18:45:22.916Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/coffee-coin-app:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2024-03-23T18:45:22.917Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/coffee-coin-app [none]
+[debug] [2024-03-23T18:45:23.336Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/coffee-coin-app 200
+[debug] [2024-03-23T18:45:23.336Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/coffee-coin-app {"projectId":"coffee-coin-app","projectNumber":"53756991092","displayName":"coffee coin app","name":"projects/coffee-coin-app","resources":{"hostingSite":"coffee-coin-app","storageBucket":"coffee-coin-app.appspot.com","locationId":"us-central"},"state":"ACTIVE","etag":"1_fafa1674-0280-405a-9a83-b0a4cf753485"}
+[debug] [2024-03-23T18:45:29.950Z] defaultcredentials: writing to file C:\Users\xinch\AppData\Roaming\firebase\coffeecoinapp_gmail_com_application_default_credentials.json
+[debug] [2024-03-23T18:45:29.956Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/coffee-coin-app/sites pageToken=&pageSize=10
+[debug] [2024-03-23T18:45:30.562Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/coffee-coin-app/sites 200
+[debug] [2024-03-23T18:45:30.562Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/coffee-coin-app/sites {"sites":[{"name":"projects/coffee-coin-app/sites/coffee-coin-app","defaultUrl":"https://coffee-coin-app.web.app","appId":"1:53756991092:web:abb9e522247df5f0f6e321","type":"DEFAULT_SITE"}]}
+[debug] [2024-03-23T18:45:30.563Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:53756991092:web:abb9e522247df5f0f6e321/config [none]
+[debug] [2024-03-23T18:45:31.946Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:53756991092:web:abb9e522247df5f0f6e321/config 200
+[debug] [2024-03-23T18:45:31.946Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:53756991092:web:abb9e522247df5f0f6e321/config {"projectId":"coffee-coin-app","appId":"1:53756991092:web:abb9e522247df5f0f6e321","storageBucket":"coffee-coin-app.appspot.com","locationId":"us-central","apiKey":"AIzaSyC5L-FI5QWb_uDeUdEbeSEmpMwAr9P8ze4","authDomain":"coffee-coin-app.firebaseapp.com","messagingSenderId":"53756991092","measurementId":"G-PV6MFHBST4"}
+[info] 
+   Thank you for trying our early preview of Next.js support on Firebase Hosting.
+   During the preview, support is best-effort and breaking changes can be expected. Proceed with caution.
+   The integration is known to work with Next.js version 12 - 14.0. You may encounter errors.
+
+   Documentation: https://firebase.google.com/docs/hosting/frameworks/nextjs
+   File a bug: https://github.com/firebase/firebase-tools/issues/new?template=bug_report.md
+   Submit a feature request: https://github.com/firebase/firebase-tools/issues/new?template=feature_request.md
+
+   We'd love to learn from you. Express your interest in helping us shape the future of Firebase Hosting: https://goo.gle/41enW5X
+
+[debug] [2024-03-23T18:45:44.845Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/coffee-coin-app/sites/coffee-coin-app [none]
+[debug] [2024-03-23T18:45:45.341Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/coffee-coin-app/sites/coffee-coin-app 200
+[debug] [2024-03-23T18:45:45.341Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/coffee-coin-app/sites/coffee-coin-app {"name":"projects/coffee-coin-app/sites/coffee-coin-app","defaultUrl":"https://coffee-coin-app.web.app","appId":"1:53756991092:web:abb9e522247df5f0f6e321","type":"DEFAULT_SITE"}
+[info]  ⨯ Failed to load next.config.js, see more info here https://nextjs.org/docs/messages/next-config-error
+
+[info] 
+
+[info] > Build error occurred
+
+[info] C:\Users\xinch\Desktop\claim_web_app\next.config.js:23
+  ],
+  ^
+
+SyntaxError: Unexpected token ']'
+    at internalCompileFunction (node:internal/vm:73:18)
+    at wrapSafe (node:internal/modules/cjs/loader:1153:20)
+    at Module._compile (node:internal/modules/cjs/loader:1205:27)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1295:10)
+    at Module.load (node:internal/modules/cjs/loader:1091:32)
+    at Module._load (node:internal/modules/cjs/loader:938:12)
+    at cjsLoader (node:internal/modules/esm/translators:284:17)
+    at ModuleWrap.<anonymous> (node:internal/modules/esm/translators:234:7)
+    at ModuleJob.run (node:internal/modules/esm/module_job:217:25)
+    at async ModuleLoader.import (node:internal/modules/esm/loader:316:24)
+
+[info] Building a Cloud Function to run this application. This is needed due to:
+[info]  • middleware
+[info]  • non-static component /api/login/route
+[info]  • non-static component /api/signOut/route
+[info] 
+[debug] [2024-03-23T18:45:59.832Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/coffee-coin-app/sites/coffee-coin-app [none]
+[debug] [2024-03-23T18:46:00.361Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/coffee-coin-app/sites/coffee-coin-app 200
+[debug] [2024-03-23T18:46:00.361Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/coffee-coin-app/sites/coffee-coin-app {"name":"projects/coffee-coin-app/sites/coffee-coin-app","defaultUrl":"https://coffee-coin-app.web.app","appId":"1:53756991092:web:abb9e522247df5f0f6e321","type":"DEFAULT_SITE"}
+[debug] [2024-03-23T18:46:12.207Z] Error: Command failed: npm i --omit dev --no-audit
+    at checkExecSyncError (node:child_process:890:11)
+    at execSync (node:child_process:962:15)
+    at prepareFrameworks (C:\Users\xinch\AppData\Roaming\npm\node_modules\firebase-tools\lib\frameworks\index.js:375:42)
+    at async deploy (C:\Users\xinch\AppData\Roaming\npm\node_modules\firebase-tools\lib\deploy\index.js:55:13)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2024-03-23T18:47:28.536Z] ----------------------------------------------------------------------
+[debug] [2024-03-23T18:47:28.539Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\xinch\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2024-03-23T18:47:28.539Z] CLI Version:   13.5.2
+[debug] [2024-03-23T18:47:28.539Z] Platform:      win32
+[debug] [2024-03-23T18:47:28.540Z] Node Version:  v20.9.0
+[debug] [2024-03-23T18:47:28.540Z] Time:          Sun Mar 24 2024 01:47:28 GMT+0700 (Indochina Time)
+[debug] [2024-03-23T18:47:28.540Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2024-03-23T18:47:28.626Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-03-23T18:47:28.626Z] > authorizing via signed-in user (coffeecoinapp@gmail.com)
+[debug] [2024-03-23T18:47:28.626Z] [iam] checking project coffee-coin-app for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2024-03-23T18:47:28.629Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/coffee-coin-app:testIamPermissions [none]
+[debug] [2024-03-23T18:47:28.629Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/coffee-coin-app:testIamPermissions x-goog-quota-user=projects/coffee-coin-app
+[debug] [2024-03-23T18:47:28.629Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/coffee-coin-app:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2024-03-23T18:47:29.750Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/coffee-coin-app:testIamPermissions 200
+[debug] [2024-03-23T18:47:29.750Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/coffee-coin-app:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2024-03-23T18:47:29.751Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/coffee-coin-app [none]
+[debug] [2024-03-23T18:47:30.150Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/coffee-coin-app 200
+[debug] [2024-03-23T18:47:30.151Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/coffee-coin-app {"projectId":"coffee-coin-app","projectNumber":"53756991092","displayName":"coffee coin app","name":"projects/coffee-coin-app","resources":{"hostingSite":"coffee-coin-app","storageBucket":"coffee-coin-app.appspot.com","locationId":"us-central"},"state":"ACTIVE","etag":"1_fafa1674-0280-405a-9a83-b0a4cf753485"}
+[debug] [2024-03-23T18:47:35.279Z] defaultcredentials: writing to file C:\Users\xinch\AppData\Roaming\firebase\coffeecoinapp_gmail_com_application_default_credentials.json
+[debug] [2024-03-23T18:47:35.282Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/coffee-coin-app/sites pageToken=&pageSize=10
+[debug] [2024-03-23T18:47:35.835Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/coffee-coin-app/sites 200
+[debug] [2024-03-23T18:47:35.835Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/coffee-coin-app/sites {"sites":[{"name":"projects/coffee-coin-app/sites/coffee-coin-app","defaultUrl":"https://coffee-coin-app.web.app","appId":"1:53756991092:web:abb9e522247df5f0f6e321","type":"DEFAULT_SITE"}]}
+[debug] [2024-03-23T18:47:35.835Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:53756991092:web:abb9e522247df5f0f6e321/config [none]
+[debug] [2024-03-23T18:47:37.118Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:53756991092:web:abb9e522247df5f0f6e321/config 200
+[debug] [2024-03-23T18:47:37.118Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:53756991092:web:abb9e522247df5f0f6e321/config {"projectId":"coffee-coin-app","appId":"1:53756991092:web:abb9e522247df5f0f6e321","storageBucket":"coffee-coin-app.appspot.com","locationId":"us-central","apiKey":"AIzaSyC5L-FI5QWb_uDeUdEbeSEmpMwAr9P8ze4","authDomain":"coffee-coin-app.firebaseapp.com","messagingSenderId":"53756991092","measurementId":"G-PV6MFHBST4"}
+[info] 
+   Thank you for trying our early preview of Next.js support on Firebase Hosting.
+   During the preview, support is best-effort and breaking changes can be expected. Proceed with caution.
+   The integration is known to work with Next.js version 12 - 14.0. You may encounter errors.
+
+   Documentation: https://firebase.google.com/docs/hosting/frameworks/nextjs
+   File a bug: https://github.com/firebase/firebase-tools/issues/new?template=bug_report.md
+   Submit a feature request: https://github.com/firebase/firebase-tools/issues/new?template=feature_request.md
+
+   We'd love to learn from you. Express your interest in helping us shape the future of Firebase Hosting: https://goo.gle/41enW5X
+
+[debug] [2024-03-23T18:47:47.329Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/coffee-coin-app/sites/coffee-coin-app [none]
+[debug] [2024-03-23T18:47:47.816Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/coffee-coin-app/sites/coffee-coin-app 200
+[debug] [2024-03-23T18:47:47.816Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/coffee-coin-app/sites/coffee-coin-app {"name":"projects/coffee-coin-app/sites/coffee-coin-app","defaultUrl":"https://coffee-coin-app.web.app","appId":"1:53756991092:web:abb9e522247df5f0f6e321","type":"DEFAULT_SITE"}
+[info]    ▲ Next.js 14.1.3
+
+[info]    - Environments: .env.local
+
+
+[info]    Creating an optimized production build ...
+
+[info] > [PWA] Compile server
+
+[info] > [PWA] Compile server
+
+[info] > [PWA] Compile client (static)
+
+[info] > [PWA] Auto register service worker with: C:\Users\xinch\Desktop\claim_web_app\node_modules\next-pwa\register.js
+> [PWA] Service worker: C:\Users\xinch\Desktop\claim_web_app\public\sw.js
+
+[info] > [PWA]   url: /sw.js
+> [PWA]   scope: /
+
+[info] <w> [webpack.cache.PackFileCacheStrategy] Skipped not serializable cache item 'Compilation/modules|C:\Users\xinch\Desktop\claim_web_app\node_modules\next\dist\build\webpack\loaders\css-loader\src\index.js??ruleSet[1].rules[11].oneOf[12].use[2]!C:\Users\xinch\Desktop\claim_web_app\node_modules\next\dist\build\webpack\loaders\postcss-loader\src\index.js??ruleSet[1].rules[11].oneOf[12].use[3]!C:\Users\xinch\Desktop\claim_web_app\app\globals.css': No serializer registered for Warning
+<w> while serializing webpack/lib/cache/PackFileCacheStrategy.PackContentItems -> webpack/lib/NormalModule -> Array { 1 items } -> webpack/lib/ModuleWarning -> Warning
+
+[info]  ⚠ Compiled with warnings
+
+
+[info] ./app/globals.css.webpack[javascript/auto]!=!./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[11].oneOf[12].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[11].oneOf[12].use[3]!./app/globals.css
+Warning
+
+(7:5) Nested CSS was detected, but CSS nesting has not been configured correctly.
+Please enable a CSS nesting plugin *before* Tailwind in your configuration.
+See how here: https://tailwindcss.com/docs/using-with-preprocessors#nesting
+
+Import trace for requested module:
+./app/globals.css.webpack[javascript/auto]!=!./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[11].oneOf[12].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[11].oneOf[12].use[3]!./app/globals.css
+./app/globals.css
+
+
+[info]    Linting and checking validity of types ...
+
+[info]    Collecting page data ...
+
+[info]    Generating static pages (0/11) ...
+
+[info]    Generating static pages (2/11) 
+
+[info]    Generating static pages (5/11) 
+
+[info]    Generating static pages (8/11) 
+
+[info]  ✓ Generating static pages (11/11) 
+
+[info]    Finalizing page optimization ...
+
+[info]    Collecting build traces ...
+
+[info] 
+
+[info] Route (app)                              Size     First Load JS
+┌ ○ /                                    17.9 kB         452 kB
+├ ○ /_not-found                          885 B          85.7 kB
+├ λ /api/login                           0 B                0 B
+├ λ /api/signOut                         0 B                0 B
+├ ○ /gift                                4.64 kB         247 kB
+├ ○ /home                                5.03 kB         248 kB
+├ ○ /manager                             3.25 kB         210 kB
+├ ○ /shop                                4.66 kB         110 kB
+└ ○ /staff                               1.89 kB         411 kB
++ First Load JS shared by all            84.8 kB
+  ├ chunks/69-8201ffd4476d26e8.js        29 kB
+  ├ chunks/fd9d1056-b402d0c7c6a759b3.js  53.4 kB
+  └ other shared chunks (total)          2.42 kB
+
+
+ƒ Middleware                             26.5 kB
+
+[info] 
+○  (Static)   prerendered as static content
+λ  (Dynamic)  server-rendered on demand using Node.js
+
+
+[info] Building a Cloud Function to run this application. This is needed due to:
+[info]  • middleware
+[info]  • non-static component /api/signOut/route
+[info]  • non-static component /api/login/route
+[info] 
+[debug] [2024-03-23T18:49:26.944Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/coffee-coin-app/sites/coffee-coin-app [none]
+[debug] [2024-03-23T18:49:27.427Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/coffee-coin-app/sites/coffee-coin-app 200
+[debug] [2024-03-23T18:49:27.427Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/coffee-coin-app/sites/coffee-coin-app {"name":"projects/coffee-coin-app/sites/coffee-coin-app","defaultUrl":"https://coffee-coin-app.web.app","appId":"1:53756991092:web:abb9e522247df5f0f6e321","type":"DEFAULT_SITE"}
+[debug] [2024-03-23T18:49:35.414Z] Error: Command failed: npm i --omit dev --no-audit
+    at checkExecSyncError (node:child_process:890:11)
+    at execSync (node:child_process:962:15)
+    at prepareFrameworks (C:\Users\xinch\AppData\Roaming\npm\node_modules\firebase-tools\lib\frameworks\index.js:375:42)
+    at async deploy (C:\Users\xinch\AppData\Roaming\npm\node_modules\firebase-tools\lib\deploy\index.js:55:13)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2024-03-23T18:50:18.595Z] ----------------------------------------------------------------------
+[debug] [2024-03-23T18:50:18.599Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\xinch\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2024-03-23T18:50:18.600Z] CLI Version:   13.5.2
+[debug] [2024-03-23T18:50:18.600Z] Platform:      win32
+[debug] [2024-03-23T18:50:18.600Z] Node Version:  v20.9.0
+[debug] [2024-03-23T18:50:18.601Z] Time:          Sun Mar 24 2024 01:50:18 GMT+0700 (Indochina Time)
+[debug] [2024-03-23T18:50:18.601Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2024-03-23T18:50:18.728Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-03-23T18:50:18.729Z] > authorizing via signed-in user (coffeecoinapp@gmail.com)
+[debug] [2024-03-23T18:50:18.729Z] [iam] checking project coffee-coin-app for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2024-03-23T18:50:18.732Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/coffee-coin-app:testIamPermissions [none]
+[debug] [2024-03-23T18:50:18.732Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/coffee-coin-app:testIamPermissions x-goog-quota-user=projects/coffee-coin-app
+[debug] [2024-03-23T18:50:18.733Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/coffee-coin-app:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2024-03-23T18:50:19.783Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/coffee-coin-app:testIamPermissions 200
+[debug] [2024-03-23T18:50:19.783Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/coffee-coin-app:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2024-03-23T18:50:19.784Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/coffee-coin-app [none]
+[debug] [2024-03-23T18:50:20.444Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/coffee-coin-app 200
+[debug] [2024-03-23T18:50:20.444Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/coffee-coin-app {"projectId":"coffee-coin-app","projectNumber":"53756991092","displayName":"coffee coin app","name":"projects/coffee-coin-app","resources":{"hostingSite":"coffee-coin-app","storageBucket":"coffee-coin-app.appspot.com","locationId":"us-central"},"state":"ACTIVE","etag":"1_fafa1674-0280-405a-9a83-b0a4cf753485"}
+[debug] [2024-03-23T18:50:26.164Z] defaultcredentials: writing to file C:\Users\xinch\AppData\Roaming\firebase\coffeecoinapp_gmail_com_application_default_credentials.json
+[debug] [2024-03-23T18:50:26.169Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/coffee-coin-app/sites pageToken=&pageSize=10
+[debug] [2024-03-23T18:50:26.758Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/coffee-coin-app/sites 200
+[debug] [2024-03-23T18:50:26.758Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/coffee-coin-app/sites {"sites":[{"name":"projects/coffee-coin-app/sites/coffee-coin-app","defaultUrl":"https://coffee-coin-app.web.app","appId":"1:53756991092:web:abb9e522247df5f0f6e321","type":"DEFAULT_SITE"}]}
+[debug] [2024-03-23T18:50:26.758Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:53756991092:web:abb9e522247df5f0f6e321/config [none]
+[debug] [2024-03-23T18:50:28.296Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:53756991092:web:abb9e522247df5f0f6e321/config 200
+[debug] [2024-03-23T18:50:28.296Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:53756991092:web:abb9e522247df5f0f6e321/config {"projectId":"coffee-coin-app","appId":"1:53756991092:web:abb9e522247df5f0f6e321","storageBucket":"coffee-coin-app.appspot.com","locationId":"us-central","apiKey":"AIzaSyC5L-FI5QWb_uDeUdEbeSEmpMwAr9P8ze4","authDomain":"coffee-coin-app.firebaseapp.com","messagingSenderId":"53756991092","measurementId":"G-PV6MFHBST4"}
+[info] 
+   Thank you for trying our early preview of Next.js support on Firebase Hosting.
+   During the preview, support is best-effort and breaking changes can be expected. Proceed with caution.
+   The integration is known to work with Next.js version 12 - 14.0. You may encounter errors.
+
+   Documentation: https://firebase.google.com/docs/hosting/frameworks/nextjs
+   File a bug: https://github.com/firebase/firebase-tools/issues/new?template=bug_report.md
+   Submit a feature request: https://github.com/firebase/firebase-tools/issues/new?template=feature_request.md
+
+   We'd love to learn from you. Express your interest in helping us shape the future of Firebase Hosting: https://goo.gle/41enW5X
+
+[debug] [2024-03-23T18:50:39.404Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/coffee-coin-app/sites/coffee-coin-app [none]
+[debug] [2024-03-23T18:50:39.942Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/coffee-coin-app/sites/coffee-coin-app 200
+[debug] [2024-03-23T18:50:39.942Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/coffee-coin-app/sites/coffee-coin-app {"name":"projects/coffee-coin-app/sites/coffee-coin-app","defaultUrl":"https://coffee-coin-app.web.app","appId":"1:53756991092:web:abb9e522247df5f0f6e321","type":"DEFAULT_SITE"}
+[info]    ▲ Next.js 14.1.3
+
+[info]    - Environments: .env.local
+
+
+[info]    Creating an optimized production build ...
+
+[info] > [PWA] Compile server
+
+[info] > [PWA] Compile server
+
+[info] > [PWA] Compile client (static)
+
+[info] > [PWA] Auto register service worker with: C:\Users\xinch\Desktop\claim_web_app\node_modules\next-pwa\register.js
+
+[info] > [PWA] Service worker: C:\Users\xinch\Desktop\claim_web_app\public\sw.js
+> [PWA]   url: /sw.js
+> [PWA]   scope: /
+
+[info]  ✓ Compiled successfully
+
+[info]    Linting and checking validity of types ...
+
+[info]    Collecting page data ...
+
+[info]    Generating static pages (0/11) ...
+
+[info]    Generating static pages (2/11) 
+
+[info]    Generating static pages (5/11) 
+
+[info]    Generating static pages (8/11) 
+
+[info]  ✓ Generating static pages (11/11) 
+
+[info]    Finalizing page optimization ...
+
+[info]    Collecting build traces ...
+
+[info] 
+
+[info] Route (app)                              Size     First Load JS
+┌ ○ /                                    17.9 kB         452 kB
+├ ○ /_not-found                          885 B          85.7 kB
+├ λ /api/login                           0 B                0 B
+├ λ /api/signOut                         0 B                0 B
+├ ○ /gift                                4.64 kB         247 kB
+├ ○ /home                                5.03 kB         248 kB
+├ ○ /manager                             3.25 kB         210 kB
+├ ○ /shop                                4.66 kB         110 kB
+└ ○ /staff                               1.89 kB         411 kB
++ First Load JS shared by all            84.8 kB
+  ├ chunks/69-8201ffd4476d26e8.js        29 kB
+  ├ chunks/fd9d1056-b402d0c7c6a759b3.js  53.4 kB
+  └ other shared chunks (total)          2.42 kB
+
+
+ƒ Middleware                             26.5 kB
+
+
+[info] ○  (Static)   prerendered as static content
+λ  (Dynamic)  server-rendered on demand using Node.js
+
+
+[info] Building a Cloud Function to run this application. This is needed due to:
+[info]  • middleware
+[info]  • non-static component /api/login/route
+[info]  • non-static component /api/signOut/route
+[info] 
+[debug] [2024-03-23T18:51:37.455Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/coffee-coin-app/sites/coffee-coin-app [none]
+[debug] [2024-03-23T18:51:37.928Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/coffee-coin-app/sites/coffee-coin-app 200
+[debug] [2024-03-23T18:51:37.928Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/coffee-coin-app/sites/coffee-coin-app {"name":"projects/coffee-coin-app/sites/coffee-coin-app","defaultUrl":"https://coffee-coin-app.web.app","appId":"1:53756991092:web:abb9e522247df5f0f6e321","type":"DEFAULT_SITE"}
+[debug] [2024-03-23T18:51:46.318Z] Error: Command failed: npm i --omit dev --no-audit
+    at checkExecSyncError (node:child_process:890:11)
+    at execSync (node:child_process:962:15)
+    at prepareFrameworks (C:\Users\xinch\AppData\Roaming\npm\node_modules\firebase-tools\lib\frameworks\index.js:375:42)
+    at async deploy (C:\Users\xinch\AppData\Roaming\npm\node_modules\firebase-tools\lib\deploy\index.js:55:13)
+[error] 
+[error] Error: An unexpected error has occurred.
