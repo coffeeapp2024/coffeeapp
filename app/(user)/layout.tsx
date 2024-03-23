@@ -236,7 +236,8 @@ export default function RootLayout({
               testing &&
               fetchedUserData &&
               fetchedUserData.coin &&
-              fetchedUserData.coin >= 0
+              fetchedUserData.coin >= 0 &&
+              fetchedUserData.coin < 500
             ) {
               fetchedUserData.coin += 100;
               toast.info("Tesing Mode! +100 coin"); // Add 1000 to coin if role is testing
