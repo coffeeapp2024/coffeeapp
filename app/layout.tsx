@@ -32,11 +32,7 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/icon-notch.png"></link>
         <link rel="manifest" href="/manifest.json" />
       </Head>
-      <body className={inter.className}>
-        <InstallButton />
-
-        {children}
-      </body>
+      <body className={inter.className}>{children}</body>
       <Toaster position="top-center" />
     </html>
   );
