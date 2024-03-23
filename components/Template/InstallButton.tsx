@@ -9,13 +9,26 @@ function InstallButton() {
 
   useEffect(() => {
     const handleBeforeInstallPrompt = (e: any) => {
-      // e.preventDefault();
+      e.preventDefault();
       deferredPrompt.current = e;
-      deferredPrompt.current.prompt();
-      // setShowButton(true);
+      setShowButton(true);
     };
 
-    window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
+    // Kiểm tra xem trình duyệt có hỗ trợ cài đặt trước không
+    if (window.matchMedia("(display-mode: standalone)").matches) {
+      setShowButton(false);
+    } else {
+      // Kiểm tra xem đã kích hoạt sự kiện beforeinstallprompt hay chưa
+      if (window.sessionStorage.getItem("isBeforeInstallPromptActivated")) {
+        deferredPrompt.current.prompt();
+        setShowButton(true);
+      } else {
+        window.addEventListener(
+          "beforeinstallprompt",
+          handleBeforeInstallPrompt
+        );
+      }
+    }
 
     return () => {
       window.removeEventListener(
