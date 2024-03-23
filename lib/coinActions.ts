@@ -23,7 +23,7 @@ export function calculateInitialCurrentCoin(
   startTime: string | null | undefined
 ) {
   const now = new Date();
-  const startDate = startTime ? new Date(startTime) : now;
+  const startDate = startTime ? new Date(startTime) : null;
 
   if (startDate && balancePerHour && now > startDate) {
     const timeDiffSeconds = (now.getTime() - startDate.getTime()) / 1000;
