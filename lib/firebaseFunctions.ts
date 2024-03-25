@@ -462,3 +462,19 @@ export async function deleteVoucherIdFromUser(
     throw error;
   }
 }
+
+export async function deleteAllKeysFromFirestore() {
+  try {
+    const keysSnapshot = await getDocs(keysRef);
+
+    keysSnapshot.forEach(async (doc) => {
+      await deleteDoc(doc.ref);
+      console.log("Key deleted successfully:", doc.id);
+    });
+
+    console.log("All keys deleted successfully");
+  } catch (error) {
+    console.error("Error deleting keys from Firestore:", error);
+    throw error;
+  }
+}
