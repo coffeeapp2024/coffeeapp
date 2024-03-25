@@ -72,7 +72,7 @@ function BoostCard({
       </div>
       <div className="flex items-center justify-center flex-col gap-y-1 font-semibold text-neutral-700">
         <span className="">{levelBalance} coin/hour</span>
-        <span className="mb-4">{timeMinePerQr}h/qrcode</span>
+        <span className="mb-4">{timeMinePerQr}hour/qrcode</span>
         <div className="flex items-center justify-center pl-2">
           <span className="font-bold text-xl">{price}</span>
           <CoinIcon classname="w-6 h-6  " />

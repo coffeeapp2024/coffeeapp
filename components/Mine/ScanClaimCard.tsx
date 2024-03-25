@@ -62,7 +62,7 @@ function ScanClaimCard() {
               {balance ?? "0"} coin/hour
             </span>
             <span className="text-neutral-500 text-sm">
-              {userTimeMinePerQr ?? "0"}h/qrcode
+              {userTimeMinePerQr ?? "0"}hour/qrcode
             </span>
           </div>
         </div>
