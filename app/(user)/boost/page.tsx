@@ -1,4 +1,5 @@
 import BoostCard from "@/components/Boost/BoostCard";
+import BoostDrawer from "@/components/Boost/BoostDrawer";
 import React from "react";
 
 function page() {
@@ -12,7 +13,7 @@ function page() {
       // }}
       className="bg-gradient-to-t from-orange-200 to-orange-50 min-h-screen px-4 pt-40"
     >
-      <BoostCard />
+      <BoostDrawer />
     </div>
   );
 }
