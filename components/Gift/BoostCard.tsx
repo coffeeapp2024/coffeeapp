@@ -2,23 +2,29 @@ import Image from "next/image";
 import React, { useId } from "react";
 import MainButton from "../MainButton";
 import CoinIcon from "../Template/CoinIcon";
-import { Level } from "@/store/storeTypes";
+import { LevelData } from "@/store/storeTypes";
 import { useUserDataStore } from "@/store/zustand";
 import { calculateInitialCurrentCoin } from "@/lib/coinActions";
 import { updateUserInFirestore } from "@/lib/firebaseFunctions";
 import { toast } from "sonner";
 
 function BoostCard({
-  level,
+  LevelData,
   nextBalance,
 }: {
-  level: Level;
+  LevelData: LevelData;
   nextBalance: number | null;
 }) {
   const { userData, userId, setUserData } = useUserDataStore();
   const { coin, startTimeMine, balance: userBalance } = userData ?? {};
 
-  const { icon, balance: levelBalance, price, timeMinePerQr } = level;
+  const {
+    icon,
+    balance: levelBalance,
+    price,
+    timeMinePerQr,
+    level,
+  } = LevelData;
   const isHidden = nextBalance === levelBalance ? false : true;
 
   const handleUpgrade = async () => {
@@ -49,6 +55,7 @@ function BoostCard({
     const newUserData = {
       ...userData,
       coin: updatedCoin,
+      level: level,
       startTimeMine: new Date().toISOString(),
       balance: levelBalance,
     };

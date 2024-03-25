@@ -77,16 +77,17 @@ export type CaseStore = {
   setCases: (cases: Case[]) => void;
 };
 
-export type Level = {
+export type LevelData = {
   balance: number;
+  level: number;
   timeMinePerQr: number;
   price: number;
   icon: string;
 };
 
 export type LevelStore = {
-  levels: Level[] | null;
-  setLevels: (levels: Level[]) => void;
+  levels: LevelData[] | null;
+  setLevels: (levels: LevelData[]) => void;
 };
 
 export type PostType = {
