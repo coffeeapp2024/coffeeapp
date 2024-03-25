@@ -11,7 +11,7 @@ function page() {
       //   backgroundRepeat: "no-repeat",
       //   backgroundSize: "cover",
       // }}
-      className="bg-gradient-to-t from-orange-200 to-orange-50 min-h-screen px-4 pt-40"
+      className="bg-gradient-to-t from-orange-300 to-orange-50 min-h-screen px-4 pt-40"
     >
       <BoostDrawer />
     </div>

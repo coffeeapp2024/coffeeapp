@@ -1,55 +1,48 @@
-import { ChevronRightIcon, UserCircleIcon } from "@heroicons/react/24/outline";
 import React from "react";
-import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+
 import UserInfo from "./UserInfo";
 import UserVoucherList from "./UserVoucherList";
 import { User } from "firebase/auth";
-import Image from "next/image";
 import SignOutButton from "./SignOutButton";
 import Admin from "./AdminNav";
 import { useUserDataStore } from "@/store/zustand";
+import UserPageNav from "./UserPageNav";
+import {
+  ArrowLeftIcon,
+  ChevronLeftIcon,
+  EllipsisVerticalIcon,
+} from "@heroicons/react/24/outline";
+import Image from "next/image";
 
 function ProfileDialog({ user }: { user: User }) {
   const { role } = useUserDataStore();
   return (
-    <Drawer>
-      <DrawerTrigger className="flex items-center justify-between w-full h-full p-3">
-        <div className="flex items-center justify-center gap-x-2 h-full">
-          <div className="relative overflow-hidden bg-neutral-300 rounded-xl h-full aspect-square flex items-center justify-center">
-            {user.photoURL ? (
-              <Image
-                src={user.photoURL}
-                fill={true}
-                sizes="(max-width: 640px) 100vw, 640px"
-                alt="User Avatar"
-                className="object-cover"
-              />
-            ) : (
-              <UserCircleIcon className="h-6 w-6 text-neutral-700" />
-            )}
-          </div>
-          <div className="flex flex-col items-start">
-            <span className="text-sm font-semibold text-neutral-800">
-              {user ? user.displayName : "Loading..."}
-            </span>
-            <span className="text-sm font-semibold text-neutral-600">
-              {user ? user.email : "Loading..."}
-            </span>
-          </div>
-        </div>
-        <ChevronRightIcon className="h-6 w-6" />
-      </DrawerTrigger>
+    <Sheet>
+      <SheetTrigger className="w-full">
+        <UserPageNav user={user} />
+      </SheetTrigger>
 
-      {/* User Content ------------------------------------- */}
-      <DrawerContent className="rounded-t-3xl h-[80vh] sm:max-w-screen-sm mx-auto">
-        <div className="pt-6">
-          <UserInfo user={user} />
-          <UserVoucherList />
+      <SheetContent className="w-full px-2 pt-3 h-full sm:max-w-screen-sm mx-auto bg-neutral-100">
+        <div className="flex justify-between items-center">
+          <SheetClose asChild>
+            <button className="w-10 h-10 flex items-center justify-center bg-neutral-200 rounded-xl">
+              <ChevronLeftIcon className="w-4 h-4" />
+            </button>
+          </SheetClose>
+          <button className="w-6 h-6">
+            <EllipsisVerticalIcon className="w-6 h-6" />
+          </button>
         </div>
         {role && <Admin />}
         <SignOutButton />
-      </DrawerContent>
-    </Drawer>
+      </SheetContent>
+    </Sheet>
   );
 }
 

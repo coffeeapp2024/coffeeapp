@@ -5,7 +5,7 @@ import Image from "next/image";
 
 function StorageCard() {
   return (
-    <div className="flex relative w-full h-32 rounded-2xl bg-white bg-opacity-50 active:scale-95 transition-transform duration-75">
+    <div className="flex relative w-full h-32 rounded-2xl bg-white bg-opacity-50 active:scale-[97%] transition-transform duration-75">
       <div className="basis-1/4 px-4 flex items-center justify-center">
         <div className="aspect-square w-full flex justify-center items-center overflow-hidden bg-white bg-opacity-50 rounded-2xl">
           <Image
