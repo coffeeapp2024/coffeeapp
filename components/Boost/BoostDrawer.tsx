@@ -17,7 +17,7 @@ function BoostDrawer() {
       <DrawerTrigger asChild>
         <BoostCard />
       </DrawerTrigger>
-      <DrawerContent className="rounded-t-3xl h-[80vh] sm:max-w-screen-sm mx-auto"></DrawerContent>
+      <DrawerContent className="rounded-t-3xl h-[60vh] sm:max-w-screen-sm mx-auto"></DrawerContent>
     </Drawer>
   );
 }
