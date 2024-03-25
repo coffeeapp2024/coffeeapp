@@ -32,12 +32,10 @@ import {
   HomePageContent,
   MinePageContent,
   PostStore,
-  UserData,
 } from "@/store/storeTypes";
 import { calculateInitialCurrentCoin } from "@/lib/coinActions";
 import { collection, doc, getDoc } from "firebase/firestore";
 import { toast } from "sonner";
-import InstallButton from "@/components/Template/InstallButton";
 
 function useFetchVouchersEffect() {
   const { setVouchers, vouchers } = useVoucherStore();
@@ -314,7 +312,6 @@ export default function RootLayout({
   return (
     <main className="relative mx-auto w-full">
       <Nav />
-      <InstallButton />
 
       {children}
     </main>

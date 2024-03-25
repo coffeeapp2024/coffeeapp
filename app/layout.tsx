@@ -5,7 +5,7 @@ import { Metadata } from "next";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
 import { useEffect } from "react";
-import InstallButton from "@/components/Template/InstallButton";
+import InstallButton from "@/components/Mine/InstallButton";
 import Head from "next/head";
 const inter = Inter({ subsets: ["latin"] });
 

@@ -25,7 +25,7 @@ function CurrentCoinInfo() {
   }, [currentCoin, userData, setCurrentCoin]);
 
   return (
-    <div className="flex items-center justify-center flex-col text-white mt-24 ">
+    <div className="flex items-center justify-center flex-col text-white mt-24">
       <div className="flex items-center mb-1 ">
         <CoinIcon classname="w-12 h-12" />
         <span className="text-shadow font-extrabold text-4xl rounded-xl">

@@ -18,7 +18,7 @@ function BoostCard({
   const { userData, userId, setUserData } = useUserDataStore();
   const { coin, startTimeMine, balance: userBalance } = userData ?? {};
 
-  const { icon, balance: levelBalance, price } = level;
+  const { icon, balance: levelBalance, price, timeMinePerQr } = level;
   const isHidden = nextBalance === levelBalance ? false : true;
 
   const handleUpgrade = async () => {
@@ -60,7 +60,7 @@ function BoostCard({
   };
 
   return (
-    <div className="bg-neutral-50 aspect-square rounded-3xl pt-2 relative ">
+    <div className="bg-neutral-50 aspect-[9/10] rounded-3xl pt-2 relative ">
       <div className="relative h-1/2 mb-3">
         <Image
           src={icon}
@@ -70,10 +70,9 @@ function BoostCard({
           className="object-contain"
         />
       </div>
-      <div className="flex items-center justify-center flex-col gap-y-2">
-        <span className="font-semibold text-neutral-700">
-          {levelBalance} coin per hour
-        </span>
+      <div className="flex items-center justify-center flex-col gap-y-1 font-semibold text-neutral-700">
+        <span className="">{levelBalance} coin/hour</span>
+        <span className="mb-4">{timeMinePerQr}h mine/qrcode</span>
         <div className="flex items-center justify-center pl-2">
           <span className="font-bold text-xl">{price}</span>
           <CoinIcon classname="w-6 h-6  " />

@@ -197,7 +197,7 @@ export async function fetchLevelsFromFirestore() {
         ...doc.data(),
       });
     });
-
+    console.log("Fetched levels from Firestore:", levels);
     return levels;
   } catch (error) {
     console.error("Error fetching levels from Firestore:", error);

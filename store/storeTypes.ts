@@ -78,6 +78,7 @@ export type CaseStore = {
 
 export type Level = {
   balance: number;
+  timeMinePerQr: number;
   price: number;
   icon: string;
 };

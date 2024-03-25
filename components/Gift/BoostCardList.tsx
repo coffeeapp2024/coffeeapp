@@ -32,7 +32,7 @@ function BoostCardList() {
     >
       <CarouselContent className="-ml-0 pb-8">
         {levels?.map((level, index) => (
-          <CarouselItem key={index} className="basis-[60%] pl-6">
+          <CarouselItem key={index} className="basis-[50%] pl-6">
             <BoostCard nextBalance={nextBalance} level={level} />
           </CarouselItem>
         ))}
