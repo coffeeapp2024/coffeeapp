@@ -29,22 +29,36 @@ function ProfileDialog({ user }: { user: User }) {
         <UserPageNav user={user} />
       </SheetTrigger>
 
-      <SheetContent className="w-full px-2 pt-3 h-full sm:max-w-screen-sm mx-auto bg-neutral-100">
-        <div className="flex justify-between items-center">
+      <SheetContent className="w-full p-0 h-full sm:max-w-screen-sm mx-auto bg-orange-50">
+        <div className="fixed w-full flex justify-between items-center bg-white px-1 py-2">
           <SheetClose asChild>
-            <button className="w-10 h-10 flex items-center justify-center bg-neutral-200 rounded-xl">
-              <ChevronLeftIcon className="w-4 h-4" />
+            <button className="w-10 h-10 flex items-center justify-center rounded-xl">
+              <ChevronLeftIcon className="w-6 h-6" />
             </button>
           </SheetClose>
           <div className="font-semibold text-lg text-neutral-900">
             MIN Wallet
           </div>
-          <button className="w-10 h-10 rounded-xl flex items-center justify-center bg-neutral-200 ">
-            <EllipsisVerticalIcon className="w-4 h-4" />
+          <button className="w-10 h-10 rounded-xl flex items-center justify-center bg-white ">
+            <EllipsisVerticalIcon className="w-6 h-6" />
           </button>
         </div>
+        <div className="px-4">
+          <div></div>
+          <div className="relative">
+            <div className="flex items-center justify-center h-40 w-full bg-white mt-28 rounded-[26px] z-10 border-neutral-800 border-[1px]">
+              <p>Coming Soon Poster/App</p>
+              <div className="bg-neutral-950 absolute top-1 left-1 w-full h-full rounded-[26px] -z-10"></div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div></div>
+        </div>
+
         {role && <Admin />}
-        <SignOutButton />
+        {/* <SignOutButton /> */}
       </SheetContent>
     </Sheet>
   );
