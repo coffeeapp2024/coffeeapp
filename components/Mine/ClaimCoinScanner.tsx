@@ -30,7 +30,7 @@ const ClaimCoinScanner = () => {
       return;
     }
 
-    const userTimeMinePerQr = levels[userData?.level].timeMinePerQr;
+    const userTimeMinePerQr = levels[userData?.level - 1].timeMinePerQr;
 
     const keys = await fetchKeysFromFirestore(); // Fetch keys from Firestore
     if (keys.includes(text)) {

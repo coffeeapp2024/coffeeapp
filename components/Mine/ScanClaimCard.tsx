@@ -41,7 +41,7 @@ function ScanClaimCard() {
     return;
   }
 
-  const userTimeMinePerQr = levels[userData?.level].timeMinePerQr;
+  const userTimeMinePerQr = levels[userData?.level - 1].timeMinePerQr;
 
   return (
     <div className="absolute bottom-1/4 sm:bottom-1/3 w-full max-w-screen-sm px-3">
