@@ -28,7 +28,7 @@ function DeleteAllKeys() {
       className={`${role === "manager" ? "" : "pointer-events-none grayscale"}`}
       onClick={handleDeleteAllKeys}
     >
-      <MainButton text="Delete All QrCode" />
+      <MainButton text="Delete All QR" />
     </button>
   );
 }
