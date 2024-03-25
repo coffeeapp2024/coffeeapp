@@ -15,6 +15,7 @@ import { useUserDataStore } from "@/store/zustand";
 import UserPageNav from "./UserPageNav";
 import {
   ArrowLeftIcon,
+  Bars2Icon,
   ChevronLeftIcon,
   EllipsisVerticalIcon,
 } from "@heroicons/react/24/outline";
@@ -35,8 +36,11 @@ function ProfileDialog({ user }: { user: User }) {
               <ChevronLeftIcon className="w-4 h-4" />
             </button>
           </SheetClose>
-          <button className="w-6 h-6">
-            <EllipsisVerticalIcon className="w-6 h-6" />
+          <div className="font-semibold text-lg text-neutral-900">
+            MIN Wallet
+          </div>
+          <button className="w-10 h-10 rounded-xl flex items-center justify-center bg-neutral-200 ">
+            <EllipsisVerticalIcon className="w-4 h-4" />
           </button>
         </div>
         {role && <Admin />}
