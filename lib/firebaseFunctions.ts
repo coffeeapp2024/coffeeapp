@@ -116,8 +116,10 @@ export async function generateKeysAndSaveToFirestore(count: number) {
     for (let i = 0; i < count; i++) {
       const keyRef = doc(keysRef);
       const keyId = keyRef.id;
-      await setDoc(keyRef, { key: keyId });
-      keys.push(keyId);
+      const createdAt = new Date().toISOString();
+      const newKey = { key: keyId, createdAt };
+      await setDoc(keyRef, newKey);
+      keys.push(newKey);
     }
     return keys;
   } catch (error) {

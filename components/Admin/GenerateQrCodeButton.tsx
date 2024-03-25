@@ -4,14 +4,15 @@ import QRCode from "qrcode.react";
 import { generateKeysAndSaveToFirestore } from "@/lib/firebaseFunctions";
 import MainButton from "../MainButton";
 import { useUserDataStore } from "@/store/zustand";
+import { QrCodeType } from "@/store/storeTypes";
 
 function GenerateQrCodeButton() {
   const { role } = useUserDataStore();
-  const [qrValues, setQrValues] = useState<string[]>([]);
+  const [qrCodes, setQrCodes] = useState<QrCodeType[]>([]);
 
   useEffect(() => {
-    if (qrValues.length > 0) {
-      qrValues.forEach((qrValue, index) => {
+    if (qrCodes.length > 0) {
+      qrCodes.forEach((qrValue, index) => {
         const canvas = document.getElementById(
           `qr-code-${index}`
         ) as HTMLCanvasElement | null;
@@ -26,25 +27,25 @@ function GenerateQrCodeButton() {
         }
       });
     }
-  }, [qrValues]);
+  }, [qrCodes]);
 
   const handleGenerateAndDownload = async () => {
     try {
-      const keys = await generateKeysAndSaveToFirestore(1); // Generate 1 key
-      setQrValues(keys);
+      const Qrcodes = await generateKeysAndSaveToFirestore(1); // Generate 1 key
+      setQrCodes(Qrcodes);
     } catch (error) {
-      console.error("Error generating keys:", error);
+      console.error("Error generating Qrcodes:", error);
     }
   };
 
   return (
     <div className="flex items-center flex-col justify-center">
       <div className="hidden">
-        {qrValues.map((qrValue, index) => (
+        {qrCodes.map((qrCode, index) => (
           <div key={index}>
             <QRCode
               id={`qr-code-${index}`}
-              value={qrValue}
+              value={qrCode.key}
               includeMargin={true}
             />
           </div>

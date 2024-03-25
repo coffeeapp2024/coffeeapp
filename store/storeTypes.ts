@@ -176,3 +176,8 @@ export type Account = {
   manager: string[];
   testing: boolean;
 };
+
+export type QrCodeType = {
+  key: string;
+  createdAt: string;
+};
