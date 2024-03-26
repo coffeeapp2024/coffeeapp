@@ -8,9 +8,9 @@ function VoucherCard({ voucherDataList }: { voucherDataList: any }) {
   const { imageURL } = voucherDataList;
 
   return (
-    <div className="relative bg-card w-full aspect-voucher-card py-2 pl-2 pr-4 rounded-2xl flex">
+    <div className="relative bg-card w-full py-2 pl-2 pr-4 rounded-2xl flex shadow-md">
       {/* Left */}
-      <div className="bg-background h-full aspect-square rounded-xl overflow-hidden">
+      <div className="bg-background basis-1/3 aspect-square rounded-xl overflow-hidden">
         <Image
           src={imageURL}
           width={300}
@@ -24,7 +24,7 @@ function VoucherCard({ voucherDataList }: { voucherDataList: any }) {
       <div className="pl-3 pt-2">
         <div className="mb-2">
           <h3 className="font-bold text-lg">Giảm 30%</h3>
-          <p className="text-wrap">Tối đa 15k cho đơn từ 0đ</p>
+          <p className="text-wrap text-sm">Tối đa 15k cho đơn từ 0đ</p>
         </div>
         <span className="flex items-center justify-center w-fit font-semibold">
           20

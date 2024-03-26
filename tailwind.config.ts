@@ -19,9 +19,7 @@ const config = {
       },
     },
     extend: {
-      aspectRatio: {
-        "voucher-card": "5/2",
-      },
+      aspectRatio: {},
       borderRadius: {
         "primary-button": "12px",
       },

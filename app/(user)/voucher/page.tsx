@@ -36,7 +36,7 @@ function page() {
       </div>
 
       {/* List Voucher Card */}
-      <div className="pt-28">
+      <div className="pt-8 flex flex-col gap-y-3">
         {VoucherDataList.map((voucherDataList, index) => (
           <VoucherCard key={index} voucherDataList={voucherDataList} />
         ))}
