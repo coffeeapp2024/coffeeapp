@@ -21,7 +21,7 @@ function Nav() {
     ["More", "/more"],
   ];
 
-  const iconSize = "w-7 h-7";
+  const iconSize = "w-8 h-8";
 
   const icons = [
     <HomeIcon key={1} className={iconSize} />,
