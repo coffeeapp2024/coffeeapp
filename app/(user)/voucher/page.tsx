@@ -16,6 +16,14 @@ const VoucherDataList = [
     imageURL:
       "https://www.aeon.com.vn/wp-content/uploads/2021/04/momo-thequa_pb_promotion.jpg",
   },
+  {
+    imageURL:
+      "https://www.aeon.com.vn/wp-content/uploads/2021/04/momo-thequa_pb_promotion.jpg",
+  },
+  {
+    imageURL:
+      "https://www.aeon.com.vn/wp-content/uploads/2021/04/momo-thequa_pb_promotion.jpg",
+  },
 ];
 
 const voucherBanner =
@@ -25,7 +33,7 @@ function page() {
   return (
     <div className="w-full min-h-screen bg-background p-0 px-3 pt-2">
       {/* Banner */}
-      <div className="bg-neutral-200 w-full aspect-[3/1] rounded-3xl overflow-hidden">
+      <div className="bg-neutral-200 w-full aspect-[3/1] rounded-2xl overflow-hidden">
         <Image
           src={voucherBanner}
           width={600}
@@ -36,7 +44,7 @@ function page() {
       </div>
 
       {/* List Voucher Card */}
-      <div className="pt-8 flex flex-col gap-y-3">
+      <div className="pt-8 flex flex-col items-center gap-y-3">
         {VoucherDataList.map((voucherDataList, index) => (
           <VoucherCard key={index} voucherDataList={voucherDataList} />
         ))}
