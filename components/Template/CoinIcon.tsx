@@ -3,9 +3,13 @@ import React from "react";
 
 function CoinIcon({ classname }: { classname: string }) {
   return (
-    <div className={`relative ${classname}`}>
-      <Image src="/icons/coin.png" fill={true} alt="Coin Icon" />
-    </div>
+    <Image
+      src="/icons/coin.png"
+      width={100}
+      height={100}
+      className={`relative ${classname} mx-1`}
+      alt="Coin Icon"
+    />
   );
 }
 
