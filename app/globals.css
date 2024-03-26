@@ -24,18 +24,6 @@
     animation: zoomOut 0.5s infinite alternate;
   }
 
-  .nav-item {
-    @apply flex flex-col items-center justify-between px-5 gap-1  scale-110;
-  }
-
-  .nav-icon {
-    @apply h-6 w-full object-contain;
-  }
-
-  .nav-item-name {
-    @apply text-xs text-neutral-600;
-  }
-
   .main-button {
     @apply bg-gradient-to-tr from-amber-300 to-amber-400 flex items-center justify-center rounded-xl text-xl text-neutral-800 font-bold text-nowrap border-[1px] border-neutral-800 -z-10 shadow-lg;
   }

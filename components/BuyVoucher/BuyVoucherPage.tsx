@@ -16,7 +16,7 @@ const VoucherDataList = [
 
 function BuyVoucherPage() {
   return (
-    <Sheet open={true}>
+    <Sheet>
       <SheetTrigger asChild>
         <button className="text-primary-dark">open buy voucher</button>
       </SheetTrigger>
