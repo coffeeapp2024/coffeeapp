@@ -21,7 +21,7 @@ function Nav() {
     ["More", "/more"],
   ];
 
-  const iconSize = "w-8 h-8";
+  const iconSize = "w-6 h-6";
 
   const icons = [
     <HomeIcon key={1} className={iconSize} />,
@@ -33,7 +33,7 @@ function Nav() {
 
   return (
     <div className="fixed bottom-10 w-screen max-w-screen-sm z-10 shadow-sm px-4">
-      <nav className="flex justify-around gap-x-2 items-center px-2 py-1 w-fit mx-auto bg-white bg-opacity-95 rounded-[40px] border-[1px] border-neutral-300 divide-neutral-300">
+      <nav className="flex justify-around items-center px-2 w-fit mx-auto bg-white bg-opacity-95 rounded-[40px] border-[1px] border-neutral-300 divide-neutral-300">
         {navList.map(([title, url], index) => {
           const isActive = pathname === url;
           return (
@@ -42,7 +42,7 @@ function Nav() {
               key={index}
               className={`${
                 isActive ? "scale-150" : "text-neutral-700 "
-              } p-4 rounded-full transition-transform`}
+              } p-3 rounded-full transition-transform`}
             >
               {icons[index]}
             </Link>
