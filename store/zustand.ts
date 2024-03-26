@@ -129,3 +129,13 @@ export const useMinePageContentStore = create<MinePageContentStore>((set) => ({
   minePageContent: null,
   setMinePageContent: (minePageContent) => set({ minePageContent }),
 }));
+
+export type PaymentMethodStore = {
+  usePoints: boolean;
+  toggleUsePoints: () => void;
+};
+
+export const usePaymentMethodStore = create<PaymentMethodStore>((set) => ({
+  usePoints: false, // Sử dụng điểm là mặc định
+  toggleUsePoints: () => set((state) => ({ usePoints: !state.usePoints })),
+}));
