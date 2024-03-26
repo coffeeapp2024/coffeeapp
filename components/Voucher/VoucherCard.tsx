@@ -8,7 +8,7 @@ function VoucherCard({ voucherDataList }: { voucherDataList: any }) {
   const { imageURL } = voucherDataList;
 
   return (
-    <div className="relative bg-card w-full py-2 pl-2 pr-4 rounded-2xl flex shadow-md">
+    <div className="relative bg-card w-full py-2 pl-2 pr-4 rounded-2xl flex shadow-sm">
       {/* Left */}
       <div className="bg-background basis-1/3 aspect-square rounded-xl overflow-hidden">
         <Image
