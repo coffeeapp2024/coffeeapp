@@ -28,7 +28,7 @@ function VoucherCard({ voucherDataList }: { voucherDataList: any }) {
         </div>
         <span className="flex items-center justify-center w-fit font-semibold">
           20
-          <CoinIcon classname="w-5 h-5" />
+          <CoinIcon classname="w-4 h-4" />
         </span>
       </div>
 
