@@ -4,6 +4,7 @@ import BoostDialog from "@/components/Gift/BoostDialog";
 import GameDialog from "@/components/Gift/GameDialog";
 import React from "react";
 import VoucherDialog from "@/components/Gift/VoucherDialog";
+import BuyVoucherPage from "@/components/BuyVoucher/BuyVoucherPage";
 
 function Page() {
   return (
@@ -20,6 +21,7 @@ function Page() {
         <GameDialog />
         <BoostDialog />
         <VoucherDialog />
+        <BuyVoucherPage />
       </div>
     </div>
   );

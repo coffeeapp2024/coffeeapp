@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import colors from "tailwindcss/colors";
 
 const config = {
   darkMode: ["class"],
@@ -18,6 +19,28 @@ const config = {
       },
     },
     extend: {
+      aspectRatio: {
+        "voucher-card": "5/2",
+      },
+      borderRadius: {
+        "primary-button": "12px",
+      },
+      borderWidth: {
+        "2px": "2px",
+      },
+      colors: {
+        background: {
+          DEFAULT: colors.neutral[50],
+        },
+        foreground: {
+          DEFAULT: colors.neutral[950],
+        },
+        primary: {
+          foreground: colors.pink[500],
+          dark: colors.white,
+        },
+        card: colors.white,
+      },
       keyframes: {
         "accordion-down": {
           from: { height: "0" },

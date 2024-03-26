@@ -5,12 +5,12 @@
 @layer base {
   :root {
     body {
-      @apply bg-black text-black max-w-screen-sm min-h-screen mx-auto;
+      @apply bg-foreground text-foreground max-w-screen-sm min-h-screen mx-auto;
     }
   }
 }
 
-@layer base {
+@layer components {
   @keyframes zoomOut {
     from {
       transform: scale(1);
@@ -45,5 +45,9 @@
 
   .text-shadow {
     @apply [text-shadow:1px_1px_5px_var(--tw-shadow-color)] shadow-neutral-800;
+  }
+
+  .user-item-card {
+    @apply basis-1/2 aspect-[6/7] bg-white border-[1px] rounded-[26px];
   }
 }
