@@ -28,7 +28,7 @@ const config = {
       },
       colors: {
         background: {
-          DEFAULT: colors.neutral[50],
+          DEFAULT: colors.neutral[100],
         },
         foreground: {
           DEFAULT: colors.neutral[950],
