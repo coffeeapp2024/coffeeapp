@@ -21,7 +21,7 @@ function Nav() {
     ["More", "/more"],
   ];
 
-  const iconSize = "w-6 h-6";
+  const iconSize = "w-7 h-7";
 
   const icons = [
     <HomeIcon key={1} className={iconSize} />,
@@ -32,7 +32,7 @@ function Nav() {
   ];
 
   return (
-    <div className="fixed bottom-10 w-screen max-w-screen-sm z-10 shadow-sm px-4">
+    <div className="fixed bottom-10 w-screen max-w-screen-sm z-10 shadow-sm px-2">
       <nav className="flex justify-around items-center px-2 w-fit mx-auto bg-white bg-opacity-95 rounded-[40px] border-[1px] border-neutral-300 divide-neutral-300">
         {navList.map(([title, url], index) => {
           const isActive = pathname === url;

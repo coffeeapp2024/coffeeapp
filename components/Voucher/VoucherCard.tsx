@@ -21,7 +21,7 @@ function VoucherCard({ voucherDataList }: { voucherDataList: any }) {
       </div>
 
       {/* Right */}
-      <div className="pl-3 pt-2">
+      <div className="pl-3 pt-1">
         <div className="mb-2">
           <h3 className="font-bold text-lg">Giảm 30%</h3>
           <p className="text-wrap text-sm">Tối đa 15k cho đơn từ 0đ</p>
