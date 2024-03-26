@@ -1,11 +1,24 @@
+"use client";
+
 import React from "react";
 import CoinIcon from "../Template/CoinIcon";
+import Image from "next/image";
 
-function BuyVoucherCard() {
+function VoucherCard({ voucherDataList }: { voucherDataList: any }) {
+  const { imageURL } = voucherDataList;
+
   return (
     <div className="relative bg-card w-full aspect-voucher-card py-2 pl-2 pr-4 rounded-2xl flex">
       {/* Left */}
-      <div className="bg-background aspect-square basis-5 rounded-xl "></div>
+      <div className="bg-background h-full aspect-square rounded-xl overflow-hidden">
+        <Image
+          src={imageURL}
+          width={300}
+          height={300}
+          alt="Image Voucher"
+          className="w-full h-full object-cover"
+        />
+      </div>
 
       {/* Right */}
       <div className="pl-3 pt-2">
@@ -26,4 +39,4 @@ function BuyVoucherCard() {
   );
 }
 
-export default BuyVoucherCard;
+export default VoucherCard;
