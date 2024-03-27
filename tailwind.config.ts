@@ -25,6 +25,7 @@ const config = {
       },
       borderWidth: {
         "2px": "2px",
+        "1px": "1px",
       },
       colors: {
         background: {
