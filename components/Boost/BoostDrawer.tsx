@@ -11,7 +11,15 @@ import {
 } from "@heroicons/react/24/outline";
 import BoostLevel from "./BoostLevel";
 
-function BoostDrawer({ icons, level, levelTexts, text, name, price }: any) {
+function BoostDrawer({
+  icons,
+  level,
+  levelTexts,
+  nextName,
+  text,
+  name,
+  price,
+}: any) {
   return (
     <Drawer>
       <DrawerTrigger asChild>
@@ -34,7 +42,7 @@ function BoostDrawer({ icons, level, levelTexts, text, name, price }: any) {
               <CoinIcon classname="w-6 h-6 " />
               <span className=" font-semibold text-neutral-800">{price}</span>
               <div className="w-1 h-1 rounded-full mx-1 bg-neutral-600"></div>
-              <span className="font-semibold">L1</span>
+              <span className="font-semibold">L{level}</span>
             </div>
           </div>
           <div className="absolute right-4 top-1/2 -translate-y-1/2">
@@ -45,7 +53,7 @@ function BoostDrawer({ icons, level, levelTexts, text, name, price }: any) {
       <DrawerContent className="rounded-t-3xl h-fit sm:max-w-screen-sm mx-auto border-none pb-6">
         <div className="px-12">
           <div className="mb-6 flex items-center text-center flex-col pt-6">
-            <h3 className="font-extrabold text-3xl mb-3">Metal Storage</h3>
+            <h3 className="font-extrabold text-3xl mb-3">{nextName}</h3>
             <p className="font-semibold text-neutral-600 mx-1">
               Better storage holds more MIN and you can claim it less often
             </p>
@@ -62,8 +70,8 @@ function BoostDrawer({ icons, level, levelTexts, text, name, price }: any) {
 
             <BoostLevel level={level} text={levelTexts[0]} icon={icons[0]} />
             <div className="flex items-center justify-center pt-8 pb-8">
-              <CoinIcon classname="w-4 h-4" />
-              <span className="font-semibold text-2xl">2</span>
+              <CoinIcon classname="w-5 h-5" />
+              <span className="font-semibold text-xl">2</span>
             </div>
           </div>
         </div>

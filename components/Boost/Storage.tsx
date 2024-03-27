@@ -18,8 +18,12 @@ function Storage() {
 
   console.log("get storages", storages);
 
-  const { level, name, price, timeMinePerQr } = storages[currentLevel] ?? {};
-  const nextTimeMinePerQr = storages[currentLevel].timeMinePerQr;
+  const { level, name, timeMinePerQr } = storages[currentLevel] ?? {};
+  const {
+    name: nextName,
+    price: nextPrice,
+    timeMinePerQr: nextTimeMinePerQr,
+  } = storages[currentLevel + 1] ?? {};
 
   const levelTexts = [
     `Claim ${timeMinePerQr} per QR Code`,
@@ -30,10 +34,11 @@ function Storage() {
     <BoostDrawer
       icons={storageIcons}
       level={level}
+      nextName={nextName}
       name={name}
       text={text}
       levelTexts={levelTexts}
-      price={price}
+      price={nextPrice}
     />
   );
 }
