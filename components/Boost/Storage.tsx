@@ -4,20 +4,38 @@ import { useStorageStore } from "@/store/zustand";
 import { BoltIcon } from "@heroicons/react/24/outline";
 import BoostDrawer from "./BoostDrawer";
 
-function Storage({ level }: any) {
-  const { storages } = useStorageStore();
-  const text = "Increase the fill <br/> time to claim less often";
-
+function Storage() {
   const iconSize = "w-10 h-10";
-
   const storageIcons = [
     <BoltIcon key="1" className={`${iconSize}`} />,
     <BoltIcon key="2" className={`${iconSize} text-yellow-500`} />,
   ];
+  const text = "Increase the fill <br/> time to claim less often";
 
-  console.log("use storage:", storages);
+  const currentLevel = 0;
+  const { storages } = useStorageStore();
+  if (!storages) return;
 
-  return <BoostDrawer icons={storageIcons} level={level} text={text} />;
+  console.log("get storages", storages);
+
+  const { level, name, price, timeMinePerQr } = storages[currentLevel] ?? {};
+  const nextTimeMinePerQr = storages[currentLevel].timeMinePerQr;
+
+  const levelTexts = [
+    `Claim ${timeMinePerQr} per QR Code`,
+    `Claim ${nextTimeMinePerQr} per QR Code`,
+  ];
+
+  return (
+    <BoostDrawer
+      icons={storageIcons}
+      level={level}
+      name={name}
+      text={text}
+      levelTexts={levelTexts}
+      price={price}
+    />
+  );
 }
 
 export default Storage;

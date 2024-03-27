@@ -11,7 +11,7 @@ import {
 } from "@heroicons/react/24/outline";
 import BoostLevel from "./BoostLevel";
 
-function BoostDrawer({ icons, level, text }: any) {
+function BoostDrawer({ icons, level, levelTexts, text, name, price }: any) {
   return (
     <Drawer>
       <DrawerTrigger asChild>
@@ -22,7 +22,7 @@ function BoostDrawer({ icons, level, text }: any) {
             </div>
           </div>
           <div className="basis-auto py-4 text-neutral-500 pr-10">
-            <div className="font-semibold text-neutral-800">Wooden Storage</div>
+            <div className="font-semibold text-neutral-800">{name}</div>
             <div
               className="text-sm font-semibold mb-2"
               dangerouslySetInnerHTML={{
@@ -32,7 +32,7 @@ function BoostDrawer({ icons, level, text }: any) {
             {/* Level */}
             <div className="flex items-center gap-x-1 -ml-1">
               <CoinIcon classname="w-6 h-6 " />
-              <span className=" font-semibold text-neutral-800">0.2</span>
+              <span className=" font-semibold text-neutral-800">{price}</span>
               <div className="w-1 h-1 rounded-full mx-1 bg-neutral-600"></div>
               <span className="font-semibold">L1</span>
             </div>
@@ -52,9 +52,15 @@ function BoostDrawer({ icons, level, text }: any) {
           </div>
 
           <div className="flex flex-col items-center">
-            <BoostLevel icon={icons[1]} />
+            <BoostLevel
+              level={level + 1}
+              text={levelTexts[1]}
+              icon={icons[1]}
+            />
+
             <ArrowUpIcon className="w-6 h-6 my-4" />
-            <BoostLevel icon={icons[0]} />
+
+            <BoostLevel level={level} text={levelTexts[0]} icon={icons[0]} />
             <div className="flex items-center justify-center pt-8 pb-8">
               <CoinIcon classname="w-4 h-4" />
               <span className="font-semibold text-2xl">2</span>

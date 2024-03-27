@@ -485,10 +485,7 @@ export async function fetchAllStorageDocs() {
     const storageDocs: any = [];
 
     storagesSnapshot.forEach((doc) => {
-      storageDocs.push({
-        id: doc.id,
-        data: doc.data(),
-      });
+      storageDocs.push(doc.data());
     });
     console.log("Fetched storages:", storageDocs);
     return storageDocs;

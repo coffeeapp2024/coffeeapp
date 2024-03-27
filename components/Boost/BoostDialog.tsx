@@ -50,7 +50,7 @@ function BoostDialog() {
         </SheetClose>
         <div className="flex flex-col gap-y-3">
           <Storage />
-          <Fireplace />
+          {/* <Fireplace /> */}
         </div>
       </SheetContent>
     </Sheet>

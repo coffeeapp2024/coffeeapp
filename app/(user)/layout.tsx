@@ -15,6 +15,7 @@ import {
   fetchAllStorageDocs,
 } from "@/lib/firebaseFunctions";
 import {
+  StorageItem,
   useCaseStore,
   useCheckinPostStore,
   useCoinStore,
@@ -311,8 +312,8 @@ export default function RootLayout({
       });
     if (!storages) {
       fetchAllStorageDocs()
-        .then((fetchedStorages) => {
-          setStorages(fetchedStorages);
+        .then((storages) => {
+          setStorages(storages);
         })
         .catch((error) => {
           console.error("Error fetching storage documents:", error);
