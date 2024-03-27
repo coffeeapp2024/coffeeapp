@@ -1,6 +1,6 @@
 "use client";
 
-import BoostDialog from "@/components/Gift/BoostDialog";
+import BoostDialog from "@/components/Boost/BoostDialog";
 import GameDialog from "@/components/Gift/GameDialog";
 import React from "react";
 import VoucherDialog from "@/components/Gift/VoucherDialog";

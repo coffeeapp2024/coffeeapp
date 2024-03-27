@@ -1,17 +1,22 @@
 import Image from "next/image";
 import React from "react";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import BoostCardList from "./BoostCardList";
-import CloseDialogButton from "../Template/CloseDialogButton";
-import { toast } from "sonner";
 import { useUserDataStore } from "@/store/zustand";
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+import { ArrowLeftIcon } from "@heroicons/react/24/outline";
+import BoostCard from "./BoostCard";
+import { toast } from "sonner";
 
 function BoostDialog() {
   const { userData } = useUserDataStore();
 
   return (
-    <Dialog>
-      <DialogTrigger
+    <Sheet>
+      <SheetTrigger
         onClick={() => {
           !userData && toast.warning("Sign in to boost your balance");
         }}
@@ -34,13 +39,17 @@ function BoostDialog() {
             <div className="absolute bg-neutral-950 w-full h-full rounded-xl -z-10 top-[3px] left-1 "></div>
           </div>
         </div>
-      </DialogTrigger>
-      <DialogContent className="bg-transparent border-none p-0 py-8">
-        <BoostCardList />
+      </SheetTrigger>
+      <SheetContent className="w-full">
+        <SheetClose>
+          <button>
+            <ArrowLeftIcon className="w-4 h-4" />
+          </button>
+        </SheetClose>
 
-        <CloseDialogButton />
-      </DialogContent>
-    </Dialog>
+        <BoostCard />
+      </SheetContent>
+    </Sheet>
   );
 }
 
