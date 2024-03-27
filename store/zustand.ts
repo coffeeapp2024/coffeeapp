@@ -136,6 +136,25 @@ export type PaymentMethodStore = {
 };
 
 export const usePaymentMethodStore = create<PaymentMethodStore>((set) => ({
-  usePoints: false, // Sử dụng điểm là mặc định
+  usePoints: false,
   toggleUsePoints: () => set((state) => ({ usePoints: !state.usePoints })),
+}));
+
+export type StorageItem = {
+  id: string;
+  icon: string;
+  level: number;
+  name: string;
+  price: number;
+  timeMinePerQr: number;
+};
+
+export type StorageStore = {
+  storages: StorageItem[] | null;
+  setStorages: (storages: StorageItem[]) => void;
+};
+
+export const useStorageStore = create<StorageStore>((set) => ({
+  storages: null,
+  setStorages: (storages) => set({ storages }),
 }));

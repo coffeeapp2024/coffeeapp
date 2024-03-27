@@ -12,6 +12,7 @@ import {
   fetchProductsFromFirestore,
   fetchProductTagsFromFirestore,
   fetchShopContent,
+  fetchAllStorageDocs,
 } from "@/lib/firebaseFunctions";
 import {
   useCaseStore,
@@ -24,6 +25,7 @@ import {
   useProductStore,
   useProductTagStore,
   useShopStore,
+  useStorageStore,
   useUserDataStore,
   useVoucherStore,
 } from "@/store/zustand";
@@ -300,14 +302,23 @@ export default function RootLayout({
 
   // Fetch HomePageContent
   const { homePageContent, setHomePageContent } = useHomePageContentStore();
+  const { storages, setStorages } = useStorageStore();
   useEffect(() => {
     !homePageContent &&
       getDoc(doc(collection(db, "contents"), "homepage")).then((snapshot) => {
         const data = snapshot.data() as HomePageContent;
-        console.log("Fetched HomePageContent:", data);
         setHomePageContent(data);
       });
-  }, [homePageContent, setHomePageContent]);
+    if (!storages) {
+      fetchAllStorageDocs()
+        .then((fetchedStorages) => {
+          setStorages(fetchedStorages);
+        })
+        .catch((error) => {
+          console.error("Error fetching storage documents:", error);
+        });
+    }
+  }, []);
 
   return (
     <main className="relative mx-auto w-full">

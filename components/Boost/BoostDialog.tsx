@@ -40,7 +40,7 @@ function BoostDialog() {
           </div>
         </div>
       </SheetTrigger>
-      <SheetContent className="w-full pt-36 bg-orange-50">
+      <SheetContent className="w-full pt-36 bg-neutral-100">
         <SheetClose className="fixed top-4 left-4">
           <button className="bg-neutral-200 p-2 rounded-xl">
             <ArrowLeftIcon className="w-4 h-4" />

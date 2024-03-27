@@ -478,3 +478,22 @@ export async function deleteAllKeysFromFirestore() {
     throw error;
   }
 }
+
+export async function fetchAllStorageDocs() {
+  try {
+    const storagesSnapshot = await getDocs(collection(db, "storages"));
+    const storageDocs: any = [];
+
+    storagesSnapshot.forEach((doc) => {
+      storageDocs.push({
+        id: doc.id,
+        data: doc.data(),
+      });
+    });
+    console.log("Fetched storages:", storageDocs);
+    return storageDocs;
+  } catch (error) {
+    console.error("Error fetching storage documents:", error);
+    throw error;
+  }
+}
