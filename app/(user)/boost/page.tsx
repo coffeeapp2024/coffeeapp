@@ -1,4 +1,3 @@
-import BoostCard from "@/components/Boost/BoostCard";
 import BoostDrawer from "@/components/Boost/BoostDrawer";
 import React from "react";
 
