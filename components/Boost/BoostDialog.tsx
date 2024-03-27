@@ -10,6 +10,8 @@ import {
 import { ArrowLeftIcon } from "@heroicons/react/24/outline";
 import { toast } from "sonner";
 import BoostDrawer from "./BoostDrawer";
+import Fireplace from "./Fireplace";
+import Storage from "./Storage";
 
 function BoostDialog() {
   const { userData } = useUserDataStore();
@@ -47,8 +49,8 @@ function BoostDialog() {
           </button>
         </SheetClose>
         <div className="flex flex-col gap-y-3">
-          <BoostDrawer />
-          <BoostDrawer />
+          <Storage />
+          <Fireplace />
         </div>
       </SheetContent>
     </Sheet>
