@@ -146,7 +146,7 @@ export type StorageItem = {
   level: number;
   name: string;
   price: number;
-  timeMinePerQr: number;
+  miningHourPerQrCode: number;
 };
 
 export type StorageStore = {

@@ -1,38 +1,66 @@
 import React from "react";
-import BoostDialog from "./BoostDialog";
-import { useStorageStore } from "@/store/zustand";
+import { useStorageStore, useUserDataStore } from "@/store/zustand";
 import { BoltIcon } from "@heroicons/react/24/outline";
 import BoostDrawer from "./BoostDrawer";
+import { toast } from "sonner";
+import { updateUserInFirestore } from "@/lib/firebaseFunctions";
+import {
+  updateDocumentInCollection,
+  updateKeyInDocument,
+} from "@/lib/firebaseUtils";
+
+const iconSize = "w-10 h-10";
+const storageIcons = [
+  <BoltIcon key="1" className={`${iconSize}`} />,
+  <BoltIcon key="2" className={`${iconSize} text-yellow-500`} />,
+];
+const text = "Increase the fill <br/> time to claim less often";
 
 function Storage() {
-  const iconSize = "w-10 h-10";
-  const storageIcons = [
-    <BoltIcon key="1" className={`${iconSize}`} />,
-    <BoltIcon key="2" className={`${iconSize} text-yellow-500`} />,
-  ];
-  const text = "Increase the fill <br/> time to claim less often";
-
-  const currentLevel = 0;
+  const { userData, userId, setUserData } = useUserDataStore();
   const { storages } = useStorageStore();
   if (!storages) return;
 
-  console.log("get storages", storages);
+  const userStorageLevel = userData?.miningHourPerQrCodeLevel;
+  const nextStorageLevel = userStorageLevel && userStorageLevel + 1;
 
-  const { level, name, timeMinePerQr } = storages[currentLevel] ?? {};
+  const userStorage = storages.find(
+    (storage) => storage.level === userStorageLevel
+  );
+  const nextStorage = storages.find(
+    (storage) => storage.level === nextStorageLevel
+  );
+
+  const { level, name, miningHourPerQrCode } = userStorage ?? {};
+
   const {
     name: nextName,
+    level: nextLevel,
     price: nextPrice,
-    timeMinePerQr: nextTimeMinePerQr,
-  } = storages[currentLevel + 1] ?? {};
+    miningHourPerQrCode: nextminingHourPerQrCode,
+  } = nextStorage ?? {};
 
   const levelTexts = [
-    `Claim ${timeMinePerQr} per QR Code`,
-    `Claim ${nextTimeMinePerQr} per QR Code`,
+    `Claim ${miningHourPerQrCode} per QR Code`,
+    `Claim ${nextminingHourPerQrCode} per QR Code`,
   ];
+
+  const handleUpgradeClick = async () => {
+    if (!userData || !nextLevel || !userId) return;
+    const newUserData = {
+      ...userData,
+      miningHourPerQrCodeLevel: nextLevel,
+    };
+    await updateDocumentInCollection("users", userId, newUserData);
+    setUserData(newUserData);
+
+    toast.success("Upgrade successful!");
+  };
 
   return (
     <BoostDrawer
       icons={storageIcons}
+      onClickUpgrade={handleUpgradeClick}
       level={level}
       nextName={nextName}
       name={name}

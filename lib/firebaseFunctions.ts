@@ -47,6 +47,8 @@ export async function createUserInFirestore(
         coin: 0,
         balance: 0.1,
         level: 1,
+        miningHourPerQrCodeLevel: 1,
+        speechMineLevel: 1,
         startTimeMine: null,
         endTimeMine: null,
         voucherIdList: [],

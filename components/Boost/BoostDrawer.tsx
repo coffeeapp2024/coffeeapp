@@ -16,6 +16,7 @@ function BoostDrawer({
   level,
   levelTexts,
   nextName,
+  onClickUpgrade,
   text,
   name,
   price,
@@ -76,7 +77,10 @@ function BoostDrawer({
           </div>
         </div>
         <div className="px-6">
-          <button className="h-[62px] px-2 py-2 rounded-3xl bg-neutral-800 text-white w-full font-medium text-xl">
+          <button
+            onClick={onClickUpgrade}
+            className="h-[62px] px-2 py-2 rounded-3xl bg-neutral-800 text-white w-full font-medium text-xl"
+          >
             Upgrade
           </button>
         </div>

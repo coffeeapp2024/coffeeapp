@@ -39,6 +39,8 @@ import {
 import { calculateInitialCurrentCoin } from "@/lib/coinActions";
 import { collection, doc, getDoc } from "firebase/firestore";
 import { toast } from "sonner";
+import Testing from "@/components/Testing";
+import { findValueByKeyWithCondition, getKeyValue } from "@/lib/firebaseUtils";
 
 function useFetchVouchersEffect() {
   const { setVouchers, vouchers } = useVoucherStore();
@@ -211,6 +213,17 @@ export default function RootLayout({
         if (user && user.email) {
           try {
             const fetchedUserData = await fetchUserData(user.uid);
+
+            if (fetchedUserData) {
+              fetchedUserData.balance = await findValueByKeyWithCondition(
+                "miningHourPerQrCodeLevels",
+                "level",
+                fetchedUserData.miningHourPerQrCodeLevel,
+                "miningHourPerQrCode"
+              );
+              console.log("set new balance:", fetchedUserData.balance);
+            }
+
             const fetchedAccounts = (
               await getDoc(doc(collection(db, "admin"), "accounts"))
             ).data() as Account;
@@ -249,6 +262,7 @@ export default function RootLayout({
     }
   }, [userData, userId, setUserData, setUserId, setRole]);
 
+  // Set Initial Coin
   useEffect(() => {
     const { balance, coin, startTimeMine } = userData ?? {};
 
@@ -259,7 +273,7 @@ export default function RootLayout({
         startTimeMine
       );
       setCurrentCoin(initialCoin);
-      console.log("initialCurrentCoin:", initialCoin);
+      console.log("Reset CurrentCoin when userData changes:", initialCoin);
     }
   }, [setCurrentCoin, userData]);
 
@@ -319,12 +333,13 @@ export default function RootLayout({
           console.error("Error fetching storage documents:", error);
         });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <main className="relative mx-auto w-full">
       <Nav />
-
+      <Testing />
       {children}
     </main>
   );

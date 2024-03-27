@@ -15,6 +15,8 @@ export type UserData = {
   voucherIdList: string[] | null;
   LikedEventImageIdList: string[];
   LikedCheckinImageIdList: string[];
+  speechMineLevel: number | null;
+  miningHourPerQrCodeLevel: number | null;
 };
 
 export type UserDataStore = {
