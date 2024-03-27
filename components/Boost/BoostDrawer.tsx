@@ -9,7 +9,7 @@ function BoostDrawer() {
   return (
     <Drawer>
       <DrawerTrigger asChild>
-        <button className="flex text-left relative w-full h-32 rounded-2xl bg-white bg-opacity-50 active:scale-[97%] transition-transform duration-75">
+        <button className="flex text-left relative w-full h-32 rounded-[20px] bg-white bg-opacity-50 active:scale-[97%] transition-transform duration-75">
           <div className="basis-1/4 px-4 h-full flex items-center justify-center">
             <div className="aspect-square w-full flex justify-center items-center overflow-hidden bg-white bg-opacity-50 rounded-2xl">
               <Image
@@ -42,23 +42,27 @@ function BoostDrawer() {
           </div>
         </button>
       </DrawerTrigger>
-      <DrawerContent className="rounded-t-3xl h-fit sm:max-w-screen-sm mx-auto border-none px-12 pb-6">
-        <div className="mb-6 flex items-center text-center flex-col pt-6">
-          <h3 className="font-extrabold text-3xl mb-3">Metal Storage</h3>
-          <p className="font-semibold text-neutral-600">
-            Better storage holds more MIN and you can claim it less often
-          </p>
-        </div>
-
-        <div className="flex flex-col items-center">
-          <BoostLevel />
-          <ArrowUpIcon className="w-6 h-6 my-4" />
-          <BoostLevel />
-          <div className="flex items-center justify-center pt-8 pb-8">
-            <CoinIcon classname="w-7 h-7" />
-            <span className="font-semibold text-2xl">2</span>
+      <DrawerContent className="rounded-t-3xl h-fit sm:max-w-screen-sm mx-auto border-none pb-6">
+        <div className="px-12">
+          <div className="mb-6 flex items-center text-center flex-col pt-6">
+            <h3 className="font-extrabold text-3xl mb-3">Metal Storage</h3>
+            <p className="font-semibold text-neutral-600 mx-1">
+              Better storage holds more MIN and you can claim it less often
+            </p>
           </div>
-          <button className="h-16 px-2 py-2 rounded-3xl bg-neutral-900 text-white w-full font-semibold text-xl">
+
+          <div className="flex flex-col items-center">
+            <BoostLevel />
+            <ArrowUpIcon className="w-6 h-6 my-4" />
+            <BoostLevel />
+            <div className="flex items-center justify-center pt-8 pb-8">
+              <CoinIcon classname="w-7 h-7" />
+              <span className="font-semibold text-2xl">2</span>
+            </div>
+          </div>
+        </div>
+        <div className="px-6">
+          <button className="h-[66px] px-2 py-2 rounded-3xl bg-neutral-800 text-white w-full font-medium text-xl">
             Upgrade
           </button>
         </div>
