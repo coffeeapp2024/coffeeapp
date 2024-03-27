@@ -8,8 +8,8 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { ArrowLeftIcon } from "@heroicons/react/24/outline";
-import BoostCard from "./BoostCard";
 import { toast } from "sonner";
+import BoostDrawer from "./BoostDrawer";
 
 function BoostDialog() {
   const { userData } = useUserDataStore();
@@ -40,14 +40,16 @@ function BoostDialog() {
           </div>
         </div>
       </SheetTrigger>
-      <SheetContent className="w-full">
-        <SheetClose>
-          <button>
+      <SheetContent className="w-full bg-neutral-100 pt-36">
+        <SheetClose className="fixed top-4 left-4">
+          <button className="bg-neutral-200 p-2 rounded-xl">
             <ArrowLeftIcon className="w-4 h-4" />
           </button>
         </SheetClose>
-
-        <BoostCard />
+        <div className="flex flex-col gap-y-3">
+          <BoostDrawer />
+          <BoostDrawer />
+        </div>
       </SheetContent>
     </Sheet>
   );
