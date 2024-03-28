@@ -47,7 +47,9 @@ function BoostDrawer({
             {/* Level */}
             <div className="flex items-center gap-x-1 -ml-1">
               <CoinIcon classname="w-6 h-6 " />
-              <span className=" font-semibold text-neutral-800">{price}</span>
+              <span className=" font-semibold text-neutral-800">
+                {isMaxLevel ? 0 : price}
+              </span>
               <div className="w-1 h-1 rounded-full mx-1 bg-neutral-600"></div>
               <span className="font-semibold">L{level}</span>
             </div>
@@ -61,7 +63,7 @@ function BoostDrawer({
         <div className="px-12">
           <div className="mb-6 flex items-center text-center flex-col pt-6">
             <h3 className="font-extrabold text-3xl mb-3">
-              {isMaxLevel ? "Maximum Storage" : nextName}
+              {isMaxLevel ? "Full Storage" : nextName}
             </h3>
             <p className="font-semibold text-neutral-600 mx-1">
               Better storage holds more MIN and you can claim it less often
