@@ -3,8 +3,10 @@
 import { signInWithPopup } from "firebase/auth";
 import { auth, provider } from "@/lib/firebase";
 import Image from "next/image";
-import { createUserInFirestore, fetchUserData } from "@/lib/firebaseFunctions";
+import { createUserInFirestore } from "@/lib/firebaseFunctions";
 import { useUserDataStore } from "@/store/zustand";
+import { getDocumentById } from "@/lib/firebaseUtils";
+import { UserData } from "@/store/storeTypes";
 
 export default function LoginButton() {
   const { setUserData, setUserId } = useUserDataStore();
@@ -14,7 +16,10 @@ export default function LoginButton() {
       const { user } = await signInWithPopup(auth, provider);
       let fetchedUserData = await createUserInFirestore(user);
       if (!fetchedUserData) {
-        fetchedUserData = await fetchUserData(user.uid);
+        fetchedUserData = (await getDocumentById(
+          "users",
+          user.uid
+        )) as UserData;
       }
       setUserData(fetchedUserData);
       setUserId(user.uid);
