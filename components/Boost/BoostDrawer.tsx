@@ -2,15 +2,8 @@
 
 import React, { useState } from "react";
 import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
-import Image from "next/image";
 import CoinIcon from "../Template/CoinIcon";
-import {
-  ArrowUpIcon,
-  BoltIcon,
-  ChevronRightIcon,
-  FireIcon,
-  RocketLaunchIcon,
-} from "@heroicons/react/24/outline";
+import { ArrowUpIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import BoostLevel from "./BoostLevel";
 import { toast } from "sonner";
 
