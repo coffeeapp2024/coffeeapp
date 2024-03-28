@@ -134,7 +134,7 @@ function Testing() {
         className="fixed z-50 bottom-28 left-1/2 -translate-x-1/2 p-2 rounded-full bg-neutral-200"
         onClick={handleReset}
       >
-        Test
+        test
       </button>
     )
   );
