@@ -1,11 +1,7 @@
 "use client";
 
 import React from "react";
-import {
-  fetchKeysFromFirestore,
-  deleteKeyFromFirestore,
-  updateUserInFirestore,
-} from "@/lib/firebaseFunctions";
+import { updateUserInFirestore } from "@/lib/firebaseFunctions";
 import {
   useLevelStore,
   useStorageStore,
