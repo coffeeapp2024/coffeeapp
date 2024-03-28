@@ -59,10 +59,10 @@ function Testing() {
     //   "miningHourPerQrCodeLevel",
     //   1
     // );
-    await renameCollection(
-      "miningSpeechHourLevels",
-      "miningSpeechPerHourLevels"
-    );
+    // await renameCollection(
+    //   "miningSpeechHourLevels",
+    //   "miningSpeechPerHourLevels"
+    // );
     // await addDocumentsToCollection("miningHourPerQrCodeLevels", storages);
   };
 

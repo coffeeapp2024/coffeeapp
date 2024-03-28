@@ -21,7 +21,9 @@ function Storage() {
   const { storages } = useStorageStore();
   if (!storages) return;
 
+  const maxStorageLevel = Math.max(...storages.map((storage) => storage.level));
   const userStorageLevel = userData?.miningHourPerQrCodeLevel;
+  const isMaxLevel = userStorageLevel === maxStorageLevel;
   const nextStorageLevel = userStorageLevel && userStorageLevel + 1;
 
   const userStorage = storages.find(
@@ -60,6 +62,7 @@ function Storage() {
   return (
     <BoostDrawer
       icons={storageIcons}
+      isMaxLevel={isMaxLevel}
       onClickUpgrade={handleUpgradeClick}
       level={level}
       nextName={nextName}

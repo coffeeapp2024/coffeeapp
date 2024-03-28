@@ -8,22 +8,6 @@ const VoucherDataList = [
     imageURL:
       "https://www.aeon.com.vn/wp-content/uploads/2021/04/momo-thequa_pb_promotion.jpg",
   },
-  {
-    imageURL:
-      "https://www.aeon.com.vn/wp-content/uploads/2021/04/momo-thequa_pb_promotion.jpg",
-  },
-  {
-    imageURL:
-      "https://www.aeon.com.vn/wp-content/uploads/2021/04/momo-thequa_pb_promotion.jpg",
-  },
-  {
-    imageURL:
-      "https://www.aeon.com.vn/wp-content/uploads/2021/04/momo-thequa_pb_promotion.jpg",
-  },
-  {
-    imageURL:
-      "https://www.aeon.com.vn/wp-content/uploads/2021/04/momo-thequa_pb_promotion.jpg",
-  },
 ];
 
 const voucherBanner =

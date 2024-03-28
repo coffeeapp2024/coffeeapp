@@ -6,7 +6,9 @@ import { useEffect, useState } from "react";
 function Background() {
   const [bg, setBg] = useState("/bg/mine-bg.jpg");
   const { minePageContent } = useMinePageContentStore();
-  const { backgrounds } = minePageContent ?? {};
+  // const { backgrounds } = minePageContent ?? {};
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const backgrounds = ["/bg/mine-bg.jpg"];
 
   useEffect(() => {
     if (!backgrounds) return;

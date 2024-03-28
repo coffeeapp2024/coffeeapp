@@ -1,8 +1,9 @@
 "use client";
 
-import Nav from "@/components/Nav";
+import React, { useEffect } from "react";
 import { auth, db } from "@/lib/firebase";
-import { useEffect } from "react";
+import { collection, doc, getDoc } from "firebase/firestore";
+import { toast } from "sonner";
 import {
   fetchCasesFromFirestore,
   fetchLevelsFromFirestore,
@@ -15,20 +16,19 @@ import {
   fetchAllStorageDocs,
 } from "@/lib/firebaseFunctions";
 import {
-  StorageItem,
-  useCaseStore,
-  useCheckinPostStore,
+  useUserDataStore,
   useCoinStore,
+  useShopStore,
   useEventPostStore,
-  useHomePageContentStore,
+  useCheckinPostStore,
+  useVoucherStore,
+  useCaseStore,
   useLevelStore,
+  useHomePageContentStore,
   useMinePageContentStore,
   useProductStore,
   useProductTagStore,
-  useShopStore,
   useStorageStore,
-  useUserDataStore,
-  useVoucherStore,
 } from "@/store/zustand";
 import {
   Account,
@@ -37,164 +37,13 @@ import {
   PostStore,
 } from "@/store/storeTypes";
 import { calculateInitialCurrentCoin } from "@/lib/coinActions";
-import { collection, doc, getDoc } from "firebase/firestore";
-import { toast } from "sonner";
+import {
+  fetchCollectionData,
+  findValueByKeyWithCondition,
+  getDocumentById,
+} from "@/lib/firebaseUtils";
 import Testing from "@/components/Testing";
-import { findValueByKeyWithCondition, getKeyValue } from "@/lib/firebaseUtils";
-
-function useFetchVouchersEffect() {
-  const { setVouchers, vouchers } = useVoucherStore();
-
-  useEffect(() => {
-    if (!vouchers) {
-      const fetchVouchers = async () => {
-        try {
-          const fetchedVouchers = await fetchVouchersFromFirestore();
-          setVouchers(fetchedVouchers);
-          console.log("Voucher fetched");
-        } catch (error) {
-          console.error("Error fetching vouchers:", error);
-        }
-      };
-
-      fetchVouchers();
-    }
-  }, [setVouchers, vouchers]);
-}
-
-function useFetchCasesEffect() {
-  const { setCases, cases } = useCaseStore();
-
-  useEffect(() => {
-    if (!cases) {
-      const fetchCases = async () => {
-        try {
-          const fetchedCases = await fetchCasesFromFirestore();
-          setCases(fetchedCases);
-          console.log("Cases fetched");
-        } catch (error) {
-          console.error("Error fetching cases:", error);
-        }
-      };
-
-      fetchCases();
-    }
-  }, [setCases, cases]);
-}
-
-function useFetchLevelsEffect() {
-  const { setLevels, levels } = useLevelStore();
-
-  useEffect(() => {
-    if (!levels) {
-      const fetchLevels = async () => {
-        try {
-          const fetchedLevels = await fetchLevelsFromFirestore();
-          setLevels(fetchedLevels);
-          console.log("Levels fetched");
-        } catch (error) {
-          console.error("Error fetching levels:", error);
-        }
-      };
-
-      fetchLevels();
-    }
-  }, [setLevels, levels]);
-}
-
-// function useHomePageContentEffect() {
-//   const { homePageContent, setHomePageContent } = useHomePageContentStore();
-
-//   useEffect(() => {
-//     if (!homePageContent) {
-//       const fetchData = async () => {
-//         try {
-//           const homePageContent = await fetchHomePageContent();
-//           setHomePageContent(homePageContent);
-//           console.log("Homepage content fetched");
-//         } catch (error) {
-//           console.error("Error fetching home page content:", error);
-//         }
-//       };
-
-//       fetchData();
-//     }
-//   }, [setHomePageContent, homePageContent]);
-// }
-
-function useFetchPostImagesEffect(usePostStore: PostStore) {
-  const { setPosts, posts, name } = usePostStore;
-  useEffect(() => {
-    const fetchPostImages = async () => {
-      try {
-        if (!name || posts.length > 0) return;
-        const fetchedPostImages = await getAllPostImages(name);
-        if (fetchedPostImages.length > 0 && posts.length === 0) {
-          setPosts(fetchedPostImages);
-
-          console.log(
-            `Fetched and set post images from Firestore for collection ${name}.`
-          );
-        } else {
-          console.log(`No post images found for collection ${name}.`);
-        }
-      } catch (error) {
-        console.error(
-          `Error fetching post images for collection ${name}:`,
-          error
-        );
-      }
-    };
-
-    fetchPostImages();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-}
-
-function useFetchProductsEffect() {
-  const { products, setProducts } = useProductStore();
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        if (!products) {
-          const products = await fetchProductsFromFirestore();
-          setProducts(products);
-          console.log("Fetched products from Firestore:", products);
-        }
-      } catch (error) {
-        console.error("Error fetching products:", error);
-      }
-    };
-
-    fetchData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [setProducts]); // Include productsFetched in the dependency array
-
-  return products; // Return the state variable if needed externally
-}
-
-function useFetchProductTagsEffect() {
-  const { productTags, setProductTags } = useProductTagStore();
-
-  useEffect(() => {
-    const fetchProductTags = async () => {
-      try {
-        if (!productTags) {
-          const tags = await fetchProductTagsFromFirestore();
-          setProductTags(tags);
-          console.log("Fetched product tags from Firestore:", tags);
-        }
-      } catch (error) {
-        console.error("Error fetching product tags:", error);
-      }
-    };
-
-    fetchProductTags();
-  }, [productTags, setProductTags]);
-
-  return productTags; // Return the productTags if needed externally
-}
+import Nav from "@/components/Nav";
 
 export default function RootLayout({
   children,
@@ -203,143 +52,223 @@ export default function RootLayout({
 }>) {
   const { userData, userId, setRole, setUserData, setUserId } =
     useUserDataStore();
-  const { setCurrentCoin, currentCoin } = useCoinStore();
-  const { banner, setBanner } = useShopStore();
+  const { setCurrentCoin } = useCoinStore();
+  const { setBanner } = useShopStore();
+  const { setPosts: setEventPost } = useEventPostStore();
+  const { setPosts: setCheckinPost } = useCheckinPostStore();
+  const { setCases } = useCaseStore();
+  const { setLevels } = useLevelStore();
+  const { setVouchers } = useVoucherStore();
+  const { setHomePageContent } = useHomePageContentStore();
+  const { setMinePageContent } = useMinePageContentStore();
+  const { setProducts } = useProductStore();
+  const { setProductTags } = useProductTagStore();
+  const { setStorages } = useStorageStore();
 
-  // Login
   useEffect(() => {
-    if (!userData || !userId) {
-      const unsubscribe = auth.onAuthStateChanged(async (user) => {
-        if (user && user.email) {
-          try {
-            const fetchedUserData = await fetchUserData(user.uid);
+    // Fetch user data and set role
+    const fetchUserDataAndSetRole = async () => {
+      if (!userData || !userId) {
+        const unsubscribe = auth.onAuthStateChanged(async (user) => {
+          if (user && user.email) {
+            try {
+              const fetchedUserData = await fetchUserData(user.uid);
 
-            if (fetchedUserData) {
-              fetchedUserData.balance = await findValueByKeyWithCondition(
-                "miningHourPerQrCodeLevels",
-                "level",
-                fetchedUserData.miningHourPerQrCodeLevel,
-                "miningHourPerQrCode"
-              );
-              console.log("set new balance:", fetchedUserData.balance);
+              if (fetchedUserData) {
+                // Update balance if available
+                const miningHourPerQrCodeLevel =
+                  fetchedUserData.miningHourPerQrCodeLevel;
+                const balance = await findValueByKeyWithCondition(
+                  "miningHourPerQrCodeLevels",
+                  "level",
+                  miningHourPerQrCodeLevel,
+                  "miningHourPerQrCode"
+                );
+                fetchedUserData.balance = balance;
+                console.log("Set new balance:", fetchedUserData.balance);
+              }
+
+              // Fetch accounts data
+              const fetchedAccounts = (
+                await getDoc(doc(collection(db, "admin"), "accounts"))
+              ).data() as Account;
+              console.log("Fetched Account:", fetchedAccounts);
+
+              // Determine user role based on fetched accounts data
+              const { staff, manager, testing } = fetchedAccounts;
+              const role = testing
+                ? "manager"
+                : staff?.includes(user.email)
+                ? "staff"
+                : manager?.includes(user.email)
+                ? "manager"
+                : null;
+              console.log("User role:", role);
+
+              // Set user role and ID
+              setRole(role);
+              setUserId(user.uid);
+
+              // Add 100 coins if in testing mode
+              if (testing && fetchedUserData) {
+                fetchedUserData.coin += 100;
+                toast.info("Testing Mode! +100 coin");
+                console.log("Testing Mode! +100 coin");
+              }
+
+              // Set user data
+              console.log("Fetched user data:", fetchedUserData);
+              setUserData(fetchedUserData);
+              console.log("Login successfully");
+            } catch (error) {
+              console.error("Error fetching user data:", error);
             }
-
-            const fetchedAccounts = (
-              await getDoc(doc(collection(db, "admin"), "accounts"))
-            ).data() as Account;
-            console.log("Fetched Account:", fetchedAccounts);
-
-            const { staff, manager, testing } = fetchedAccounts;
-            const role = testing
-              ? "manager"
-              : staff?.includes(user.email)
-              ? "staff"
-              : manager?.includes(user.email)
-              ? "manager"
-              : null;
-            console.log("user role:", role);
-
-            setRole(role);
-            setUserId(user.uid);
-            if (testing && fetchedUserData) {
-              fetchedUserData.coin += 100;
-              toast.info("Testing Mode! +100 coin");
-              console.log("Testing Mode! +100 coin");
-            }
-
-            console.log("fetchedUserData:", fetchedUserData);
-            setUserData(fetchedUserData);
-            console.log("Login successfully");
-          } catch (error) {
-            console.error("Error fetching user data:", error);
+          } else {
+            setUserData(null);
           }
-        } else {
-          setUserData(null);
-        }
-      });
+        });
 
-      return () => unsubscribe();
-    }
-  }, [userData, userId, setUserData, setUserId, setRole]);
+        return () => unsubscribe();
+      }
+    };
 
-  // Set Initial Coin
-  useEffect(() => {
-    const { balance, coin, startTimeMine } = userData ?? {};
+    fetchUserDataAndSetRole();
 
-    if (balance && coin) {
-      const initialCoin = calculateInitialCurrentCoin(
-        balance,
-        coin,
-        startTimeMine
-      );
-      setCurrentCoin(initialCoin);
-      console.log("Reset CurrentCoin when userData changes:", initialCoin);
-    }
-  }, [setCurrentCoin, userData]);
-
-  useEffect(() => {
+    // Fetch shop data
     const fetchShopData = async () => {
       try {
-        if (!banner) {
-          const fetchedBanner = await fetchShopContent();
-          setBanner(fetchedBanner);
-        }
+        const fetchedBanner = await fetchShopContent();
+        setBanner(fetchedBanner);
       } catch (error) {
         console.error("Error fetching shop content:", error);
       }
     };
 
     fetchShopData();
-  });
 
-  useFetchPostImagesEffect(useEventPostStore());
-  useFetchPostImagesEffect(useCheckinPostStore());
+    // Fetch post images for event and check-in posts
+    const fetchPostImages = async () => {
+      try {
+        const fetchedPostImagesEvent = await getAllPostImages("event");
+        setEventPost(fetchedPostImagesEvent);
+        const fetchedPostImagesCheckin = await getAllPostImages("checkin");
+        setCheckinPost(fetchedPostImagesCheckin);
+      } catch (error) {
+        console.error("Error fetching post images:", error);
+      }
+    };
 
-  useFetchVouchersEffect();
-  useFetchCasesEffect();
-  useFetchLevelsEffect();
+    fetchPostImages();
 
-  useFetchProductTagsEffect();
-  useFetchProductsEffect();
+    // Fetch vouchers
+    const fetchVouchers = async () => {
+      try {
+        const fetchedVouchers = await fetchVouchersFromFirestore();
+        setVouchers(fetchedVouchers);
+        console.log("Voucher fetched");
+      } catch (error) {
+        console.error("Error fetching vouchers:", error);
+      }
+    };
 
-  // Shortest fetching way -------------------------------------------------------------------------
+    fetchVouchers();
 
-  // Fetch MinePageContent
-  const { minePageContent, setMinePageContent } = useMinePageContentStore();
-  useEffect(() => {
-    !minePageContent &&
-      getDoc(doc(collection(db, "contents"), "minePage")).then((snapshot) => {
-        const data = snapshot.data() as MinePageContent;
-        console.log("Fetched minePageContent:", data);
-        setMinePageContent(data);
-      });
-  }, [minePageContent, setMinePageContent]);
+    // Fetch cases
+    const fetchCases = async () => {
+      try {
+        const fetchedCases = await fetchCasesFromFirestore();
+        setCases(fetchedCases);
+        console.log("Cases fetched");
+      } catch (error) {
+        console.error("Error fetching cases:", error);
+      }
+    };
 
-  // Fetch HomePageContent
-  const { homePageContent, setHomePageContent } = useHomePageContentStore();
-  const { storages, setStorages } = useStorageStore();
-  useEffect(() => {
-    !homePageContent &&
-      getDoc(doc(collection(db, "contents"), "homepage")).then((snapshot) => {
-        const data = snapshot.data() as HomePageContent;
-        setHomePageContent(data);
-      });
-    if (!storages) {
-      fetchAllStorageDocs()
-        .then((storages) => {
-          setStorages(storages);
-        })
-        .catch((error) => {
-          console.error("Error fetching storage documents:", error);
-        });
-    }
+    fetchCases();
+
+    // Fetch levels
+    const fetchLevels = async () => {
+      try {
+        const fetchedLevels = await fetchLevelsFromFirestore();
+        setLevels(fetchedLevels);
+        console.log("Levels fetched");
+      } catch (error) {
+        console.error("Error fetching levels:", error);
+      }
+    };
+
+    fetchLevels();
+
+    // Fetch homepage content and storage documents
+    const fetchHomePageContent = async () => {
+      const fetchedHomePageContent = (await getDocumentById(
+        "contents",
+        "homepage"
+      )) as HomePageContent;
+      setHomePageContent(fetchedHomePageContent);
+    };
+    fetchHomePageContent();
+
+    // Fetch miningHourPerQrCodeLevels
+    const fetchStorageData = async () => {
+      const fetchedMiningHourPerQrCodeLevels = await fetchCollectionData(
+        "miningHourPerQrCodeLevels"
+      );
+      setStorages(fetchedMiningHourPerQrCodeLevels);
+    };
+    fetchStorageData();
+
+    // Fetch products
+    const fetchProducts = async () => {
+      try {
+        const fetchedProducts = await fetchProductsFromFirestore();
+        setProducts(fetchedProducts);
+        console.log("Fetched products from Firestore:", fetchedProducts);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
+    };
+
+    fetchProducts();
+
+    // Fetch product tags
+    const fetchProductTags = async () => {
+      try {
+        const tags = await fetchProductTagsFromFirestore();
+        setProductTags(tags);
+        console.log("Fetched product tags from Firestore:", tags);
+      } catch (error) {
+        console.error("Error fetching product tags:", error);
+      }
+    };
+
+    fetchProductTags();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  useEffect(() => {
+    // Fetch initial coin
+    const fetchInitialCoin = () => {
+      const { balance, coin, startTimeMine } = userData ?? {};
+      if (balance && coin) {
+        const initialCoin = calculateInitialCurrentCoin(
+          balance,
+          coin,
+          startTimeMine
+        );
+        setCurrentCoin(initialCoin);
+        console.log("Reset CurrentCoin when userData changes:", initialCoin);
+      }
+    };
+
+    fetchInitialCoin();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [userData]);
+
   return (
     <main className="relative mx-auto w-full">
-      <Nav />
       <Testing />
+      <Nav />
       {children}
     </main>
   );

@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
 import Image from "next/image";
 import CoinIcon from "../Template/CoinIcon";
@@ -10,6 +12,7 @@ import {
   RocketLaunchIcon,
 } from "@heroicons/react/24/outline";
 import BoostLevel from "./BoostLevel";
+import { toast } from "sonner";
 
 function BoostDrawer({
   icons,
@@ -17,12 +20,15 @@ function BoostDrawer({
   levelTexts,
   nextName,
   onClickUpgrade,
+  isMaxLevel,
   text,
   name,
   price,
 }: any) {
+  const [open, setOpen] = useState(false);
+  // toast.info("Maximum level reached");
   return (
-    <Drawer>
+    <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>
         <button className="flex text-left items-center relative w-full rounded-[20px] bg-white bg-opacity-50 active:scale-[97%] transition-transform duration-75 shadow-sm">
           <div className="basis-1/4 px-4">
@@ -54,31 +60,48 @@ function BoostDrawer({
       <DrawerContent className="rounded-t-3xl h-fit sm:max-w-screen-sm mx-auto border-none pb-6">
         <div className="px-12">
           <div className="mb-6 flex items-center text-center flex-col pt-6">
-            <h3 className="font-extrabold text-3xl mb-3">{nextName}</h3>
+            <h3 className="font-extrabold text-3xl mb-3">
+              {isMaxLevel ? "Maximum Storage" : nextName}
+            </h3>
             <p className="font-semibold text-neutral-600 mx-1">
               Better storage holds more MIN and you can claim it less often
             </p>
           </div>
 
           <div className="flex flex-col items-center">
-            <BoostLevel
-              level={level + 1}
-              text={levelTexts[1]}
-              icon={icons[1]}
-            />
+            {!isMaxLevel && (
+              <>
+                <BoostLevel
+                  level={level + 1}
+                  text={levelTexts[1]}
+                  icon={icons[1]}
+                />
 
-            <ArrowUpIcon className="w-6 h-6 my-4" />
+                <ArrowUpIcon className="w-6 h-6 my-4" />
+              </>
+            )}
 
             <BoostLevel level={level} text={levelTexts[0]} icon={icons[0]} />
             <div className="flex items-center justify-center pt-8 pb-8">
-              <CoinIcon classname="w-5 h-5" />
-              <span className="font-semibold text-xl">2</span>
+              {!isMaxLevel && (
+                <>
+                  <CoinIcon classname="w-5 h-5" />
+                  <span className="font-semibold text-xl">{price}</span>
+                </>
+              )}
             </div>
           </div>
         </div>
         <div className="px-6">
           <button
-            onClick={onClickUpgrade}
+            onClick={() => {
+              if (isMaxLevel) {
+                setOpen(false);
+                toast.info("Maximum level reached");
+                return;
+              }
+              onClickUpgrade();
+            }}
             className="h-[62px] px-2 py-2 rounded-3xl bg-neutral-800 text-white w-full font-medium text-xl"
           >
             Upgrade
