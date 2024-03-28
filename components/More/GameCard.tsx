@@ -1,65 +1,43 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import MainButton from "../MainButton";
 import Image from "next/image";
 import CoinIcon from "../Template/CoinIcon";
 import { Case } from "@/store/storeTypes";
 import { useRandomVoucherStore, useUserDataStore } from "@/store/zustand";
-import { calculateInitialCurrentCoin } from "@/lib/coinActions";
+import { updateUserDataAfterPurchase } from "@/lib/coinActions";
 import { toast } from "sonner";
-import { updateUserInFirestore } from "@/lib/firebaseFunctions";
 
 function GameCard({ gameCase }: { gameCase: Case }) {
-  const { userData, setUserData, userId } = useUserDataStore();
-  const { icon, price, voucherIdList: caseVoucherIdList, id } = gameCase;
+  const { userData, setUserData } = useUserDataStore();
+  const { icon, price, voucherIdList: caseVoucherIdList } = gameCase;
   const { setOpen, setRandomVoucherId } = useRandomVoucherStore();
 
   const isHidden =
     !caseVoucherIdList || caseVoucherIdList.length <= 0 || !userData;
 
   const handlePlay = async () => {
-    if (
-      !userData ||
-      !userId ||
-      !id ||
-      !caseVoucherIdList ||
-      !caseVoucherIdList.length
-    )
-      return;
-    const { coin, voucherIdList, balance, startTimeMine } = userData;
-    if (!coin || !balance) return;
-    const currentCoin = calculateInitialCurrentCoin(
-      balance,
-      coin,
-      startTimeMine
-    );
-    if (currentCoin < price) {
-      console.warn("Insufficient balance or voucher already owned.");
-      return;
-    }
-    try {
-      const updatedCoin = currentCoin - price;
+    if (!userData || !caseVoucherIdList || !caseVoucherIdList.length) return;
 
-      const randomIndex = Math.floor(Math.random() * caseVoucherIdList.length);
-      const randomVoucherId = caseVoucherIdList[randomIndex];
-      setRandomVoucherId(randomVoucherId);
-      setOpen(true);
-      toast.success("Well done! You've earned  a random voucher!");
+    const randomIndex = Math.floor(Math.random() * caseVoucherIdList.length);
+    const randomVoucherId = caseVoucherIdList[randomIndex];
+    setRandomVoucherId(randomVoucherId);
 
-      // Update user data
-      const newUserData = {
-        ...userData,
-        coin: updatedCoin,
-        startTimeMine: new Date().toISOString(),
-        voucherIdList: [...(voucherIdList || []), randomVoucherId],
-      };
+    setOpen(true);
+    toast.success("Well done! You've earned a random voucher!");
 
-      setUserData(newUserData);
-      await updateUserInFirestore(userId, newUserData);
-    } catch (error) {
-      console.error("Error updating user data:", error);
-    }
+    const updatedVouchers = [
+      ...(userData.voucherIdList || []),
+      randomVoucherId,
+    ];
+
+    await updateUserDataAfterPurchase(userData, price, setUserData, [
+      {
+        key: "voucherIdList",
+        value: updatedVouchers,
+      },
+    ]);
   };
 
   return (

@@ -8,6 +8,7 @@ import {
 import CloseDialogButton from "../Template/CloseDialogButton";
 import Image from "next/image";
 import { useRandomVoucherStore, useVoucherStore } from "@/store/zustand";
+import UserVoucherCard from "../Mine/Profile/UserVoucher/UserVoucherCard";
 
 function RandomVoucherDialog() {
   const { open, randomVoucherId, setOpen } = useRandomVoucherStore();
@@ -16,7 +17,9 @@ function RandomVoucherDialog() {
 
   const voucher = vouchers?.find((voucher) => voucher.id === randomVoucherId);
 
-  const { imageURL, info } = voucher ?? {};
+  const { imageURL, info, name } = voucher ?? {};
+
+  console.log("rrandomVoucherId", randomVoucherId);
 
   return (
     <Dialog
@@ -27,19 +30,20 @@ function RandomVoucherDialog() {
     >
       <DialogTrigger></DialogTrigger>
       <DialogContent className="bg-transparent border-none shadow-none px-6">
-        <div className="relative bg-neutral-50 w-full aspect-[3/2] rounded-3xl py-4 px-4 h-fit  flex items-center justify-between flex-col ">
-          <div className="overflow-hidden">
+        <div className="w-full">
+          <div>
             {imageURL && (
               <Image
                 src={imageURL}
-                alt="level icon"
-                width={700}
-                height={300}
-                className="object-contain"
+                width={500}
+                height={500}
+                alt="Voucher Image"
+                className="object-cover"
               />
             )}
           </div>
-          <span className="font-semibold text-neutral-700 text-xl">{info}</span>
+
+          <div></div>
         </div>
         <DialogClose className="w-0 h-0"></DialogClose>
         {/* <CloseDialogButton /> */}

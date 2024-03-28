@@ -20,7 +20,7 @@ function UserVoucherCard({
   const voucher = vouchers?.find((voucher) => voucher.id === voucherId);
   if (!voucher) return;
 
-  const { imageURL, info, price, name, id } = voucher;
+  const { imageURL, info, name, id } = voucher;
 
   return (
     <div className="relative bg-card w-full py-2 pl-2 pr-4 rounded-2xl flex shadow-sm">
@@ -41,10 +41,6 @@ function UserVoucherCard({
           <h3 className="font-bold text-lg">{name}</h3>
           <p className="text-wrap text-sm">{info}</p>
         </div>
-        <span className="flex items-center justify-center w-fit font-semibold">
-          {price}
-          <CoinIcon classname="w-4 h-4" />
-        </span>
       </div>
       <SecondaryButton
         name="Scan QR"

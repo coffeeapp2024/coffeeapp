@@ -108,11 +108,136 @@ const VoucherList = [
   },
 ];
 
+export const demoProductList = [
+  {
+    id: "7bgVfNe5KM47wXL774B4",
+    img: "https://firebasestorage.googleapis.com/v0/b/coffee-coin-app.appspot.com/o/products%2F11.jpg?alt=media&token=965d5c2b-3c8c-4a52-9850-1ca76460a1e3",
+    name: "ice cream chocolate",
+    sizes: [
+      { size: "S", point: 2, price: 8 },
+      { size: "M", point: 3, price: 10 },
+      { size: "L", point: 4, price: 12 },
+    ],
+    toppingIds: ["a", "ab", "abc"],
+    tags: ["food", "popular"],
+  },
+  {
+    id: "ENwbJROMWFl7l2VQcacK",
+    img: "https://firebasestorage.googleapis.com/v0/b/coffee-coin-app.appspot.com/o/products%2Fdrink2.jpg?alt=media&token=6e53c4dc-d27b-4186-9425-e8e78f63744b",
+    name: "Kopaja",
+    sizes: [
+      { size: "S", point: 2, price: 8 },
+      { size: "M", point: 3, price: 10 },
+      { size: "L", point: 4, price: 12 },
+    ],
+    tags: ["drink"],
+  },
+  {
+    id: "M00pQwY9jsWIQr1h7QLo",
+    img: "https://firebasestorage.googleapis.com/v0/b/coffee-coin-app.appspot.com/o/products%2Fdrink3.jpg?alt=media&token=bef834d1-fc67-4e53-9dfd-750d1ef4c56a",
+    name: "Kopaja kitajo",
+    sizes: [
+      { size: "S", point: 2, price: 8 },
+      { size: "M", point: 3, price: 10 },
+      { size: "L", point: 4, price: 12 },
+    ],
+    toppingIds: ["a", "ab", "abc"],
+    tags: ["drink"],
+  },
+  {
+    id: "eHR9zkwIGjFxMJhXbQbG",
+    img: "https://firebasestorage.googleapis.com/v0/b/coffee-coin-app.appspot.com/o/products%2F33.jpg?alt=media&token=642c9de2-994f-4f51-84f9-7c6ebf5208a1",
+    name: "drink tea tea",
+    sizes: [
+      { size: "S", point: 2, price: 8 },
+      { size: "M", point: 3, price: 10 },
+      { size: "L", point: 4, price: 12 },
+    ],
+    toppingIds: ["a", "ab", "abc"],
+    tags: ["tea", "popular"],
+  },
+  {
+    id: "fgU07XuMHhw9NcHruloO",
+    img: "https://firebasestorage.googleapis.com/v0/b/coffee-coin-app.appspot.com/o/products%2F44.jpg?alt=media&token=d7dab7df-6a29-4bf6-aa20-77c3f7e1f368",
+    name: "lorem ipsum tea",
+    sizes: [
+      { size: "S", point: 2, price: 8 },
+      { size: "M", point: 3, price: 10 },
+      { size: "L", point: 4, price: 12 },
+    ],
+    toppingIds: ["a", "ab", "abc"],
+    tags: ["popular", "tea"],
+  },
+  {
+    id: "ipLh1oB5ssXXRLxuxsbx",
+    img: "https://firebasestorage.googleapis.com/v0/b/coffee-coin-app.appspot.com/o/products%2F23.jpg?alt=media&token=90ec1d34-ec62-4618-9652-d1585627e404",
+    name: "laohg hadilao",
+    sizes: [
+      { size: "S", point: 2, price: 8 },
+      { size: "M", point: 3, price: 10 },
+      { size: "L", point: 4, price: 12 },
+    ],
+    toppingIds: ["a", "ab", "abc"],
+    tags: ["popular", "food"],
+  },
+  {
+    id: "jObIWIUoHsEGInmue6ZF",
+    img: "https://firebasestorage.googleapis.com/v0/b/coffee-coin-app.appspot.com/o/products%2Fdrink3.jpg?alt=media&token=bef834d1-fc67-4e53-9dfd-750d1ef4c56a",
+    name: "Kopi suren",
+    sizes: [
+      { size: "S", point: 2, price: 8 },
+      { size: "M", point: 3, price: 10 },
+      { size: "L", point: 4, price: 12 },
+    ],
+    toppingIds: ["a", "ab", "abc"],
+    tags: ["food"],
+  },
+  {
+    id: "lNAikJVfE4Rs0DFOdABe",
+    img: "https://firebasestorage.googleapis.com/v0/b/coffee-coin-app.appspot.com/o/products%2Fdrink1.jpg?alt=media&token=035f83d2-5f66-49a5-b0f2-f78611da33b1",
+    name: "Kopsu mantan",
+    sizes: [
+      { size: "S", point: 2, price: 8 },
+      { size: "M", point: 3, price: 10 },
+      { size: "L", point: 4, price: 12 },
+    ],
+    toppingIds: ["a", "ab", "abc"],
+    tags: ["drink"],
+  },
+];
+
+const cases = [
+  {
+    id: "case3",
+    price: 4,
+    icon: "https://firebasestorage.googleapis.com/v0/b/coffee-coin-app.appspot.com/o/boxs%2Fcase3.png?alt=media&token=5aecac5e-bb4f-4a6c-8436-cfa6e5a5bc52",
+    voucherIdList: ["1", "2", "3"],
+  },
+  {
+    id: "case4",
+    voucherIdList: ["1", "2", "3"],
+    icon: "https://firebasestorage.googleapis.com/v0/b/coffee-coin-app.appspot.com/o/boxs%2Fcase4.png?alt=media&token=5bc33afa-892d-4f1c-8790-e73ab154e486",
+    price: 8,
+  },
+  {
+    id: "case1",
+    voucherIdList: ["1", "2", "3"],
+    price: 9,
+    icon: "https://firebasestorage.googleapis.com/v0/b/coffee-coin-app.appspot.com/o/boxs%2Fcase1.png?alt=media&token=73ae64af-ea50-4755-94fc-9d6dd8a90e02",
+  },
+  {
+    id: "case2",
+    icon: "https://firebasestorage.googleapis.com/v0/b/coffee-coin-app.appspot.com/o/boxs%2Fcase2.png?alt=media&token=8e229a0a-5783-4e2c-9300-ab192d7593d7",
+    voucherIdList: ["1", "2", "3"],
+    price: 15,
+  },
+];
+
 function Testing() {
   const { userData } = useUserDataStore();
 
   const handleReset = async () => {
-    // await resetCollectionData("vouchers", VoucherList);
+    // await resetCollectionData("cases", cases);
     // await updateKeyInDocument(
     //   "users",
     //   "NllhI3c86XTHdDIS0sNL9JfE3rN2",
@@ -126,7 +251,8 @@ function Testing() {
     // await renameKeyInCollection("balanceLevels", "miningHourPerQr", "balance");
   };
 
-  const showResetButton = process.env.NODE_ENV === "development";
+  // const showResetButton = process.env.NODE_ENV === "development";
+  const showResetButton = false;
 
   return (
     showResetButton && (
