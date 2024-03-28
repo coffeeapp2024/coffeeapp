@@ -20,18 +20,18 @@ function Fireplace() {
   const { balanceLevels } = useBalanceLevelStore();
   if (!balanceLevels) return;
 
-  const maxStorageLevel = Math.max(
-    ...balanceLevels.map((storage) => storage.level)
+  const maxBalanceLevel = Math.max(
+    ...balanceLevels.map((balance) => balance.level)
   );
   const userBalanceLevel = userData?.balanceLevel;
-  const isMaxLevel = userBalanceLevel === maxStorageLevel;
+  const isMaxLevel = userBalanceLevel === maxBalanceLevel;
   const nextBalanceLevel = userBalanceLevel && userBalanceLevel + 1;
 
   const userBalanceLevelData = balanceLevels.find(
-    (storage) => storage.level === userBalanceLevel
+    (balance) => balance.level === userBalanceLevel
   );
   const nextBalanceLevelData = balanceLevels.find(
-    (storage) => storage.level === nextBalanceLevel
+    (balance) => balance.level === nextBalanceLevel
   );
 
   const { level, name, balance } = userBalanceLevelData ?? {};
@@ -52,6 +52,10 @@ function Fireplace() {
       {
         key: "balanceLevel",
         value: nextLevel,
+      },
+      {
+        key: "balance",
+        value: nextBalance,
       },
     ]);
     toast.success("Upgrade successful!");

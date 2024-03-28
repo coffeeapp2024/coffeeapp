@@ -4,14 +4,12 @@ import {
   calculateRemainingTimeInSeconds,
   formatSeconds,
 } from "@/lib/timeActions";
-import { useLevelStore, useTimeStore, useUserDataStore } from "@/store/zustand";
+import { useTimeStore, useUserDataStore } from "@/store/zustand";
 import ClaimCoinScanner from "./ClaimCoinScanner";
-import { toast } from "sonner";
 
 function ScanClaimCard() {
   const { remainingTimeSeconds, setRemainingTimeSeconds } = useTimeStore();
   const { userData } = useUserDataStore();
-  const { levels } = useLevelStore();
   const { endTimeMine, balance } = userData ?? {};
 
   useEffect(() => {
@@ -30,18 +28,6 @@ function ScanClaimCard() {
   const remainingTimeFormatted = remainingTimeSeconds
     ? formatSeconds(remainingTimeSeconds)
     : "Scan QR to claim";
-
-  if (!userData?.level) {
-    console.log("User level not found");
-    return;
-  }
-
-  if (!levels) {
-    console.log("Levels not found");
-    return;
-  }
-
-  const userTimeMinePerQr = levels[userData?.level - 1].timeMinePerQr;
 
   return (
     <div className="absolute bottom-1/4 sm:bottom-1/3 w-full max-w-screen-sm px-3">

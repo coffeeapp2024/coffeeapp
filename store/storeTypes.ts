@@ -9,6 +9,7 @@ export type UserData = {
   displayName: string | null;
   coin: number;
   level: number | null;
+  balance: number | null;
   startTimeMine: string | null;
   endTimeMine: string | null;
   voucherIdList: string[] | null;
