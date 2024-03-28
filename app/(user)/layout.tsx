@@ -13,7 +13,6 @@ import {
   fetchProductsFromFirestore,
   fetchProductTagsFromFirestore,
   fetchShopContent,
-  fetchAllStorageDocs,
 } from "@/lib/firebaseFunctions";
 import {
   useUserDataStore,
@@ -29,14 +28,10 @@ import {
   useProductStore,
   useProductTagStore,
   useStorageStore,
+  useBalanceLevelStore,
 } from "@/store/zustand";
-import {
-  Account,
-  HomePageContent,
-  MinePageContent,
-  PostStore,
-} from "@/store/storeTypes";
-import { calculateInitialCurrentCoin } from "@/lib/coinActions";
+import { Account, HomePageContent, MinePageContent } from "@/store/storeTypes";
+import { calcInitialCoin } from "@/lib/coinActions";
 import {
   fetchCollectionData,
   findValueByKeyWithCondition,
@@ -64,6 +59,7 @@ export default function RootLayout({
   const { setProducts } = useProductStore();
   const { setProductTags } = useProductTagStore();
   const { setStorages } = useStorageStore();
+  const { setBalanceLevels } = useBalanceLevelStore();
 
   useEffect(() => {
     // Fetch user data and set role
@@ -218,6 +214,13 @@ export default function RootLayout({
     };
     fetchStorageData();
 
+    // Fetch balanceLevels
+    const fetchBalanceLevels = async () => {
+      const fetchedBalanceLevels = await fetchCollectionData("balanceLevels");
+      setBalanceLevels(fetchedBalanceLevels);
+    };
+    fetchBalanceLevels();
+
     // Fetch products
     const fetchProducts = async () => {
       try {
@@ -246,19 +249,13 @@ export default function RootLayout({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // Reset CurrentCoin when userData changes
   useEffect(() => {
-    // Fetch initial coin
     const fetchInitialCoin = () => {
-      const { balance, coin, startTimeMine } = userData ?? {};
-      if (balance && coin) {
-        const initialCoin = calculateInitialCurrentCoin(
-          balance,
-          coin,
-          startTimeMine
-        );
-        setCurrentCoin(initialCoin);
-        console.log("Reset CurrentCoin when userData changes:", initialCoin);
-      }
+      if (!userData) return console.log("User data not found");
+      const initialCoin = calcInitialCoin(userData);
+      setCurrentCoin(initialCoin);
+      console.log("Reset CurrentCoin when user data changes:", initialCoin);
     };
 
     fetchInitialCoin();

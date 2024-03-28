@@ -17,6 +17,7 @@ export type UserData = {
   LikedCheckinImageIdList: string[];
   speechMineLevel: number | null;
   miningHourPerQrCodeLevel: number | null;
+  [key: string]: any;
 };
 
 export type UserDataStore = {

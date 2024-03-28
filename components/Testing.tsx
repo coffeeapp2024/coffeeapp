@@ -12,6 +12,7 @@ import {
   getDocumentById,
   updateDocumentInCollection,
   renameCollection,
+  deleteKeyInAllDocuments,
 } from "@/lib/firebaseUtils";
 import MainButton from "./MainButton";
 
@@ -59,11 +60,10 @@ function Testing() {
     //   "miningHourPerQrCodeLevel",
     //   1
     // );
-    // await renameCollection(
-    //   "miningSpeechHourLevels",
-    //   "miningSpeechPerHourLevels"
-    // );
+    // await renameCollection("BalanceLevels", "balanceLevels");
     // await addDocumentsToCollection("miningHourPerQrCodeLevels", storages);
+
+    await deleteKeyInAllDocuments("balanceLevels", "icon");
   };
 
   const showResetButton = process.env.NODE_ENV === "development";

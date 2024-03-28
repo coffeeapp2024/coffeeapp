@@ -6,14 +6,21 @@ import {
   deleteKeyFromFirestore,
   updateUserInFirestore,
 } from "@/lib/firebaseFunctions";
-import { useLevelStore, useUserDataStore } from "@/store/zustand";
-import { updateMineTimes } from "@/lib/coinActions";
+import {
+  useLevelStore,
+  useStorageStore,
+  useUserDataStore,
+} from "@/store/zustand";
+import {
+  findUserMiningHourPerQrCode,
+  updateMineTimes,
+} from "@/lib/coinActions";
 import { toast } from "sonner";
 import QRCodeScanner from "../Template/QrCodeScanner";
 
 const ClaimCoinScanner = () => {
   const { userData, userId, setUserData } = useUserDataStore();
-  const { levels } = useLevelStore();
+  const { storages } = useStorageStore();
 
   const handleQrCode = async (text: string) => {
     if (!userId || !userData) {
@@ -21,20 +28,32 @@ const ClaimCoinScanner = () => {
       return;
     }
 
-    if (!userData?.level) {
-      toast.warning("User level not found");
+    if (!userData?.miningHourPerQrCodeLevel) {
+      toast.warning("User miningHourPerQrCodeLevel not found");
       return;
     }
 
-    if (!levels) {
+    if (!storages) {
+      toast.warning("Storages not found");
       return;
     }
 
-    const userTimeMinePerQr = levels[userData?.level - 1].timeMinePerQr;
+    const userMiningHourPerQrCode = findUserMiningHourPerQrCode(
+      storages,
+      userData?.miningHourPerQrCodeLevel
+    );
 
-    const keys = await fetchKeysFromFirestore(); // Fetch keys from Firestore
+    if (!userMiningHourPerQrCode) {
+      toast.warning("userMiningHourPerQrCode not found");
+      return;
+    }
+
+    const keys = await fetchKeysFromFirestore();
     if (keys.includes(text)) {
-      const newUserData = await updateMineTimes(userData, userTimeMinePerQr);
+      const newUserData = await updateMineTimes(
+        userData,
+        userMiningHourPerQrCode
+      );
       if (!newUserData) {
         return;
       }
@@ -42,7 +61,9 @@ const ClaimCoinScanner = () => {
       await updateUserInFirestore(userId, newUserData);
       await deleteKeyFromFirestore(text);
 
-      toast.success(`QR Code scanned successfully! +${userTimeMinePerQr}h`);
+      toast.success(
+        `QR Code scanned successfully! +${userMiningHourPerQrCode}h`
+      );
     } else {
       toast.error("Invalid QR Code. Please try again.");
     }

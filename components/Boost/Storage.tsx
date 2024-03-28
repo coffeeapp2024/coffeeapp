@@ -3,11 +3,7 @@ import { useStorageStore, useUserDataStore } from "@/store/zustand";
 import { BoltIcon } from "@heroicons/react/24/outline";
 import BoostDrawer from "./BoostDrawer";
 import { toast } from "sonner";
-import { updateUserInFirestore } from "@/lib/firebaseFunctions";
-import {
-  updateDocumentInCollection,
-  updateKeyInDocument,
-} from "@/lib/firebaseUtils";
+import { updateUserDataAfterPurchase } from "@/lib/coinActions";
 
 const iconSize = "w-10 h-10";
 const storageIcons = [
@@ -17,7 +13,8 @@ const storageIcons = [
 const text = "Increase the fill <br/> time to claim less often";
 
 function Storage() {
-  const { userData, userId, setUserData } = useUserDataStore();
+  const { userData, setUserData } = useUserDataStore();
+
   const { storages } = useStorageStore();
   if (!storages) return;
 
@@ -48,14 +45,14 @@ function Storage() {
   ];
 
   const handleUpgradeClick = async () => {
-    if (!userData || !nextLevel || !userId) return;
-    const newUserData = {
-      ...userData,
-      miningHourPerQrCodeLevel: nextLevel,
-    };
-    await updateDocumentInCollection("users", userId, newUserData);
-    setUserData(newUserData);
+    if (!userData || !nextLevel || !nextPrice) return;
 
+    await updateUserDataAfterPurchase(userData, nextPrice, setUserData, [
+      {
+        key: "miningHourPerQrCodeLevel",
+        value: nextLevel,
+      },
+    ]);
     toast.success("Upgrade successful!");
   };
 

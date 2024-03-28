@@ -8,6 +8,8 @@ import {
   query,
   where,
   writeBatch,
+  FieldValue,
+  deleteField,
 } from "firebase/firestore";
 import { db } from "./firebase";
 
@@ -170,6 +172,10 @@ export async function fetchCollectionData(collectionName: string) {
     querySnapshot.forEach((doc) => {
       collectionData.push({ id: doc.id, ...doc.data() });
     });
+    console.log(
+      `Fetched data from collection ${collectionName}:`,
+      collectionData
+    );
     return collectionData;
   } catch (error) {
     console.error(
@@ -346,6 +352,117 @@ export async function renameKeyInCollection(
   } catch (error) {
     console.error(
       `Error renaming key "${oldKey}" in collection ${collectionName}:`,
+      error
+    );
+    throw error;
+  }
+}
+
+export async function updateDocumentByKeyCondition(
+  collectionName: string,
+  conditionKey: string,
+  conditionValue: any,
+  updateData: any
+) {
+  try {
+    // Query documents in the collection based on the condition
+    const collectionRef = collection(db, collectionName);
+    const q = query(collectionRef, where(conditionKey, "==", conditionValue));
+    const querySnapshot = await getDocs(q);
+
+    // Update each document that matches the condition
+    const batch = writeBatch(db);
+    querySnapshot.forEach((doc) => {
+      batch.update(doc.ref, updateData);
+    });
+
+    // Commit the batch update
+    await batch.commit();
+
+    console.log(
+      `Documents in collection ${collectionName} updated based on condition ${conditionKey}=${conditionValue}`
+    );
+  } catch (error) {
+    console.error(
+      `Error updating documents in collection ${collectionName} based on condition ${conditionKey}=${conditionValue}:`,
+      error
+    );
+    throw error;
+  }
+}
+
+export async function deleteKeyInDocument(
+  collectionName: string,
+  docId: string,
+  keyToDelete: string
+) {
+  try {
+    // Get a reference to the document
+    const docRef = doc(db, collectionName, docId);
+
+    // Retrieve the current document data
+    const docSnapshot = await getDoc(docRef);
+
+    // Check if the document exists
+    if (docSnapshot.exists()) {
+      // Create an update object with the key to delete set to deleteField()
+      const updateData = {
+        [keyToDelete]: deleteField(),
+      };
+
+      // Update the document to delete the key
+      await updateDoc(docRef, updateData);
+
+      console.log(
+        `Key ${keyToDelete} deleted successfully from document ${docId} in collection ${collectionName}`
+      );
+    } else {
+      console.error(
+        `Document ${docId} does not exist in collection ${collectionName}`
+      );
+    }
+  } catch (error) {
+    console.error(
+      `Error deleting key ${keyToDelete} in document ${docId} from collection ${collectionName}:`,
+      error
+    );
+    throw error;
+  }
+}
+
+export async function deleteKeyInAllDocuments(
+  collectionName: string,
+  keyToDelete: string
+) {
+  try {
+    // Get all documents in the collection
+    const collectionRef = collection(db, collectionName);
+    const querySnapshot = await getDocs(collectionRef);
+
+    // Iterate through each document
+    const batch = writeBatch(db);
+    querySnapshot.forEach((doc) => {
+      // Get a reference to the document
+      const docRef = doc.ref;
+
+      // Create an update object with the key to delete set to deleteField()
+      const updateData = {
+        [keyToDelete]: deleteField(),
+      };
+
+      // Update the document to delete the key
+      batch.update(docRef, updateData);
+    });
+
+    // Commit the batch update
+    await batch.commit();
+
+    console.log(
+      `Key ${keyToDelete} deleted successfully from all documents in collection ${collectionName}`
+    );
+  } catch (error) {
+    console.error(
+      `Error deleting key ${keyToDelete} in all documents from collection ${collectionName}:`,
       error
     );
     throw error;

@@ -141,8 +141,6 @@ export const usePaymentMethodStore = create<PaymentMethodStore>((set) => ({
 }));
 
 export type StorageItem = {
-  id: string;
-  icon: string;
   level: number;
   name: string;
   price: number;
@@ -157,4 +155,21 @@ export type StorageStore = {
 export const useStorageStore = create<StorageStore>((set) => ({
   storages: null,
   setStorages: (storages) => set({ storages }),
+}));
+
+export type balanceLevel = {
+  level: number;
+  name: string;
+  price: number;
+  speechPerHour: number;
+};
+
+export type BalanceLevelStore = {
+  balanceLevels: balanceLevel[] | null;
+  setBalanceLevels: (balanceLevels: balanceLevel[]) => void;
+};
+
+export const useBalanceLevelStore = create<BalanceLevelStore>((set) => ({
+  balanceLevels: null,
+  setBalanceLevels: (balanceLevels) => set({ balanceLevels }),
 }));

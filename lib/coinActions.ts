@@ -1,4 +1,10 @@
 import { UserData } from "@/store/storeTypes";
+import { toast } from "sonner";
+import {
+  updateDocumentByKeyCondition,
+  updateDocumentInCollection,
+} from "./firebaseUtils";
+import { StorageItem } from "@/store/zustand";
 
 export function updateCurrentCoin(
   balancePerHour: number,
@@ -85,3 +91,65 @@ export const updateMineTimes = async (userData: UserData, mineHour: number) => {
 
   return newUserData;
 };
+
+export function calcInitialCoin(userData: UserData): number {
+  const { balance, coin, startTimeMine } = userData;
+  const now = new Date();
+  const startDate = startTimeMine ? new Date(startTimeMine) : null;
+
+  if (startDate && balance && now > startDate) {
+    const timeDiffSeconds = (now.getTime() - startDate.getTime()) / 1000;
+    const initialCoin = coin + balance * (timeDiffSeconds / 3600);
+    return parseFloat(initialCoin.toFixed(5));
+  }
+
+  return coin;
+}
+
+export async function updateUserDataAfterPurchase(
+  userData: UserData,
+  price: number,
+  setUserData: (userData: UserData | null) => void,
+  updates: { key: string; value: any }[]
+): Promise<UserData | null> {
+  const currentCoin = calcInitialCoin(userData);
+
+  if (currentCoin < price) {
+    console.log("Not enough coin");
+    return null;
+  }
+
+  const updatedCoin = currentCoin - price;
+
+  const updatedUserData: UserData = {
+    ...userData,
+    coin: updatedCoin,
+    startTimeMine: userData.startTimeMine && new Date().toISOString(),
+  };
+
+  // Apply all updates
+  updates.forEach(({ key, value }) => {
+    updatedUserData[key] = value;
+  });
+
+  await updateDocumentByKeyCondition(
+    "users",
+    "email",
+    updatedUserData.email,
+    updatedUserData
+  );
+
+  console.log("Updated user data after purchase:", updatedUserData);
+  setUserData(updatedUserData);
+
+  return updatedUserData;
+}
+
+export function findUserMiningHourPerQrCode(
+  storages: StorageItem[],
+  userStorageLevel: number
+): number | undefined {
+  // Use the find method to search for the storage with the matching level
+  return storages.find((storage) => storage.level === userStorageLevel)
+    ?.miningHourPerQrCode;
+}
