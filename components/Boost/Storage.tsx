@@ -11,6 +11,8 @@ const storageIcons = [
   <BoltIcon key="2" className={`${iconSize} text-yellow-500`} />,
 ];
 const text = "Increase the fill <br/> time to claim less often";
+const textInner =
+  "Better storage holds more MIN and you can claim it less often";
 
 function Storage() {
   const { userData, setUserData } = useUserDataStore();
@@ -65,6 +67,7 @@ function Storage() {
       nextName={nextName}
       name={name}
       text={text}
+      textInner={textInner}
       levelTexts={levelTexts}
       price={nextPrice}
     />

@@ -8,6 +8,7 @@ import { toast } from "sonner";
 
 const iconSize = "w-10 h-10";
 const text = "Increase passive mining speed";
+const textInner = "Better Fireplace boost mining speech";
 
 const fireplaceIcons = [
   <FireIcon key="1" className={`${iconSize}`} />,
@@ -66,6 +67,7 @@ function Fireplace() {
       icons={fireplaceIcons}
       nextName={nextName}
       text={text}
+      textInner={textInner}
       isMaxLevel={isMaxLevel}
       onClickUpgrade={handleUpgradeClick}
       level={level}

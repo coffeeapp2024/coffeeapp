@@ -15,6 +15,7 @@ function BoostDrawer({
   onClickUpgrade,
   isMaxLevel,
   text,
+  textInner,
   name,
   price,
 }: any) {
@@ -56,11 +57,9 @@ function BoostDrawer({
         <div className="px-12">
           <div className="mb-6 flex items-center text-center flex-col pt-6">
             <h3 className="font-extrabold text-3xl mb-3">
-              {isMaxLevel ? "Full Storage" : nextName}
+              {isMaxLevel ? "Maximum level" : nextName}
             </h3>
-            <p className="font-semibold text-neutral-600 mx-1">
-              Better storage holds more MIN and you can claim it less often
-            </p>
+            <p className="font-semibold text-neutral-600 mx-1">{textInner}</p>
           </div>
 
           <div className="flex flex-col items-center">
