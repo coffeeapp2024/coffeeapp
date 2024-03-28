@@ -36,7 +36,7 @@ function VoucherCard({ voucherData, handleBuy, isHidden }: any) {
         className={`${
           !isHidden && "pointer-events-none grayscale "
         } absolute bottom-2 right-2 text-nowrap font-semibold px-2 py-1 rounded-primary-button border-2px border-primary-foreground  text-primary-foreground`}
-        onClick={handleBuy(id, price)}
+        onClick={() => handleBuy(id, price)}
       >
         Thu Thập
       </button>
