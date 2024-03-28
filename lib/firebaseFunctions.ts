@@ -3,7 +3,6 @@ import {
   collection,
   setDoc,
   getDoc,
-  deleteDoc,
   onSnapshot,
   Unsubscribe,
   addDoc,
@@ -13,9 +12,9 @@ import { UserData, PostType } from "@/store/storeTypes";
 import { User } from "firebase/auth";
 import { db, storage } from "./firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { addDocumentsToCollection } from "./firebaseUtils";
 
 const usersRef = collection(db, "users");
-const keysRef = collection(db, "keys");
 
 export async function createUserInFirestore(
   user: User
@@ -43,6 +42,7 @@ export async function createUserInFirestore(
       };
 
       await setDoc(userDoc, userData);
+      console.log("User created successfully");
       return userData;
     } else {
       console.error("User data already exists or user data is incomplete");
@@ -51,24 +51,6 @@ export async function createUserInFirestore(
   } catch (error) {
     console.error("Error creating user data:", error);
     throw error; // Handle the error appropriately in your application
-  }
-}
-
-export async function fetchUserData(userId: string): Promise<UserData | null> {
-  const userDoc = doc(usersRef, userId);
-
-  try {
-    const userSnapshot = await getDoc(userDoc);
-
-    if (userSnapshot.exists()) {
-      return userSnapshot.data() as UserData;
-    } else {
-      console.log("User data not found");
-      return null;
-    }
-  } catch (error) {
-    console.error("Error fetching user data:", error);
-    throw error;
   }
 }
 
@@ -87,33 +69,17 @@ export async function updateUserInFirestore(
   }
 }
 
-export async function deleteUserInFirestore(userId: string): Promise<void> {
-  const userDoc = doc(usersRef, userId);
-
-  try {
-    await deleteDoc(userDoc);
-  } catch (error) {
-    console.error("Error deleting user data:", error);
-    throw error;
-  }
-}
-
 export async function generateKeysAndSaveToFirestore(count: number) {
   const keys = [];
-  try {
-    for (let i = 0; i < count; i++) {
-      const keyRef = doc(keysRef);
-      const keyId = keyRef.id;
-      const createdAt = new Date().toISOString();
-      const newKey = { key: keyId, createdAt };
-      await setDoc(keyRef, newKey);
-      keys.push(newKey);
-    }
-    return keys;
-  } catch (error) {
-    console.error("Error generating and saving keys:", error);
-    throw error;
+  for (let i = 0; i < count; i++) {
+    const keyId = doc(collection(db, "keys ")).id;
+    const createdAt = new Date().toISOString();
+    const newKey = { key: keyId, createdAt };
+
+    await addDocumentsToCollection("keys", [newKey]);
+    keys.push(newKey);
   }
+  return keys;
 }
 
 export function listenForVoucherIdListChanges(
