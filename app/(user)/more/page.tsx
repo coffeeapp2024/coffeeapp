@@ -6,15 +6,7 @@ import React from "react";
 
 function Page() {
   return (
-    <div
-      style={{
-        backgroundImage: `url("/bg/bg-scan.jpg")`,
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-        backgroundSize: "cover",
-      }}
-      className="bg-neutral-700 min-h-screen px-4 pt-4"
-    >
+    <div className="bg-background min-h-screen px-4 pt-4">
       <div className="grid grid-cols-2 gap-4 pb-40">
         <GameDialog />
         <BoostDialog />

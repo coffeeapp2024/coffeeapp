@@ -6,6 +6,7 @@ import { useOpenQrVoucherStore, useVoucherStore } from "@/store/zustand";
 import { toast } from "sonner";
 import CoinIcon from "@/components/Template/CoinIcon";
 import MainButton from "@/components/MainButton";
+import SecondaryButton from "@/components/Template/SecondaryButton";
 
 function UserVoucherCard({
   voucherId,
@@ -45,9 +46,8 @@ function UserVoucherCard({
           <CoinIcon classname="w-4 h-4" />
         </span>
       </div>
-
-      <button
-        className={`absolute bottom-2 right-2 text-nowrap font-semibold px-2 py-1 rounded-primary-button border-2px border-primary-foreground  text-primary-foreground`}
+      <SecondaryButton
+        name="Scan QR"
         onClick={() => {
           toast.info(
             "Scan this voucher at the coffee shop to claim your offer."
@@ -57,9 +57,7 @@ function UserVoucherCard({
           setIndex(index);
           setVoucherId(voucherId);
         }}
-      >
-        Claim
-      </button>
+      />
     </div>
   );
 }

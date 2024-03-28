@@ -3,6 +3,7 @@
 import React from "react";
 import CoinIcon from "../Template/CoinIcon";
 import Image from "next/image";
+import SecondaryButton from "../Template/SecondaryButton";
 
 function VoucherCard({ voucherData, handleBuy, isHidden }: any) {
   const { imageURL, name, info, price, id } = voucherData;
@@ -31,15 +32,7 @@ function VoucherCard({ voucherData, handleBuy, isHidden }: any) {
           <CoinIcon classname="w-4 h-4" />
         </span>
       </div>
-
-      <button
-        className={`${
-          isHidden && "pointer-events-none grayscale "
-        } absolute bottom-2 right-2 text-nowrap font-semibold px-2 py-1 rounded-primary-button border-2px border-primary-foreground  text-primary-foreground`}
-        onClick={() => handleBuy(id, price)}
-      >
-        Claim
-      </button>
+      <SecondaryButton name="Claim" onClick={() => handleBuy(id, price)} />
     </div>
   );
 }

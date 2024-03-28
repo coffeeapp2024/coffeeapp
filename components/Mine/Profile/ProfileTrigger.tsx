@@ -5,7 +5,7 @@ import { User } from "firebase/auth";
 import Image from "next/image";
 import React from "react";
 
-function UserPageNav({ user }: { user: User }) {
+export default function ProfileTrigger({ user }: { user: User }) {
   return (
     <div className="flex items-center justify-between w-full h-full p-3">
       <div className="flex items-center justify-center gap-x-2 h-full">
@@ -35,5 +35,3 @@ function UserPageNav({ user }: { user: User }) {
     </div>
   );
 }
-
-export default UserPageNav;
