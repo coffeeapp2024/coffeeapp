@@ -1,19 +1,8 @@
 "use client";
 
 import React, { useEffect } from "react";
-import { auth, db } from "@/lib/firebase";
-import { collection, doc, getDoc } from "firebase/firestore";
+import { auth } from "@/lib/firebase";
 import { toast } from "sonner";
-import {
-  fetchCasesFromFirestore,
-  fetchLevelsFromFirestore,
-  fetchUserData,
-  fetchVouchersFromFirestore,
-  getAllPostImages,
-  fetchProductsFromFirestore,
-  fetchProductTagsFromFirestore,
-  fetchShopContent,
-} from "@/lib/firebaseFunctions";
 import {
   useUserDataStore,
   useCoinStore,
@@ -29,13 +18,21 @@ import {
   useProductTagStore,
   useStorageStore,
   useBalanceLevelStore,
+  useVoucherPageContentStore,
+  VoucherPageContent,
 } from "@/store/zustand";
-import { Account, HomePageContent, MinePageContent } from "@/store/storeTypes";
+import {
+  Account,
+  HomePageContent,
+  MinePageContent,
+  UserData,
+} from "@/store/storeTypes";
 import { calcInitialCoin } from "@/lib/coinActions";
 import {
   fetchCollectionData,
   findValueByKeyWithCondition,
   getDocumentById,
+  getKeyValue,
 } from "@/lib/firebaseUtils";
 import Testing from "@/components/Testing";
 import Nav from "@/components/Nav";
@@ -56,6 +53,7 @@ export default function RootLayout({
   const { setVouchers } = useVoucherStore();
   const { setHomePageContent } = useHomePageContentStore();
   const { setMinePageContent } = useMinePageContentStore();
+  const { setVoucherPageContent } = useVoucherPageContentStore();
   const { setProducts } = useProductStore();
   const { setProductTags } = useProductTagStore();
   const { setStorages } = useStorageStore();
@@ -68,7 +66,10 @@ export default function RootLayout({
         const unsubscribe = auth.onAuthStateChanged(async (user) => {
           if (user && user.email) {
             try {
-              const fetchedUserData = await fetchUserData(user.uid);
+              const fetchedUserData = (await getDocumentById(
+                "users",
+                user.uid
+              )) as UserData;
 
               if (fetchedUserData) {
                 // Update balance if available
@@ -84,11 +85,11 @@ export default function RootLayout({
                 console.log("Set new balance:", fetchedUserData.balance);
               }
 
-              // Fetch accounts data
-              const fetchedAccounts = (
-                await getDoc(doc(collection(db, "admin"), "accounts"))
-              ).data() as Account;
-              console.log("Fetched Account:", fetchedAccounts);
+              // Fetch admin accounts
+              const fetchedAccounts = (await getDocumentById(
+                "admin",
+                "accounts"
+              )) as Account;
 
               // Determine user role based on fetched accounts data
               const { staff, manager, testing } = fetchedAccounts;
@@ -130,74 +131,52 @@ export default function RootLayout({
 
     fetchUserDataAndSetRole();
 
+    const fetchMineContent = async () => {
+      const fetchedMinePageContent = (await getDocumentById(
+        "contents",
+        "minePage"
+      )) as MinePageContent;
+      setMinePageContent(fetchedMinePageContent);
+    };
+    fetchMineContent();
+
     // Fetch shop data
     const fetchShopData = async () => {
-      try {
-        const fetchedBanner = await fetchShopContent();
-        setBanner(fetchedBanner);
-      } catch (error) {
-        console.error("Error fetching shop content:", error);
-      }
+      const fetchedBannerURL = await getKeyValue(
+        "contents",
+        "shopPage",
+        "bannerURL"
+      );
+      setBanner(fetchedBannerURL);
     };
-
     fetchShopData();
 
     // Fetch post images for event and check-in posts
     const fetchPostImages = async () => {
-      try {
-        const fetchedPostImagesEvent = await getAllPostImages("eventImages");
-        setEventPost(fetchedPostImagesEvent);
-        const fetchedPostImagesCheckin = await getAllPostImages(
-          "checkinImages"
-        );
-        setCheckinPost(fetchedPostImagesCheckin);
-      } catch (error) {
-        console.error("Error fetching post images:", error);
-      }
+      const fetchedPostImagesEvent = await fetchCollectionData("eventImages");
+      setEventPost(fetchedPostImagesEvent);
+      const fetchedPostImagesCheckin = await fetchCollectionData(
+        "checkinImages"
+      );
+      setCheckinPost(fetchedPostImagesCheckin);
     };
-
     fetchPostImages();
 
     // Fetch vouchers
     const fetchVouchers = async () => {
-      try {
-        const fetchedVouchers = await fetchVouchersFromFirestore();
-        setVouchers(fetchedVouchers);
-        console.log("Voucher fetched");
-      } catch (error) {
-        console.error("Error fetching vouchers:", error);
-      }
+      const fetchedVouchers = await fetchCollectionData("vouchers");
+      setVouchers(fetchedVouchers);
     };
-
     fetchVouchers();
 
     // Fetch cases
     const fetchCases = async () => {
-      try {
-        const fetchedCases = await fetchCasesFromFirestore();
-        setCases(fetchedCases);
-        console.log("Cases fetched");
-      } catch (error) {
-        console.error("Error fetching cases:", error);
-      }
+      const fetchedCases = await fetchCollectionData("cases");
+      setCases(fetchedCases);
     };
-
     fetchCases();
 
-    // // Fetch levels
-    // const fetchLevels = async () => {
-    //   try {
-    //     const fetchedLevels = await fetchLevelsFromFirestore();
-    //     setLevels(fetchedLevels);
-    //     console.log("Levels fetched");
-    //   } catch (error) {
-    //     console.error("Error fetching levels:", error);
-    //   }
-    // };
-
-    // fetchLevels();
-
-    // Fetch homepage content and storage documents
+    // Fetch homepage content
     const fetchHomePageContent = async () => {
       const fetchedHomePageContent = (await getDocumentById(
         "contents",
@@ -206,6 +185,15 @@ export default function RootLayout({
       setHomePageContent(fetchedHomePageContent);
     };
     fetchHomePageContent();
+
+    const fetchVoucherPageContent = async () => {
+      const voucherPageContent = (await getDocumentById(
+        "contents",
+        "voucherPage"
+      )) as VoucherPageContent;
+      setVoucherPageContent(voucherPageContent);
+    };
+    fetchVoucherPageContent();
 
     // Fetch miningHourPerQrCodeLevels
     const fetchStorageData = async () => {
@@ -225,28 +213,16 @@ export default function RootLayout({
 
     // Fetch products
     const fetchProducts = async () => {
-      try {
-        const fetchedProducts = await fetchProductsFromFirestore();
-        setProducts(fetchedProducts);
-        console.log("Fetched products from Firestore:", fetchedProducts);
-      } catch (error) {
-        console.error("Error fetching products:", error);
-      }
+      const fetchedProducts = await fetchCollectionData("products");
+      setProducts(fetchedProducts);
     };
-
     fetchProducts();
 
     // Fetch product tags
     const fetchProductTags = async () => {
-      try {
-        const tags = await fetchProductTagsFromFirestore();
-        setProductTags(tags);
-        console.log("Fetched product tags from Firestore:", tags);
-      } catch (error) {
-        console.error("Error fetching product tags:", error);
-      }
+      const tags = await fetchCollectionData("productTags");
+      setProductTags(tags);
     };
-
     fetchProductTags();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

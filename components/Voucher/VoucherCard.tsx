@@ -4,8 +4,8 @@ import React from "react";
 import CoinIcon from "../Template/CoinIcon";
 import Image from "next/image";
 
-function VoucherCard({ voucherDataList }: { voucherDataList: any }) {
-  const { imageURL } = voucherDataList;
+function VoucherCard({ voucherData, handleBuy, isHidden }: any) {
+  const { imageURL, info, price, id } = voucherData;
 
   return (
     <div className="relative bg-card w-full py-2 pl-2 pr-4 rounded-2xl flex shadow-sm">
@@ -32,7 +32,12 @@ function VoucherCard({ voucherDataList }: { voucherDataList: any }) {
         </span>
       </div>
 
-      <button className="absolute bottom-2 right-2 text-nowrap font-semibold px-2 py-1 rounded-primary-button border-2px border-primary-foreground  text-primary-foreground">
+      <button
+        className={`${
+          !isHidden && "pointer-events-none grayscale "
+        } absolute bottom-2 right-2 text-nowrap font-semibold px-2 py-1 rounded-primary-button border-2px border-primary-foreground  text-primary-foreground`}
+        onClick={handleBuy(id, price)}
+      >
         Thu Thập
       </button>
     </div>

@@ -173,3 +173,19 @@ export const useBalanceLevelStore = create<BalanceLevelStore>((set) => ({
   balanceLevels: null,
   setBalanceLevels: (balanceLevels) => set({ balanceLevels }),
 }));
+
+export type VoucherPageContent = {
+  voucherBannerURL: string;
+};
+
+export type VoucherPageContentStore = {
+  voucherPageContent: VoucherPageContent | null;
+  setVoucherPageContent: (content: VoucherPageContent) => void;
+};
+
+export const useVoucherPageContentStore = create<VoucherPageContentStore>(
+  (set) => ({
+    voucherPageContent: null,
+    setVoucherPageContent: (content) => set({ voucherPageContent: content }),
+  })
+);

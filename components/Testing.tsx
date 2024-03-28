@@ -52,27 +52,59 @@ const storages = [
 const balacelLevels = [
   {
     balance: 0.8,
-    name: "Neon",
+    name: "Neon Fireplace",
     level: 4,
     price: 100,
   },
   {
     miningHourPerQr: 0.1,
     price: 5,
-    name: "Wood",
+    name: "Wood Fireplace",
     level: 1,
   },
   {
     level: 3,
-    name: "Gas",
+    name: "Gas Fireplace",
     balance: 0.4,
     price: 40,
   },
   {
     level: 2,
-    name: "Stone",
+    name: "Stone Fireplace",
     price: 10,
     balance: 0.2,
+  },
+];
+
+const VoucherList = [
+  {
+    id: "1",
+    name: "30% Off Soft Drinks",
+    imageURL:
+      "https://www.aeon.com.vn/wp-content/uploads/2021/04/momo-thequa_pb_promotion.jpg",
+    info: "Get 30% off on all soft drink purchases.",
+    price: 50,
+    category: "Soft Drinks",
+    discountPercentage: 30,
+  },
+  {
+    id: "2",
+    name: "Buy 1 Get 1 Free on Coffee",
+    imageURL:
+      "https://www.aeon.com.vn/wp-content/uploads/2021/04/momo-thequa_pb_promotion.jpg",
+    info: "Buy 1 coffee and get 1 coffee free.",
+    price: 40,
+    category: "Coffee",
+  },
+  {
+    id: "3",
+    name: "50% Off Fruit Juices",
+    imageURL:
+      "https://www.aeon.com.vn/wp-content/uploads/2021/04/momo-thequa_pb_promotion.jpg",
+    info: "Get 50% off on all fruit juice purchases.",
+    price: 60,
+    category: "Juices",
+    discountPercentage: 50,
   },
 ];
 
@@ -80,19 +112,18 @@ function Testing() {
   const { userData } = useUserDataStore();
 
   const handleReset = async () => {
-    await resetCollectionData("balanceLevels", balacelLevels);
+    // await resetCollectionData("vouchers", VoucherList);
+
     // await updateKeyInDocument(
     //   "users",
     //   "NllhI3c86XTHdDIS0sNL9JfE3rN2",
     //   "miningHourPerQrCodeLevel",
     //   1
     // );
-    // await renameCollection("BalanceLevels", "balanceLevels");
-    // await addDocumentsToCollection("miningHourPerQrCodeLevels", storages);
+    await renameCollection("game_random_voucher", "cases");
+    // await addDocumentsToCollection("vouchers", VoucherList);
     // await deleteKeyInAllDocuments("balanceLevels", "icon");
-
     // await fetchCollectionData("balanceLevels");
-
     // await renameKeyInCollection("balanceLevels", "miningHourPerQr", "balance");
   };
 

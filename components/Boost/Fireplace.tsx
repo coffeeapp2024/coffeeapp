@@ -73,7 +73,7 @@ function Fireplace() {
       level={level}
       name={name}
       levelTexts={levelTexts}
-      price={nextPrice}
+      nextPrice={nextPrice}
     />
   );
 }

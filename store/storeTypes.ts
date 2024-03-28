@@ -60,7 +60,15 @@ export type Voucher = {
   id: string;
   imageURL: string;
   info: string;
+  name: string;
   price: number;
+  category?: string;
+  expiryDate?: string;
+  discountPercentage?: number;
+  discountAmount?: number;
+  maxDiscount?: number;
+  minPurchaseAmount?: number;
+  posterDescription?: string;
 };
 
 export type VoucherStore = {

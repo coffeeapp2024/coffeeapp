@@ -17,7 +17,7 @@ function BoostDrawer({
   text,
   textInner,
   name,
-  price,
+  nextPrice,
 }: any) {
   const [open, setOpen] = useState(false);
   // toast.info("Maximum level reached");
@@ -42,7 +42,7 @@ function BoostDrawer({
             <div className="flex items-center gap-x-1 -ml-1">
               <CoinIcon classname="w-6 h-6 " />
               <span className=" font-semibold text-neutral-800">
-                {isMaxLevel ? 0 : price}
+                {isMaxLevel ? 0 : nextPrice}
               </span>
               <div className="w-1 h-1 rounded-full mx-1 bg-neutral-600"></div>
               <span className="font-semibold">L{level}</span>
@@ -57,7 +57,7 @@ function BoostDrawer({
         <div className="px-12">
           <div className="mb-6 flex items-center text-center flex-col pt-6">
             <h3 className="font-extrabold text-3xl mb-3">
-              {isMaxLevel ? "Maximum level" : nextName}
+              {isMaxLevel ? "Maximum Level" : nextName}
             </h3>
             <p className="font-semibold text-neutral-600 mx-1">{textInner}</p>
           </div>
@@ -80,7 +80,7 @@ function BoostDrawer({
               {!isMaxLevel && (
                 <>
                   <CoinIcon classname="w-5 h-5" />
-                  <span className="font-semibold text-xl">{price}</span>
+                  <span className="font-semibold text-xl">{nextPrice}</span>
                 </>
               )}
             </div>

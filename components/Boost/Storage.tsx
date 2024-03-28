@@ -42,8 +42,8 @@ function Storage() {
   } = nextStorage ?? {};
 
   const levelTexts = [
-    `Claim ${miningHourPerQrCode} per QR Code`,
-    `Claim ${nextminingHourPerQrCode} per QR Code`,
+    `Claim ${miningHourPerQrCode}h per QR Code`,
+    `Claim ${nextminingHourPerQrCode}h per QR Code`,
   ];
 
   const handleUpgradeClick = async () => {
