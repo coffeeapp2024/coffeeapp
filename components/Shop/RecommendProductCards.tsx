@@ -8,11 +8,9 @@ import {
 } from "@/components/ui/carousel";
 import ProductCard from "./ProductCard";
 import { useProductStore, useProductTagStore } from "@/store/zustand";
-import { demoProductList } from "./ProductCardList";
 
 function RecommendProductCards() {
-  // const { products } = useProductStore();
-  const products = demoProductList;
+  const { products } = useProductStore();
 
   const { productTags } = useProductTagStore();
   if (!products) return null;

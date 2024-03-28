@@ -189,3 +189,14 @@ export const useVoucherPageContentStore = create<VoucherPageContentStore>(
     setVoucherPageContent: (content) => set({ voucherPageContent: content }),
   })
 );
+
+export type PriceTypeStore = {
+  isPriceInCoins: boolean;
+  togglePriceType: () => void;
+};
+
+export const usePriceTypeStore = create<PriceTypeStore>((set) => ({
+  isPriceInCoins: false,
+  togglePriceType: () =>
+    set((state) => ({ isPriceInCoins: !state.isPriceInCoins })),
+}));

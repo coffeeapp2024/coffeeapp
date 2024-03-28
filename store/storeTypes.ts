@@ -4,6 +4,12 @@ export type UserVoucherInfo = {
   qrCode: string;
 };
 
+export type Sizes = {
+  size: string;
+  point: number;
+  price: number;
+};
+
 export type UserData = {
   email: string | null;
   displayName: string | null;
@@ -17,6 +23,7 @@ export type UserData = {
   LikedCheckinImageIdList: string[];
   balanceLevel: number | null;
   miningHourPerQrCodeLevel: number | null;
+  sizes: Sizes[];
   [key: string]: any;
 };
 

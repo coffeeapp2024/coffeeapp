@@ -233,6 +233,30 @@ const cases = [
   },
 ];
 
+export const toppings = [
+  { id: "a", name: "Milk", price: 5, point: 2 },
+  { id: "ab", name: "Sugar", price: 3, point: 1 },
+  { id: "abc", name: "Honey", price: 4, point: 2 },
+];
+
+export const item = {
+  name: "Drink Tea Tea",
+  size: "Large",
+  sizes: [
+    { size: "S", point: 2, price: 8 },
+    { size: "M", point: 3, price: 10 },
+    { size: "L", point: 4, price: 12 },
+  ],
+  toppingIds: ["a", "ab", "abc"],
+  price: 42, // Giá cơ bản của mặt hàng
+  point: 3, // Điểm cơ bản của mặt hàng
+  toppings: [
+    "toppingId1", // ID của topping 1
+    "toppingId2", // ID của topping 2
+    // Các topping khác...
+  ],
+};
+
 function Testing() {
   const { userData } = useUserDataStore();
 
@@ -245,14 +269,14 @@ function Testing() {
     //   1
     // );
     // await renameCollection("game_random_voucher", "cases");
-    // await addDocumentsToCollection("vouchers", VoucherList);
+    await addDocumentsToCollection("toppings", toppings);
     // await deleteKeyInAllDocuments("balanceLevels", "icon");
     // await fetchCollectionData("balanceLevels");
     // await renameKeyInCollection("balanceLevels", "miningHourPerQr", "balance");
   };
 
-  // const showResetButton = process.env.NODE_ENV === "development";
-  const showResetButton = false;
+  const showResetButton = process.env.NODE_ENV === "development";
+  // const showResetButton = false;
 
   return (
     showResetButton && (
