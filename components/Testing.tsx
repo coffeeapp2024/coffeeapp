@@ -113,14 +113,13 @@ function Testing() {
 
   const handleReset = async () => {
     // await resetCollectionData("vouchers", VoucherList);
-
     // await updateKeyInDocument(
     //   "users",
     //   "NllhI3c86XTHdDIS0sNL9JfE3rN2",
     //   "miningHourPerQrCodeLevel",
     //   1
     // );
-    await renameCollection("game_random_voucher", "cases");
+    // await renameCollection("game_random_voucher", "cases");
     // await addDocumentsToCollection("vouchers", VoucherList);
     // await deleteKeyInAllDocuments("balanceLevels", "icon");
     // await fetchCollectionData("balanceLevels");
@@ -132,10 +131,10 @@ function Testing() {
   return (
     showResetButton && (
       <button
-        className="fixed z-50 bottom-28 left-1/2 -translate-x-1/2"
+        className="fixed z-50 bottom-28 left-1/2 -translate-x-1/2 p-2 rounded-full bg-neutral-200"
         onClick={handleReset}
       >
-        <MainButton text="testing" />
+        Test
       </button>
     )
   );
