@@ -94,21 +94,23 @@ function BoostDrawer({
             </div>
           </div>
         </div>
-        <div className="px-6">
-          <button
-            onClick={() => {
-              if (isMaxLevel) {
-                setOpen(false);
-                toast.info("Maximum level reached");
-                return;
-              }
-              onClickUpgrade();
-            }}
-            className="h-[62px] px-2 py-2 rounded-3xl bg-neutral-800 text-white w-full font-medium text-xl"
-          >
-            Upgrade
-          </button>
-        </div>
+        {!isMaxLevel && (
+          <div className="px-6">
+            <button
+              onClick={() => {
+                if (isMaxLevel) {
+                  setOpen(false);
+                  toast.info("Maximum level reached");
+                  return;
+                }
+                onClickUpgrade();
+              }}
+              className="h-[62px] px-2 py-2 rounded-3xl bg-neutral-800 text-white w-full font-medium text-xl"
+            >
+              Upgrade
+            </button>
+          </div>
+        )}
       </DrawerContent>
     </Drawer>
   );

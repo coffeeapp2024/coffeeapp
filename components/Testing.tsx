@@ -62,8 +62,7 @@ function Testing() {
     // );
     // await renameCollection("BalanceLevels", "balanceLevels");
     // await addDocumentsToCollection("miningHourPerQrCodeLevels", storages);
-
-    await deleteKeyInAllDocuments("balanceLevels", "icon");
+    // await deleteKeyInAllDocuments("balanceLevels", "icon");
   };
 
   const showResetButton = process.env.NODE_ENV === "development";
