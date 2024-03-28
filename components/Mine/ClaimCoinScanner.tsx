@@ -2,17 +2,18 @@
 
 import React from "react";
 import { updateUserInFirestore } from "@/lib/firebaseFunctions";
-import {
-  useLevelStore,
-  useStorageStore,
-  useUserDataStore,
-} from "@/store/zustand";
+import { useStorageStore, useUserDataStore } from "@/store/zustand";
 import {
   findUserMiningHourPerQrCode,
   updateMineTimes,
 } from "@/lib/coinActions";
 import { toast } from "sonner";
 import QRCodeScanner from "../Template/QrCodeScanner";
+import {
+  deleteDocumentById,
+  deleteKeyInDocument,
+  fetchCollectionData,
+} from "@/lib/firebaseUtils";
 
 const ClaimCoinScanner = () => {
   const { userData, userId, setUserData } = useUserDataStore();
@@ -44,7 +45,7 @@ const ClaimCoinScanner = () => {
       return;
     }
 
-    const keys = await fetchKeysFromFirestore();
+    const keys = await fetchCollectionData("keys");
     if (keys.includes(text)) {
       const newUserData = await updateMineTimes(
         userData,
@@ -55,7 +56,7 @@ const ClaimCoinScanner = () => {
       }
       setUserData(newUserData);
       await updateUserInFirestore(userId, newUserData);
-      await deleteKeyFromFirestore(text);
+      await deleteDocumentById("keys", text);
 
       toast.success(
         `QR Code scanned successfully! +${userMiningHourPerQrCode}h`
