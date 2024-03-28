@@ -161,7 +161,7 @@ export type balanceLevel = {
   level: number;
   name: string;
   price: number;
-  speechPerHour: number;
+  balance: number;
 };
 
 export type BalanceLevelStore = {

@@ -13,6 +13,7 @@ import {
   updateDocumentInCollection,
   renameCollection,
   deleteKeyInAllDocuments,
+  renameKeyInCollection,
 } from "@/lib/firebaseUtils";
 import MainButton from "./MainButton";
 
@@ -33,7 +34,6 @@ const storages = [
     miningHourPerQrCode: 12,
     price: 40,
     level: 4,
-    name: "Liquid Storage",
   },
   {
     name: "Wooden Storage",
@@ -49,11 +49,38 @@ const storages = [
   },
 ];
 
+const balacelLevels = [
+  {
+    balance: 0.8,
+    name: "Neon",
+    level: 4,
+    price: 100,
+  },
+  {
+    miningHourPerQr: 0.1,
+    price: 5,
+    name: "Wood",
+    level: 1,
+  },
+  {
+    level: 3,
+    name: "Gas",
+    balance: 0.4,
+    price: 40,
+  },
+  {
+    level: 2,
+    name: "Stone",
+    price: 10,
+    balance: 0.2,
+  },
+];
+
 function Testing() {
   const { userData } = useUserDataStore();
 
   const handleReset = async () => {
-    // await resetCollectionData("storages", storages);
+    await resetCollectionData("balanceLevels", balacelLevels);
     // await updateKeyInDocument(
     //   "users",
     //   "NllhI3c86XTHdDIS0sNL9JfE3rN2",
@@ -63,6 +90,10 @@ function Testing() {
     // await renameCollection("BalanceLevels", "balanceLevels");
     // await addDocumentsToCollection("miningHourPerQrCodeLevels", storages);
     // await deleteKeyInAllDocuments("balanceLevels", "icon");
+
+    // await fetchCollectionData("balanceLevels");
+
+    // await renameKeyInCollection("balanceLevels", "miningHourPerQr", "balance");
   };
 
   const showResetButton = process.env.NODE_ENV === "development";

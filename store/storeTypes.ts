@@ -8,14 +8,13 @@ export type UserData = {
   email: string | null;
   displayName: string | null;
   coin: number;
-  balance: number | null;
   level: number | null;
   startTimeMine: string | null;
   endTimeMine: string | null;
   voucherIdList: string[] | null;
   LikedEventImageIdList: string[];
   LikedCheckinImageIdList: string[];
-  speechMineLevel: number | null;
+  balanceLevel: number | null;
   miningHourPerQrCodeLevel: number | null;
   [key: string]: any;
 };

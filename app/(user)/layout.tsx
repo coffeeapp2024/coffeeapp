@@ -145,9 +145,11 @@ export default function RootLayout({
     // Fetch post images for event and check-in posts
     const fetchPostImages = async () => {
       try {
-        const fetchedPostImagesEvent = await getAllPostImages("event");
+        const fetchedPostImagesEvent = await getAllPostImages("eventImages");
         setEventPost(fetchedPostImagesEvent);
-        const fetchedPostImagesCheckin = await getAllPostImages("checkin");
+        const fetchedPostImagesCheckin = await getAllPostImages(
+          "checkinImages"
+        );
         setCheckinPost(fetchedPostImagesCheckin);
       } catch (error) {
         console.error("Error fetching post images:", error);
@@ -182,18 +184,18 @@ export default function RootLayout({
 
     fetchCases();
 
-    // Fetch levels
-    const fetchLevels = async () => {
-      try {
-        const fetchedLevels = await fetchLevelsFromFirestore();
-        setLevels(fetchedLevels);
-        console.log("Levels fetched");
-      } catch (error) {
-        console.error("Error fetching levels:", error);
-      }
-    };
+    // // Fetch levels
+    // const fetchLevels = async () => {
+    //   try {
+    //     const fetchedLevels = await fetchLevelsFromFirestore();
+    //     setLevels(fetchedLevels);
+    //     console.log("Levels fetched");
+    //   } catch (error) {
+    //     console.error("Error fetching levels:", error);
+    //   }
+    // };
 
-    fetchLevels();
+    // fetchLevels();
 
     // Fetch homepage content and storage documents
     const fetchHomePageContent = async () => {
