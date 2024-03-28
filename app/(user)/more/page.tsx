@@ -1,9 +1,8 @@
 "use client";
 
 import BoostDialog from "@/components/Boost/BoostDialog";
-import GameDialog from "@/components/Gift/GameDialog";
+import GameDialog from "@/components/More/GameDialog";
 import React from "react";
-import VoucherDialog from "@/components/Gift/VoucherDialog";
 
 function Page() {
   return (
@@ -19,7 +18,6 @@ function Page() {
       <div className="grid grid-cols-2 gap-4 pb-40">
         <GameDialog />
         <BoostDialog />
-        <VoucherDialog />
       </div>
     </div>
   );

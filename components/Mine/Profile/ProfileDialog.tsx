@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/sheet";
 
 import UserInfo from "./UserInfo";
-import UserVoucherList from "./UserVoucherList";
+import UserVoucherList from "./UserVoucherCardList";
 import { User } from "firebase/auth";
 import SignOutButton from "./SignOutButton";
 import Admin from "./AdminNav";
@@ -20,6 +20,7 @@ import {
   EllipsisVerticalIcon,
 } from "@heroicons/react/24/outline";
 import Image from "next/image";
+import UserVoucherDiaLog from "./UserVoucherDiaLog";
 
 function ProfileDialog({ user }: { user: User }) {
   const { role } = useUserDataStore();
@@ -55,7 +56,9 @@ function ProfileDialog({ user }: { user: User }) {
           </div>
 
           <div className="grid grid-cols-2 gap-x-4">
-            <div className="user-item-card"></div>
+            <div className="user-item-card">
+              <UserVoucherDiaLog />
+            </div>
             <div className="user-item-card"></div>
           </div>
         </div>

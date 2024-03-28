@@ -4,17 +4,18 @@ import {
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel";
-import UserVoucher from "./UserVoucher";
+import UserVoucher from "./UserVoucherCard";
 import { useUserDataStore } from "@/store/zustand";
 import QrCodeUserVoucher from "./QrCodeUserVoucher";
+import UserVoucherCard from "./UserVoucherCard";
 
-function VoucherCardList() {
+function UserVoucherCardList() {
   const { userData } = useUserDataStore();
 
   const { voucherIdList } = userData ?? {};
 
   return (
-    <div className="">
+    <div className="overflow-y-scroll">
       <div className="flex items-center justify-center mb-14">
         <span className="text-neutral-900 text-sm font-medium">
           Vouchers: {voucherIdList?.length}
@@ -27,17 +28,15 @@ function VoucherCardList() {
         }}
         className="-mx-0x"
       >
-        <CarouselContent className="-ml-0 pb-20">
+        <div className="-ml-0 pb-20">
           {voucherIdList?.map((voucherId, index) => (
-            <CarouselItem key={index} className="basis-[80%] pl-3">
-              <UserVoucher index={index} voucherId={voucherId} />
-            </CarouselItem>
+            <UserVoucherCard key={index} index={index} voucherId={voucherId} />
           ))}
-        </CarouselContent>
+        </div>
       </Carousel>
       <QrCodeUserVoucher />
     </div>
   );
 }
 
-export default VoucherCardList;
+export default UserVoucherCardList;
