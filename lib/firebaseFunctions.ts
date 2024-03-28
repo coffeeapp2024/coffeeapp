@@ -2,7 +2,6 @@ import {
   doc,
   collection,
   setDoc,
-  getDocs,
   getDoc,
   deleteDoc,
   onSnapshot,
@@ -10,27 +9,13 @@ import {
   addDoc,
   updateDoc,
 } from "firebase/firestore";
-import {
-  UserData,
-  HomePageContent,
-  PostType,
-  Product,
-  ProductTag,
-  MinePageContent,
-} from "@/store/storeTypes";
+import { UserData, PostType } from "@/store/storeTypes";
 import { User } from "firebase/auth";
 import { db, storage } from "./firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
-// const settingsRef = collection(db, "settings");
 const usersRef = collection(db, "users");
-const contentsRef = collection(db, "contents");
 const keysRef = collection(db, "keys");
-const vouchersRef = collection(db, "vouchers");
-const casesRef = collection(db, "game_random_voucher");
-const levelsRef = collection(db, "levels");
-const productsRef = collection(db, "products");
-const productTagsRef = collection(db, "productTags");
 
 export async function createUserInFirestore(
   user: User
