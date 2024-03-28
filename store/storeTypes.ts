@@ -23,7 +23,6 @@ export type UserData = {
   LikedCheckinImageIdList: string[];
   balanceLevel: number | null;
   miningHourPerQrCodeLevel: number | null;
-  sizes: Sizes[];
   [key: string]: any;
 };
 
@@ -138,8 +137,8 @@ export type Product = {
   id: string;
   img: string;
   name: string;
-  price: number;
   tags: string[];
+  sizes: Sizes[];
 };
 
 export type ProductStore = {
