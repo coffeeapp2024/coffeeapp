@@ -7,8 +7,6 @@ import GameCardList from "./GameCardList";
 import AppCardTemplate from "../Template/AppCardTemplate";
 
 function GameDialog() {
-  const { userData } = useUserDataStore();
-
   return (
     <AppCardTemplate icon="" imageURL="" info="" name="">
       <Sheet>
