@@ -2,17 +2,18 @@ import Image from "next/image";
 import React from "react";
 import MainButton from "../MainButton";
 import CloseDialogButton from "../Template/CloseDialogButton";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import GameCardList from "./GameCardList";
 import { useUserDataStore } from "@/store/zustand";
 import { toast } from "sonner";
+import SheetContentLayout from "../ui/SheetContentLayout";
+import { Sheet, SheetTrigger } from "../ui/sheet";
 
 function GameDialog() {
   const { userData } = useUserDataStore();
 
   return (
-    <Dialog>
-      <DialogTrigger
+    <Sheet>
+      <SheetTrigger
         className="col-span-2"
         onClick={() => {
           !userData && toast.warning("Sign in to play game");
@@ -28,25 +29,17 @@ function GameDialog() {
               unoptimized={true}
               className="scale-[1.6] w-full"
             />
-            <Image
-              src={"/icons/cases.gif"}
-              height={100}
-              width={100}
-              alt="boost"
-              unoptimized={true}
-              className="scale-[0.6] -translate-y-10 absolute w-full"
-            />
           </div>
           <div className="absolute bottom-4 left-1/2 -translate-x-1/2">
             <MainButton text="Open" />
           </div>
         </div>
-      </DialogTrigger>
-      <DialogContent className="bg-transparent border-none p-0 py-8">
+      </SheetTrigger>
+      <SheetContentLayout>
         <GameCardList />
         <CloseDialogButton />
-      </DialogContent>
-    </Dialog>
+      </SheetContentLayout>
+    </Sheet>
   );
 }
 

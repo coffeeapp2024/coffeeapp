@@ -22,16 +22,13 @@ function GameCard({ gameCase }: { gameCase: Case }) {
 
     const randomIndex = Math.floor(Math.random() * caseVoucherIdList.length);
     const randomVoucherId = caseVoucherIdList[randomIndex];
-    setRandomVoucherId(randomVoucherId);
-
-    setOpen(true);
 
     const updatedVouchers = [
       ...(userData.voucherIdList || []),
       randomVoucherId,
     ];
 
-    await toast.promise(
+    const updatedUserData = await toast.promise(
       updateUserDataAfterPurchase(userData, setUserData, price, [
         {
           key: "voucherIdList",
@@ -44,6 +41,10 @@ function GameCard({ gameCase }: { gameCase: Case }) {
         error: (error) => error.message,
       }
     );
+    if (updatedUserData) {
+      setRandomVoucherId(randomVoucherId);
+      setOpen(true);
+    }
   };
 
   return (
