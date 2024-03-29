@@ -1,8 +1,5 @@
 import { SheetClose, SheetContent } from "./sheet";
-import {
-  ArrowLeftCircleIcon,
-  ArrowLeftIcon,
-} from "@heroicons/react/24/outline";
+import { ArrowLeftIcon } from "@heroicons/react/24/outline";
 
 export default function SheetContentLayout({
   children, // will be a page or nested layout
