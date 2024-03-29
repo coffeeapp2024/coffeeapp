@@ -15,6 +15,11 @@ function AddToHomeScreen() {
       setIsPWAInstalled(true);
     });
 
+    // Check if running in standalone mode
+    if (window.matchMedia("(display-mode: standalone)").matches) {
+      setIsPWAInstalled(true); // Hide the button if running in standalone mode
+    }
+
     // Xoá event listener khi component unmount
     return () => {
       window.removeEventListener("beforeinstallprompt", () => {});
