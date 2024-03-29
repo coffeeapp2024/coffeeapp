@@ -1,12 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import React from "react";
 import { useOpenQrVoucherStore, useVoucherStore } from "@/store/zustand";
 import { toast } from "sonner";
-import CoinIcon from "@/components/Template/CoinIcon";
-import MainButton from "@/components/MainButton";
-import SecondaryButton from "@/components/Template/SecondaryButton";
 import VoucherCardTemplate from "@/components/Template/VoucherCardTemplate";
 
 function UserVoucherCard({
