@@ -45,7 +45,7 @@ function ScanClaimCard() {
           <div className="flex flex-col font-semibold">
             <span className="text-neutral-800 ">{remainingTimeFormatted}</span>
             <span className="text-neutral-500 text-sm">
-              {balance ?? "0"} coin/hour
+              {balance ?? "0"} min/hour
             </span>
           </div>
         </div>

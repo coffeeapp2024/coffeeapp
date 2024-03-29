@@ -10,7 +10,7 @@ export default function SheetContentLayout({
   children: React.ReactNode;
 }) {
   return (
-    <SheetContent className="w-full pt-36 bg-neutral-100">
+    <SheetContent className="w-full pt-24 px-4 bg-neutral-100">
       <SheetClose className="fixed top-4 left-4">
         <button className="bg-neutral-200 p-2 rounded-xl">
           <ArrowLeftIcon className="w-4 h-4" />
