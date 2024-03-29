@@ -13,7 +13,7 @@ function GameDialog() {
     <AppCardTemplate icon="" imageURL="" info="" name="">
       <Sheet>
         <SheetTrigger>
-          <MainButton text="Open" className="px-6 h-12" />
+          <MainButton text="Open" className="px-6" />
         </SheetTrigger>
         <SheetContentLayout>
           <div>

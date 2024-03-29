@@ -22,7 +22,7 @@ function BoostDialog() {
     <AppCardTemplate icon="" imageURL="" info="" name="">
       <Sheet>
         <SheetTrigger>
-          <MainButton text="Boost" className="px-6 h-12" />
+          <MainButton text="Boost" className="px-6" />
         </SheetTrigger>
         <SheetContentLayout>
           <div className="flex flex-col gap-y-3">
