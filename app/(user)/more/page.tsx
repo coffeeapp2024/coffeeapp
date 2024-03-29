@@ -1,7 +1,7 @@
 "use client";
 
 import BoostDialog from "@/components/Boost/BoostDialog";
-import GameDialog from "@/components/More/GameDialog";
+import GameDialog from "@/components/Game/GameDialog";
 import React from "react";
 
 function Page() {
