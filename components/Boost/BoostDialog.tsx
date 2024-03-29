@@ -16,8 +16,6 @@ import MainButton from "../MainButton";
 import SheetContentLayout from "../ui/SheetContentLayout";
 
 function BoostDialog() {
-  const { userData } = useUserDataStore();
-
   return (
     <AppCardTemplate icon="" imageURL="" info="" name="">
       <Sheet>
