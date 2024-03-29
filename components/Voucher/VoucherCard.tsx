@@ -11,7 +11,7 @@ function VoucherCard({ voucherData, isHidden }: any) {
   const { userData, setUserData } = useUserDataStore();
 
   const handleBuy = async (voucherId: string, price: number) => {
-    if (!userData) return;
+    if (!userData) return toast.error("Login to claim voucher");
 
     const updatedVouchers = [...(userData.voucherIdList || []), voucherId];
 
@@ -31,7 +31,8 @@ function VoucherCard({ voucherData, isHidden }: any) {
   };
   return (
     <VoucherCardTemplate
-      {...{ imageURL, name, info, price, isHidden }}
+      {...{ imageURL, name, info, price }}
+      nameButton="Claim"
       onClick={() => handleBuy(id, price)}
     />
   );

@@ -9,7 +9,7 @@ type PageProps = {
   imageURL: string;
   name: string;
   info: string;
-  isHidden: boolean;
+  nameButton: string;
   price?: number;
   onClick: any;
 };
@@ -19,7 +19,7 @@ function VoucherCardTemplate({
   name,
   info,
   price,
-  isHidden,
+  nameButton,
   onClick,
 }: PageProps) {
   return (
@@ -49,7 +49,7 @@ function VoucherCardTemplate({
           </span>
         )}
       </div>
-      {!isHidden && <SecondaryButton name="Claim" onClick={() => onClick()} />}
+      <SecondaryButton name={nameButton} onClick={() => onClick()} />
     </div>
   );
 }
