@@ -1,39 +1,39 @@
 "use client";
 
 import React from "react";
-import CoinIcon from "../Template/CoinIcon";
-import Image from "next/image";
-import SecondaryButton from "../Template/SecondaryButton";
+import VoucherCardTemplate from "../Template/VoucherCardTemplate";
+import { useUserDataStore } from "@/store/zustand";
+import { updateUserDataAfterPurchase } from "@/lib/coinActions";
+import { toast } from "sonner";
 
-function VoucherCard({ voucherData, handleBuy, isHidden }: any) {
+function VoucherCard({ voucherData, isHidden }: any) {
   const { imageURL, name, info, price, id } = voucherData;
+  const { userData, setUserData } = useUserDataStore();
 
+  const handleBuy = async (voucherId: string, price: number) => {
+    if (!userData) return;
+
+    const updatedVouchers = [...(userData.voucherIdList || []), voucherId];
+
+    await toast.promise(
+      updateUserDataAfterPurchase(userData, setUserData, price, [
+        {
+          key: "voucherIdList",
+          value: updatedVouchers,
+        },
+      ]),
+      {
+        loading: "Proccessing...",
+        success: "Voucher purchased successfully",
+        error: (error) => error.message,
+      }
+    );
+  };
   return (
-    <div className="relative bg-card w-full py-2 pl-2 pr-4 rounded-2xl flex shadow-sm">
-      {/* Left */}
-      <div className="bg-background basis-1/3 aspect-square rounded-xl overflow-hidden">
-        <Image
-          src={imageURL}
-          width={300}
-          height={300}
-          alt="Image Voucher"
-          className="w-full h-full object-cover"
-        />
-      </div>
-
-      {/* Right */}
-      <div className="pl-3 pt-1">
-        <div className="mb-2">
-          <h3 className="font-bold text-lg">{name}</h3>
-          <p className="text-wrap text-sm">{info}</p>
-        </div>
-        <span className="flex items-center justify-center w-fit font-semibold">
-          {price}
-          <CoinIcon classname="w-4 h-4" />
-        </span>
-      </div>
-      <SecondaryButton name="Claim" onClick={() => handleBuy(id, price)} />
-    </div>
+    <VoucherCardTemplate
+      {...{ imageURL, name, info, price, isHidden }}
+      onClick={() => handleBuy(id, price)}
+    />
   );
 }
 

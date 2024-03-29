@@ -49,17 +49,23 @@ function Fireplace() {
   const handleUpgradeClick = async () => {
     if (!userData || !nextLevel || !nextPrice) return;
 
-    await updateUserDataAfterPurchase(userData, nextPrice, setUserData, [
+    await toast.promise(
+      updateUserDataAfterPurchase(userData, setUserData, nextPrice, [
+        {
+          key: "balanceLevel",
+          value: nextLevel,
+        },
+        {
+          key: "balance",
+          value: nextBalance,
+        },
+      ]),
       {
-        key: "balanceLevel",
-        value: nextLevel,
-      },
-      {
-        key: "balance",
-        value: nextBalance,
-      },
-    ]);
-    toast.success("Upgrade successful!");
+        loading: "Proccessing...",
+        success: "Upgrade successful!",
+        error: (error) => error.message,
+      }
+    );
   };
 
   return (

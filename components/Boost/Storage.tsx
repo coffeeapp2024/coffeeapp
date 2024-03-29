@@ -49,13 +49,19 @@ function Storage() {
   const handleUpgradeClick = async () => {
     if (!userData || !nextLevel || !nextPrice) return;
 
-    await updateUserDataAfterPurchase(userData, nextPrice, setUserData, [
+    await toast.promise(
+      updateUserDataAfterPurchase(userData, setUserData, nextPrice, [
+        {
+          key: "miningHourPerQrCodeLevel",
+          value: nextLevel,
+        },
+      ]),
       {
-        key: "miningHourPerQrCodeLevel",
-        value: nextLevel,
-      },
-    ]);
-    toast.success("Upgrade successful!");
+        loading: "Proccessing...",
+        success: "Upgrade successful!",
+        error: (error) => error.message,
+      }
+    );
   };
 
   return (

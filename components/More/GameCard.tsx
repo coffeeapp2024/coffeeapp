@@ -25,19 +25,25 @@ function GameCard({ gameCase }: { gameCase: Case }) {
     setRandomVoucherId(randomVoucherId);
 
     setOpen(true);
-    toast.success("Well done! You've earned a random voucher!");
 
     const updatedVouchers = [
       ...(userData.voucherIdList || []),
       randomVoucherId,
     ];
 
-    await updateUserDataAfterPurchase(userData, price, setUserData, [
+    await toast.promise(
+      updateUserDataAfterPurchase(userData, setUserData, price, [
+        {
+          key: "voucherIdList",
+          value: updatedVouchers,
+        },
+      ]),
       {
-        key: "voucherIdList",
-        value: updatedVouchers,
-      },
-    ]);
+        loading: "Proccessing...",
+        success: "Well done! You've earned a random voucher!",
+        error: (error) => error.message,
+      }
+    );
   };
 
   return (

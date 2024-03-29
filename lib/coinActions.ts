@@ -4,7 +4,7 @@ import {
   updateDocumentByKeyCondition,
   updateDocumentInCollection,
 } from "./firebaseUtils";
-import { StorageItem } from "@/store/zustand";
+import { StorageItem, useUserDataStore } from "@/store/zustand";
 
 export function updateCurrentCoin(
   balancePerHour: number,
@@ -108,15 +108,13 @@ export function calcInitialCoin(userData: UserData): number {
 
 export async function updateUserDataAfterPurchase(
   userData: UserData,
-  price: number,
   setUserData: (userData: UserData | null) => void,
+  price: number,
   updates: { key: string; value: any }[]
 ): Promise<UserData | null> {
   const currentCoin = calcInitialCoin(userData);
-
   if (currentCoin < price) {
-    console.log("Not enough coin");
-    return null;
+    throw new Error("Not enough min point");
   }
 
   const updatedCoin = currentCoin - price;
@@ -124,13 +122,17 @@ export async function updateUserDataAfterPurchase(
   const updatedUserData: UserData = {
     ...userData,
     coin: updatedCoin,
-    startTimeMine: userData.startTimeMine && new Date().toISOString(),
   };
 
   // Apply all updates
   updates.forEach(({ key, value }) => {
     updatedUserData[key] = value;
   });
+
+  // Check if userData.startTimeMine exists before updating updatedUserData
+  if (userData.startTimeMine) {
+    updatedUserData.startTimeMine = new Date().toISOString();
+  }
 
   await updateDocumentByKeyCondition(
     "users",
@@ -139,9 +141,9 @@ export async function updateUserDataAfterPurchase(
     updatedUserData
   );
 
-  console.log("Updated user data after purchase:", updatedUserData);
   setUserData(updatedUserData);
 
+  console.log("Updated user data after purchase:", updatedUserData);
   return updatedUserData;
 }
 
