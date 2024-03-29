@@ -16,11 +16,11 @@ function UserVoucherCardList() {
 
   return (
     <div className="overflow-y-scroll">
-      <div className="flex items-center justify-center mb-14">
+      {/* <div className="flex items-center justify-center mb-14">
         <span className="text-neutral-900 text-sm font-medium">
           Vouchers: {voucherIdList?.length}
         </span>
-      </div>
+      </div> */}
       <Carousel
         opts={{
           startIndex: 1,
@@ -28,7 +28,7 @@ function UserVoucherCardList() {
         }}
         className="-mx-0x"
       >
-        <div className="-ml-0 pb-20">
+        <div className="-ml-0 pb-20 flex flex-col gap-y-3">
           {voucherIdList?.map((voucherId, index) => (
             <UserVoucherCard key={index} index={index} voucherId={voucherId} />
           ))}

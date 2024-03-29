@@ -36,7 +36,7 @@ function VoucherCardTemplate({
       </div>
 
       {/* Right */}
-      <div className="pl-3 pt-1">
+      <div className="pl-3 pt-1 basis-2/3">
         <div className="mb-2">
           <h3 className="font-bold">{name}</h3>
           <p className="text-wrap text-sm">{info}</p>

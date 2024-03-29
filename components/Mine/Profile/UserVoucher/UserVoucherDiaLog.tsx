@@ -6,7 +6,7 @@ function UserVoucherDiaLog() {
   return (
     <Drawer>
       <DrawerTrigger>Open</DrawerTrigger>
-      <DrawerContent className="h-[90%]">
+      <DrawerContent className="h-[90%] bg-background px-2 pt-1">
         <UserVoucherCardList />
       </DrawerContent>
     </Drawer>
