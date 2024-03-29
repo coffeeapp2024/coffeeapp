@@ -7,18 +7,20 @@ import Background from "@/components/Mine/Background";
 import {} from "@/lib/timeActions";
 import AddToHomeScreen from "@/components/Mine/AddToHomeScreen";
 import InstallButton from "@/components/Mine/InstallButton";
+import Tiktok from "@/components/Mine/Tiktok";
 
 export default function Home() {
   return (
     <main className="relative h-screen max-w-screen-sm">
       <AddToHomeScreen />
       <InstallButton />
-      <Background />
+      {/* <Background /> */}
       <div className="pt-4 pb-20">
         <ProfileCard />
       </div>
       <CurrentCoinInfo />
       <ScanClaimCard />
+      <Tiktok />
     </main>
   );
 }
