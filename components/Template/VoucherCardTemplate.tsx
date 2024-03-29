@@ -23,9 +23,9 @@ function VoucherCardTemplate({
   onClick,
 }: PageProps) {
   return (
-    <div className="relative bg-card w-full py-2 pl-2 pr-4 rounded-2xl flex shadow-sm">
+    <div className="relative h-32 bg-card w-full py-2 pl-2 pr-4 rounded-2xl flex shadow-sm">
       {/* Left */}
-      <div className="bg-background basis-1/3 aspect-square rounded-xl overflow-hidden">
+      <div className="bg-background h-full aspect-square rounded-xl overflow-hidden">
         <Image
           src={imageURL}
           width={300}
@@ -38,7 +38,7 @@ function VoucherCardTemplate({
       {/* Right */}
       <div className="pl-3 pt-1">
         <div className="mb-2">
-          <h3 className="font-bold text-lg">{name}</h3>
+          <h3 className="font-bold">{name}</h3>
           <p className="text-wrap text-sm">{info}</p>
         </div>
 
