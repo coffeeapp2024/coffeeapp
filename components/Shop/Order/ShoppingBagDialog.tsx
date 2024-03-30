@@ -11,7 +11,7 @@ function ShoppingBagDialog() {
 
   return (
     <Sheet>
-      <SheetTrigger className="fixed right-[9px] top-[59%] bg-neutral-50 shadow-sm p-2 rounded-2xl flex items-center justify-center">
+      <SheetTrigger className="fixed right-[9px] top-[68%] bg-neutral-50 shadow-sm p-2 rounded-2xl flex items-center justify-center">
         <ShoppingCartIcon className="w-7 h-7" />
         <div
           className={`${

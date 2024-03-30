@@ -19,7 +19,7 @@ function UseCoin() {
   const { isPriceInCoins, togglePriceType } = usePriceTypeStore();
 
   return (
-    <div className="fixed top-2/3 -right-3 p-3 rounded-full rotate-90">
+    <div className="fixed top-[75%] -right-3 p-3 rounded-full rotate-90">
       <Switch
         isSelected={isPriceInCoins}
         onValueChange={() => {
