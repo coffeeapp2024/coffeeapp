@@ -48,8 +48,10 @@ function ProductCard({ product }: { product: any }) {
           </span>
         </div>
       </DrawerTrigger>
-      <DrawerContent className="h-[80%] rounded-t-3xl border-none bg-transparent px-4">
-        <div className="bg-white h-full mt-4 mb-20 rounded-[30px]"></div>
+      <DrawerContent className="h-[90%] rounded-t-3xl border-none bg-transparent px-2">
+        <div className="bg-white h-full mt-4 mb-20 rounded-[30px] overflow-hidden">
+          <div className="w-full aspect-square bg-neutral-50"></div>
+        </div>
       </DrawerContent>
     </Drawer>
   );
