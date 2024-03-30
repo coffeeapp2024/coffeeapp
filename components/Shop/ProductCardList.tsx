@@ -1,6 +1,8 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import ProductCard from "./ProductCard";
 import { useProductStore, useProductTagStore } from "@/store/zustand";
+import ProductDialog from "./ProductDialog";
 
 function ProductCardList() {
   const { products } = useProductStore();
@@ -21,6 +23,7 @@ function ProductCardList() {
       {filteredProducts.map((product, index) => (
         <ProductCard key={index} product={product} />
       ))}
+      <ProductDialog />
     </div>
   );
 }

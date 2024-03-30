@@ -200,3 +200,19 @@ export const usePriceTypeStore = create<PriceTypeStore>((set) => ({
   togglePriceType: () =>
     set((state) => ({ isPriceInCoins: !state.isPriceInCoins })),
 }));
+
+export type ProductType = any;
+
+export type SelectProductStore = {
+  open: boolean;
+  product: ProductType | null;
+  toggleOpen: () => void;
+  selectProduct: (product: ProductType) => void;
+};
+
+export const useSelectProductStore = create<SelectProductStore>((set) => ({
+  open: false,
+  product: null,
+  toggleOpen: () => set((state) => ({ open: !state.open })),
+  selectProduct: (product) => set({ open: true, product }), // Changed pickProduct to selectProduct
+}));
