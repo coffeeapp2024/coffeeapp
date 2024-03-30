@@ -33,7 +33,7 @@ function RecommendProductCards() {
       <div>
         <Carousel
           opts={{
-            startIndex: 1,
+            startIndex: 0,
             dragFree: true,
           }}
         >
