@@ -7,7 +7,7 @@ import React from "react";
 
 function Page() {
   return (
-    <div className="relative min-h-[200vh] w-full bg-neutral-100">
+    <div className="relative min-h-[200vh] w-full bg-background">
       <BannerProductPage />
       <RecommendProductCards />
       <Menu />
