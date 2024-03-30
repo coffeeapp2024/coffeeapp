@@ -40,7 +40,7 @@ function BoostDrawer({
             />
             {/* Level */}
             <div className="flex items-center gap-x-1 -ml-1">
-              <CoinIcon classname="w-4 h-4 " />
+              <CoinIcon className="w-4 h-4 " />
               <span className=" font-semibold text-neutral-800">
                 {isMaxLevel ? 0 : nextPrice}
               </span>
@@ -79,7 +79,7 @@ function BoostDrawer({
             <div className="flex items-center justify-center pt-8 pb-8">
               {!isMaxLevel && (
                 <>
-                  <CoinIcon classname="w-5 h-5" />
+                  <CoinIcon className="w-5 h-5" />
                   <span className="font-semibold text-xl">{nextPrice}</span>
                 </>
               )}
