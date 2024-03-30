@@ -13,7 +13,7 @@ function GameDialog() {
       background="bg-fuchsia-300"
       icon={<GiftIcon className="w-7 h-7" />}
       imageURL=""
-      info="Get random voucher"
+      info="Random voucher"
       name="Cases Boom"
     >
       <Sheet>
