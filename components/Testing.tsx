@@ -373,7 +373,7 @@ function Testing() {
   const { userData } = useUserDataStore();
 
   const handleReset = async () => {
-    await resetCollectionData("products", demoProductList);
+    // await resetCollectionData("products", demoProductList);
     // await updateKeyInDocument(
     //   "users",
     //   "NllhI3c86XTHdDIS0sNL9JfE3rN2",
