@@ -9,9 +9,12 @@ import UserVoucherDiaLog from "./UserVoucher/UserVoucherDiaLog";
 import ProfileTrigger from "./ProfileTrigger";
 import SheetContentLayout from "@/components/ui/SheetContentLayout";
 import ProfileCard from "./ProfileCard";
+import Image from "next/image";
 
 function ProfileDialog({ user }: { user: User }) {
   const { role } = useUserDataStore();
+
+  const { displayName, photoURL, email, phoneNumber } = user;
 
   const styleCard =
     "bg-neutral-50 aspect-square rounded-3xl flex items-center justify-center shadow-sm border-1px  border-neutral-200";
@@ -22,9 +25,21 @@ function ProfileDialog({ user }: { user: User }) {
       </SheetTrigger>
       <SheetContentLayout>
         <div className="flex flex-col items-center justify-center">
-          <div className="w-24 aspect-square rounded-full bg-neutral-300 mb-5"></div>
-          <h3 className="font-bold text-2xl">Tri Minh Nguyen</h3>
-          <p>trimindev@gmail.com</p>
+          <div className="w-24 aspect-square rounded-full bg-neutral-300 mb-5">
+            {photoURL && (
+              <Image
+                src={photoURL}
+                width={300}
+                height={300}
+                className="rounded-full"
+                alt="Avatar"
+              />
+            )}
+          </div>
+          <h3 className="font-bold text-2xl">
+            {displayName ? displayName : "Loading..."}
+          </h3>
+          <p>{email ? email : "Loading..."}</p>
         </div>
         <div className="border-neutral-100 border-1px -mx-4 my-6"></div>
         <div className="grid grid-cols-2 gap-4">
