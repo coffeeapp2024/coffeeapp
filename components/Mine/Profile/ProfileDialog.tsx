@@ -22,7 +22,7 @@ function ProfileDialog({ user }: { user: User }) {
       </SheetTrigger>
       <SheetContentLayout>
         <div className="flex flex-col items-center justify-center">
-          <div className="w-28 aspect-square rounded-full bg-neutral-300 mb-5"></div>
+          <div className="w-24 aspect-square rounded-full bg-neutral-300 mb-5"></div>
           <h3 className="font-bold text-2xl">Tri Minh Nguyen</h3>
           <p>trimindev@gmail.com</p>
         </div>
