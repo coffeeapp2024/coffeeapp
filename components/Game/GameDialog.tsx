@@ -8,7 +8,13 @@ import AppCardTemplate from "../Template/AppCardTemplate";
 
 function GameDialog() {
   return (
-    <AppCardTemplate icon="" imageURL="" info="" name="">
+    <AppCardTemplate
+      background="bg-violet-400"
+      icon=""
+      imageURL=""
+      info=""
+      name=""
+    >
       <Sheet>
         <SheetTrigger>
           <MainButton text="Open" className="px-6" />

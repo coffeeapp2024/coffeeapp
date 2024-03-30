@@ -17,7 +17,13 @@ import SheetContentLayout from "../ui/SheetContentLayout";
 
 function BoostDialog() {
   return (
-    <AppCardTemplate icon="" imageURL="" info="" name="">
+    <AppCardTemplate
+      background="bg-yellow-400"
+      icon=""
+      imageURL=""
+      info=""
+      name=""
+    >
       <Sheet>
         <SheetTrigger>
           <MainButton text="Boost" className="px-6" />

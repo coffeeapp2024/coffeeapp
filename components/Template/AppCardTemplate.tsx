@@ -1,3 +1,4 @@
+import { RocketLaunchIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import React from "react";
 
@@ -7,13 +8,17 @@ function AppCardTemplate({
   icon,
   name,
   info,
+  background,
 }: {
   children: React.ReactNode;
   icon: React.ReactNode;
   imageURL: string;
   name: string;
+  background: string;
   info: string;
 }) {
+  const BackgroundIcon = ["bg-violet-400", "bg-yellow-400"];
+
   return (
     <div className="col-span-2 w-full aspect-square rounded-3xl bg-white border-neutral-200 border-1px shadow-sm overflow-hidden flex flex-col justify-end">
       <div className="h-full bg-neutral-50">
@@ -27,8 +32,11 @@ function AppCardTemplate({
       </div>
       <div className="w-full bg-neutral-100 px-3 py-2 flex justify-between items-center">
         <div className="flex gap-x-3">
-          <div className="bg-neutral-300 h-14 aspect-square rounded-2xl">
-            {icon}
+          <div
+            className={`${background} h-14 aspect-square rounded-2xl flex items-center justify-center`}
+          >
+            {/* {icon} */}
+            <RocketLaunchIcon className="w-8 h-8" />
           </div>
           <div>
             <h3 className="text-lg font-bold">{name}</h3>
