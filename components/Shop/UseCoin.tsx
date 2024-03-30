@@ -19,14 +19,14 @@ function UseCoin() {
   const { isPriceInCoins, togglePriceType } = usePriceTypeStore();
 
   return (
-    <div className="fixed top-2/3 -right-4 p-3 rounded-full rotate-90">
+    <div className="fixed top-2/3 -right-3 p-3 rounded-full rotate-90">
       <Switch
         isSelected={isPriceInCoins}
         onValueChange={() => {
           togglePriceType();
         }}
         defaultSelected
-        size="md"
+        size="lg"
         color="success"
         startContent={<Coin2D />}
         endContent={<Currency />}
