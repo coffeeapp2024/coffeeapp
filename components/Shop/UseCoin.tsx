@@ -21,6 +21,10 @@ function UseCoin() {
   return (
     <div className="fixed top-1/4 -right-4  p-3 rounded-full rotate-90 ">
       <Switch
+        isSelected={isPriceInCoins}
+        onValueChange={() => {
+          togglePriceType();
+        }}
         defaultSelected
         size="md"
         color="secondary"
