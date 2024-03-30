@@ -196,7 +196,7 @@ export type PriceTypeStore = {
 };
 
 export const usePriceTypeStore = create<PriceTypeStore>((set) => ({
-  isPriceInCoins: false,
+  isPriceInCoins: true,
   togglePriceType: () =>
     set((state) => ({ isPriceInCoins: !state.isPriceInCoins })),
 }));
