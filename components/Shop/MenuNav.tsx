@@ -20,10 +20,10 @@ function MenuNav() {
         {filteredTags?.map((tag) => (
           <CarouselItem className="basis-auto pl-2" key={tag.tag}>
             <button
-              className={`py-2 px-5 rounded-3xl border-2 text-sm text-neutral-400 font-medium transition-all duration-75 ${
+              className={`py-2 px-5 rounded-3xl border-2 text-sm font-medium transition-all duration-75 ${
                 tag.tag === currentTag
-                  ? "bg-neutral-600 border-neutral-600 text-white"
-                  : "border-neutral-200"
+                  ? "border-neutral-700 text-neutral-700"
+                  : "border-white border-opacity-40 text-white"
               }`}
               onClick={() => handleTagChange(tag.tag)}
             >

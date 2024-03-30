@@ -5,7 +5,9 @@ import UserVoucherCardList from "./UserVoucherCardList";
 function UserVoucherDiaLog() {
   return (
     <Drawer>
-      <DrawerTrigger>Open</DrawerTrigger>
+      <DrawerTrigger className="bg-white bg-opacity-95 w-full h-full">
+        Open
+      </DrawerTrigger>
       <DrawerContent className="h-[90%] bg-background px-2 pt-1">
         <UserVoucherCardList />
       </DrawerContent>
