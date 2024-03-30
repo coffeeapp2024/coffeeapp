@@ -11,7 +11,7 @@ import Tiktok from "@/components/Mine/Tiktok";
 
 export default function Home() {
   return (
-    <main className="relative h-screen max-w-screen-sm">
+    <main className="relative h-screen max-w-screen-sm z-10">
       <AddToHomeScreen />
       <InstallButton />
       <Background />

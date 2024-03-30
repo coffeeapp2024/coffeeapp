@@ -27,7 +27,7 @@ function Tiktok() {
         }),
       ]}
     >
-      <CarouselContent className="fixed top-0 w-full max-w-screen-sm h-screen -z-50 -mt-0">
+      <CarouselContent className="fixed top-0 w-full max-w-screen-sm h-screen -z-10 -mt-0">
         {videos.map((video, index) => (
           <CarouselItem
             key={index}
