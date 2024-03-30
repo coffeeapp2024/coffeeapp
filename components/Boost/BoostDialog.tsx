@@ -18,7 +18,7 @@ import SheetContentLayout from "../ui/SheetContentLayout";
 function BoostDialog() {
   return (
     <AppCardTemplate
-      background="bg-fuchsia-400"
+      background="bg-yellow-400"
       icon={<RocketLaunchIcon className="w-7 h-7" />}
       imageURL="https://img.freepik.com/premium-photo/space-rocket-flying-high-sky-generative-ai_634053-3936.jpg"
       info="Boost balance"
