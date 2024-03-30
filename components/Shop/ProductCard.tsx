@@ -148,28 +148,33 @@ function ProductCard({ product }: { product: Product }) {
               ))}
             </div>
 
-            <h3 className="font-bold text-xl mb-2">Add ins</h3>
-            <div className="flex items-center justify-start gap-x-2 mb-6">
-              {productToppings.map((topping, index) => (
-                <button
-                  onClick={() => toggleTopping(topping)}
-                  className={`h-10 px-4 ${
-                    selectedToppings.some(
-                      (selected) => selected.id === topping.id
-                    )
-                      ? isPriceInCoins
-                        ? "bg-green-500 text-white"
-                        : "bg-purple-500 text-white"
-                      : "bg-neutral-100 text-neutral-700"
-                  } rounded-[30px] flex items-center justify-center font-medium `}
-                  key={index}
-                >
-                  <span>{topping.name}</span>
-                </button>
-              ))}
-            </div>
+            {/* Add ins */}
+            {productToppings.length > 0 && (
+              <div>
+                <h3 className="font-bold text-xl mb-2">Add ins</h3>
+                <div className="flex items-center justify-start gap-x-2">
+                  {productToppings.map((topping, index) => (
+                    <button
+                      onClick={() => toggleTopping(topping)}
+                      className={`h-10 px-4 ${
+                        selectedToppings.some(
+                          (selected) => selected.id === topping.id
+                        )
+                          ? isPriceInCoins
+                            ? "bg-green-500 text-white"
+                            : "bg-purple-500 text-white"
+                          : "bg-neutral-100 text-neutral-700"
+                      } rounded-[30px] flex items-center justify-center font-medium `}
+                      key={index}
+                    >
+                      <span>{topping.name}</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
 
-            <div className="border-t-1px -mx-3 my-3"></div>
+            <div className="border-t-1px -mx-3 mb-3 mt-6"></div>
 
             <div className="flex items-center justify-between gap-x-3">
               {/* Amount */}
