@@ -16,7 +16,7 @@ function ProfileDialog({ user }: { user: User }) {
   const { displayName, photoURL, email, phoneNumber } = user;
 
   const styleCard =
-    "bg-neutral-50 aspect-square rounded-3xl flex items-center justify-center shadow-sm border-1px  border-neutral-200";
+    "bg-background aspect-square rounded-3xl flex items-center justify-center shadow-sm border-1px  border-neutral-200";
   return (
     <Sheet>
       <SheetTrigger className="w-full">

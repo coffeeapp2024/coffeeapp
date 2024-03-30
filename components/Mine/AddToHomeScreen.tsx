@@ -29,7 +29,7 @@ function AddToHomeScreen() {
   return (
     <>
       {isIOS && !isPWAInstalled && (
-        <div className="fixed top-28 left-1/2 -translate-x-1/2 w-fit  text-sm bg-white text-neutral-800 px-5 py-2 rounded-3xl flex flex-col items-center justify-center">
+        <div className="fixed top-28 left-1/2 -translate-x-1/2 w-fit  text-sm bg-background text-neutral-800 px-5 py-2 rounded-3xl flex flex-col items-center justify-center">
           <div className="flex items-center gap-x-[3px] text-nowrap">
             <span>Tap</span>
             <ArrowUpOnSquareIcon className="w-4 h-4 text-blue-500" />
