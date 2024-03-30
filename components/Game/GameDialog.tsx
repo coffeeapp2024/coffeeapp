@@ -12,7 +12,7 @@ function GameDialog() {
     <AppCardTemplate
       background="bg-fuchsia-300"
       icon={<GiftIcon className="w-7 h-7" />}
-      imageURL=""
+      imageURL="/bg/bg-case.jpg"
       info="Random voucher"
       name="Cases Boom"
     >
@@ -20,9 +20,15 @@ function GameDialog() {
         <SheetTrigger>
           <MainButton text="Open" className="px-6" />
         </SheetTrigger>
-        <SheetContentLayout>
-          <div>
-            <GameCardList />
+        <SheetContentLayout className="p-0">
+          <div
+            style={{
+              backgroundImage:
+                'url("https://i.pinimg.com/564x/cb/5c/5a/cb5c5a0ce2599d078ebd545d4bbe1a5c.jpg")',
+            }}
+            className="w-full h-full flex items-center justify-center"
+          >
+            {/* <GameCardList /> */}
           </div>
         </SheetContentLayout>
       </Sheet>

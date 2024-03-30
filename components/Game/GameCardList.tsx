@@ -20,7 +20,7 @@ export default function GameCardList() {
         }}
         className="-mx-0"
       >
-        <CarouselContent className="-ml- pb-12">
+        <CarouselContent className="-ml-0 pb-12 w-full">
           {cases?.map((gameCase, index) => (
             <CarouselItem key={index} className="basis-[60%] pl-6">
               <GameCard gameCase={gameCase} />
