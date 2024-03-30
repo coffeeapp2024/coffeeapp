@@ -41,7 +41,7 @@ function ProfileDialog({ user }: { user: User }) {
           </h3>
           <p>{email ? email : "Loading..."}</p>
         </div>
-        <div className="border-neutral-100 border-1px -mx-4 my-6"></div>
+        <div className="border-white border-opacity-80 border-1px -mx-4 my-6"></div>
         <div className="grid grid-cols-2 gap-4">
           <div className={`${styleCard}`}>
             <UserVoucherDiaLog />
