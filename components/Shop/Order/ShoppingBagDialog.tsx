@@ -3,7 +3,7 @@
 import React from "react";
 import { Sheet, SheetTrigger } from "@/components/ui/sheet";
 import SheetContentLayout from "@/components/ui/SheetContentLayout";
-import { ShoppingCartIcon } from "@heroicons/react/24/outline";
+import { ShoppingBagIcon, ShoppingCartIcon } from "@heroicons/react/24/outline";
 import { usePriceTypeStore } from "@/store/zustand";
 
 function ShoppingBagDialog() {
@@ -12,7 +12,7 @@ function ShoppingBagDialog() {
   return (
     <Sheet>
       <SheetTrigger className="fixed right-[9px] top-[68%] bg-neutral-50 shadow-sm p-2 rounded-2xl flex items-center justify-center">
-        <ShoppingCartIcon className="w-7 h-7" />
+        <ShoppingBagIcon className="w-7 h-7" />
         <div
           className={`${
             isPriceInCoins ? "bg-green-500" : "bg-purple-600"
