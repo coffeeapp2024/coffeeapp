@@ -23,7 +23,8 @@ function ProfileDialog({ user }: { user: User }) {
       <SheetTrigger className="w-full">
         <ProfileTrigger user={user} />
       </SheetTrigger>
-      <SheetContentLayout>
+      <SheetContentLayout className="">
+        {/* Profile Info */}
         <div className="flex flex-col items-center justify-center">
           <div className="w-24 aspect-square rounded-full bg-neutral-300 mb-5">
             {photoURL && (
