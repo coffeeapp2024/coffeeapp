@@ -2,14 +2,13 @@ import React from "react";
 import { Sheet, SheetTrigger } from "@/components/ui/sheet";
 
 import { User } from "firebase/auth";
-import SignOutButton from "./SignOutButton";
-import Admin from "./AdminNav";
 import { useUserDataStore } from "@/store/zustand";
 import UserVoucherDiaLog from "./UserVoucher/UserVoucherDiaLog";
 import ProfileTrigger from "./ProfileTrigger";
 import SheetContentLayout from "@/components/ui/SheetContentLayout";
-import ProfileCard from "./ProfileCard";
 import Image from "next/image";
+import SettingPopup from "./SettingPopup";
+import AdminNav from "./AdminNav";
 
 function ProfileDialog({ user }: { user: User }) {
   const { role } = useUserDataStore();
@@ -53,8 +52,8 @@ function ProfileDialog({ user }: { user: User }) {
             </div>
           ))}
         </div>
-        {role && <Admin />}
-        <SignOutButton />
+        <SettingPopup />
+        {role && <AdminNav />}
       </SheetContentLayout>
     </Sheet>
   );

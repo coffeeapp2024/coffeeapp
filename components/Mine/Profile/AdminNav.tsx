@@ -3,18 +3,12 @@ import React from "react";
 
 function AdminNav() {
   return (
-    <div className="absolute bottom-16 left-1/2 -translate-x-1/2 text-neutral-400 text-sm font-semibold flex gap-x-2">
+    <div className="absolute bottom-2 right-2 text-neutral-400 text-sm font-semibold flex gap-x-2 text-nowrap">
       <Link
         href="/staff"
-        className="p-2 border-2 border-neutral-300 rounded-3xl"
+        className="px-2 py-1 border-2 border-neutral-300 rounded-2xl"
       >
-        Staff
-      </Link>
-      <Link
-        href="/manager"
-        className="p-2 border-2 border-neutral-300 rounded-3xl"
-      >
-        Manager
+        Only Admin
       </Link>
     </div>
   );

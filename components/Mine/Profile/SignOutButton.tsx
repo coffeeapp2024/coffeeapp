@@ -16,10 +16,11 @@ function SignOutButton() {
 
   return (
     <button
-      className="flex items-center justify-center gap-x-1 rounded-xl font-medium text-neutral-400 absolute top-4 right-2 p-2"
+      className="flex items-center justify-center gap-x-1 rounded-xl font-medium text-neutral-400 p-2"
       onClick={signOutUser}
     >
       <ArrowRightStartOnRectangleIcon className="w-6 h-6" />
+      <span>Sign Out</span>
     </button>
   );
 }
