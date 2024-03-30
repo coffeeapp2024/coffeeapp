@@ -6,7 +6,7 @@ import React from "react";
 
 function Page() {
   return (
-    <div className="bg-neutral-100 min-h-screen pb-40 px-4 pt-4">
+    <div className="bg-neutral-100 min-h-[150vh] pb-40 px-4 pt-4">
       <div className="grid grid-cols-2 gap-y-6 pb-40">
         <GameDialog />
         <BoostDialog />
