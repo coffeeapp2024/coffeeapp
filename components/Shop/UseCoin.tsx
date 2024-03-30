@@ -10,9 +10,7 @@ function UseCoin() {
   return (
     <div className="fixed bottom-32 right-4 bg-red-600 p-3 rounded-full ">
       <Switch.Root checked={isPriceInCoins} onCheckedChange={togglePriceType}>
-        <Switch.Thumb>
-          <CoinIcon classname="w-4 h-4" />
-        </Switch.Thumb>
+        <Switch.Thumb />
       </Switch.Root>
     </div>
   );
