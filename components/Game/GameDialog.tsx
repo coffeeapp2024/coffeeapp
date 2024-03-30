@@ -11,7 +11,7 @@ function GameDialog() {
   return (
     <AppCardTemplate
       background="bg-violet-400"
-      icon={<GiftIcon className="w-8 h-8" />}
+      icon={<GiftIcon className="w-7 h-7" />}
       imageURL=""
       info=""
       name=""
