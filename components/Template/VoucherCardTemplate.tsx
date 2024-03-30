@@ -23,7 +23,7 @@ function VoucherCardTemplate({
   onClick,
 }: PageProps) {
   return (
-    <div className="relative h-32 bg-card w-full py-2 pl-2 pr-4 rounded-2xl flex shadow-sm">
+    <div className="relative h-32 bg-white bg-opacity-95 w-full py-2 pl-2 pr-4 rounded-2xl flex shadow-sm">
       {/* Left */}
       <div className="bg-background h-full aspect-square rounded-xl overflow-hidden">
         <Image
