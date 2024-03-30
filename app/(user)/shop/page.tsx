@@ -1,5 +1,6 @@
 import BannerProductPage from "@/components/Shop/BannerProductPage";
 import Menu from "@/components/Shop/Menu";
+import ShoppingBagDialog from "@/components/Shop/Order/ShoppingBagDialog";
 import RecommendProductCards from "@/components/Shop/RecommendProductCards";
 import UseCoin from "@/components/Shop/UseCoin";
 import React from "react";
@@ -11,6 +12,7 @@ function page() {
       <RecommendProductCards />
       <Menu />
       <UseCoin />
+      <ShoppingBagDialog />
     </div>
   );
 }
