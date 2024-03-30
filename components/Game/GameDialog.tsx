@@ -24,7 +24,9 @@ function GameDialog() {
           <div
             style={{
               backgroundImage:
-                'url("https://i.pinimg.com/564x/cb/5c/5a/cb5c5a0ce2599d078ebd545d4bbe1a5c.jpg")',
+                'url("https://i.pinimg.com/564x/bc/4b/30/bc4b3045bd8f036c7263e831657bde6f.jpg")',
+              backgroundPosition: "center",
+              backgroundSize: "cover",
             }}
             className="w-full h-full flex items-center justify-center"
           >
