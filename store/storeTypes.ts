@@ -4,7 +4,7 @@ export type UserVoucherInfo = {
   qrCode: string;
 };
 
-export type Sizes = {
+export type Size = {
   size: string;
   point: number;
   price: number;
@@ -135,10 +135,12 @@ export interface CheckinStore {
 
 export type Product = {
   id: string;
+  info: string;
   img: string;
   name: string;
   tags: string[];
-  sizes: Sizes[];
+  sizes: Size[];
+  toppingIds: string[];
 };
 
 export type ProductStore = {

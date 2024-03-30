@@ -110,99 +110,203 @@ const VoucherList = [
 
 export const demoProductList = [
   {
-    id: "7bgVfNe5KM47wXL774B4",
-    img: "https://firebasestorage.googleapis.com/v0/b/coffee-coin-app.appspot.com/o/products%2F11.jpg?alt=media&token=965d5c2b-3c8c-4a52-9850-1ca76460a1e3",
-    name: "ice cream chocolate",
+    id: "fgU07XuMHhw9NcHruloO",
+    info: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce eleifend condimentum risus, ac feugiat nisl aliquam eu. Mauris congue volutpat purus, vitae commodo tellus varius sit amet.",
+    toppingIds: ["ab", "abc"],
+    tags: ["popular", "tea"],
+    name: "Lorem Ipsum Tea",
     sizes: [
-      { size: "S", point: 2, price: 8 },
-      { size: "M", point: 3, price: 10 },
-      { size: "L", point: 4, price: 12 },
+      {
+        point: 2,
+        size: "S",
+        price: 8,
+      },
+      {
+        size: "M",
+        point: 3,
+        price: 10,
+      },
+      {
+        point: 4,
+        price: 12,
+        size: "L",
+      },
     ],
-    toppingIds: ["a", "ab", "abc"],
-    tags: ["food", "popular"],
+    img: "https://firebasestorage.googleapis.com/v0/b/coffee-coin-app.appspot.com/o/products%2F44.jpg?alt=media&token=d7dab7df-6a29-4bf6-aa20-77c3f7e1f368",
   },
   {
     id: "ENwbJROMWFl7l2VQcacK",
-    img: "https://firebasestorage.googleapis.com/v0/b/coffee-coin-app.appspot.com/o/products%2Fdrink2.jpg?alt=media&token=6e53c4dc-d27b-4186-9425-e8e78f63744b",
-    name: "Kopaja",
-    sizes: [
-      { size: "S", point: 2, price: 8 },
-      { size: "M", point: 3, price: 10 },
-      { size: "L", point: 4, price: 12 },
-    ],
+    info: "A refreshing drink that will keep you energized throughout the day.",
     tags: ["drink"],
+    name: "Refreshing Drink",
+    sizes: [
+      {
+        size: "S",
+        point: 2,
+        price: 8,
+      },
+      {
+        point: 3,
+        price: 10,
+        size: "M",
+      },
+      {
+        price: 12,
+        size: "L",
+        point: 4,
+      },
+    ],
+    img: "https://firebasestorage.googleapis.com/v0/b/coffee-coin-app.appspot.com/o/products%2Fdrink2.jpg?alt=media&token=6e53c4dc-d27b-4186-9425-e8e78f63744b",
+  },
+  {
+    id: "7bgVfNe5KM47wXL774B4",
+    info: "Indulge in the rich flavor of chocolate with our delicious ice cream.",
+    sizes: [
+      {
+        price: 8,
+        size: "S",
+        point: 2,
+      },
+      {
+        size: "M",
+        price: 10,
+        point: 3,
+      },
+      {
+        size: "L",
+        point: 4,
+        price: 12,
+      },
+    ],
+    name: "Chocolate Ice Cream",
+    toppingIds: ["a", "ab", "abc"],
+    tags: ["food", "popular"],
+    img: "https://firebasestorage.googleapis.com/v0/b/coffee-coin-app.appspot.com/o/products%2F11.jpg?alt=media&token=965d5c2b-3c8c-4a52-9850-1ca76460a1e3",
   },
   {
     id: "M00pQwY9jsWIQr1h7QLo",
+    info: "A classic drink with a twist, perfect for any occasion.",
+    name: "Classic Drink",
     img: "https://firebasestorage.googleapis.com/v0/b/coffee-coin-app.appspot.com/o/products%2Fdrink3.jpg?alt=media&token=bef834d1-fc67-4e53-9dfd-750d1ef4c56a",
-    name: "Kopaja kitajo",
-    sizes: [
-      { size: "S", point: 2, price: 8 },
-      { size: "M", point: 3, price: 10 },
-      { size: "L", point: 4, price: 12 },
-    ],
-    toppingIds: ["a", "ab", "abc"],
     tags: ["drink"],
-  },
-  {
-    id: "eHR9zkwIGjFxMJhXbQbG",
-    img: "https://firebasestorage.googleapis.com/v0/b/coffee-coin-app.appspot.com/o/products%2F33.jpg?alt=media&token=642c9de2-994f-4f51-84f9-7c6ebf5208a1",
-    name: "drink tea tea",
-    sizes: [
-      { size: "S", point: 2, price: 8 },
-      { size: "M", point: 3, price: 10 },
-      { size: "L", point: 4, price: 12 },
-    ],
     toppingIds: ["a", "ab", "abc"],
-    tags: ["tea", "popular"],
-  },
-  {
-    id: "fgU07XuMHhw9NcHruloO",
-    img: "https://firebasestorage.googleapis.com/v0/b/coffee-coin-app.appspot.com/o/products%2F44.jpg?alt=media&token=d7dab7df-6a29-4bf6-aa20-77c3f7e1f368",
-    name: "lorem ipsum tea",
     sizes: [
-      { size: "S", point: 2, price: 8 },
-      { size: "M", point: 3, price: 10 },
-      { size: "L", point: 4, price: 12 },
+      {
+        point: 2,
+        size: "S",
+        price: 8,
+      },
+      {
+        price: 10,
+        size: "M",
+        point: 3,
+      },
+      {
+        size: "L",
+        point: 4,
+        price: 12,
+      },
     ],
-    toppingIds: ["a", "ab", "abc"],
-    tags: ["popular", "tea"],
-  },
-  {
-    id: "ipLh1oB5ssXXRLxuxsbx",
-    img: "https://firebasestorage.googleapis.com/v0/b/coffee-coin-app.appspot.com/o/products%2F23.jpg?alt=media&token=90ec1d34-ec62-4618-9652-d1585627e404",
-    name: "laohg hadilao",
-    sizes: [
-      { size: "S", point: 2, price: 8 },
-      { size: "M", point: 3, price: 10 },
-      { size: "L", point: 4, price: 12 },
-    ],
-    toppingIds: ["a", "ab", "abc"],
-    tags: ["popular", "food"],
-  },
-  {
-    id: "jObIWIUoHsEGInmue6ZF",
-    img: "https://firebasestorage.googleapis.com/v0/b/coffee-coin-app.appspot.com/o/products%2Fdrink3.jpg?alt=media&token=bef834d1-fc67-4e53-9dfd-750d1ef4c56a",
-    name: "Kopi suren",
-    sizes: [
-      { size: "S", point: 2, price: 8 },
-      { size: "M", point: 3, price: 10 },
-      { size: "L", point: 4, price: 12 },
-    ],
-    toppingIds: ["a", "ab", "abc"],
-    tags: ["food"],
   },
   {
     id: "lNAikJVfE4Rs0DFOdABe",
-    img: "https://firebasestorage.googleapis.com/v0/b/coffee-coin-app.appspot.com/o/products%2Fdrink1.jpg?alt=media&token=035f83d2-5f66-49a5-b0f2-f78611da33b1",
-    name: "Kopsu mantan",
+    info: "Enjoy the rich aroma and taste of our premium coffee blend.",
     sizes: [
-      { size: "S", point: 2, price: 8 },
-      { size: "M", point: 3, price: 10 },
-      { size: "L", point: 4, price: 12 },
+      {
+        price: 8,
+        size: "S",
+        point: 2,
+      },
+      {
+        price: 10,
+        size: "M",
+        point: 3,
+      },
+      {
+        size: "L",
+        point: 4,
+        price: 12,
+      },
     ],
+    name: "Premium Coffee",
     toppingIds: ["a", "ab", "abc"],
     tags: ["drink"],
+    img: "https://firebasestorage.googleapis.com/v0/b/coffee-coin-app.appspot.com/o/products%2Fdrink1.jpg?alt=media&token=035f83d2-5f66-49a5-b0f2-f78611da33b1",
+  },
+  {
+    id: "ipLh1oB5ssXXRLxuxsbx",
+    info: "A soothing blend of tea flavors to calm your senses.",
+    img: "https://firebasestorage.googleapis.com/v0/b/coffee-coin-app.appspot.com/o/products%2F23.jpg?alt=media&token=90ec1d34-ec62-4618-9652-d1585627e404",
+    name: "Soothing Tea",
+    tags: ["popular", "food"],
+    toppingIds: ["a", "ab", "abc"],
+    sizes: [
+      {
+        size: "S",
+        price: 8,
+        point: 2,
+      },
+      {
+        price: 10,
+        size: "M",
+        point: 3,
+      },
+      {
+        size: "L",
+        point: 4,
+        price: 12,
+      },
+    ],
+  },
+  {
+    id: "eHR9zkwIGjFxMJhXbQbG",
+    info: "An aromatic tea blend that will tantalize your taste buds.",
+    tags: ["tea", "popular"],
+    img: "https://firebasestorage.googleapis.com/v0/b/coffee-coin-app.appspot.com/o/products%2F33.jpg?alt=media&token=642c9de2-994f-4f51-84f9-7c6ebf5208a1",
+    toppingIds: ["a", "ab", "abc"],
+    sizes: [
+      {
+        point: 2,
+        price: 8,
+        size: "S",
+      },
+      {
+        point: 3,
+        price: 10,
+        size: "M",
+      },
+      {
+        size: "L",
+        price: 12,
+        point: 4,
+      },
+    ],
+    name: "Aromatic Tea Blend",
+  },
+  {
+    id: "jObIWIUoHsEGInmue6ZF",
+    info: "A delightful coffee blend that will awaken your senses.",
+    toppingIds: ["a", "ab", "abc"],
+    tags: ["food"],
+    img: "https://firebasestorage.googleapis.com/v0/b/coffee-coin-app.appspot.com/o/products%2Fdrink3.jpg?alt=media&token=bef834d1-fc67-4e53-9dfd-750d1ef4c56a",
+    sizes: [
+      {
+        price: 8,
+        size: "S",
+        point: 2,
+      },
+      {
+        point: 3,
+        price: 10,
+        size: "M",
+      },
+      {
+        price: 12,
+        point: 4,
+        size: "L",
+      },
+    ],
+    name: "Delightful Coffee Blend",
   },
 ];
 
@@ -261,7 +365,7 @@ function Testing() {
   const { userData } = useUserDataStore();
 
   const handleReset = async () => {
-    // await resetCollectionData("cases", cases);
+    await resetCollectionData("products", demoProductList);
     // await updateKeyInDocument(
     //   "users",
     //   "NllhI3c86XTHdDIS0sNL9JfE3rN2",
@@ -269,7 +373,7 @@ function Testing() {
     //   1
     // );
     // await renameCollection("game_random_voucher", "cases");
-    await addDocumentsToCollection("toppings", toppings);
+    // await addDocumentsToCollection("toppings", toppings);
     // await deleteKeyInAllDocuments("balanceLevels", "icon");
     // await fetchCollectionData("balanceLevels");
     // await renameKeyInCollection("balanceLevels", "miningHourPerQr", "balance");

@@ -20,6 +20,7 @@ import {
   useBalanceLevelStore,
   useVoucherPageContentStore,
   VoucherPageContent,
+  useToppingsStore,
 } from "@/store/zustand";
 import {
   Account,
@@ -57,6 +58,7 @@ export default function RootLayout({
   const { setVoucherPageContent } = useVoucherPageContentStore();
   const { setProducts } = useProductStore();
   const { setProductTags } = useProductTagStore();
+  const { setToppings } = useToppingsStore();
   const { setStorages } = useStorageStore();
   const { setBalanceLevels } = useBalanceLevelStore();
 
@@ -225,6 +227,13 @@ export default function RootLayout({
       setProductTags(tags);
     };
     fetchProductTags();
+
+    // Fetch toppings
+    const fetchToppings = async () => {
+      const fetchedToppings = await fetchCollectionData("toppings");
+      setToppings(fetchedToppings);
+    };
+    fetchToppings();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
