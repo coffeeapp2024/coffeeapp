@@ -31,7 +31,7 @@ const config = {
       },
       colors: {
         background: {
-          DEFAULT: colors.stone[50],
+          DEFAULT: "#F3EEEA",
         },
         foreground: {
           DEFAULT: colors.neutral[950],
