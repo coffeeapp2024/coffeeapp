@@ -26,7 +26,7 @@ function ProductCard({ product }: { product: any }) {
         <span className="font-bold text-neutral-800">
           {isPriceInCoins ? (
             <span className="flex items-center text-base">
-              <CoinIcon classname="w-4 h-4" />
+              <CoinIcon classname="w-4 h-4 -ml-[1px]" />
               {sizes[0].point}
             </span>
           ) : (
