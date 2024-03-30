@@ -5,6 +5,7 @@ import CoinIcon from "../Template/CoinIcon";
 import { Switch } from "@nextui-org/switch";
 import { MoonIcon, SunIcon } from "@heroicons/react/24/outline";
 import Currency from "../Icon/Currency";
+import Coin2D from "../Icon/Coin2D";
 
 type IconProps = {
   "data-checked": string;
@@ -20,7 +21,7 @@ function UseCoin() {
   const { isPriceInCoins, togglePriceType } = usePriceTypeStore();
 
   return (
-    <div className="fixed top-1/4 -right-4  p-3 rounded-full rotate-90">
+    <div className="fixed top-1/4 -right-4 p-3 rounded-full rotate-90">
       <Switch
         isSelected={isPriceInCoins}
         onValueChange={() => {
@@ -29,8 +30,8 @@ function UseCoin() {
         defaultSelected
         size="md"
         color="secondary"
-        startContent={<MoonIcon />}
-        endContent={<Currency className="w-6 h-6 " />}
+        startContent={<Coin2D />}
+        endContent={<Currency />}
       ></Switch>
     </div>
   );
