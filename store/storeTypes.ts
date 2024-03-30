@@ -84,8 +84,9 @@ export type VoucherStore = {
 };
 
 export type Case = {
-  id: string;
-  icon: string;
+  id: number;
+  quantity: number;
+  iconURL: string;
   price: number;
   voucherIdList: string[];
 };

@@ -48,7 +48,10 @@ export const useVoucherStore = create<VoucherStore>((set) => ({
 
 export const useCaseStore = create<CaseStore>((set) => ({
   cases: null,
-  setCases: (cases) => set({ cases: [...cases] }),
+  setCases: (cases) => {
+    const sortedCases = cases.slice().sort((a, b) => a.id - b.id);
+    set({ cases: sortedCases });
+  },
 }));
 
 export const useLevelStore = create<LevelStore>((set) => ({

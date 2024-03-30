@@ -320,26 +320,34 @@ export const demoProductList = [
 
 const cases = [
   {
-    id: "case3",
+    id: 3,
+    quantity: 1000,
     price: 4,
-    icon: "https://firebasestorage.googleapis.com/v0/b/coffee-coin-app.appspot.com/o/boxs%2Fcase3.png?alt=media&token=5aecac5e-bb4f-4a6c-8436-cfa6e5a5bc52",
+    iconURL:
+      "https://firebasestorage.googleapis.com/v0/b/coffee-coin-app.appspot.com/o/boxs%2Fcase3.png?alt=media&token=5aecac5e-bb4f-4a6c-8436-cfa6e5a5bc52",
     voucherIdList: ["1", "2", "3"],
   },
   {
-    id: "case4",
+    id: 4,
+    quantity: 1000,
     voucherIdList: ["1", "2", "3"],
-    icon: "https://firebasestorage.googleapis.com/v0/b/coffee-coin-app.appspot.com/o/boxs%2Fcase4.png?alt=media&token=5bc33afa-892d-4f1c-8790-e73ab154e486",
+    iconURL:
+      "https://firebasestorage.googleapis.com/v0/b/coffee-coin-app.appspot.com/o/boxs%2Fcase4.png?alt=media&token=5bc33afa-892d-4f1c-8790-e73ab154e486",
     price: 8,
   },
   {
-    id: "case1",
+    id: 1,
+    quantity: 1000,
     voucherIdList: ["1", "2", "3"],
     price: 9,
-    icon: "https://firebasestorage.googleapis.com/v0/b/coffee-coin-app.appspot.com/o/boxs%2Fcase1.png?alt=media&token=73ae64af-ea50-4755-94fc-9d6dd8a90e02",
+    iconURL:
+      "https://firebasestorage.googleapis.com/v0/b/coffee-coin-app.appspot.com/o/boxs%2Fcase1.png?alt=media&token=73ae64af-ea50-4755-94fc-9d6dd8a90e02",
   },
   {
-    id: "case2",
-    icon: "https://firebasestorage.googleapis.com/v0/b/coffee-coin-app.appspot.com/o/boxs%2Fcase2.png?alt=media&token=8e229a0a-5783-4e2c-9300-ab192d7593d7",
+    id: 2,
+    quantity: 1000,
+    iconURL:
+      "https://firebasestorage.googleapis.com/v0/b/coffee-coin-app.appspot.com/o/boxs%2Fcase2.png?alt=media&token=8e229a0a-5783-4e2c-9300-ab192d7593d7",
     voucherIdList: ["1", "2", "3"],
     price: 15,
   },
@@ -373,7 +381,7 @@ function Testing() {
   const { userData } = useUserDataStore();
 
   const handleReset = async () => {
-    // await resetCollectionData("products", demoProductList);
+    await resetCollectionData("cases", cases);
     // await updateKeyInDocument(
     //   "users",
     //   "NllhI3c86XTHdDIS0sNL9JfE3rN2",
