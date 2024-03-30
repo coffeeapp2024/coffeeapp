@@ -65,10 +65,13 @@ const config = {
     require("tailwindcss-animate"),
     nextui({
       themes: {
-        colors: {
-          warning: {
-            DEFAULT: "#EE99C2",
+        light: {
+          colors: {
+            warning: {
+              DEFAULT: "#EE99C2",
+            },
           },
+          focus: "#BEF264",
         },
       },
     }),

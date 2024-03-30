@@ -10,7 +10,7 @@ function VoucherBanner() {
   const { voucherBannerURL } = voucherPageContent ?? {};
 
   return (
-    <div className="bg-neutral-200 w-full aspect-[3/1] rounded-2xl overflow-hidden">
+    <div className="bg-background w-full aspect-[3/1] rounded-2xl overflow-hidden">
       {voucherBannerURL && (
         <Image
           src={voucherBannerURL}
