@@ -1,14 +1,11 @@
 // Import necessary modules and components
-
 import { Inter } from "next/font/google";
 import { Metadata } from "next";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
-import { useEffect } from "react";
 import InstallButton from "@/components/Mine/InstallButton";
 import Head from "next/head";
 const inter = Inter({ subsets: ["latin"] });
-import { NextUIProvider } from "@nextui-org/system";
 
 // Define metadata for the page
 export const metadata: Metadata = {
@@ -33,9 +30,7 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/touch-icon-iphone.png"></link>
         <link rel="manifest" href="/manifest.json" />
       </Head>
-      <NextUIProvider>
-        <body className={inter.className}>{children}</body>
-      </NextUIProvider>
+      <body className={inter.className}>{children}</body>
       <Toaster position="top-center" />
     </html>
   );

@@ -36,6 +36,7 @@ import {
 } from "@/lib/firebaseUtils";
 import Testing from "@/components/Testing";
 import Nav from "@/components/Nav";
+import { NextUIProvider } from "@nextui-org/system";
 
 export default function RootLayout({
   children,
@@ -241,10 +242,12 @@ export default function RootLayout({
   }, [userData]);
 
   return (
-    <main className="relative mx-auto w-full">
-      <Testing />
-      <Nav />
-      {children}
-    </main>
+    <NextUIProvider>
+      <main className="relative mx-auto w-full">
+        <Testing />
+        <Nav />
+        {children}
+      </main>
+    </NextUIProvider>
   );
 }
