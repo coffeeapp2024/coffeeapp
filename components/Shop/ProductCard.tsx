@@ -86,7 +86,7 @@ function ProductCard({ product }: { product: Product }) {
 
   return (
     <Drawer open={open} onOpenChange={setOpen}>
-      <DrawerTrigger className="text-start rounded-3xl overflow-hidden shadow-sm bg-white bg-opacity-70">
+      <DrawerTrigger className="text-start rounded-3xl overflow-hidden shadow-sm bg-white bg-opacity-60">
         <div className="relative aspect-square rounded-2xl overflow-hidden shadow-sm">
           {img && (
             <Image
