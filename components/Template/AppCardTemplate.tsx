@@ -27,7 +27,7 @@ function AppCardTemplate({
           width={500}
           height={500}
           alt="App Image"
-          className="object-cover w-full h-full"
+          className="object-cover w-full h-full "
         />
       </div>
       <div className="w-full bg-neutral-100 px-3 py-3 flex justify-between items-center">
