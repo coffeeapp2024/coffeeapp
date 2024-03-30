@@ -15,7 +15,7 @@ function ShoppingBagDialog() {
         <ShoppingBagIcon className="w-7 h-7" />
         <div
           className={`${
-            isPriceInCoins ? "bg-green-500" : "bg-purple-600"
+            isPriceInCoins ? "bg-pink-300" : "bg-neutral-400"
           } absolute w-5 h-5 rounded-full  -top-1 -left-1 flex items-center justify-center`}
         >
           <span className="text-xs font-semibold text-white">

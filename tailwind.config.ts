@@ -58,7 +58,21 @@ const config = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate"), nextui()],
+  plugins: [
+    require("tailwindcss-animate"),
+    nextui({
+      themes: {
+        light: {
+          colors: {
+            secondary: {
+              DEFAULT: "#EE99C2",
+              foreground: "#EE99C2",
+            },
+          },
+        },
+      },
+    }),
+  ],
 } satisfies Config;
 
 export default config;
