@@ -30,10 +30,10 @@ function AppCardTemplate({
           className="object-cover w-full h-full"
         />
       </div>
-      <div className="w-full bg-neutral-100 px-3 py-2 flex justify-between items-center">
+      <div className="w-full bg-neutral-100 px-3 py-3 flex justify-between items-center">
         <div className="flex gap-x-3">
           <div
-            className={`${background} h-14 aspect-square rounded-2xl flex items-center justify-center`}
+            className={`${background} h-12 aspect-square rounded-2xl flex items-center justify-center`}
           >
             {icon}
           </div>

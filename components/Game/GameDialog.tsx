@@ -5,12 +5,13 @@ import { Sheet, SheetTrigger } from "../ui/sheet";
 import SheetContentLayout from "../ui/SheetContentLayout";
 import GameCardList from "./GameCardList";
 import AppCardTemplate from "../Template/AppCardTemplate";
+import { GiftIcon } from "@heroicons/react/24/outline";
 
 function GameDialog() {
   return (
     <AppCardTemplate
       background="bg-violet-400"
-      icon=""
+      icon={<GiftIcon className="w-8 h-8" />}
       imageURL=""
       info=""
       name=""
