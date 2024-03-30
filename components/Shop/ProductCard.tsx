@@ -136,8 +136,8 @@ function ProductCard({ product }: { product: Product }) {
                   className={`h-10 px-4 ${
                     size.size === selectedSize?.size
                       ? isPriceInCoins
-                        ? "bg-green-500 text-white"
-                        : "bg-purple-500 text-white"
+                        ? "bg-secondary-foreground text-white"
+                        : "bg-primary-foreground text-white"
                       : "bg-neutral-100 text-neutral-700"
                   } rounded-[30px] flex items-center justify-center font-medium `}
                   key={index}
@@ -161,8 +161,8 @@ function ProductCard({ product }: { product: Product }) {
                           (selected) => selected.id === topping.id
                         )
                           ? isPriceInCoins
-                            ? "bg-green-500 text-white"
-                            : "bg-purple-500 text-white"
+                            ? "bg-secondary-foreground text-white"
+                            : "bg-primary-foreground text-white"
                           : "bg-neutral-100 text-neutral-700"
                       } rounded-[30px] flex items-center justify-center font-medium `}
                       key={index}
@@ -198,7 +198,9 @@ function ProductCard({ product }: { product: Product }) {
               <div
                 // onClick={}
                 className={`${
-                  isPriceInCoins ? "bg-green-500" : "bg-purple-500"
+                  isPriceInCoins
+                    ? "bg-secondary-foreground"
+                    : "bg-primary-foreground"
                 } basis-3/5 text-white text-lg font-medium h-14 rounded-2xl flex items-center justify-between px-4`}
               >
                 <div>Add to cart</div>

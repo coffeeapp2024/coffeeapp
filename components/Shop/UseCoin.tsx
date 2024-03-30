@@ -27,7 +27,7 @@ function UseCoin() {
         }}
         defaultSelected
         size="lg"
-        color="secondary"
+        color="warning"
         startContent={<Coin2D />}
         endContent={<Currency />}
       ></Switch>

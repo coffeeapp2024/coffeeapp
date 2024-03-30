@@ -37,8 +37,11 @@ const config = {
           DEFAULT: colors.neutral[950],
         },
         primary: {
-          foreground: colors.pink[500],
+          foreground: colors.neutral[800],
           dark: colors.white,
+        },
+        secondary: {
+          foreground: "#EE99C2",
         },
         card: colors.white,
       },
@@ -62,12 +65,9 @@ const config = {
     require("tailwindcss-animate"),
     nextui({
       themes: {
-        light: {
-          colors: {
-            secondary: {
-              DEFAULT: "#EE99C2",
-              foreground: "#EE99C2",
-            },
+        colors: {
+          warning: {
+            DEFAULT: "#EE99C2",
           },
         },
       },
