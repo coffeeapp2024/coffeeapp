@@ -59,7 +59,7 @@ function GameCard({ gameCase }: { gameCase: Case }) {
         />
       </div>
       <div className="flex items-center justify-center pl-2">
-        <CoinIcon classname="w-6 h-6" />
+        <CoinIcon className="w-6 h-6" />
         <span className="font-bold text-xl">{price}</span>
       </div>
       <button
