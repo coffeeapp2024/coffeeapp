@@ -19,10 +19,10 @@ function UseCoin() {
   const { isPriceInCoins, togglePriceType } = usePriceTypeStore();
 
   return (
-    <div className="fixed bottom-32 right-4  p-3 rounded-full rotate-90 ">
+    <div className="fixed top-1/4 -right-4  p-3 rounded-full rotate-90 ">
       <Switch
         defaultSelected
-        size="lg"
+        size="md"
         color="secondary"
         startContent={<SunIcon />}
         endContent={<MoonIcon />}
