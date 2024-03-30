@@ -7,7 +7,7 @@ import {
   SheetContent,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { ArrowLeftIcon } from "@heroicons/react/24/outline";
+import { ArrowLeftIcon, RocketLaunchIcon } from "@heroicons/react/24/outline";
 import { toast } from "sonner";
 import Fireplace from "./Fireplace";
 import Storage from "./Storage";
@@ -19,7 +19,7 @@ function BoostDialog() {
   return (
     <AppCardTemplate
       background="bg-yellow-400"
-      icon=""
+      icon={<RocketLaunchIcon className="w-8 h-8" />}
       imageURL=""
       info=""
       name=""

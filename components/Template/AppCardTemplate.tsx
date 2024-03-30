@@ -35,8 +35,7 @@ function AppCardTemplate({
           <div
             className={`${background} h-14 aspect-square rounded-2xl flex items-center justify-center`}
           >
-            {/* {icon} */}
-            <RocketLaunchIcon className="w-8 h-8" />
+            {icon}
           </div>
           <div>
             <h3 className="text-lg font-bold">{name}</h3>
