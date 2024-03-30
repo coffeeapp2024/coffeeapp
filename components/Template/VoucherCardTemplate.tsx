@@ -44,8 +44,8 @@ function VoucherCardTemplate({
 
         {price && (
           <span className="flex items-center justify-center w-fit font-semibold">
+            <CoinIcon classname="w-4 h-4 -ml-[1px]" />
             {price}
-            <CoinIcon classname="w-4 h-4" />
           </span>
         )}
       </div>
