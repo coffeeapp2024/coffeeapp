@@ -14,7 +14,7 @@ export default function Home() {
     <main className="relative h-screen max-w-screen-sm">
       <AddToHomeScreen />
       <InstallButton />
-      {/* <Background /> */}
+      <Background />
       <div className="pt-4 pb-20">
         <ProfileCard />
       </div>
