@@ -8,6 +8,7 @@ export type Size = {
   size: string;
   point: number;
   price: number;
+  isDefault: boolean;
 };
 
 export type UserData = {

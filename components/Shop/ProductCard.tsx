@@ -20,6 +20,13 @@ function ProductCard({ product }: { product: Product }) {
   const [totalPrice, setTotalPrice] = useState<number>(0);
 
   useEffect(() => {
+    const defaultSize = sizes.find((size) => size.isDefault);
+    if (defaultSize) {
+      setSelectedSize(defaultSize);
+    }
+  }, [sizes]);
+
+  useEffect(() => {
     if (toppings && toppingIds) {
       const filteredToppings = toppings.filter((topping) =>
         toppingIds.includes(topping.id)
@@ -100,10 +107,10 @@ function ProductCard({ product }: { product: Product }) {
             {isPriceInCoins ? (
               <span className="flex items-center text-base">
                 <CoinIcon className="w-4 h-4 -ml-[1px]" />
-                {sizes[0].point}
+                {sizes.find((size) => size.isDefault)?.point}
               </span>
             ) : (
-              <>{sizes[0].price}k</>
+              <>{sizes.find((size) => size.isDefault)?.price}k</>
             )}
           </span>
         </div>
@@ -128,15 +135,15 @@ function ProductCard({ product }: { product: Product }) {
                 <div
                   className={`h-10 px-4 ${
                     size.size === selectedSize?.size
-                      ? "bg-green-200"
-                      : "bg-neutral-100"
-                  } rounded-[30px] flex items-center justify-center`}
+                      ? isPriceInCoins
+                        ? "bg-green-500 text-white"
+                        : "bg-purple-500 text-white"
+                      : "bg-neutral-100 text-neutral-700"
+                  } rounded-[30px] flex items-center justify-center font-medium `}
                   key={index}
                   onClick={() => setSelectedSize(size)}
                 >
-                  <span className="font-medium text-neutral-700">
-                    {size.size}
-                  </span>
+                  <span className="">{size.size}</span>
                 </div>
               ))}
             </div>
@@ -150,14 +157,14 @@ function ProductCard({ product }: { product: Product }) {
                     selectedToppings.some(
                       (selected) => selected.id === topping.id
                     )
-                      ? "bg-green-200"
-                      : "bg-neutral-100"
-                  } rounded-[30px] flex items-center justify-center`}
+                      ? isPriceInCoins
+                        ? "bg-green-500 text-white"
+                        : "bg-purple-500 text-white"
+                      : "bg-neutral-100 text-neutral-700"
+                  } rounded-[30px] flex items-center justify-center font-medium `}
                   key={index}
                 >
-                  <span className="font-medium text-neutral-700">
-                    {topping.name}
-                  </span>
+                  <span>{topping.name}</span>
                 </button>
               ))}
             </div>
@@ -186,7 +193,7 @@ function ProductCard({ product }: { product: Product }) {
               <div
                 // onClick={}
                 className={`${
-                  isPriceInCoins ? "bg-green-500" : "bg-neutral-900"
+                  isPriceInCoins ? "bg-green-500" : "bg-purple-500"
                 } basis-3/5 text-white text-lg font-medium h-14 rounded-2xl flex items-center justify-between px-4`}
               >
                 <div>Add to cart</div>
