@@ -11,9 +11,9 @@ function SettingPopup() {
   return (
     <Popover>
       <PopoverTrigger className="absolute right-3 top-5">
-        <EllipsisVerticalIcon className="w-6 h-6" />
+        <EllipsisVerticalIcon className="w-6 h-6 text-neutral-600" />
       </PopoverTrigger>
-      <PopoverContent className="p-2 relative w-30 min-h-10 rounded-2xl flex items-center justify-center">
+      <PopoverContent className="p-2 bg-white bg-opacity-95 relative w-30 min-h-10 rounded-2xl flex items-center justify-center">
         <SignOutButton />
       </PopoverContent>
     </Popover>
