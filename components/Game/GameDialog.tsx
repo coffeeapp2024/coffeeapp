@@ -10,7 +10,7 @@ import { GiftIcon } from "@heroicons/react/24/outline";
 function GameDialog() {
   return (
     <AppCardTemplate
-      background="bg-purple-400"
+      background="bg-fuchsia-300"
       icon={<GiftIcon className="w-7 h-7" />}
       imageURL=""
       info=""
