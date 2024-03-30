@@ -1,9 +1,6 @@
-"use client";
-
 import BannerProductPage from "@/components/Shop/BannerProductPage";
 import Menu from "@/components/Shop/Menu";
 import ShoppingBagDialog from "@/components/Shop/Order/ShoppingBagDialog";
-import ProductDialog from "@/components/Shop/ProductDialog";
 import RecommendProductCards from "@/components/Shop/RecommendProductCards";
 import UseCoin from "@/components/Shop/UseCoin";
 import React from "react";
@@ -16,7 +13,6 @@ function Page() {
       <Menu />
       <UseCoin />
       <ShoppingBagDialog />
-      <ProductDialog />
     </div>
   );
 }
