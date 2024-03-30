@@ -16,7 +16,7 @@ function Page() {
       <div className="grid grid-cols-2 gap-y-6 pb-40">
         <GameDialog />
         <BoostDialog />
-        <div className=" col-span-2 rounded-3xl bg-background aspect-[3/1] w-full flex items-center justify-center border-neutral-100 border-1px shadow-sm">
+        <div className=" col-span-2 rounded-3xl bg-background aspect-[3/1] w-full flex items-center justify-center  shadow-sm">
           <p className="text-neutral-400">Coming Soon App</p>
         </div>
       </div>
