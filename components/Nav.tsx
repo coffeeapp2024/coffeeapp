@@ -33,7 +33,7 @@ function Nav() {
 
   return (
     <div className="fixed bottom-10 w-screen max-w-screen-sm z-50 shadow-sm px-2">
-      <nav className="flex justify-around items-center px-2 w-fit mx-auto bg-stone-100 bg-opacity-[98%] rounded-[40px] border-[1px] border-stone-200 divide-neutral-300">
+      <nav className="flex justify-around items-center px-2 w-fit mx-auto bg-background bg-opacity-[98%] rounded-[40px] border-[1px] border-stone-200 divide-neutral-300">
         {navList.map(([title, url], index) => {
           const isActive = pathname === url;
           return (

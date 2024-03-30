@@ -31,7 +31,7 @@ const config = {
       },
       colors: {
         background: {
-          DEFAULT: "#F3EEEA",
+          DEFAULT: "#FFFBF5",
         },
         foreground: {
           DEFAULT: colors.neutral[950],
