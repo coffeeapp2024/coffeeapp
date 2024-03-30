@@ -23,7 +23,7 @@ function GameDialog() {
 
         <SheetContentLayout
           backgroundImage="/bg/bg-cases.jpg"
-          className="p-0 flex items-center justify-center"
+          className="p-0 flex items-center justify-center border-0"
         >
           <GameCardList />
         </SheetContentLayout>
