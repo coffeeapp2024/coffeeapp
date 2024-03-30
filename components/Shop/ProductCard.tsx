@@ -10,8 +10,6 @@ function ProductCard({ product }: { product: any }) {
 
   const handleSelect = () => {
     selectProduct(product);
-    console.log(open);
-    return;
   };
 
   return (

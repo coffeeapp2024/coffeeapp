@@ -19,8 +19,6 @@ function RandomVoucherDialog() {
 
   const { imageURL, info, name } = voucher ?? {};
 
-  console.log("rrandomVoucherId", randomVoucherId);
-
   return (
     <Dialog
       open={open}
