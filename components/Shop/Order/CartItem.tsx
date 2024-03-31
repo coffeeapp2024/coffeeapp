@@ -80,7 +80,7 @@ function CartItem({
     isCoinCartItem ? removeFromCoinCart(index) : removeFromCashCart(index);
   };
   return (
-    <div className="relative h-32 bg-white bg-opacity-70 w-full py-2 rounded-2xl flex shadow-sm">
+    <div className="relative h-32 bg-white bg-opacity-70 w-full p-2 rounded-2xl flex shadow-sm">
       {/* Left */}
       <div className="bg-neutral-200 h-full aspect-square rounded-xl overflow-hidden">
         <Image

@@ -36,9 +36,15 @@ function ShoppingBagDialog() {
         <div className="absolute top-6 left-1/2 -translate-x-1/2">
           <h2 className="text-center font-semibold text-xl">My Cart</h2>
         </div>
-        {currentCart.map((_, index) => (
-          <CartItem isCoinCartItem={isPriceInCoins} key={index} index={index} />
-        ))}
+        <div className="flex flex-col gap-y-3">
+          {currentCart.map((_, index) => (
+            <CartItem
+              isCoinCartItem={isPriceInCoins}
+              key={index}
+              index={index}
+            />
+          ))}
+        </div>
       </SheetContentLayout>
     </Sheet>
   );
