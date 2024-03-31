@@ -14,7 +14,6 @@ function CartItem({
   isCoinCartItem: boolean;
   index: number;
 }) {
-  const [showDelete, setShowDelete] = useState(false);
   const {
     cartItems: cashCartItems,
     setItem: setCashCartItem,
@@ -117,7 +116,7 @@ function CartItem({
             >
               <MinusIcon className="w-4 h-4" />
             </button>
-            <span className="text-wrap text-sm">{quantity}</span>
+            <span className="text-wrap text-sm font-medium">{quantity}</span>
             <button
               className="p-2 rounded-full bg-white bg-opacity-80"
               onClick={handleIncrement}
@@ -129,14 +128,13 @@ function CartItem({
       </div>
 
       {/* Remove */}
-      {true && (
-        <button
-          className="absolute right-2 top-4 text-neutral-700"
-          onClick={handleDelete}
-        >
-          <TrashIcon className="w-4 h-4" />
-        </button>
-      )}
+
+      <button
+        className="absolute right-2 top-[14px] text-neutral-700"
+        onClick={handleDelete}
+      >
+        <TrashIcon className="w-4 h-4" />
+      </button>
     </div>
   );
 }
