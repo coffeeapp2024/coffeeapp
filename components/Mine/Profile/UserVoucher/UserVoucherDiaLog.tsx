@@ -24,7 +24,7 @@ function UserVoucherDiaLog() {
           </div>
         </div>
       </SheetTrigger>
-      <SheetContentLayout className="">
+      <SheetContentLayout backgroundImage="/bg/bg3.jpg" className="px-2">
         <UserVoucherCardList />
       </SheetContentLayout>
     </Sheet>
