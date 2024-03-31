@@ -39,7 +39,9 @@ function ProfileDialog({ user }: { user: User }) {
           <h3 className="font-bold text-2xl">
             {displayName ? displayName : "Loading..."}
           </h3>
-          <p>{email ? email : "Loading..."}</p>
+          <p className="text-neutral-600 font-medium">
+            {email ? email : "Loading..."}
+          </p>
         </div>
         <div className="border-white border-opacity-20 border-1px -mx-4 my-6"></div>
         <div className="grid grid-cols-2 gap-4">
