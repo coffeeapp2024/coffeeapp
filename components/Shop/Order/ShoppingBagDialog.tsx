@@ -45,6 +45,20 @@ function ShoppingBagDialog() {
             />
           ))}
         </div>
+
+        {/* Checkout */}
+        <div className="bg-white bg-opacity-90 w-full absolute bottom-0 left-0 rounded-t-3xl flex flex-col justify-between overflow-hidden pt-4">
+          <div className="px-4 text-xl font-semibold flex items-center justify-between">
+            <span>Total:</span>
+            <span>123$</span>
+          </div>
+
+          <div className="w-full px-3 py-3">
+            <button className="bg-neutral-800 w-full h-14 font-semibold text-white rounded-3xl">
+              Checkout
+            </button>
+          </div>
+        </div>
       </SheetContentLayout>
     </Sheet>
   );
