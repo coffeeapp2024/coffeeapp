@@ -45,7 +45,7 @@ function ProfileDialog({ user }: { user: User }) {
           </p>
         </div>
         <div className="border-white border-opacity-20 border-1px -mx-4 my-6"></div>
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-2 gap-4 px-2">
           <div className={`${styleCard}`}>
             <UserVoucherDiaLog />
           </div>
