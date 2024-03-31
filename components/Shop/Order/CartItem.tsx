@@ -93,7 +93,7 @@ function CartItem({
       </div>
 
       {/* Right */}
-      <div className="pl-3 pt-1 basis-2/3 flex flex-col justify-between">
+      <div className="pl-3 pt-1 basis-2/3 flex flex-col justify-between flex-grow">
         <div className="mb-2">
           <h4 className="font-bold">{name}</h4>
           <p className="text-wrap text-neutral-700 text-sm font-semibold">
@@ -114,7 +114,7 @@ function CartItem({
           </span>
 
           {/* Quantity */}
-          <div className="flex items-center justify-between gap-x-2 -mr-3">
+          <div className="flex items-center justify-between gap-x-2">
             <button
               className="p-2 rounded-full bg-white bg-opacity-95"
               onClick={handleDecrement}
