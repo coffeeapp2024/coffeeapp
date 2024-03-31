@@ -96,8 +96,12 @@ function CartItem({
       <div className="pl-3 pt-1 basis-2/3 flex flex-col justify-between">
         <div className="mb-2">
           <h4 className="font-bold">{name}</h4>
-          <p className="text-wrap text-sm">Size: {size}</p>
-          <p className="text-wrap text-sm">Add ins: {toppings}</p>
+          <p className="text-wrap text-neutral-700 text-sm font-semibold">
+            Size: {size}
+          </p>
+          <p className="text-wrap text-neutral-700 text-sm font-semibold">
+            Add ins: {toppings}
+          </p>
         </div>
 
         {/* Bottom */}
