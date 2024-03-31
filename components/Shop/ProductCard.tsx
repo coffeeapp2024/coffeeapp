@@ -232,7 +232,7 @@ function ProductCard({ product }: { product: Product }) {
                 <span className="font-semibold flex items-center justify-center">
                   {isPriceInCoins && <CoinIcon className="w-5 h-5 -ml-1" />}
                   {totalPrice}
-                  {!isPriceInCoins && "$"}
+                  {!isPriceInCoins && "k"}
                 </span>
               </button>
             </div>

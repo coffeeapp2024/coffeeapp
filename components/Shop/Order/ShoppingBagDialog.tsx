@@ -10,6 +10,7 @@ import {
   usePriceTypeStore,
 } from "@/store/zustand";
 import CartItem from "./CartItem";
+import CoinIcon from "@/components/Template/CoinIcon";
 
 function ShoppingBagDialog() {
   const { isPriceInCoins } = usePriceTypeStore();
@@ -48,9 +49,13 @@ function ShoppingBagDialog() {
 
         {/* Checkout */}
         <div className="bg-white bg-opacity-90 w-full absolute bottom-0 left-0 rounded-t-3xl flex flex-col justify-between overflow-hidden pt-4">
-          <div className="px-4 text-xl font-semibold flex items-center justify-between">
+          <div className="px-6 text-xl font-semibold flex items-center justify-between">
             <span>Total:</span>
-            <span>123$</span>
+            <div className="flex items-center justify-center">
+              {isPriceInCoins && <CoinIcon className="w-5 h-5" />}
+              <span>{"12"}</span>
+              {!isPriceInCoins && "k"}
+            </div>
           </div>
 
           <div className="w-full px-3 py-3">

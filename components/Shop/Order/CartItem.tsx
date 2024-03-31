@@ -106,7 +106,7 @@ function CartItem({
           <span className="flex items-center justify-center w-fit font-semibold">
             {isCoinCartItem && <CoinIcon className="w-4 h-4 -ml-[1px]" />}
             {totalPrice}
-            {!isCoinCartItem && "$"}
+            {!isCoinCartItem && "k"}
           </span>
 
           {/* Quantity */}
