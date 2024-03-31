@@ -1,17 +1,33 @@
 import React from "react";
-import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
 import UserVoucherCardList from "./UserVoucherCardList";
+import Image from "next/image";
+import { Sheet, SheetTrigger } from "@/components/ui/sheet";
+import SheetContentLayout from "@/components/ui/SheetContentLayout";
 
 function UserVoucherDiaLog() {
   return (
-    <Drawer>
-      <DrawerTrigger className="bg-white bg-opacity-95 w-full h-full">
-        Open
-      </DrawerTrigger>
-      <DrawerContent className="h-[90%] bg-background px-2 pt-1">
+    <Sheet>
+      <SheetTrigger className="relative w-full h-full bg-purple-300 px-2 py-1 flex">
+        <div className="h-2/3 w-full">
+          <Image
+            src="/icons/voucher.png"
+            width={200}
+            height={200}
+            alt="Voucher Image"
+            className="w-full h-full object-cover"
+          />
+        </div>
+
+        <div className="absolute left-1/2 -translate-x-1/2 bottom-0 w-full px-2 pb-2">
+          <div className="rounded-[20px] h-12 font-semibold bg-white flex items-center justify-center">
+            My voucher
+          </div>
+        </div>
+      </SheetTrigger>
+      <SheetContentLayout className="">
         <UserVoucherCardList />
-      </DrawerContent>
-    </Drawer>
+      </SheetContentLayout>
+    </Sheet>
   );
 }
 

@@ -13,10 +13,10 @@ import AdminNav from "./AdminNav";
 function ProfileDialog({ user }: { user: User }) {
   const { role } = useUserDataStore();
 
-  const { displayName, photoURL, email, phoneNumber } = user;
+  const { displayName, photoURL, email } = user;
 
   const styleCard =
-    "bg-background aspect-square rounded-3xl flex items-center justify-center shadow-sm border-1px  border-neutral-200 overflow-hidden";
+    "bg-background aspect-square rounded-3xl flex items-center justify-center shadow-sm bg-white bg-opacity-80 overflow-hidden";
   return (
     <Sheet>
       <SheetTrigger className="w-full">

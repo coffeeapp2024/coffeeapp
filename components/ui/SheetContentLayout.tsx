@@ -17,7 +17,7 @@ export default function SheetContentLayout({
         backgroundPosition: "center",
         backgroundSize: "cover",
       }}
-      className={`w-full pt-14 px-4 bg-background ${className}`}
+      className={`w-full h-full pt-14 px-4 bg-background ${className}`}
     >
       <SheetClose className="fixed top-4 left-4">
         <button className="bg-white bg-opacity-95 shadow-sm p-3 rounded-xl text-neutral-500">
