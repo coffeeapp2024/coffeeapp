@@ -38,7 +38,6 @@ const config = {
         },
         primary: {
           foreground: colors.neutral[800],
-          dark: colors.white,
         },
         secondary: {
           foreground: "#EE99C2",
