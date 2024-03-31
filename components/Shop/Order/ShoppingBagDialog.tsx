@@ -59,7 +59,7 @@ function ShoppingBagDialog() {
           </div>
 
           <div className="w-full px-3 py-3">
-            <button className="bg-neutral-800 w-full h-14 font-semibold text-white rounded-3xl">
+            <button className="bg-primary-foreground w-full h-14 font-semibold text-white rounded-3xl">
               Checkout
             </button>
           </div>
