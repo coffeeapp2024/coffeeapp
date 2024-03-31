@@ -20,7 +20,7 @@ function UserVoucherDiaLog() {
 
         <div className="absolute left-1/2 -translate-x-1/2 bottom-0 w-full px-2 pb-2">
           <div className="rounded-[20px] h-12 font-semibold bg-white flex items-center justify-center">
-            My vouchers
+            Vouchers
           </div>
         </div>
       </SheetTrigger>

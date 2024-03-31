@@ -80,7 +80,7 @@ function CartItem({
     isCoinCartItem ? removeFromCoinCart(index) : removeFromCashCart(index);
   };
   return (
-    <div className="relative h-32 bg-white bg-opacity-70 w-full p-2 rounded-2xl flex shadow-sm">
+    <div className="relative h-32 bg-white bg-opacity-70 w-full py-2 rounded-2xl flex shadow-sm">
       {/* Left */}
       <div className="bg-neutral-200 h-full aspect-square rounded-xl overflow-hidden">
         <Image
@@ -93,7 +93,7 @@ function CartItem({
       </div>
 
       {/* Right */}
-      <div className="pl-3 pt-1 pb-1 basis-2/3 flex flex-col justify-between">
+      <div className="pl-3 pt-1 basis-2/3 flex flex-col justify-between">
         <div className="mb-2">
           <h4 className="font-bold">{name}</h4>
           <p className="text-wrap text-sm">Size: {size}</p>
@@ -109,7 +109,8 @@ function CartItem({
             {!isCoinCartItem && "$"}
           </span>
 
-          <div className="flex items-center justify-between gap-x-2">
+          {/* Quantity */}
+          <div className="flex items-center justify-between gap-x-2 -mr-3">
             <button
               className="p-2 rounded-full bg-white bg-opacity-95"
               onClick={handleDecrement}
