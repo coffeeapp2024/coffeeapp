@@ -19,7 +19,7 @@ export default function SheetContentLayout({
       }}
       className={`w-full h-full pt-14 px-4 bg-background overflow-y-scroll border-l-0 ${className} `}
     >
-      <SheetClose className="fixed top-4 left-4 z-50">
+      <SheetClose className="fixed top-4 left-2 z-50">
         <button className="bg-white bg-opacity-95 shadow-sm p-3 rounded-xl text-neutral-500">
           <ChevronLeftIcon className="w-4 h-4" />
         </button>
