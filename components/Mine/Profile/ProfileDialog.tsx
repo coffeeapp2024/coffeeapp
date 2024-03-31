@@ -22,7 +22,7 @@ function ProfileDialog({ user }: { user: User }) {
       <SheetTrigger className="w-full">
         <ProfileTrigger user={user} />
       </SheetTrigger>
-      <SheetContentLayout className="">
+      <SheetContentLayout backgroundImage="bg/main-bg.jpg">
         {/* Profile Info */}
         <div className="flex flex-col items-center justify-center">
           <div className="w-24 aspect-square rounded-full bg-neutral-300 mb-5">
@@ -41,7 +41,7 @@ function ProfileDialog({ user }: { user: User }) {
           </h3>
           <p>{email ? email : "Loading..."}</p>
         </div>
-        <div className="border-white border-opacity-80 border-1px -mx-4 my-6"></div>
+        <div className="border-white border-opacity-20 border-1px -mx-4 my-6"></div>
         <div className="grid grid-cols-2 gap-4">
           <div className={`${styleCard}`}>
             <UserVoucherDiaLog />
