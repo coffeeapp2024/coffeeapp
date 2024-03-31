@@ -129,12 +129,12 @@ function CartItem({
       </div>
 
       {/* Remove */}
-      {showDelete && (
+      {true && (
         <button
-          className="absolute right-3 top-3 text-neutral-700"
+          className="absolute right-2 top-4 text-neutral-700"
           onClick={handleDelete}
         >
-          <TrashIcon className="w-5 h-5" />
+          <TrashIcon className="w-4 h-4" />
         </button>
       )}
     </div>
