@@ -37,7 +37,7 @@ function ShoppingBagDialog() {
           <h2 className="text-center font-semibold text-xl">My Cart</h2>
         </div>
         {coinCartItems.map((coinCartItem, index) => (
-          <CartItem isCoinCartItem={true} key={index} cartItem={coinCartItem} />
+          <CartItem isCoinCartItem={true} key={index} index={index} />
         ))}
       </SheetContentLayout>
     </Sheet>

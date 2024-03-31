@@ -238,6 +238,7 @@ type CartStoreType = {
   addToCart: (item: CartItem) => void;
   removeFromCart: (index: number) => void;
   clearCart: () => void;
+  setItem: (index: number, newItem: CartItem) => void;
 };
 type CartType = "cash" | "coin";
 
@@ -259,6 +260,17 @@ const createCartStore = (
     clearCart: () => {
       console.log(`Clearing ${cartType} cart`);
       set({ cartItems: [] });
+    },
+    setItem: (index, newItem) => {
+      console.log(
+        `Setting item at index ${index} in ${cartType} cart:`,
+        newItem
+      );
+      set((state) => {
+        const updatedItems = [...state.cartItems];
+        updatedItems[index] = newItem;
+        return { cartItems: updatedItems };
+      });
     },
   }));
 };
