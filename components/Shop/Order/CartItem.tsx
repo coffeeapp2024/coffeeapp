@@ -121,7 +121,7 @@ function CartItem({
             >
               <MinusIcon className="w-4 h-4" />
             </button>
-            <span className="text-wrap text-sm font-medium">{quantity}</span>
+            <span className="font-medium text-sm">{quantity}</span>
             <button
               className="p-2 rounded-full bg-white bg-opacity-80"
               onClick={handleIncrement}
