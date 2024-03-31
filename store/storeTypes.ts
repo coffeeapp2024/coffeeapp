@@ -1,3 +1,5 @@
+import { CartItem } from "./zustand";
+
 export type UserVoucherInfo = {
   imgUrl: string;
   info: string;
@@ -20,10 +22,11 @@ export type UserData = {
   startTimeMine: string | null;
   endTimeMine: string | null;
   voucherIdList: string[] | null;
-  LikedEventImageIdList: string[];
-  LikedCheckinImageIdList: string[];
+  LikedEventImageIdList: string[] | null;
+  LikedCheckinImageIdList: string[] | null;
   balanceLevel: number | null;
   miningHourPerQrCodeLevel: number | null;
+  collection: CartItem[] | null;
   [key: string]: any;
 };
 

@@ -1,12 +1,19 @@
 "use client";
 
-import { Topping, usePriceTypeStore, useToppingsStore } from "@/store/zustand";
+import {
+  Topping,
+  useCashCartStore,
+  useCoinCartStore,
+  usePriceTypeStore,
+  useToppingsStore,
+} from "@/store/zustand";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import CoinIcon from "../Template/CoinIcon";
 import { Drawer, DrawerContent, DrawerTrigger } from "../ui/drawer";
 import { Product, Size } from "@/store/storeTypes";
 import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
+import { toast } from "sonner";
 
 function ProductCard({ product }: { product: Product }) {
   const [open, setOpen] = useState(false);
@@ -18,6 +25,10 @@ function ProductCard({ product }: { product: Product }) {
   const [selectedSize, setSelectedSize] = useState<Size | null>(null);
   const [selectedToppings, setSelectedToppings] = useState<Topping[]>([]);
   const [totalPrice, setTotalPrice] = useState<number>(0);
+  const { cartItems: cashCartItems, addToCart: addToCashCart } =
+    useCashCartStore();
+  const { cartItems: coinCartItems, addToCart: addToCoinCart } =
+    useCoinCartStore();
 
   useEffect(() => {
     const defaultSize = sizes.find((size) => size.isDefault);
@@ -83,6 +94,20 @@ function ProductCard({ product }: { product: Product }) {
 
     setTotalPrice(calculateTotalPrice());
   }, [selectedSize, selectedToppings, quantity, isPriceInCoins]);
+
+  const handleAddToCart = () => {
+    const itemToAdd = {
+      product: product,
+      size: selectedSize?.size || "",
+      toppings: selectedToppings.map((topping) => topping.name),
+      quantity: quantity,
+      totalPrice: totalPrice,
+    };
+
+    isPriceInCoins ? addToCoinCart(itemToAdd) : addToCashCart(itemToAdd);
+    setOpen(false);
+    toast.success("Item added to cart successfully");
+  };
 
   return (
     <Drawer open={open} onOpenChange={setOpen}>
@@ -195,8 +220,8 @@ function ProductCard({ product }: { product: Product }) {
               </div>
 
               {/* Add to cart */}
-              <div
-                // onClick={}
+              <button
+                onClick={() => handleAddToCart()}
                 className={`${
                   isPriceInCoins
                     ? "bg-secondary-foreground"
@@ -209,7 +234,7 @@ function ProductCard({ product }: { product: Product }) {
                   {totalPrice}
                   {!isPriceInCoins && "$"}
                 </span>
-              </div>
+              </button>
             </div>
           </div>
         </div>

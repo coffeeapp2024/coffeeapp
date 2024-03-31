@@ -1,4 +1,3 @@
-import { create } from "zustand";
 import {
   CaseStore,
   CoinStore,
@@ -15,7 +14,9 @@ import {
   RandomVoucherStore,
   OpenQrVoucherStore,
   MinePageContentStore,
+  Product,
 } from "./storeTypes";
+import { create, StoreApi, UseBoundStore } from "zustand";
 
 export const useUserDataStore = create<UserDataStore>((set: any) => ({
   userData: null,
@@ -204,22 +205,6 @@ export const usePriceTypeStore = create<PriceTypeStore>((set) => ({
     set((state) => ({ isPriceInCoins: !state.isPriceInCoins })),
 }));
 
-// export type ProductType = any;
-
-// export type SelectProductStore = {
-//   open: boolean;
-//   product: ProductType | null;
-//   toggleOpen: () => void;
-//   selectProduct: (product: ProductType) => void;
-// };
-
-// export const useSelectProductStore = create<SelectProductStore>((set) => ({
-//   open: false,
-//   product: null,
-//   toggleOpen: () => set((state) => ({ open: !state.open })),
-//   selectProduct: (product) => set({ open: true, product }), // Changed pickProduct to selectProduct
-// }));
-
 // Define the type for a topping
 export type Topping = {
   id: string;
@@ -239,3 +224,44 @@ export const useToppingsStore = create<ToppingsStore>((set) => ({
   toppings: null,
   setToppings: (toppings) => set({ toppings }),
 }));
+
+export type CartItem = {
+  product: Product;
+  size: string;
+  toppings: string[];
+  quantity: number;
+  totalPrice: number;
+};
+
+type CartStoreType = {
+  cartItems: CartItem[];
+  addToCart: (item: CartItem) => void;
+  removeFromCart: (index: number) => void;
+  clearCart: () => void;
+};
+type CartType = "cash" | "coin";
+
+const createCartStore = (
+  cartType: CartType
+): UseBoundStore<StoreApi<CartStoreType>> => {
+  return create<CartStoreType>((set) => ({
+    cartItems: [],
+    addToCart: (item) => {
+      console.log(`Adding item to ${cartType} cart:`, item);
+      set((state) => ({ cartItems: [...state.cartItems, item] }));
+    },
+    removeFromCart: (index) => {
+      console.log(`Removing item at index ${index} from ${cartType} cart`);
+      set((state) => ({
+        cartItems: state.cartItems.filter((_, i) => i !== index),
+      }));
+    },
+    clearCart: () => {
+      console.log(`Clearing ${cartType} cart`);
+      set({ cartItems: [] });
+    },
+  }));
+};
+
+export const useCashCartStore = createCartStore("cash");
+export const useCoinCartStore = createCartStore("coin");
