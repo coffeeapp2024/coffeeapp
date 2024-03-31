@@ -34,6 +34,7 @@ export async function createUserInFirestore(
         level: 1,
         miningHourPerQrCodeLevel: 1,
         speechMineLevel: 1,
+        collection: null,
         startTimeMine: null,
         endTimeMine: null,
         voucherIdList: [],
