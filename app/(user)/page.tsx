@@ -20,7 +20,7 @@ export default function Home() {
       </div>
       <CurrentCoinInfo />
       <ScanClaimCard />
-      <Tiktok />
+      {/* <Tiktok /> */}
     </main>
   );
 }
