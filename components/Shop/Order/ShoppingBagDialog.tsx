@@ -4,10 +4,19 @@ import React from "react";
 import { Sheet, SheetTrigger } from "@/components/ui/sheet";
 import SheetContentLayout from "@/components/ui/SheetContentLayout";
 import { ShoppingBagIcon, ShoppingCartIcon } from "@heroicons/react/24/outline";
-import { usePriceTypeStore } from "@/store/zustand";
+import {
+  useCashCartStore,
+  useCoinCartStore,
+  usePriceTypeStore,
+} from "@/store/zustand";
+import CartItem from "./CartItem";
 
 function ShoppingBagDialog() {
   const { isPriceInCoins } = usePriceTypeStore();
+  const { cartItems: cashCartItems, addToCart: addToCashCart } =
+    useCashCartStore();
+  const { cartItems: coinCartItems, addToCart: addToCoinCart } =
+    useCoinCartStore();
 
   return (
     <Sheet>
@@ -19,12 +28,17 @@ function ShoppingBagDialog() {
           } absolute w-5 h-5 rounded-full  -top-1 -left-1 flex items-center justify-center`}
         >
           <span className="text-xs font-semibold text-white">
-            {isPriceInCoins ? 3 : 0}
+            {isPriceInCoins ? coinCartItems.length : cashCartItems.length}
           </span>
         </div>
       </SheetTrigger>
-      <SheetContentLayout>
-        <div></div>
+      <SheetContentLayout className="pt-24">
+        <div className="absolute top-6 left-1/2 -translate-x-1/2">
+          <h2 className="text-center font-semibold text-xl">My Cart</h2>
+        </div>
+        {coinCartItems.map((coinCartItem, index) => (
+          <CartItem isCoinCartItem={true} key={index} cartItem={coinCartItem} />
+        ))}
       </SheetContentLayout>
     </Sheet>
   );
