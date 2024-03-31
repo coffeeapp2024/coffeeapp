@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useMemo } from "react";
 import { Sheet, SheetTrigger } from "@/components/ui/sheet";
 import SheetContentLayout from "@/components/ui/SheetContentLayout";
 import { ShoppingBagIcon } from "@heroicons/react/24/outline";
@@ -18,6 +18,13 @@ function ShoppingBagDialog() {
   const { cartItems: coinCartItems } = useCoinCartStore();
 
   const currentCart = isPriceInCoins ? coinCartItems : cashCartItems;
+
+  // Calculate total price
+  const totalPrice = useMemo(() => {
+    return currentCart.reduce((acc, currentItem) => {
+      return acc + currentItem.totalPrice;
+    }, 0);
+  }, [currentCart]);
 
   return (
     <Sheet>
@@ -53,7 +60,7 @@ function ShoppingBagDialog() {
             <span>Total:</span>
             <div className="flex items-center justify-center">
               {isPriceInCoins && <CoinIcon className="w-5 h-5" />}
-              <span>{"12"}</span>
+              <span>{totalPrice}</span>
               {!isPriceInCoins && "k"}
             </div>
           </div>
