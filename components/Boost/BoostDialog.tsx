@@ -1,14 +1,7 @@
-import Image from "next/image";
 import React from "react";
 import { useUserDataStore } from "@/store/zustand";
-import {
-  Sheet,
-  SheetClose,
-  SheetContent,
-  SheetTrigger,
-} from "@/components/ui/sheet";
-import { ArrowLeftIcon, RocketLaunchIcon } from "@heroicons/react/24/outline";
-import { toast } from "sonner";
+import { Sheet, SheetTrigger } from "@/components/ui/sheet";
+import { RocketLaunchIcon } from "@heroicons/react/24/outline";
 import Fireplace from "./Fireplace";
 import Storage from "./Storage";
 import AppCardTemplate from "../Template/AppCardTemplate";
