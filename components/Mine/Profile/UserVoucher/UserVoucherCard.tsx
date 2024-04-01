@@ -28,7 +28,7 @@ function UserVoucherCard({
   const handleOpenQrCode = () => {
     toast.info("Scan this voucher at the coffee shop to claim your offer.");
 
-    const voucherQrCodeId = `${userId}-${voucherId}-${index}`;
+    const voucherQrCodeId = `${userId}-voucherIdList-${index}`;
     setOpen(true);
     setQrCodeId(voucherQrCodeId);
   };

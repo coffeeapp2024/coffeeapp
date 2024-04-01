@@ -1,11 +1,12 @@
 import SecondaryButton from "@/components/Template/SecondaryButton";
-import { CartItem, useQrCodeStore } from "@/store/zustand";
+import { CartItem, useQrCodeStore, useUserDataStore } from "@/store/zustand";
 import Image from "next/image";
 import React from "react";
 import { toast } from "sonner";
 
-function UserItemCard({ item }: { item: CartItem }) {
+function UserItemCard({ item, index }: { item: CartItem; index: number }) {
   const { setOpen, setQrCodeId } = useQrCodeStore();
+  const { userId } = useUserDataStore();
 
   const { product, quantity, size, toppings } = item;
   const { img, name } = product;
@@ -13,7 +14,7 @@ function UserItemCard({ item }: { item: CartItem }) {
   const handleOpenQrCode = () => {
     toast.info("Scan this voucher at the coffee shop to claim your offer.");
 
-    const itemQrCodeId = `${size}`;
+    const itemQrCodeId = `${userId}-collection-${index}`;
     setQrCodeId(itemQrCodeId);
     setOpen(true);
   };

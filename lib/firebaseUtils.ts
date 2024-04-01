@@ -11,8 +11,11 @@ import {
   writeBatch,
   FieldValue,
   deleteField,
+  DocumentReference,
+  DocumentData,
 } from "firebase/firestore";
-import { db } from "./firebase";
+import { db, storage } from "./firebase";
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 
 export async function resetCollectionData(
   collectionName: string,
@@ -523,6 +526,59 @@ export async function uploadImageToFirebase(
     return downloadURL;
   } catch (error) {
     console.error("Error uploading image to Firebase Storage:", error);
+    throw error;
+  }
+}
+
+export async function deleteItemFromDocumentArrayByIndex(
+  collectionName: string,
+  docId: string,
+  arrayKey: string,
+  indexToDelete: number
+) {
+  try {
+    // Get a reference to the document
+    const docRef = doc(db, collectionName, docId);
+
+    // Retrieve the current document data
+    const docSnapshot = await getDoc(docRef);
+
+    // Check if the document exists
+    if (docSnapshot.exists()) {
+      // Get the current array value from the document data
+      const dataArray = docSnapshot.data()?.[arrayKey] || [];
+
+      // Check if the index is valid
+      if (indexToDelete >= 0 && indexToDelete < dataArray.length) {
+        // Remove the item at the specified index from the array
+        dataArray.splice(indexToDelete, 1);
+
+        // Create an update object with the modified array
+        const updateData = {
+          [arrayKey]: dataArray,
+        };
+
+        // Update the document with the modified array
+        await updateDoc(docRef, updateData);
+
+        console.log(
+          `Item at index ${indexToDelete} deleted successfully from ${arrayKey} in document ${docId}`
+        );
+      } else {
+        console.error(
+          `Index ${indexToDelete} is out of range for ${arrayKey} in document ${docId}`
+        );
+      }
+    } else {
+      console.error(
+        `Document ${docId} does not exist in collection ${collectionName}`
+      );
+    }
+  } catch (error) {
+    console.error(
+      `Error deleting item at index ${indexToDelete} from ${arrayKey} in document ${docId} from collection ${collectionName}:`,
+      error
+    );
     throw error;
   }
 }

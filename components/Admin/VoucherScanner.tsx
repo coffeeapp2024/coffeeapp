@@ -1,21 +1,23 @@
 "use client";
-import { deleteVoucherIdFromUser } from "@/lib/firebaseFunctions";
 import QRCodeScanner from "../Template/QrCodeScanner";
 
-import React, { useState } from "react";
+import React from "react";
 import { toast } from "sonner";
 import { useUserDataStore } from "@/store/zustand";
+import { deleteItemFromDocumentArrayByIndex } from "@/lib/firebaseUtils";
 
 const VoucherScanner = () => {
   const { role } = useUserDataStore();
 
   const handleQrCode = async (text: string) => {
-    const [userId, voucherId, indexStr] = text.split("-");
+    const [userId, arrayKey, indexStr] = text.split("-");
     const index = parseInt(indexStr);
 
-    await deleteVoucherIdFromUser(userId, voucherId, index);
+    await deleteItemFromDocumentArrayByIndex("users", userId, arrayKey, index);
 
-    toast.success("Voucher deleted successfully");
+    if (arrayKey === "voucherIdList")
+      toast.success("Voucher deleted successfully");
+    if (arrayKey === "collection") toast.success("Item deleted successfully");
   };
 
   return (

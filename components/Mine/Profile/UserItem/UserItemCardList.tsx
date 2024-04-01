@@ -11,7 +11,7 @@ function UserItemCardList() {
     <div className="flex flex-col items-center gap-y-3">
       {collection &&
         collection.map((item, index) => (
-          <UserItemCard key={index} item={item} />
+          <UserItemCard key={index} item={item} index={index} />
         ))}
     </div>
   );

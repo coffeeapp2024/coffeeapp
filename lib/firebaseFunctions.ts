@@ -3,15 +3,12 @@ import {
   collection,
   setDoc,
   getDoc,
-  onSnapshot,
-  Unsubscribe,
   addDoc,
   updateDoc,
 } from "firebase/firestore";
 import { UserData, PostType } from "@/store/storeTypes";
 import { User } from "firebase/auth";
-import { db, storage } from "./firebase";
-import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { db } from "./firebase";
 import {
   addDocumentsToCollection,
   uploadImageToFirebase,
