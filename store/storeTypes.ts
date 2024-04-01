@@ -26,7 +26,7 @@ export type UserData = {
   balanceLevel: number | null;
   miningHourPerQrCodeLevel: number | null;
   collection: CartItem[] | null;
-  // [key: string]: any;
+  [key: string]: any;
 };
 
 export type UserDataStore = {
