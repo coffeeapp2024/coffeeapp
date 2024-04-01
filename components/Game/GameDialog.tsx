@@ -22,7 +22,7 @@ function GameDialog() {
         </SheetTrigger>
 
         <SheetContentLayout
-          backgroundImage="/bg/bg-cases.jpg"
+          backgroundImage="/bg/main-bg.jpg"
           className="p-0 flex items-center justify-center border-0"
         >
           <GameCardList />

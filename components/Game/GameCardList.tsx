@@ -18,6 +18,7 @@ import CoinIcon from "../Template/CoinIcon";
 export default function GameCardList() {
   const [api, setApi] = React.useState<CarouselApi>();
   const [currentCase, setCurrentCase] = useState<Case | null>(null);
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
   const { cases } = useCaseStore();
   const { userData, setUserData } = useUserDataStore();
   const { price, voucherIdList: caseVoucherIdList } = currentCase ?? {};
@@ -32,6 +33,7 @@ export default function GameCardList() {
       const selectedIndex = api.selectedScrollSnap();
       const selectedCase = cases[selectedIndex]; // Lấy gameCase tương ứng với index được chọn
       setCurrentCase(selectedCase);
+      setCurrentIndex(selectedIndex);
       console.log("current case", currentCase);
     });
   }, [api]);
@@ -70,14 +72,20 @@ export default function GameCardList() {
   const isHidden =
     !caseVoucherIdList || caseVoucherIdList.length <= 0 || !userData;
 
+  const quantityColors = [
+    "text-green-400 ",
+    "text-blue-400",
+    "text-fuchsia-400",
+    "text-red-400",
+  ];
   return (
-    <div className="-mx-6 w-full">
+    <div className="-mx-6 w-full relative h-screen">
       <Carousel
         setApi={setApi}
         opts={{
           startIndex: 0,
         }}
-        className="-mx-0"
+        className="-mx-0 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full"
       >
         <CarouselContent className="-ml-0 pb-12">
           {cases?.map((gameCase, index) => (
@@ -86,8 +94,17 @@ export default function GameCardList() {
             </CarouselItem>
           ))}
         </CarouselContent>
+        <div className="absolute left-1/2 -translate-x-1/2 top-[6%] flex items-center flex-col -z-10">
+          <span className="text-neutral-500 font-medium">Cases in stock:</span>
+          <h2
+            className={`text-8xl font-extrabold opacity-30 ${quantityColors[currentIndex]}`}
+          >
+            00000
+          </h2>
+        </div>
       </Carousel>
 
+      {/* Open */}
       <div className="absolute bottom-4 left-1/2 -translate-x-1/2 w-[95%]">
         <div className=" bg-neutral-50 rounded-3xl flex flex-col items-center justify-between pb-3 pt-4 gap-y-3 z-10 border-2 border-neutral-800">
           <div>
