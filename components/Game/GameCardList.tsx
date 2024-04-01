@@ -17,11 +17,17 @@ import CoinIcon from "../Template/CoinIcon";
 
 export default function GameCardList() {
   const [api, setApi] = React.useState<CarouselApi>();
-  const [currentCase, setCurrentCase] = useState<Case | null>(null);
-  const [currentIndex, setCurrentIndex] = useState<number>(0);
   const { cases } = useCaseStore();
+  const [currentCase, setCurrentCase] = useState<Case | null>(
+    cases && cases.length > 0 ? cases[0] : null
+  );
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
   const { userData, setUserData } = useUserDataStore();
-  const { price, voucherIdList: caseVoucherIdList } = currentCase ?? {};
+  const {
+    price,
+    voucherIdList: caseVoucherIdList,
+    quantity,
+  } = currentCase ?? {};
   const { setOpen, setRandomVoucherId } = useRandomVoucherStore();
 
   React.useEffect(() => {
@@ -99,7 +105,7 @@ export default function GameCardList() {
           <h2
             className={`text-8xl font-extrabold opacity-30 ${quantityColors[currentIndex]}`}
           >
-            00000
+            {quantity ? String(quantity).padStart(5, "0") : "00000"}
           </h2>
         </div>
       </Carousel>

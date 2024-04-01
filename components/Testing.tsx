@@ -320,36 +320,36 @@ export const demoProductList = [
 
 const cases = [
   {
-    id: 3,
-    quantity: 1000,
-    price: 4,
-    iconURL:
-      "https://firebasestorage.googleapis.com/v0/b/coffee-coin-app.appspot.com/o/boxs%2Fcase3.png?alt=media&token=5aecac5e-bb4f-4a6c-8436-cfa6e5a5bc52",
+    id: 1,
     voucherIdList: ["1", "2", "3"],
+    iconURL:
+      "https://firebasestorage.googleapis.com/v0/b/coffee-coin-app.appspot.com/o/boxs%2Fcase1.png?alt=media&token=da1533bf-dccf-4fe0-ab35-a499a6f66481",
+    quantity: 3589,
+    price: 9,
   },
   {
     id: 4,
-    quantity: 1000,
-    voucherIdList: ["1", "2", "3"],
     iconURL:
-      "https://firebasestorage.googleapis.com/v0/b/coffee-coin-app.appspot.com/o/boxs%2Fcase4.png?alt=media&token=5bc33afa-892d-4f1c-8790-e73ab154e486",
+      "https://firebasestorage.googleapis.com/v0/b/coffee-coin-app.appspot.com/o/boxs%2Fcase4.png?alt=media&token=9b1e34d2-f21e-41d2-b5fb-7723c5f50c22",
     price: 8,
-  },
-  {
-    id: 1,
-    quantity: 1000,
+    quantity: 2956,
     voucherIdList: ["1", "2", "3"],
-    price: 9,
-    iconURL:
-      "https://firebasestorage.googleapis.com/v0/b/coffee-coin-app.appspot.com/o/boxs%2Fcase1.png?alt=media&token=73ae64af-ea50-4755-94fc-9d6dd8a90e02",
   },
   {
     id: 2,
-    quantity: 1000,
+    quantity: 1097,
     iconURL:
-      "https://firebasestorage.googleapis.com/v0/b/coffee-coin-app.appspot.com/o/boxs%2Fcase2.png?alt=media&token=8e229a0a-5783-4e2c-9300-ab192d7593d7",
+      "https://firebasestorage.googleapis.com/v0/b/coffee-coin-app.appspot.com/o/boxs%2Fcase2.png?alt=media&token=d630fbef-6299-4aff-bbfe-5ab46ebaf61b",
     voucherIdList: ["1", "2", "3"],
     price: 15,
+  },
+  {
+    id: 3,
+    voucherIdList: ["1", "2", "3"],
+    quantity: 976,
+    price: 4,
+    iconURL:
+      "https://firebasestorage.googleapis.com/v0/b/coffee-coin-app.appspot.com/o/boxs%2Fcase3.png?alt=media&token=e98bb2c1-ba58-4fb2-9a66-518c95b25143",
   },
 ];
 
