@@ -1,4 +1,4 @@
-import VoucherScanner from "@/components/Admin/VoucherScanner";
+import AdminScanner from "@/components/Admin/AdminScanner";
 
 function Page() {
   return (
@@ -12,7 +12,7 @@ function Page() {
       className="bg-white h-screen max-w-screen-sm flex items-center justify-center flex-col gap-y-3"
     >
       <div className="flex flex-col items-center justify-center pt-48">
-        <VoucherScanner />
+        <AdminScanner />
       </div>
     </div>
   );

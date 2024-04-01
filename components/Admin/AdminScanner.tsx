@@ -6,7 +6,7 @@ import { toast } from "sonner";
 import { useUserDataStore } from "@/store/zustand";
 import { deleteItemFromDocumentArrayByIndex } from "@/lib/firebaseUtils";
 
-const VoucherScanner = () => {
+const AdminScanner = () => {
   const { role } = useUserDataStore();
 
   const handleQrCode = async (text: string) => {
@@ -31,4 +31,4 @@ const VoucherScanner = () => {
   );
 };
 
-export default VoucherScanner;
+export default AdminScanner;
