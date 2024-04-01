@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import { Sheet, SheetTrigger } from "@/components/ui/sheet";
 import SheetContentLayout from "@/components/ui/SheetContentLayout";
 import { ShoppingBagIcon } from "@heroicons/react/24/outline";
@@ -8,14 +8,22 @@ import {
   useCashCartStore,
   useCoinCartStore,
   usePriceTypeStore,
+  useUserDataStore,
 } from "@/store/zustand";
+
 import CartItem from "./CartItem";
 import CoinIcon from "@/components/Template/CoinIcon";
+import { updateUserDataAfterPurchase } from "@/lib/coinActions";
+import { toast } from "sonner";
 
 function ShoppingBagDialog() {
+  const [open, setOpen] = useState(false);
+  const { userData, setUserData } = useUserDataStore();
   const { isPriceInCoins } = usePriceTypeStore();
-  const { cartItems: cashCartItems } = useCashCartStore();
-  const { cartItems: coinCartItems } = useCoinCartStore();
+  const { cartItems: cashCartItems, clearCart: clearCashCart } =
+    useCashCartStore();
+  const { cartItems: coinCartItems, clearCart: clearCoinCart } =
+    useCoinCartStore();
 
   const currentCart = isPriceInCoins ? coinCartItems : cashCartItems;
 
@@ -26,8 +34,54 @@ function ShoppingBagDialog() {
     }, 0);
   }, [currentCart]);
 
+  const handleCheckout = async () => {
+    if (!userData) {
+      toast.error("Please sign in to complete your purchase.");
+      return;
+    }
+
+    if (!isPriceInCoins) {
+      toast.error(
+        "Cash checkout option is coming soon. Currently, only coin checkout is available."
+      );
+      return;
+    }
+
+    if (totalPrice === 0) {
+      toast.info("Your cart is empty. Add items to proceed to checkout.");
+      return;
+    }
+
+    const updatedCollection = [...(userData.collection || []), ...currentCart];
+    const promise = async () => {
+      // Add cart items to the user's collection
+      await updateUserDataAfterPurchase(userData, setUserData, totalPrice, [
+        {
+          key: "collection",
+          value: updatedCollection,
+        },
+      ]);
+
+      // Clear the cart after checkout
+      // isPriceInCoins ? clearCoinCart() : clearCoinCart();
+      clearCoinCart();
+
+      setOpen(false);
+    };
+
+    try {
+      await toast.promise(promise(), {
+        loading: "Loading...",
+        success: "Checkout successful! Visit your collection, scan, and enjoy!",
+        error: (error) => error.message,
+      });
+    } catch (error) {
+      console.error("Error deleting keys:", error);
+    }
+  };
+
   return (
-    <Sheet>
+    <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger className="fixed right-[9px] top-[68%] bg-white bg-opacity-90 shadow-sm p-2 rounded-2xl flex items-center justify-center">
         <ShoppingBagIcon className="w-7 h-7" />
         <div
@@ -66,7 +120,10 @@ function ShoppingBagDialog() {
           </div>
 
           <div className="w-full px-3 py-3">
-            <button className="bg-primary-foreground w-full h-14 font-semibold text-white rounded-3xl">
+            <button
+              onClick={handleCheckout}
+              className="bg-primary-foreground w-full h-14 font-semibold text-white rounded-3xl"
+            >
               Checkout
             </button>
           </div>
