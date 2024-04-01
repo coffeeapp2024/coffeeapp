@@ -7,6 +7,7 @@ import {
   getDoc,
   query,
   where,
+  onSnapshot,
   writeBatch,
   FieldValue,
   deleteField,
@@ -463,6 +464,42 @@ export async function deleteKeyInAllDocuments(
   } catch (error) {
     console.error(
       `Error deleting key ${keyToDelete} in all documents from collection ${collectionName}:`,
+      error
+    );
+    throw error;
+  }
+}
+
+export function listenForKeyChangeInDoc(
+  collectionName: string,
+  docId: string,
+  keyToWatch: string,
+  callback: (newValue: any) => void
+) {
+  try {
+    const docRef = doc(db, collectionName, docId);
+
+    // Listen for snapshot changes to the document
+    const unsubscribe = onSnapshot(docRef, (docSnapshot) => {
+      if (docSnapshot.exists()) {
+        const data = docSnapshot.data();
+        if (data && data[keyToWatch] !== undefined) {
+          // If the watched key exists in the document, invoke the callback with its new value
+          callback(data[keyToWatch]);
+        }
+      } else {
+        // Document doesn't exist
+        console.error(
+          `Document ${docId} does not exist in collection ${collectionName}`
+        );
+      }
+    });
+
+    // Return the unsubscribe function to stop listening
+    return unsubscribe;
+  } catch (error) {
+    console.error(
+      `Error listening for key ${keyToWatch} change in document ${docId} from collection ${collectionName}:`,
       error
     );
     throw error;

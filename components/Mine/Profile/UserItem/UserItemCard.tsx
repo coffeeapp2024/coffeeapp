@@ -1,10 +1,22 @@
-import { CartItem } from "@/store/zustand";
+import SecondaryButton from "@/components/Template/SecondaryButton";
+import { CartItem, useQrCodeStore } from "@/store/zustand";
 import Image from "next/image";
 import React from "react";
+import { toast } from "sonner";
 
 function UserItemCard({ item }: { item: CartItem }) {
+  const { setOpen, setQrCodeId } = useQrCodeStore();
+
   const { product, quantity, size, toppings } = item;
   const { img, name } = product;
+
+  const handleOpenQrCode = () => {
+    toast.info("Scan this voucher at the coffee shop to claim your offer.");
+
+    const itemQrCodeId = `${size}`;
+    setQrCodeId(itemQrCodeId);
+    setOpen(true);
+  };
 
   return (
     <div className="relative h-32 bg-white bg-opacity-70 w-full p-2 rounded-2xl flex shadow-sm">
@@ -34,6 +46,7 @@ function UserItemCard({ item }: { item: CartItem }) {
           </p>
         </div>
       </div>
+      <SecondaryButton name="Scan QR" onClick={handleOpenQrCode} />
     </div>
   );
 }

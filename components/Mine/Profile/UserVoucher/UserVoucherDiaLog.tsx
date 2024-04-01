@@ -3,6 +3,7 @@ import UserVoucherCardList from "./UserVoucherCardList";
 import Image from "next/image";
 import { Sheet, SheetTrigger } from "@/components/ui/sheet";
 import SheetContentLayout from "@/components/ui/SheetContentLayout";
+import QrCodeUserVoucher from "./QrCodeUserVoucher";
 
 function UserVoucherDiaLog() {
   return (
@@ -25,6 +26,7 @@ function UserVoucherDiaLog() {
         </div>
       </SheetTrigger>
       <SheetContentLayout backgroundImage="/bg/bg3.jpg" className="px-2">
+        <QrCodeUserVoucher />
         <UserVoucherCardList />
       </SheetContentLayout>
     </Sheet>

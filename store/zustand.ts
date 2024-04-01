@@ -2,7 +2,6 @@ import {
   CaseStore,
   CoinStore,
   HomePageContentStore,
-  LevelStore,
   PostType,
   PostStore,
   TimeStore,
@@ -53,11 +52,6 @@ export const useCaseStore = create<CaseStore>((set) => ({
     const sortedCases = cases.slice().sort((a, b) => a.id - b.id);
     set({ cases: sortedCases });
   },
-}));
-
-export const useLevelStore = create<LevelStore>((set) => ({
-  levels: null,
-  setLevels: (levels) => set({ levels }),
 }));
 
 function createPostStore(
@@ -274,3 +268,18 @@ const createCartStore = (
 
 export const useCashCartStore = createCartStore("cash");
 export const useCoinCartStore = createCartStore("coin");
+
+export type QrCodeStore = {
+  id: string | null;
+  open: boolean;
+  setQrCodeId: (id: string) => void;
+  setOpen: (open: boolean) => void;
+};
+
+// Tạo store
+export const useQrCodeStore = create<QrCodeStore>((set) => ({
+  id: null,
+  open: false,
+  setQrCodeId: (id) => set((state) => ({ ...state, id })),
+  setOpen: (open) => set((state) => ({ ...state, open })),
+}));

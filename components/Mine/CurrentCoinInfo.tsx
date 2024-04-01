@@ -1,10 +1,9 @@
 import React, { useEffect } from "react";
 import CoinIcon from "../Template/CoinIcon";
 import { updateCurrentCoin } from "@/lib/coinActions";
-import { useCoinStore, useLevelStore, useUserDataStore } from "@/store/zustand";
+import { useCoinStore, useUserDataStore } from "@/store/zustand";
 function CurrentCoinInfo() {
   const { userData } = useUserDataStore();
-  const { levels } = useLevelStore();
   const { currentCoin, setCurrentCoin } = useCoinStore();
 
   useEffect(() => {
@@ -39,7 +38,7 @@ function CurrentCoinInfo() {
         <div className="flex items-center">
           <CoinIcon className="w-5 h-5 ml-1 " />
           <span className="font-bold text-shadow">
-            {userData?.balance ?? (levels ? levels[0]?.balance : 0)}
+            {userData?.balance ?? 0}
           </span>
         </div>
       </div>

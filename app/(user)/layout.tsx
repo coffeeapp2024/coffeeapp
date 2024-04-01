@@ -11,7 +11,6 @@ import {
   useCheckinPostStore,
   useVoucherStore,
   useCaseStore,
-  useLevelStore,
   useHomePageContentStore,
   useMinePageContentStore,
   useProductStore,
@@ -38,6 +37,7 @@ import {
 import Testing from "@/components/Testing";
 import Nav from "@/components/Nav";
 import { NextUIProvider } from "@nextui-org/system";
+import QrcodeDialogTemplate from "@/components/Template/QrcodeDialogTemplate";
 
 export default function RootLayout({
   children,
@@ -51,7 +51,6 @@ export default function RootLayout({
   const { setPosts: setEventPost } = useEventPostStore();
   const { setPosts: setCheckinPost } = useCheckinPostStore();
   const { setCases } = useCaseStore();
-  const { setLevels } = useLevelStore();
   const { setVouchers } = useVoucherStore();
   const { setHomePageContent } = useHomePageContentStore();
   const { setMinePageContent } = useMinePageContentStore();

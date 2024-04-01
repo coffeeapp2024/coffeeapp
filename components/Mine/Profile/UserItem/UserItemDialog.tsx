@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Sheet, SheetTrigger } from "@/components/ui/sheet";
 import SheetContentLayout from "@/components/ui/SheetContentLayout";
 import UserItemCardList from "./UserItemCardList";
+import QrCodeUserItem from "./QrCodeUserItem";
 
 function UserItemDialog() {
   return (
@@ -25,6 +26,7 @@ function UserItemDialog() {
         </div>
       </SheetTrigger>
       <SheetContentLayout backgroundImage="/bg/bg3.jpg" className="px-2 pt-20">
+        <QrCodeUserItem />
         <UserItemCardList />
       </SheetContentLayout>
     </Sheet>

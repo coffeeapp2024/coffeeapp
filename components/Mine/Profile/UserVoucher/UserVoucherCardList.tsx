@@ -10,14 +10,11 @@ function UserVoucherCardList() {
   const { voucherIdList } = userData ?? {};
 
   return (
-    <>
-      <QrCodeUserVoucher />
-      <div className="pb-20 flex flex-col gap-y-2">
-        {voucherIdList?.map((voucherId, index) => (
-          <UserVoucherCard key={index} index={index} voucherId={voucherId} />
-        ))}
-      </div>
-    </>
+    <div className="pb-20 flex flex-col gap-y-2">
+      {voucherIdList?.map((voucherId, index) => (
+        <UserVoucherCard key={index} index={index} voucherId={voucherId} />
+      ))}
+    </div>
   );
 }
 
