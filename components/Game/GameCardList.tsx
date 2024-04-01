@@ -20,7 +20,7 @@ import { updateDocumentByKeyCondition } from "@/lib/firebaseUtils";
 
 export default function GameCardList() {
   const [api, setApi] = React.useState<CarouselApi>();
-  const { cases } = useCaseStore();
+  const { cases, setCases } = useCaseStore();
   const [currentCase, setCurrentCase] = useState<Case | null>(null);
   const { userData, setUserData } = useUserDataStore();
   const { setOpen, setRandomVoucherId } = useRandomVoucherStore();
@@ -32,22 +32,43 @@ export default function GameCardList() {
   } = currentCase ?? {};
 
   useEffect(() => {
+    if (!cases || cases.length === 0) {
+      return;
+    }
+
+    if (!currentCase || !currentCase.id) {
+      setCurrentCase(cases[0]);
+      console.log("Set Initialize currentCase");
+    } else {
+      const foundCase = cases.find((c) => c.id === currentCase.id);
+      if (foundCase) {
+        setCurrentCase(foundCase);
+        console.log("Updated currentCase based on id");
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [cases]);
+
+  useEffect(() => {
     if (!api || !cases) {
       return;
     }
 
-    // Initialize currentCase based on cases
-    if (cases.length > 0) {
-      setCurrentCase(cases[0]);
-      console.log("Set current case");
-    }
-
-    api.on("select", () => {
+    const handleSelect = () => {
       const selectedIndex = api.selectedScrollSnap();
       const selectedCase = cases[selectedIndex];
       setCurrentCase(selectedCase);
-    });
-  }, [api, cases]);
+    };
+
+    // Attach event listener for "select" event
+    api.on("select", handleSelect);
+
+    // Cleanup function to remove event listener
+    return () => {
+      api.off("select", handleSelect);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [api]);
 
   const handlePlay = async () => {
     if (!id || !quantity || !price || !caseVoucherIdList) return;
@@ -63,6 +84,7 @@ export default function GameCardList() {
     ];
 
     const promise = async () => {
+      if (!cases || !id || !currentCase) return;
       const updatedUserData = await updateUserDataAfterPurchase(
         userData,
         setUserData,
@@ -77,6 +99,9 @@ export default function GameCardList() {
 
       const updatedQuantity = quantity - 1;
       const updatedCase = { ...currentCase, quantity: updatedQuantity };
+
+      cases[id - 1] = updatedCase; // fix later to find real id
+      setCases(cases);
 
       await updateDocumentByKeyCondition("cases", "id", id, updatedCase);
       if (updatedUserData) {
