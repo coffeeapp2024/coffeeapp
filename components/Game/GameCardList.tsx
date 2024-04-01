@@ -41,6 +41,7 @@ export default function GameCardList() {
     // Initialize currentCase based on cases
     if (cases.length > 0) {
       setCurrentCase(cases[0]);
+      console.log("set current case");
     }
 
     api.on("select", () => {
@@ -104,6 +105,7 @@ export default function GameCardList() {
     "text-fuchsia-400",
     "text-red-400",
   ];
+
   return (
     <div className="-mx-6 w-full relative h-screen">
       <Carousel
