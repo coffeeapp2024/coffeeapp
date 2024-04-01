@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+"use client";
+
+import React, { useEffect, useState } from "react";
 import {
   Carousel,
   CarouselContent,
@@ -14,39 +16,42 @@ import { updateUserDataAfterPurchase } from "@/lib/coinActions";
 import { toast } from "sonner";
 import { Case } from "@/store/storeTypes";
 import CoinIcon from "../Template/CoinIcon";
+import { updateDocumentByKeyCondition } from "@/lib/firebaseUtils";
 
 export default function GameCardList() {
   const [api, setApi] = React.useState<CarouselApi>();
   const { cases } = useCaseStore();
-  const [currentCase, setCurrentCase] = useState<Case | null>(
-    cases && cases.length > 0 ? cases[0] : null
-  );
-  const [currentIndex, setCurrentIndex] = useState<number>(0);
+  const [currentCase, setCurrentCase] = useState<Case | null>(null);
   const { userData, setUserData } = useUserDataStore();
+  const { setOpen, setRandomVoucherId } = useRandomVoucherStore();
   const {
     price,
     voucherIdList: caseVoucherIdList,
     quantity,
+    id,
   } = currentCase ?? {};
-  const { setOpen, setRandomVoucherId } = useRandomVoucherStore();
+  if (!id || !quantity || !price || !caseVoucherIdList) return;
 
-  React.useEffect(() => {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  useEffect(() => {
     if (!api || !cases) {
       return;
     }
 
+    // Initialize currentCase based on cases
+    if (cases.length > 0) {
+      setCurrentCase(cases[0]);
+    }
+
     api.on("select", () => {
       const selectedIndex = api.selectedScrollSnap();
-      const selectedCase = cases[selectedIndex]; // Lấy gameCase tương ứng với index được chọn
+      const selectedCase = cases[selectedIndex];
       setCurrentCase(selectedCase);
-      setCurrentIndex(selectedIndex);
-      console.log("current case", currentCase);
     });
-  }, [api]);
+  }, [api, cases]);
 
   const handlePlay = async () => {
-    if (!userData || !caseVoucherIdList || !caseVoucherIdList.length || !price)
-      return;
+    if (!userData || !caseVoucherIdList.length || !price) return;
 
     const randomIndex = Math.floor(Math.random() * caseVoucherIdList.length);
     const randomVoucherId = caseVoucherIdList[randomIndex];
@@ -56,19 +61,34 @@ export default function GameCardList() {
       randomVoucherId,
     ];
 
-    const updatedUserData = await toast.promise(
-      updateUserDataAfterPurchase(userData, setUserData, price, [
-        {
-          key: "voucherIdList",
-          value: updatedVouchers,
-        },
-      ]),
-      {
-        loading: "Proccessing...",
-        success: "Well done! You've earned a random voucher!",
-        error: (error) => error.message,
+    const promise = async () => {
+      const updatedUserData = await updateUserDataAfterPurchase(
+        userData,
+        setUserData,
+        price,
+        [
+          {
+            key: "voucherIdList",
+            value: updatedVouchers,
+          },
+        ]
+      );
+
+      const updatedQuantity = quantity - 1;
+      const updatedCase = { ...currentCase, quantity: updatedQuantity };
+
+      await updateDocumentByKeyCondition("cases", "id", id, updatedCase);
+      if (updatedUserData) {
+        setRandomVoucherId(randomVoucherId);
+        setOpen(true);
       }
-    );
+    };
+
+    const updatedUserData = await toast.promise(promise(), {
+      loading: "Proccessing...",
+      success: "Well done! You've earned a random voucher!",
+      error: (error) => error.message,
+    });
     if (updatedUserData) {
       setRandomVoucherId(randomVoucherId);
       setOpen(true);
@@ -103,7 +123,9 @@ export default function GameCardList() {
         <div className="absolute left-1/2 -translate-x-1/2 top-[6%] flex items-center flex-col -z-10">
           <span className="text-neutral-500 font-medium">Cases in stock:</span>
           <h2
-            className={`text-8xl font-extrabold opacity-30 ${quantityColors[currentIndex]}`}
+            className={`text-8xl font-extrabold opacity-30 ${
+              quantityColors[id - 1]
+            }`}
           >
             {quantity ? String(quantity).padStart(5, "0") : "00000"}
           </h2>
