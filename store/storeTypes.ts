@@ -17,7 +17,6 @@ export type UserData = {
   email: string | null;
   displayName: string | null;
   coin: number;
-  level: number | null;
   balance: number | null;
   startTimeMine: string | null;
   endTimeMine: string | null;
@@ -27,7 +26,7 @@ export type UserData = {
   balanceLevel: number | null;
   miningHourPerQrCodeLevel: number | null;
   collection: CartItem[] | null;
-  [key: string]: any;
+  // [key: string]: any;
 };
 
 export type UserDataStore = {
