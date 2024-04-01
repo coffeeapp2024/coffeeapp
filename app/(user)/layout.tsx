@@ -247,7 +247,12 @@ export default function RootLayout({
 
     fetchInitialCoin();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [userData]);
+  }, [
+    userData?.balance,
+    userData?.coin,
+    userData?.endTimeMine,
+    userData?.startTimeMine,
+  ]);
 
   return (
     <NextUIProvider>

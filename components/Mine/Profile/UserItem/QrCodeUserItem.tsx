@@ -17,22 +17,24 @@ function QrCodeUserItem() {
         userId,
         "collection",
         (newCollection) => {
-          if (isEqual(newCollection, userData.collection)) return;
-
+          if (isEqual(newCollection, userData.collection)) {
+            console.log("User collection remains unchanged");
+            return;
+          }
           const updatedUserData: UserData = {
             ...userData,
             collection: newCollection,
           };
 
           setOpen(false);
+          toast.success("Items has been successfully scanned!");
           setTimeout(() => {
             setUserData(updatedUserData);
           }, 2000);
 
-          toast.success("Items has been successfully scanned!");
+          return unsubscribe();
         }
       );
-      return () => unsubscribe();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open]);

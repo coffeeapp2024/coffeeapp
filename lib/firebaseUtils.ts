@@ -505,3 +505,24 @@ export function listenForKeyChangeInDoc(
     throw error;
   }
 }
+
+export async function uploadImageToFirebase(
+  file: File,
+  folder: string
+): Promise<string> {
+  try {
+    // Create a storage reference with a unique name within the specified folder
+    const storageRef = ref(storage, `${folder}/${file.name}`);
+
+    // Upload the file to Firebase Storage
+    const snapshot = await uploadBytesResumable(storageRef, file);
+
+    // Get the download URL of the uploaded image
+    const downloadURL = await getDownloadURL(snapshot.ref);
+
+    return downloadURL;
+  } catch (error) {
+    console.error("Error uploading image to Firebase Storage:", error);
+    throw error;
+  }
+}

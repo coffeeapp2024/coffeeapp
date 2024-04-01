@@ -12,7 +12,10 @@ import { UserData, PostType } from "@/store/storeTypes";
 import { User } from "firebase/auth";
 import { db, storage } from "./firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import { addDocumentsToCollection } from "./firebaseUtils";
+import {
+  addDocumentsToCollection,
+  uploadImageToFirebase,
+} from "./firebaseUtils";
 
 const usersRef = collection(db, "users");
 
@@ -79,56 +82,6 @@ export async function generateKeysAndSaveToFirestore(count: number) {
     keys.push(newKey);
   }
   return keys;
-}
-
-export function listenForVoucherIdListChanges(
-  userId: string,
-  callback: (voucherIdList: string[]) => void
-): Unsubscribe {
-  const userDoc = doc(usersRef, userId);
-
-  try {
-    // Use onSnapshot to listen for real-time updates to the document
-    const unsubscribe = onSnapshot(userDoc, (snapshot) => {
-      if (snapshot.exists()) {
-        const userData = snapshot.data() as UserData;
-        // Get the current voucherIdList
-        const voucherIdList = userData.voucherIdList || [];
-        // Invoke the callback with the current voucherIdList
-        callback(voucherIdList);
-      } else {
-        console.log("User data not found");
-        // Handle the situation when user data doesn't exist
-      }
-    });
-
-    // Return the unsubscribe function
-    return unsubscribe;
-  } catch (error) {
-    console.error("Error listening for voucherIdList changes:", error);
-    throw error;
-  }
-}
-
-export async function uploadImageToFirebase(
-  file: File,
-  folder: string
-): Promise<string> {
-  try {
-    // Create a storage reference with a unique name within the specified folder
-    const storageRef = ref(storage, `${folder}/${file.name}`);
-
-    // Upload the file to Firebase Storage
-    const snapshot = await uploadBytesResumable(storageRef, file);
-
-    // Get the download URL of the uploaded image
-    const downloadURL = await getDownloadURL(snapshot.ref);
-
-    return downloadURL;
-  } catch (error) {
-    console.error("Error uploading image to Firebase Storage:", error);
-    throw error;
-  }
 }
 
 export async function uploadImageToFirebaseAndAddToCollection(
