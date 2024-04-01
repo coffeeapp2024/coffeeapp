@@ -30,9 +30,7 @@ export default function GameCardList() {
     quantity,
     id,
   } = currentCase ?? {};
-  if (!id || !quantity || !price || !caseVoucherIdList) return;
 
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
     if (!api || !cases) {
       return;
@@ -41,7 +39,7 @@ export default function GameCardList() {
     // Initialize currentCase based on cases
     if (cases.length > 0) {
       setCurrentCase(cases[0]);
-      console.log("set current case");
+      console.log("Set current case");
     }
 
     api.on("select", () => {
@@ -52,6 +50,8 @@ export default function GameCardList() {
   }, [api, cases]);
 
   const handlePlay = async () => {
+    if (!id || !quantity || !price || !caseVoucherIdList) return;
+
     if (!userData || !caseVoucherIdList.length || !price) return;
 
     const randomIndex = Math.floor(Math.random() * caseVoucherIdList.length);
@@ -85,15 +85,11 @@ export default function GameCardList() {
       }
     };
 
-    const updatedUserData = await toast.promise(promise(), {
+    await toast.promise(promise(), {
       loading: "Proccessing...",
       success: "Well done! You've earned a random voucher!",
       error: (error) => error.message,
     });
-    if (updatedUserData) {
-      setRandomVoucherId(randomVoucherId);
-      setOpen(true);
-    }
   };
 
   const isHidden =
@@ -126,7 +122,7 @@ export default function GameCardList() {
           <span className="text-neutral-500 font-medium">Cases in stock:</span>
           <h2
             className={`text-8xl font-extrabold opacity-30 ${
-              quantityColors[id - 1]
+              id && quantityColors[id - 1]
             }`}
           >
             {quantity ? String(quantity).padStart(5, "0") : "00000"}

@@ -7,13 +7,13 @@ import CloseDialogButton from "./CloseDialogButton";
 function DialogContentTemplate({ imageURL }: { imageURL: string }) {
   return (
     <DialogContent className="max-w-sm aspect-square p-2 w-full bg-transparent shadow-none border-none">
-      <div className="overflow-hidden rounded-2xl bg-transparent">
+      <div className="overflow-hidden rounded-2xl">
         <Image
           width={500}
           height={500}
           src={imageURL}
           alt="Event Poster"
-          className="object-cover"
+          className="object-cover w-full h-full"
         />
       </div>
       <CloseDialogButton />

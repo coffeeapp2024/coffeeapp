@@ -9,6 +9,7 @@ import CloseDialogButton from "../Template/CloseDialogButton";
 import Image from "next/image";
 import { useRandomVoucherStore, useVoucherStore } from "@/store/zustand";
 import UserVoucherCard from "../Mine/Profile/UserVoucher/UserVoucherCard";
+import DialogContentTemplate from "../Template/DialogContentTemplate";
 
 function RandomVoucherDialog() {
   const { open, randomVoucherId, setOpen } = useRandomVoucherStore();
@@ -27,24 +28,7 @@ function RandomVoucherDialog() {
       }}
     >
       <DialogTrigger></DialogTrigger>
-      <DialogContent className="bg-transparent border-none shadow-none px-6">
-        <div className="w-full">
-          <div>
-            {imageURL && (
-              <Image
-                src={imageURL}
-                width={500}
-                height={500}
-                alt="Voucher Image"
-                className="object-cover"
-              />
-            )}
-          </div>
-
-          <div></div>
-        </div>
-        <DialogClose className="w-0 h-0"></DialogClose>
-      </DialogContent>
+      {imageURL && <DialogContentTemplate imageURL={imageURL} />}
     </Dialog>
   );
 }
