@@ -44,7 +44,6 @@ function RandomVoucherDialog() {
           <div></div>
         </div>
         <DialogClose className="w-0 h-0"></DialogClose>
-        {/* <CloseDialogButton /> */}
       </DialogContent>
     </Dialog>
   );

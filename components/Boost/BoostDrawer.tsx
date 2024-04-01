@@ -24,7 +24,7 @@ function BoostDrawer({
   return (
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>
-        <button className="flex text-left items-center relative w-full rounded-[20px] bg-white bg-opacity-50 active:scale-[97%] transition-transform duration-75 shadow-sm">
+        <button className="flex text-left items-center relative w-full h-32 rounded-[20px] bg-white bg-opacity-50 active:scale-[97%] transition-transform duration-75 shadow-sm">
           <div className="basis-1/4 px-4">
             <div className="aspect-square w-full flex justify-center items-center overflow-hidden bg-white bg-opacity-50 rounded-2xl">
               {icons[0]}

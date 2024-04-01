@@ -2,6 +2,7 @@ import React from "react";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import CloseDialogButton from "../../Template/CloseDialogButton";
 import Image from "next/image";
+import DialogContentTemplate from "@/components/Template/DialogContentTemplate";
 
 function AboutEventButton({ eventPosterURL }: { eventPosterURL: string }) {
   return (
@@ -9,18 +10,8 @@ function AboutEventButton({ eventPosterURL }: { eventPosterURL: string }) {
       <DialogTrigger className="bg-neutral-900 rounded-xl px-3 py-1 flex items-center justify-center">
         info
       </DialogTrigger>
-      <DialogContent className="max-w-sm aspect-square p-0 w-full bg-transparent  border-none">
-        <div className="overflow-hidden rounded-2xl bg-neutral-900">
-          <Image
-            width={500}
-            height={500}
-            src={eventPosterURL}
-            alt="Event Poster"
-            className="object-cover"
-          />
-        </div>
-        <CloseDialogButton />
-      </DialogContent>
+      <DialogContentTemplate imageURL="bg/main-bg.jpg" />
+      <CloseDialogButton />
     </Dialog>
   );
 }
