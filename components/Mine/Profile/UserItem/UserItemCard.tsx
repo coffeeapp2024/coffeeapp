@@ -12,7 +12,7 @@ function UserItemCard({ item, index }: { item: CartItem; index: number }) {
   const { img, name } = product;
 
   const handleOpenQrCode = () => {
-    toast.info("Scan this voucher at the coffee shop to claim your offer.");
+    toast.info("Scan this product at the coffee shop to enjoy it.");
 
     const itemQrCodeId = `${userId}-collection-${index}`;
     setQrCodeId(itemQrCodeId);
