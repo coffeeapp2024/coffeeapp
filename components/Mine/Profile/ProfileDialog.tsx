@@ -49,9 +49,9 @@ function ProfileDialog({ user }: { user: User }) {
           <div className={`${styleCard}`}>
             <UserVoucherDiaLog />
           </div>
-          {/* <div className={`${styleCard}`}>
+          <div className={`${styleCard}`}>
             <UserItemDialog />
-          </div> */}
+          </div>
           {Array.from({ length: 2 }, (_, index) => (
             <div key={index} className={`${styleCard}`}>
               <span className="text-neutral-400">Coming Soon</span>

@@ -97,10 +97,10 @@ function CartItem({
         <div className="mb-2">
           <h4 className="font-bold">{name}</h4>
           <p className="text-wrap text-neutral-700 text-sm font-semibold">
-            Size: {size}
+            {size && ` Size: ${size}`}
           </p>
           <p className="text-wrap text-neutral-700 text-sm font-semibold">
-            Add ins: {toppings}
+            {toppings.length > 0 && `Add ins: ${toppings}`}
           </p>
         </div>
 

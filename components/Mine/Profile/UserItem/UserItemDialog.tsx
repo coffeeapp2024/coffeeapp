@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import { Sheet, SheetTrigger } from "@/components/ui/sheet";
 import SheetContentLayout from "@/components/ui/SheetContentLayout";
+import UserItemCardList from "./UserItemCardList";
 
 function UserItemDialog() {
   return (
@@ -23,8 +24,8 @@ function UserItemDialog() {
           </div>
         </div>
       </SheetTrigger>
-      <SheetContentLayout backgroundImage="/bg/bg3.jpg" className="px-2">
-        <div></div>
+      <SheetContentLayout backgroundImage="/bg/bg3.jpg" className="px-2 pt-20">
+        <UserItemCardList />
       </SheetContentLayout>
     </Sheet>
   );
