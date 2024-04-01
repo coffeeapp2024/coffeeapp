@@ -81,9 +81,9 @@ const VoucherList = [
     id: "1",
     name: "30% Off Soft Drinks",
     imageURL:
-      "https://www.aeon.com.vn/wp-content/uploads/2021/04/momo-thequa_pb_promotion.jpg",
+      "https://i.pinimg.com/564x/27/6a/9b/276a9b13f17e474f10dae6355f1de6a2.jpg",
     info: "Get 30% off on all soft drink purchases.",
-    price: 50,
+    price: 43,
     category: "Soft Drinks",
     discountPercentage: 30,
   },
@@ -91,18 +91,28 @@ const VoucherList = [
     id: "2",
     name: "Buy 1 Get 1 Free on Coffee",
     imageURL:
-      "https://www.aeon.com.vn/wp-content/uploads/2021/04/momo-thequa_pb_promotion.jpg",
+      "https://i.pinimg.com/564x/04/90/ea/0490ea594801ccc41f8a3ef104ab349b.jpg",
     info: "Buy 1 coffee and get 1 coffee free.",
-    price: 40,
+    price: 22,
     category: "Coffee",
   },
   {
     id: "3",
     name: "50% Off Fruit Juices",
     imageURL:
-      "https://www.aeon.com.vn/wp-content/uploads/2021/04/momo-thequa_pb_promotion.jpg",
+      "https://i.pinimg.com/564x/53/7b/da/537bda5be29c62cd0e85a00fc61beb43.jpg",
     info: "Get 50% off on all fruit juice purchases.",
-    price: 60,
+    price: 14,
+    category: "Juices",
+    discountPercentage: 50,
+  },
+  {
+    id: "4",
+    name: "50% Off Fruit Juices",
+    imageURL:
+      "https://i.pinimg.com/564x/77/53/8f/77538f02ae8caa183c35cfb0f9729e7e.jpg",
+    info: "Get 50% off on all fruit juice purchases.",
+    price: 42,
     category: "Juices",
     discountPercentage: 50,
   },
@@ -382,7 +392,7 @@ function Testing() {
   const { userData } = useUserDataStore();
 
   const handleReset = async () => {
-    // await resetCollectionData("cases", cases);
+    await resetCollectionData("vouchers", VoucherList);
     // await updateKeyInDocument(
     //   "users",
     //   "NllhI3c86XTHdDIS0sNL9JfE3rN2",

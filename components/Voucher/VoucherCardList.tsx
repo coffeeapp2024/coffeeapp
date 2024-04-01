@@ -7,7 +7,7 @@ function VoucherCardList() {
   const { vouchers } = useVoucherStore();
 
   return (
-    <div className="pt-8 flex flex-col items-center gap-y-3">
+    <div className="pt-8 flex flex-col items-center gap-y-2">
       {vouchers &&
         vouchers.map((voucherData, index) => (
           <VoucherCard key={index} voucherData={voucherData} />
