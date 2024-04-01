@@ -40,7 +40,7 @@ function BoostDrawer({
         <button className="flex text-left items-center relative w-full h-32 rounded-[20px] bg-white bg-opacity-50 active:scale-[97%] transition-transform duration-75 shadow-sm">
           <div className="basis-1/4 px-4">
             <div className="aspect-square w-full flex justify-center items-center overflow-hidden bg-white bg-opacity-50 rounded-2xl">
-              {icons[0]}
+              {icons[level - 1]}
             </div>
           </div>
           <div className="basis-auto py-4 text-neutral-500 pr-10">
@@ -81,14 +81,18 @@ function BoostDrawer({
                 <BoostLevel
                   level={level + 1}
                   text={levelTexts[1]}
-                  icon={icons[1]}
+                  icon={icons[level]}
                 />
 
                 <ArrowUpIcon className="w-6 h-6 my-4" />
               </>
             )}
 
-            <BoostLevel level={level} text={levelTexts[0]} icon={icons[0]} />
+            <BoostLevel
+              level={level}
+              text={levelTexts[0]}
+              icon={icons[level - 1]}
+            />
             <div className="flex items-center justify-center pt-8 pb-8">
               {!isMaxLevel && (
                 <>

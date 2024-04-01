@@ -12,10 +12,9 @@ const textInner = "Better Fireplace boost mining speech";
 
 const fireplaceIcons = [
   <FireIcon key="1" className={`${iconSize} text-rose-500`} />,
-  <FireIcon key="1" className={`${iconSize} text-orange-500`} />,
-  <FireIcon key="1" className={`${iconSize} text-cyan-500`} />,
-  <FireIcon key="1" className={`${iconSize} text-purple-600`} />,
-  <FireIcon key="2" className={`${iconSize} text-red-600`} />,
+  <FireIcon key="3" className={`${iconSize} text-cyan-500`} />,
+  <FireIcon key="4" className={`${iconSize} text-purple-600`} />,
+  <FireIcon key="5" className={`${iconSize} text-red-600`} />,
 ];
 
 function Fireplace() {
@@ -38,7 +37,6 @@ function Fireplace() {
     (balance) => balance.level === nextBalanceLevel
   );
 
-  console.log("userBalanceLevelData", userBalanceLevelData);
   const { level, name, balance } = userBalanceLevelData ?? {};
   if (!level || !name || !balance) return;
 

@@ -9,6 +9,7 @@ const iconSize = "w-10 h-10";
 const storageIcons = [
   <BoltIcon key="1" className={`${iconSize} text-yellow-500`} />,
   <BoltIcon key="2" className={`${iconSize} text-blue-600`} />,
+  <BoltIcon key="2" className={`${iconSize} text-green-500`} />,
   <BoltIcon key="3" className={`${iconSize} text-purple-600`} />,
   <BoltIcon key="4" className={`${iconSize} text-red-600`} />,
 ];
