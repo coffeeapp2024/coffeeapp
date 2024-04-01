@@ -16,8 +16,9 @@ const AdminScanner = () => {
     await deleteItemFromDocumentArrayByIndex("users", userId, arrayKey, index);
 
     if (arrayKey === "voucherIdList")
-      toast.success("Voucher deleted successfully");
-    if (arrayKey === "collection") toast.success("Item deleted successfully");
+      toast.success("Voucher deleted successfully from the database.");
+    if (arrayKey === "collection")
+      toast.success("Product deleted successfully from the database.");
   };
 
   return (

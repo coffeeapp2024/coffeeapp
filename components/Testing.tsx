@@ -327,17 +327,10 @@ const cases = [
     quantity: 3589,
     price: 9,
   },
-  {
-    id: 4,
-    iconURL:
-      "https://firebasestorage.googleapis.com/v0/b/coffee-coin-app.appspot.com/o/boxs%2Fcase4.png?alt=media&token=9b1e34d2-f21e-41d2-b5fb-7723c5f50c22",
-    price: 8,
-    quantity: 2956,
-    voucherIdList: ["1", "2", "3"],
-  },
+
   {
     id: 2,
-    quantity: 1097,
+    quantity: 2956,
     iconURL:
       "https://firebasestorage.googleapis.com/v0/b/coffee-coin-app.appspot.com/o/boxs%2Fcase2.png?alt=media&token=d630fbef-6299-4aff-bbfe-5ab46ebaf61b",
     voucherIdList: ["1", "2", "3"],
@@ -346,10 +339,18 @@ const cases = [
   {
     id: 3,
     voucherIdList: ["1", "2", "3"],
-    quantity: 976,
+    quantity: 1097,
     price: 4,
     iconURL:
       "https://firebasestorage.googleapis.com/v0/b/coffee-coin-app.appspot.com/o/boxs%2Fcase3.png?alt=media&token=e98bb2c1-ba58-4fb2-9a66-518c95b25143",
+  },
+  {
+    id: 4,
+    iconURL:
+      "https://firebasestorage.googleapis.com/v0/b/coffee-coin-app.appspot.com/o/boxs%2Fcase4.png?alt=media&token=9b1e34d2-f21e-41d2-b5fb-7723c5f50c22",
+    price: 8,
+    quantity: 976,
+    voucherIdList: ["1", "2", "3"],
   },
 ];
 
@@ -381,7 +382,7 @@ function Testing() {
   const { userData } = useUserDataStore();
 
   const handleReset = async () => {
-    await resetCollectionData("cases", cases);
+    // await resetCollectionData("cases", cases);
     // await updateKeyInDocument(
     //   "users",
     //   "NllhI3c86XTHdDIS0sNL9JfE3rN2",
