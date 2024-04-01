@@ -5,7 +5,7 @@ import Image from "next/image";
 
 function GameCard({ iconURL }: { iconURL: string }) {
   return (
-    <div className="aspect-square px-24 relative bg-transparent">
+    <div className="aspect-square px-20 relative bg-transparent">
       <Image
         src={iconURL}
         width={500}

@@ -87,18 +87,27 @@ export default function GameCardList() {
           ))}
         </CarouselContent>
       </Carousel>
-      <div className="flex items-center justify-center pl-2">
-        <CoinIcon className="w-6 h-6" />
-        <span className="font-bold text-xl text-foreground">{price}</span>
+
+      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 w-[95%]">
+        <div className=" bg-neutral-50 rounded-3xl flex flex-col items-center justify-between py-4 gap-y-3 z-10 border-2 border-neutral-800">
+          <div>
+            <div className="flex items-center justify-center pl-2 mb-2">
+              <CoinIcon className="w-6 h-6" />
+              <span className="font-bold text-xl text-foreground">{price}</span>
+            </div>
+            <p className="text-sm font-semibold">
+              Be first and find vouchers inside
+            </p>
+          </div>
+          <button
+            onClick={handlePlay}
+            className={`${isHidden && "pointer-events-none grayscale"} w-[80%]`}
+          >
+            <MainButton className="w-full" text="Open" />
+          </button>
+        </div>
+        <div className="w-full h-full absolute -bottom-[4px] left-[4px] bg-neutral-900 rounded-3xl -z-50"></div>
       </div>
-      <button
-        onClick={handlePlay}
-        className={`${
-          isHidden && "pointer-events-none grayscale"
-        } absolute bottom-20 translate-y-1/2 left-1/2 -translate-x-1/2`}
-      >
-        <MainButton text="Open" />
-      </button>
       <RandomVoucherDialog />
     </div>
   );
