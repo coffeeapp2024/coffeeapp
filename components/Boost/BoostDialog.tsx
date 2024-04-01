@@ -19,7 +19,7 @@ function BoostDialog() {
     <AppCardTemplate
       background="bg-yellow-400"
       icon={<RocketLaunchIcon className="w-7 h-7" />}
-      imageURL="https://img.freepik.com/premium-photo/space-rocket-flying-high-sky-generative-ai_634053-3936.jpg"
+      imageURL="/img/rocket.png"
       info="Boost balance"
       name="Boost"
     >
@@ -34,7 +34,7 @@ function BoostDialog() {
             </h3>
             <div className="text-5xl font-extrabold flex items-center mb-6">
               <CoinIcon className="w-11 h-11 mr-1" />
-              <h1>{userData?.balance?.toFixed(5)}</h1>
+              <h1>{userData?.balance?.toFixed(5) ?? Number(0).toFixed(5)}</h1>
             </div>
             <div>
               <Dialog>
