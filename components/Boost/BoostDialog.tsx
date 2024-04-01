@@ -45,7 +45,7 @@ function BoostDialog() {
               </Dialog>
             </div>
           </div>
-          <div className="flex flex-col gap-y-3">
+          <div className="flex flex-col gap-y-3 px-3">
             <Storage />
             <Fireplace />
           </div>
