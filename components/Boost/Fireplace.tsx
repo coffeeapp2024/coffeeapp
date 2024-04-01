@@ -12,8 +12,9 @@ const textInner = "Better Fireplace boost mining speech";
 
 const fireplaceIcons = [
   <FireIcon key="1" className={`${iconSize} text-rose-500`} />,
-  <FireIcon key="1" className={`${iconSize} text-orange-500`} />,
   <FireIcon key="1" className={`${iconSize} text-pink-500`} />,
+  <FireIcon key="1" className={`${iconSize} text-orange-500`} />,
+  <FireIcon key="1" className={`${iconSize} text-purple-600`} />,
   <FireIcon key="2" className={`${iconSize} text-red-600`} />,
 ];
 
