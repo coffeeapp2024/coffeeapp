@@ -35,7 +35,7 @@ function Storage() {
   );
 
   const { level, name, miningHourPerQrCode } = userStorage ?? {};
-
+  if (!level || !name || !miningHourPerQrCode) return;
   const {
     name: nextName,
     level: nextLevel,
@@ -77,7 +77,7 @@ function Storage() {
       text={text}
       textInner={textInner}
       levelTexts={levelTexts}
-      price={nextPrice}
+      nextPrice={nextPrice || 0}
     />
   );
 }

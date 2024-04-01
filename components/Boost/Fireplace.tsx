@@ -38,7 +38,9 @@ function Fireplace() {
     (balance) => balance.level === nextBalanceLevel
   );
 
+  console.log("userBalanceLevelData", userBalanceLevelData);
   const { level, name, balance } = userBalanceLevelData ?? {};
+  if (!level || !name || !balance) return;
 
   const {
     name: nextName,
@@ -82,7 +84,7 @@ function Fireplace() {
       level={level}
       name={name}
       levelTexts={levelTexts}
-      nextPrice={nextPrice}
+      nextPrice={nextPrice || 0}
     />
   );
 }

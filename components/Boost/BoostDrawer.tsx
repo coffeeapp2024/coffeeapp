@@ -7,6 +7,19 @@ import { ArrowUpIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import BoostLevel from "./BoostLevel";
 import { toast } from "sonner";
 
+type PageProps = {
+  icons: any;
+  level: number;
+  levelTexts: string[];
+  nextName: string | undefined;
+  onClickUpgrade: any;
+  isMaxLevel: boolean;
+  text: string;
+  textInner: string;
+  name: string;
+  nextPrice: number;
+};
+
 function BoostDrawer({
   icons,
   level,
@@ -18,7 +31,7 @@ function BoostDrawer({
   textInner,
   name,
   nextPrice,
-}: any) {
+}: PageProps) {
   const [open, setOpen] = useState(false);
   // toast.info("Maximum level reached");
   return (
