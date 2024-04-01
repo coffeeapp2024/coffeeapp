@@ -178,7 +178,7 @@ export default function RootLayout({
     };
     fetchCases();
 
-    // Fetch homepage content
+    // Fetch voucher page content
     const fetchHomePageContent = async () => {
       const fetchedHomePageContent = (await getDocumentById(
         "contents",

@@ -173,7 +173,7 @@ export const useBalanceLevelStore = create<BalanceLevelStore>((set) => ({
 }));
 
 export type VoucherPageContent = {
-  voucherBannerURL: string;
+  bannerURL: string;
 };
 
 export type VoucherPageContentStore = {

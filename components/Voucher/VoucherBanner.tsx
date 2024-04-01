@@ -7,13 +7,13 @@ import React from "react";
 function VoucherBanner() {
   const { voucherPageContent } = useVoucherPageContentStore();
 
-  const { voucherBannerURL } = voucherPageContent ?? {};
+  const { bannerURL } = voucherPageContent ?? {};
 
   return (
     <div className="bg-background w-full aspect-[3/1] rounded-2xl overflow-hidden">
-      {voucherBannerURL && (
+      {bannerURL && (
         <Image
-          src={voucherBannerURL}
+          src={bannerURL}
           width={600}
           height={200}
           className="w-full h-full object-cover"

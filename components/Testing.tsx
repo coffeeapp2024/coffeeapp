@@ -81,7 +81,7 @@ const VoucherList = [
     id: "1",
     name: "30% Off Soft Drinks",
     imageURL:
-      "https://i.pinimg.com/564x/27/6a/9b/276a9b13f17e474f10dae6355f1de6a2.jpg",
+      "https://i.pinimg.com/564x/7a/01/eb/7a01eb62e67b8959fa10157f69010c54.jpg",
     info: "Get 30% off on all soft drink purchases.",
     price: 43,
     category: "Soft Drinks",
@@ -91,7 +91,7 @@ const VoucherList = [
     id: "2",
     name: "Buy 1 Get 1 Free on Coffee",
     imageURL:
-      "https://i.pinimg.com/564x/04/90/ea/0490ea594801ccc41f8a3ef104ab349b.jpg",
+      "https://i.pinimg.com/564x/13/8a/10/138a102489a9b26ff8159c9e9adb5abf.jpg",
     info: "Buy 1 coffee and get 1 coffee free.",
     price: 22,
     category: "Coffee",
@@ -100,7 +100,7 @@ const VoucherList = [
     id: "3",
     name: "50% Off Fruit Juices",
     imageURL:
-      "https://i.pinimg.com/564x/53/7b/da/537bda5be29c62cd0e85a00fc61beb43.jpg",
+      "https://i.pinimg.com/564x/c2/12/d1/c212d1b177ba30aba3c27581623c1cc2.jpg",
     info: "Get 50% off on all fruit juice purchases.",
     price: 14,
     category: "Juices",
@@ -110,7 +110,7 @@ const VoucherList = [
     id: "4",
     name: "50% Off Fruit Juices",
     imageURL:
-      "https://i.pinimg.com/564x/77/53/8f/77538f02ae8caa183c35cfb0f9729e7e.jpg",
+      "https://i.pinimg.com/564x/13/8a/10/138a102489a9b26ff8159c9e9adb5abf.jpg",
     info: "Get 50% off on all fruit juice purchases.",
     price: 42,
     category: "Juices",
