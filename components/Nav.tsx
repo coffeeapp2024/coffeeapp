@@ -41,7 +41,7 @@ function Nav() {
               href={url}
               key={index}
               className={`${
-                isActive ? "scale-150" : "text-neutral-700 "
+                isActive ? "text-pink-500" : "text-neutral-600 "
               } p-3 rounded-full transition-transform`}
             >
               {icons[index]}

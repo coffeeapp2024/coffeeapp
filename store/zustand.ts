@@ -205,7 +205,6 @@ export const usePriceTypeStore = create<PriceTypeStore>((set) => ({
     set((state) => ({ isPriceInCoins: !state.isPriceInCoins })),
 }));
 
-// Define the type for a topping
 export type Topping = {
   id: string;
   name: string;
@@ -213,13 +212,11 @@ export type Topping = {
   point: number;
 };
 
-// Define the store for toppings
 export type ToppingsStore = {
   toppings: Topping[] | null;
   setToppings: (toppings: Topping[]) => void;
 };
 
-// Create the store using Zustand
 export const useToppingsStore = create<ToppingsStore>((set) => ({
   toppings: null,
   setToppings: (toppings) => set({ toppings }),
