@@ -8,7 +8,7 @@ import QrCodeUserItem from "./QrCodeUserItem";
 function UserItemDialog() {
   return (
     <Sheet>
-      <SheetTrigger className="relative w-full h-full bg-purple-300 px-2 py-1 flex">
+      <SheetTrigger className="relative w-full h-full  px-2 py-1 flex">
         <div className="h-2/3 w-full">
           <Image
             src="/icons/voucher.png"
@@ -20,7 +20,7 @@ function UserItemDialog() {
         </div>
 
         <div className="absolute left-1/2 -translate-x-1/2 bottom-0 w-full px-2 pb-2">
-          <div className="rounded-[20px] h-12 font-semibold bg-white flex items-center justify-center">
+          <div className="rounded-[20px] h-12 font-semibold flex items-center justify-center">
             Collection
           </div>
         </div>

@@ -17,7 +17,7 @@ function ProfileDialog({ user }: { user: User }) {
   const { displayName, photoURL, email } = user;
 
   const styleCard =
-    "bg-background aspect-square rounded-3xl flex items-center justify-center shadow-sm bg-white bg-opacity-80 overflow-hidden";
+    "bg-background aspect-square rounded-3xl flex items-center justify-center shadow-sm bg-white bg-opacity-70 overflow-hidden";
   return (
     <Sheet>
       <SheetTrigger className="w-full">
