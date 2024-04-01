@@ -89,7 +89,7 @@ export default function GameCardList() {
       </Carousel>
 
       <div className="absolute bottom-4 left-1/2 -translate-x-1/2 w-[95%]">
-        <div className=" bg-neutral-50 rounded-3xl flex flex-col items-center justify-between py-4 gap-y-3 z-10 border-2 border-neutral-800">
+        <div className=" bg-neutral-50 rounded-3xl flex flex-col items-center justify-between pb-3 pt-4 gap-y-3 z-10 border-2 border-neutral-800">
           <div>
             <div className="flex items-center justify-center pl-2 mb-2">
               <CoinIcon className="w-6 h-6" />
