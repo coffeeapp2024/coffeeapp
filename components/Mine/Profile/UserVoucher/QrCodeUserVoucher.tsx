@@ -1,9 +1,5 @@
 import React, { useEffect } from "react";
-import {
-  useOpenQrVoucherStore,
-  useQrCodeStore,
-  useUserDataStore,
-} from "@/store/zustand";
+import { useQrCodeStore, useUserDataStore } from "@/store/zustand";
 import { toast } from "sonner";
 import { isEqual } from "lodash";
 import { UserData } from "@/store/storeTypes";
