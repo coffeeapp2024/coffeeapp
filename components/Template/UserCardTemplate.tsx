@@ -10,14 +10,14 @@ function UserCardTemplate({
   name: string;
 }) {
   return (
-    <SheetTrigger className="relative w-full h-full px-4 py-4 flex flex-col items-center justify-center">
-      <div className="w-full">
+    <SheetTrigger className="relative w-full h-full py-4 flex flex-col items-center justify-between">
+      <div className="w-full h-4/5">
         <Image
           src={imageURL}
           width={200}
           height={200}
           alt="Voucher Image"
-          className="w-full h-full object-cover"
+          className="w-full h-full object-contain"
         />
       </div>
 

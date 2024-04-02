@@ -9,7 +9,7 @@ import UserCardTemplate from "@/components/Template/UserCardTemplate";
 function UserItemDialog() {
   return (
     <Sheet>
-      <UserCardTemplate imageURL="/icons/voucher.png" name="Collection" />
+      <UserCardTemplate imageURL="/icons/collection.png" name="Collection" />
       <SheetContentLayout backgroundImage="/bg/bg3.jpg" className="px-2 pt-20">
         <QrCodeUserItem />
         <UserItemCardList />
