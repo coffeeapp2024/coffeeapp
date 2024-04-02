@@ -1,15 +1,13 @@
 "use client";
 
-import {
-  CurrencyDollarIcon,
-  HomeIcon,
-  ShoppingCartIcon,
-  Squares2X2Icon,
-  TicketIcon,
-} from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
+import HomeIcon from "./Icon/Navbar/Regular/HomeIcon";
+import ShoppingCartIcon from "./Icon/Navbar/Regular/ShoppingCartIcon";
+import VoucherIcon from "./Icon/Navbar/Regular/VoucherIcon";
+import CategoryIcon from "./Icon/Navbar/Regular/CategoryIcon";
+import CurrencyIcon from "./Icon/Navbar/Regular/CurrencyIcon";
 
 function Nav() {
   const pathname = usePathname();
@@ -25,10 +23,10 @@ function Nav() {
 
   const icons = [
     <HomeIcon key={1} className={iconSize} />,
-    <ShoppingCartIcon key={2} className={iconSize} />,
-    <CurrencyDollarIcon key={3} className={iconSize} />,
-    <TicketIcon key={4} className={iconSize} />,
-    <Squares2X2Icon key={5} className={iconSize} />,
+    <ShoppingCartIcon key={2} className={"w-9 h-9"} />,
+    <CurrencyIcon key={3} className={iconSize} />,
+    <VoucherIcon key={4} className={"w-9 h-9"} />,
+    <CategoryIcon key={5} className={iconSize} />,
   ];
 
   return (
@@ -41,7 +39,7 @@ function Nav() {
               href={url}
               key={index}
               className={`${
-                isActive ? "text-neutral-900" : "text-neutral-500 "
+                isActive ? "text-neutral-900" : "text-neutral-600 "
               } p-3 rounded-full transition-transform`}
             >
               {icons[index]}
