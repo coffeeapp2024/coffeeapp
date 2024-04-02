@@ -9,7 +9,11 @@ import UserCardTemplate from "@/components/Template/UserCardTemplate";
 function UserItemDialog() {
   return (
     <Sheet>
-      <UserCardTemplate imageURL="/icons/collection.png" name="Collection" />
+      <UserCardTemplate
+        imageURL="/icons/collection.png"
+        name="Collection"
+        className="-mt-1"
+      />
       <SheetContentLayout backgroundImage="/bg/bg3.jpg" className="px-2 pt-20">
         <QrCodeUserItem />
         <UserItemCardList />

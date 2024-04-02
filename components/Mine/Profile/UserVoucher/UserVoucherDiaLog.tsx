@@ -9,7 +9,11 @@ import UserCardTemplate from "@/components/Template/UserCardTemplate";
 function UserVoucherDiaLog() {
   return (
     <Sheet>
-      <UserCardTemplate imageURL="/icons/voucher.png" name="Vouchers" />
+      <UserCardTemplate
+        imageURL="/icons/voucher.png"
+        name="Vouchers"
+        className="-mr-2"
+      />
       <SheetContentLayout backgroundImage="/bg/bg3.jpg" className="px-2 pt-20">
         <QrCodeUserVoucher />
         <UserVoucherCardList />
