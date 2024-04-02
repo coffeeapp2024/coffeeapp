@@ -10,6 +10,7 @@ import {
 import { toast } from "sonner";
 import QRCodeScanner from "../Template/QrCodeScanner";
 import { deleteDocumentById, fetchCollectionData } from "@/lib/firebaseUtils";
+import { QrCodeType } from "@/store/storeTypes";
 
 const ClaimCoinScanner = () => {
   const { userData, userId, setUserData } = useUserDataStore();
@@ -41,8 +42,8 @@ const ClaimCoinScanner = () => {
       return;
     }
 
-    const keys = await fetchCollectionData("keys");
-    if (keys.includes(text)) {
+    const keys = (await fetchCollectionData("keys")) as QrCodeType[];
+    if (keys.some((key) => key.key === text)) {
       const newUserData = await updateMineTimes(
         userData,
         userMiningHourPerQrCode

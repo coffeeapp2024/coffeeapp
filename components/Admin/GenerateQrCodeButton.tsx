@@ -33,6 +33,8 @@ function GenerateQrCodeButton() {
     try {
       const Qrcodes = await generateKeysAndSaveToFirestore(1); // Generate 1 key
       setQrCodes(Qrcodes);
+
+      console.log("Qrcodes", qrCodes);
     } catch (error) {
       console.error("Error generating Qrcodes:", error);
     }

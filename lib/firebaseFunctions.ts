@@ -74,7 +74,6 @@ export async function generateKeysAndSaveToFirestore(count: number) {
     const keyId = doc(collection(db, "keys ")).id;
     const createdAt = new Date().toISOString();
     const newKey = { key: keyId, createdAt };
-
     await addDocumentsToCollection("keys", [newKey]);
     keys.push(newKey);
   }
