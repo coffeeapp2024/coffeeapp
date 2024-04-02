@@ -19,13 +19,13 @@ function Nav() {
     ["More", "/more"],
   ];
 
-  const iconSize = "w-8 h-8";
+  const iconSize = "w-7 h-7";
 
   const icons = [
     <HomeIcon key={1} className={iconSize} />,
-    <ShoppingCartIcon key={2} className={"w-9 h-9"} />,
+    <ShoppingCartIcon key={2} className={"w-8 h-8"} />,
     <CurrencyIcon key={3} className={iconSize} />,
-    <VoucherIcon key={4} className={"w-9 h-9"} />,
+    <VoucherIcon key={4} className={"w-8 h-8"} />,
     <CategoryIcon key={5} className={iconSize} />,
   ];
 

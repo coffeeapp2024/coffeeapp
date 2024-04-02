@@ -15,6 +15,7 @@ import CartItem from "./CartItem";
 import CoinIcon from "@/components/Template/CoinIcon";
 import { updateUserDataAfterPurchase } from "@/lib/coinActions";
 import { toast } from "sonner";
+import ShoppingCartIcon from "@/components/Icon/Navbar/Regular/ShoppingCartIcon";
 
 function ShoppingBagDialog() {
   const [open, setOpen] = useState(false);
@@ -83,7 +84,7 @@ function ShoppingBagDialog() {
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger className="fixed right-[9px] top-[68%] bg-white bg-opacity-90 shadow-sm p-2 rounded-2xl flex items-center justify-center">
-        <ShoppingBagIcon className="w-7 h-7" />
+        <ShoppingCartIcon className="w-7 h-7" />
         <div
           className={`${
             isPriceInCoins ? "bg-pink-300" : "bg-purple-400"
