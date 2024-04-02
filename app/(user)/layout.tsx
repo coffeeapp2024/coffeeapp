@@ -37,7 +37,6 @@ import {
 import Testing from "@/components/Testing";
 import Nav from "@/components/Nav";
 import { NextUIProvider } from "@nextui-org/system";
-import QrcodeDialogTemplate from "@/components/Template/QrcodeDialogTemplate";
 
 export default function RootLayout({
   children,
@@ -73,19 +72,19 @@ export default function RootLayout({
                 user.uid
               )) as UserData;
 
-              if (fetchedUserData) {
-                // Update balance if available
-                const miningHourPerQrCodeLevel =
-                  fetchedUserData.miningHourPerQrCodeLevel;
-                const balance = await findValueByKeyWithCondition(
-                  "miningHourPerQrCodeLevels",
-                  "level",
-                  miningHourPerQrCodeLevel,
-                  "miningHourPerQrCode"
-                );
-                fetchedUserData.balance = balance;
-                console.log("Set new balance:", fetchedUserData.balance);
-              }
+              // if (fetchedUserData) {
+              //   // Update balance if available
+              //   const miningHourPerQrCodeLevel =
+              //     fetchedUserData.miningHourPerQrCodeLevel;
+              //   const balance = await findValueByKeyWithCondition(
+              //     "miningHourPerQrCodeLevels",
+              //     "level",
+              //     miningHourPerQrCodeLevel,
+              //     "miningHourPerQrCode"
+              //   );
+              //   fetchedUserData.balance = balance;
+              //   console.log("Set new balance:", fetchedUserData.balance);
+              // }
 
               // Fetch admin accounts
               const fetchedAccounts = (await getDocumentById(
