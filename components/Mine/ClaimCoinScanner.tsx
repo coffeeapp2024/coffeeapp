@@ -9,11 +9,7 @@ import {
 } from "@/lib/coinActions";
 import { toast } from "sonner";
 import QRCodeScanner from "../Template/QrCodeScanner";
-import {
-  deleteDocumentById,
-  deleteDocumentByKey,
-  fetchCollectionData,
-} from "@/lib/firebaseUtils";
+import { deleteDocumentByKey, fetchCollectionData } from "@/lib/firebaseUtils";
 import { QrCodeType } from "@/store/storeTypes";
 
 const ClaimCoinScanner = () => {
