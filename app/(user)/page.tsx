@@ -20,13 +20,13 @@ export default function Home() {
     >
       <AddToHomeScreen />
       <InstallButton />
-      {/* <Background /> */}
+      <Background />
       <div className="pt-4 pb-20">
         <ProfileCard />
       </div>
       <CurrentCoinInfo />
       <ScanClaimCard />
-      <Tiktok />
+      {/* <Tiktok /> */}
     </main>
   );
 }
