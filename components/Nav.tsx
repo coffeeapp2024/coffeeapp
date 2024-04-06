@@ -40,7 +40,7 @@ function Nav() {
               key={index}
               className={`${
                 isActive ? "text-neutral-900" : "text-neutral-500 "
-              } p-3 rounded-full transition-all`}
+              } p-3 rounded-full`}
             >
               {icons[index]}
             </Link>

@@ -43,6 +43,10 @@ const ClaimCoinScanner = () => {
     }
 
     const keys = (await fetchCollectionData("keys")) as QrCodeType[];
+    console.log(
+      "text stage",
+      keys.some((key) => key.key === text)
+    );
     if (keys.some((key) => key.key === text)) {
       const newUserData = await updateMineTimes(
         userData,
