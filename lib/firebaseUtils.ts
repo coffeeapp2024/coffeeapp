@@ -582,3 +582,35 @@ export async function deleteItemFromDocumentArrayByIndex(
     throw error;
   }
 }
+
+export async function deleteDocumentByKey(
+  collectionName: string,
+  key: string,
+  value: any
+) {
+  try {
+    // Tìm tài liệu có chứa key và value tương ứng
+    const collectionRef = collection(db, collectionName);
+    const q = query(collectionRef, where(key, "==", value));
+    const querySnapshot = await getDocs(q);
+
+    // Duyệt qua tất cả các tài liệu và xóa chúng
+    const batch = writeBatch(db);
+    querySnapshot.forEach((doc) => {
+      batch.delete(doc.ref);
+    });
+
+    // Commit batch để thực hiện xóa
+    await batch.commit();
+
+    console.log(
+      `Deleted documents in collection ${collectionName} with ${key}=${value}`
+    );
+  } catch (error) {
+    console.error(
+      `Error deleting documents in collection ${collectionName} with ${key}=${value}:`,
+      error
+    );
+    throw error;
+  }
+}

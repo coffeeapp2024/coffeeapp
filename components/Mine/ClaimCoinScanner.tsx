@@ -9,7 +9,11 @@ import {
 } from "@/lib/coinActions";
 import { toast } from "sonner";
 import QRCodeScanner from "../Template/QrCodeScanner";
-import { deleteDocumentById, fetchCollectionData } from "@/lib/firebaseUtils";
+import {
+  deleteDocumentById,
+  deleteDocumentByKey,
+  fetchCollectionData,
+} from "@/lib/firebaseUtils";
 import { QrCodeType } from "@/store/storeTypes";
 
 const ClaimCoinScanner = () => {
@@ -43,10 +47,6 @@ const ClaimCoinScanner = () => {
     }
 
     const keys = (await fetchCollectionData("keys")) as QrCodeType[];
-    console.log(
-      "text stage",
-      keys.some((key) => key.key === text)
-    );
     if (keys.some((key) => key.key === text)) {
       const newUserData = await updateMineTimes(
         userData,
@@ -57,7 +57,7 @@ const ClaimCoinScanner = () => {
       }
       setUserData(newUserData);
       await updateUserInFirestore(userId, newUserData);
-      await deleteDocumentById("keys", text);
+      await deleteDocumentByKey("keys", "key", text);
 
       toast.success(
         `QR Code scanned successfully! +${userMiningHourPerQrCode}h`
