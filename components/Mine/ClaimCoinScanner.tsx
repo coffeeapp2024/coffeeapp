@@ -66,7 +66,7 @@ const ClaimCoinScanner = () => {
 
   return (
     <QRCodeScanner
-      buttonName="Scan QR"
+      buttonName="Claim MIN"
       handleOnClick={() => {
         !userData && toast.warning("Sign in to scan QR Code");
       }}
