@@ -5,7 +5,6 @@ import { auth } from "@/lib/firebase";
 import { toast } from "sonner";
 import {
   useUserDataStore,
-  useCoinStore,
   useShopStore,
   useEventPostStore,
   useCheckinPostStore,
@@ -16,10 +15,11 @@ import {
   useProductStore,
   useProductTagStore,
   useStorageStore,
-  useBalanceLevelStore,
+  useFireplaceLevelStore,
   useVoucherPageContentStore,
   VoucherPageContent,
   useToppingsStore,
+  useCurrentBalanceStore,
 } from "@/store/zustand";
 import {
   Account,
@@ -27,10 +27,8 @@ import {
   MinePageContent,
   UserData,
 } from "@/store/storeTypes";
-import { calcInitialCoin } from "@/lib/coinActions";
 import {
   fetchCollectionData,
-  findValueByKeyWithCondition,
   getDocumentById,
   getKeyValue,
 } from "@/lib/firebaseUtils";
@@ -45,7 +43,7 @@ export default function RootLayout({
 }>) {
   const { userData, userId, setRole, setUserData, setUserId } =
     useUserDataStore();
-  const { setCurrentCoin } = useCoinStore();
+  const { setCurrentBalance } = useCurrentBalanceStore();
   const { setBanner } = useShopStore();
   const { setPosts: setEventPost } = useEventPostStore();
   const { setPosts: setCheckinPost } = useCheckinPostStore();
@@ -58,7 +56,7 @@ export default function RootLayout({
   const { setProductTags } = useProductTagStore();
   const { setToppings } = useToppingsStore();
   const { setStorages } = useStorageStore();
-  const { setBalanceLevels } = useBalanceLevelStore();
+  const { setFireplaceLevels } = useFireplaceLevelStore();
 
   useEffect(() => {
     // Fetch user data and set role
@@ -71,20 +69,6 @@ export default function RootLayout({
                 "users",
                 user.uid
               )) as UserData;
-
-              // if (fetchedUserData) {
-              //   // Update balance if available
-              //   const miningHourPerQrCodeLevel =
-              //     fetchedUserData.miningHourPerQrCodeLevel;
-              //   const balance = await findValueByKeyWithCondition(
-              //     "miningHourPerQrCodeLevels",
-              //     "level",
-              //     miningHourPerQrCodeLevel,
-              //     "miningHourPerQrCode"
-              //   );
-              //   fetchedUserData.balance = balance;
-              //   console.log("Set new balance:", fetchedUserData.balance);
-              // }
 
               // Fetch admin accounts
               const fetchedAccounts = (await getDocumentById(
@@ -107,11 +91,11 @@ export default function RootLayout({
               setRole(role);
               setUserId(user.uid);
 
-              // Add 100 coins if in testing mode
+              // Add 100 min to balance if in testing mode
               if (testing && fetchedUserData) {
-                fetchedUserData.coin += 100;
-                toast.info("Testing Mode! +100 coin");
-                console.log("Testing Mode! +100 coin");
+                fetchedUserData.balance += 100;
+                toast.info("Testing Mode! +100 min");
+                console.log("Testing Mode! +100 min");
               }
 
               // Set user data
@@ -196,21 +180,19 @@ export default function RootLayout({
     };
     fetchVoucherPageContent();
 
-    // Fetch miningHourPerQrCodeLevels
+    // Fetch storageLevels
     const fetchStorageData = async () => {
-      const fetchedMiningHourPerQrCodeLevels = await fetchCollectionData(
-        "miningHourPerQrCodeLevels"
-      );
-      setStorages(fetchedMiningHourPerQrCodeLevels);
+      const fetchedStorageLevels = await fetchCollectionData("storageLevels");
+      setStorages(fetchedStorageLevels);
     };
     fetchStorageData();
 
-    // Fetch balanceLevels
-    const fetchBalanceLevels = async () => {
-      const fetchedBalanceLevels = await fetchCollectionData("balanceLevels");
-      setBalanceLevels(fetchedBalanceLevels);
+    // Fetch FireplaceLevels
+    const fetchFireplaceLevels = async () => {
+      const fetchedBalanceLevels = await fetchCollectionData("fireplaceLevels");
+      setFireplaceLevels(fetchedBalanceLevels);
     };
-    fetchBalanceLevels();
+    fetchFireplaceLevels();
 
     // Fetch products
     const fetchProducts = async () => {
@@ -234,24 +216,6 @@ export default function RootLayout({
     fetchToppings();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  // Reset CurrentCoin when userData changes
-  useEffect(() => {
-    const fetchInitialCoin = () => {
-      if (!userData) return console.log("User data not found");
-      const initialCoin = calcInitialCoin(userData);
-      setCurrentCoin(initialCoin);
-      console.log("Reset CurrentCoin when user data changes:", initialCoin);
-    };
-
-    fetchInitialCoin();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [
-    userData?.balance,
-    userData?.coin,
-    userData?.endTimeMine,
-    userData?.startTimeMine,
-  ]);
 
   return (
     <NextUIProvider>

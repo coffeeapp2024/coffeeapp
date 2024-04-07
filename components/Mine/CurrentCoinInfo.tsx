@@ -1,45 +1,36 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import CoinIcon from "../Template/CoinIcon";
-import { updateCurrentCoin } from "@/lib/coinActions";
-import { useCoinStore, useUserDataStore } from "@/store/zustand";
+import { calcBalanceInStorage } from "@/lib/coinActions";
+import { useUserDataStore } from "@/store/zustand";
 function CurrentCoinInfo() {
   const { userData } = useUserDataStore();
-  const { currentCoin, setCurrentCoin } = useCoinStore();
+  const [balanceInStorage, setBalanceInStorage] = useState(0);
 
   useEffect(() => {
-    const { balance, endTimeMine } = userData ?? {};
-    if (balance && currentCoin) {
-      const intervalId = setInterval(() => {
-        const updatedCoin = updateCurrentCoin(
-          balance,
-          currentCoin,
-          endTimeMine
-        );
-        setCurrentCoin(updatedCoin);
-      }, 1000);
+    if (!userData) return;
 
-      return () => clearInterval(intervalId);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentCoin, userData, setCurrentCoin]);
+    const intervalId = setInterval(() => {
+      const balanceInStorage = calcBalanceInStorage(userData);
+      setBalanceInStorage(balanceInStorage);
+    }, 1000);
+
+    return () => clearInterval(intervalId);
+  }, [userData]);
 
   return (
-    <div className="flex items-center justify-center flex-col text-white mt-24">
+    <div className="flex items-center justify-center flex-col text-neutral-900 mt-24">
+      <div className="font-semibold">In storage:</div>
       <div className="flex items-center mb-1 ">
-        <CoinIcon className="w-12 h-12" />
-        <span className="text-shadow font-extrabold text-4xl rounded-xl">
-          {currentCoin?.toFixed(5) ?? Number(0).toFixed(5)}
+        <CoinIcon className="w-9 h-9" />
+        <span className="font-extrabold text-4xl rounded-xl">
+          {balanceInStorage?.toFixed(5) ?? Number(0).toFixed(5)}
         </span>
       </div>
       <div className="flex items-center justify-center">
-        <span className="text-opacity-80 text-white font-semibold">
-          MIN Balance:
-        </span>
+        <span className="text-opacity-70 font-semibold">MIN Balance:</span>
         <div className="flex items-center">
-          <CoinIcon className="w-5 h-5 ml-1 " />
-          <span className="font-bold text-shadow">
-            {userData?.balance ?? 0}
-          </span>
+          <CoinIcon className="w-4 h-4 ml-1 " />
+          <span className="font-bold">{userData?.balance ?? 0}</span>
         </div>
       </div>
     </div>

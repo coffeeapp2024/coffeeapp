@@ -16,16 +16,16 @@ export type Size = {
 export type UserData = {
   email: string | null;
   displayName: string | null;
-  coin: number;
-  balance: number | null;
+  balance: number;
+  fillTime: number | null;
+  miningSpeed: number | null;
+  storageLevel: number | null;
+  fireplaceLevel: number | null;
   startTimeMine: string | null;
-  endTimeMine: string | null;
   voucherIdList: string[] | null;
+  collection: CartItem[] | null;
   LikedEventImageIdList: string[] | null;
   LikedCheckinImageIdList: string[] | null;
-  balanceLevel: number | null;
-  miningHourPerQrCodeLevel: number | null;
-  collection: CartItem[] | null;
   [key: string]: any;
 };
 
@@ -58,11 +58,6 @@ export type HomePageContentStore = {
 export type TimeStore = {
   remainingTimeSeconds: number | null;
   setRemainingTimeSeconds: (time: number | null) => void;
-};
-
-export type CoinStore = {
-  currentCoin: number | null;
-  setCurrentCoin: (coin: number | null) => void;
 };
 
 export type Voucher = {

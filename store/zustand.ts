@@ -1,6 +1,5 @@
 import {
   CaseStore,
-  CoinStore,
   HomePageContentStore,
   PostType,
   PostStore,
@@ -36,9 +35,14 @@ export const useTimeStore = create<TimeStore>((set) => ({
   setRemainingTimeSeconds: (time) => set({ remainingTimeSeconds: time }),
 }));
 
-export const useCoinStore = create<CoinStore>((set) => ({
-  currentCoin: null,
-  setCurrentCoin: (coin) => set({ currentCoin: coin }),
+export type CurrentBalanceStore = {
+  currentBalance: number | null;
+  setCurrentBalance: (coin: number | null) => void;
+};
+
+export const useCurrentBalanceStore = create<CurrentBalanceStore>((set) => ({
+  currentBalance: null,
+  setCurrentBalance: (coin) => set({ currentBalance: coin }),
 }));
 
 export const useVoucherStore = create<VoucherStore>((set) => ({
@@ -142,7 +146,7 @@ export type StorageItem = {
   level: number;
   name: string;
   price: number;
-  miningHourPerQrCode: number;
+  fillTime: number;
 };
 
 export type StorageStore = {
@@ -155,21 +159,21 @@ export const useStorageStore = create<StorageStore>((set) => ({
   setStorages: (storages) => set({ storages }),
 }));
 
-export type balanceLevel = {
+export type fireplaceLevel = {
   level: number;
   name: string;
   price: number;
-  balance: number;
+  miningSpeed: number;
 };
 
-export type BalanceLevelStore = {
-  balanceLevels: balanceLevel[] | null;
-  setBalanceLevels: (balanceLevels: balanceLevel[]) => void;
+export type FireplaceLevelStore = {
+  balanceLevels: fireplaceLevel[] | null;
+  setFireplaceLevels: (balanceLevels: fireplaceLevel[]) => void;
 };
 
-export const useBalanceLevelStore = create<BalanceLevelStore>((set) => ({
+export const useFireplaceLevelStore = create<FireplaceLevelStore>((set) => ({
   balanceLevels: null,
-  setBalanceLevels: (balanceLevels) => set({ balanceLevels }),
+  setFireplaceLevels: (balanceLevels) => set({ balanceLevels }),
 }));
 
 export type VoucherPageContent = {

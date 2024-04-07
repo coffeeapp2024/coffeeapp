@@ -392,14 +392,14 @@ function Testing() {
   const { userData } = useUserDataStore();
 
   const handleReset = async () => {
-    await resetCollectionData("vouchers", VoucherList);
+    // await resetCollectionData("vouchers", VoucherList);
     // await updateKeyInDocument(
     //   "users",
     //   "NllhI3c86XTHdDIS0sNL9JfE3rN2",
     //   "miningHourPerQrCodeLevel",
     //   1
     // );
-    // await renameCollection("game_random_voucher", "cases");
+    await renameCollection("balanceLevels", "fireplaceLevels");
     // await addDocumentsToCollection("toppings", toppings);
     // await deleteKeyInAllDocuments("balanceLevels", "icon");
     // await fetchCollectionData("balanceLevels");

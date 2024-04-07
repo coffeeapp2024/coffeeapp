@@ -1,10 +1,6 @@
 import { UserData } from "@/store/storeTypes";
-import { toast } from "sonner";
-import {
-  updateDocumentByKeyCondition,
-  updateDocumentInCollection,
-} from "./firebaseUtils";
-import { StorageItem, useUserDataStore } from "@/store/zustand";
+import { updateDocumentByKeyCondition } from "./firebaseUtils";
+import { StorageItem } from "@/store/zustand";
 
 export function updateCurrentCoin(
   balancePerHour: number,
@@ -106,22 +102,36 @@ export function calcInitialCoin(userData: UserData): number {
   return coin;
 }
 
+export function calcBalanceInStorage(userData: UserData): number {
+  const { miningSpeed, startTimeMine } = userData;
+  const now = new Date();
+  const startDate = startTimeMine ? new Date(startTimeMine) : null;
+
+  if (startDate && miningSpeed && now > startDate) {
+    const timeDiffSeconds = (now.getTime() - startDate.getTime()) / 1000;
+    const balanceInStorage = miningSpeed * (timeDiffSeconds / 3600);
+
+    return parseFloat(balanceInStorage.toFixed(5));
+  }
+
+  return 0;
+}
+
 export async function updateUserDataAfterPurchase(
   userData: UserData,
   setUserData: (userData: UserData | null) => void,
   price: number,
   updates: { key: string; value: any }[]
 ): Promise<UserData | null> {
-  const currentCoin = calcInitialCoin(userData);
-  if (currentCoin < price) {
+  if (userData.balance < price) {
     throw new Error("Not enough min point");
   }
 
-  const updatedCoin = currentCoin - price;
+  const updatedBalance = userData.balance - price;
 
   const updatedUserData: UserData = {
     ...userData,
-    coin: updatedCoin,
+    balance: updatedBalance,
   };
 
   // Apply all updates
@@ -147,11 +157,11 @@ export async function updateUserDataAfterPurchase(
   return updatedUserData;
 }
 
-export function findUserMiningHourPerQrCode(
+export function findFillTime(
   storages: StorageItem[],
-  userStorageLevel: number
+  userStoragelevel: number
 ): number | undefined {
   // Use the find method to search for the storage with the matching level
-  return storages.find((storage) => storage.level === userStorageLevel)
-    ?.miningHourPerQrCode;
+  return storages.find((storage) => storage.level === userStoragelevel)
+    ?.fillTime;
 }

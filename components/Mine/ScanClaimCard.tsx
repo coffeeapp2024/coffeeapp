@@ -1,21 +1,21 @@
 import { useEffect } from "react";
 import Image from "next/image";
-import {
-  calculateRemainingTimeInSeconds,
-  formatSeconds,
-} from "@/lib/timeActions";
+import { calculateRemainingTime, formatMillis } from "@/lib/timeActions";
 import { useTimeStore, useUserDataStore } from "@/store/zustand";
 import ClaimCoinScanner from "./ClaimCoinScanner";
 
 function ScanClaimCard() {
   const { remainingTimeSeconds, setRemainingTimeSeconds } = useTimeStore();
   const { userData } = useUserDataStore();
-  const { endTimeMine, balance } = userData ?? {};
+  const { startTimeMine, fillTime, miningSpeed } = userData ?? {};
 
   useEffect(() => {
-    if (endTimeMine && balance != null) {
+    if (startTimeMine && fillTime != null) {
       const intervalId = setInterval(() => {
-        const newRemainingTime = calculateRemainingTimeInSeconds(endTimeMine);
+        const newRemainingTime = calculateRemainingTime(
+          startTimeMine,
+          fillTime
+        );
         setRemainingTimeSeconds(newRemainingTime);
       }, 1000);
 
@@ -23,10 +23,11 @@ function ScanClaimCard() {
     } else {
       setRemainingTimeSeconds(null);
     }
-  }, [endTimeMine, balance, setRemainingTimeSeconds]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [startTimeMine, fillTime]);
 
   const remainingTimeFormatted = remainingTimeSeconds
-    ? formatSeconds(remainingTimeSeconds)
+    ? formatMillis(remainingTimeSeconds)
     : "filled";
 
   return (
@@ -48,7 +49,7 @@ function ScanClaimCard() {
               {remainingTimeFormatted}
             </span>
             <span className="text-neutral-500 text-sm">
-              {balance ?? "0"} MIN/hour
+              {miningSpeed ?? "0"} MIN/hour
             </span>
           </div>
         </div>
