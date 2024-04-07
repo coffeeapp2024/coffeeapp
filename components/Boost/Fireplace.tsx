@@ -1,8 +1,7 @@
 import React from "react";
-import BoostDialog from "./BoostDialog";
 import { FireIcon } from "@heroicons/react/24/outline";
 import BoostDrawer from "./BoostDrawer";
-import { useBalanceLevelStore, useUserDataStore } from "@/store/zustand";
+import { useFireplaceLevelStore, useUserDataStore } from "@/store/zustand";
 import { updateUserDataAfterPurchase } from "@/lib/coinActions";
 import { toast } from "sonner";
 
@@ -20,34 +19,37 @@ const fireplaceIcons = [
 function Fireplace() {
   const { userData, setUserData } = useUserDataStore();
 
-  const { balanceLevels } = useBalanceLevelStore();
-  if (!balanceLevels) return;
+  const { fireplaceLevels } = useFireplaceLevelStore();
+  if (!fireplaceLevels) return;
 
-  const maxBalanceLevel = Math.max(
-    ...balanceLevels.map((balance) => balance.level)
+  const maxFireplaceLevel = Math.max(
+    ...fireplaceLevels.map((fireplaceLevel) => fireplaceLevel.level)
   );
-  const userBalanceLevel = userData?.balanceLevel;
-  const isMaxLevel = userBalanceLevel === maxBalanceLevel;
-  const nextBalanceLevel = userBalanceLevel && userBalanceLevel + 1;
+  const userFireplaceLevel = userData?.balanceLevel;
+  const isMaxLevel = userFireplaceLevel === maxFireplaceLevel;
+  const nextFireplaceLevel = userFireplaceLevel && userFireplaceLevel + 1;
 
-  const userBalanceLevelData = balanceLevels.find(
-    (balance) => balance.level === userBalanceLevel
+  const userFireplaceLevelData = fireplaceLevels.find(
+    (fireplaceLevel) => fireplaceLevel.level === userFireplaceLevel
   );
-  const nextBalanceLevelData = balanceLevels.find(
-    (balance) => balance.level === nextBalanceLevel
+  const nextBalanceLevelData = fireplaceLevels.find(
+    (fireplaceLevel) => fireplaceLevel.level === nextFireplaceLevel
   );
 
-  const { level, name, balance } = userBalanceLevelData ?? {};
-  if (!level || !name || !balance) return;
+  const { level, name, miningSpeed } = userFireplaceLevelData ?? {};
+  if (!level || !name || !miningSpeed) return;
 
   const {
     name: nextName,
     level: nextLevel,
     price: nextPrice,
-    balance: nextBalance,
+    miningSpeed: nextMiningSpeed,
   } = nextBalanceLevelData ?? {};
 
-  const levelTexts = [`${balance} min per hour`, `${nextBalance} min per hour`];
+  const levelTexts = [
+    `${miningSpeed} min per hour`,
+    `${nextMiningSpeed} min per hour`,
+  ];
 
   const handleUpgradeClick = async () => {
     if (!userData || !nextLevel || !nextPrice) return;
@@ -55,12 +57,12 @@ function Fireplace() {
     await toast.promise(
       updateUserDataAfterPurchase(userData, setUserData, nextPrice, [
         {
-          key: "balanceLevel",
+          key: "fireplaceLevel",
           value: nextLevel,
         },
         {
-          key: "balance",
-          value: nextBalance,
+          key: "miningSpeed",
+          value: nextMiningSpeed,
         },
       ]),
       {

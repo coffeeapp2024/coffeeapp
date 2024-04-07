@@ -1,14 +1,6 @@
-import React, { useEffect, useState } from "react";
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import CloseDialogButton from "../Template/CloseDialogButton";
-import Image from "next/image";
+import React from "react";
+import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import { useRandomVoucherStore, useVoucherStore } from "@/store/zustand";
-import UserVoucherCard from "../Mine/Profile/UserVoucher/UserVoucherCard";
 import DialogContentTemplate from "../Template/DialogContentTemplate";
 
 function RandomVoucherDialog() {

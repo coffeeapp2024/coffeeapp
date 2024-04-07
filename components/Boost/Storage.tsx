@@ -24,7 +24,7 @@ function Storage() {
   if (!storages) return;
 
   const maxStorageLevel = Math.max(...storages.map((storage) => storage.level));
-  const userStorageLevel = userData?.miningHourPerQrCodeLevel;
+  const userStorageLevel = userData?.fillTime;
   const isMaxLevel = userStorageLevel === maxStorageLevel;
   const nextStorageLevel = userStorageLevel && userStorageLevel + 1;
 
@@ -35,18 +35,19 @@ function Storage() {
     (storage) => storage.level === nextStorageLevel
   );
 
-  const { level, name, miningHourPerQrCode } = userStorage ?? {};
-  if (!level || !name || !miningHourPerQrCode) return;
+  const { level, name, fillTime } = userStorage ?? {};
+  if (!level || !name || !fillTime) return;
+
   const {
     name: nextName,
     level: nextLevel,
     price: nextPrice,
-    miningHourPerQrCode: nextminingHourPerQrCode,
+    fillTime: nextFillTime,
   } = nextStorage ?? {};
 
   const levelTexts = [
-    `Claim ${miningHourPerQrCode}h per QR Code`,
-    `Claim ${nextminingHourPerQrCode}h per QR Code`,
+    `Claim ${fillTime}h per QR Code`,
+    `Claim ${nextFillTime}h per QR Code`,
   ];
 
   const handleUpgradeClick = async () => {
@@ -55,7 +56,11 @@ function Storage() {
     await toast.promise(
       updateUserDataAfterPurchase(userData, setUserData, nextPrice, [
         {
-          key: "miningHourPerQrCodeLevel",
+          key: "fillTime",
+          value: nextFillTime,
+        },
+        {
+          key: "storageLevel",
           value: nextLevel,
         },
       ]),

@@ -19,7 +19,6 @@ import {
   useVoucherPageContentStore,
   VoucherPageContent,
   useToppingsStore,
-  useCurrentBalanceStore,
 } from "@/store/zustand";
 import {
   Account,
@@ -43,7 +42,6 @@ export default function RootLayout({
 }>) {
   const { userData, userId, setRole, setUserData, setUserId } =
     useUserDataStore();
-  const { setCurrentBalance } = useCurrentBalanceStore();
   const { setBanner } = useShopStore();
   const { setPosts: setEventPost } = useEventPostStore();
   const { setPosts: setCheckinPost } = useCheckinPostStore();

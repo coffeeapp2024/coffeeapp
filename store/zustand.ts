@@ -167,13 +167,13 @@ export type fireplaceLevel = {
 };
 
 export type FireplaceLevelStore = {
-  balanceLevels: fireplaceLevel[] | null;
-  setFireplaceLevels: (balanceLevels: fireplaceLevel[]) => void;
+  fireplaceLevels: fireplaceLevel[] | null;
+  setFireplaceLevels: (fireplaceLevels: fireplaceLevel[]) => void;
 };
 
 export const useFireplaceLevelStore = create<FireplaceLevelStore>((set) => ({
-  balanceLevels: null,
-  setFireplaceLevels: (balanceLevels) => set({ balanceLevels }),
+  fireplaceLevels: null,
+  setFireplaceLevels: (fireplaceLevels) => set({ fireplaceLevels }),
 }));
 
 export type VoucherPageContent = {
