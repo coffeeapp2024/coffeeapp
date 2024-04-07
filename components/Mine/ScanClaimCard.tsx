@@ -32,8 +32,8 @@ function ScanClaimCard() {
   return (
     <div className="absolute bottom-1/4 sm:bottom-1/3 w-full max-w-screen-sm px-3">
       <div className=" bg-background bg-opacity-90 rounded-3xl border-[1px] border-neutral-300 flex px-3 py-3 items-center justify-between shadow-sm">
-        <div className="flex items-center gap-x-1">
-          <div>
+        <div className="flex items-center">
+          <div className="mx-1">
             <Image
               src="/icons/hourclass.png"
               width={200}
@@ -43,9 +43,12 @@ function ScanClaimCard() {
             />
           </div>
           <div className="flex flex-col font-semibold">
-            <span className="text-neutral-800 ">{remainingTimeFormatted}</span>
+            <span className="text-neutral-800">Storage</span>
             <span className="text-neutral-500 text-sm">
-              {balance ?? "0"} min/hour
+              {remainingTimeFormatted}
+            </span>
+            <span className="text-neutral-500 text-sm">
+              {balance ?? "0"} MIN/hour
             </span>
           </div>
         </div>

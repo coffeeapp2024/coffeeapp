@@ -11,10 +11,12 @@ const QRCodeScanner = ({
   handleQrCode,
   handleOnClick,
   buttonName,
+  className,
 }: {
   handleQrCode: (text: string) => Promise<void>;
   handleOnClick: any;
   buttonName: string;
+  className?: string;
 }) => {
   const [showScanner, setShowScanner] = useState(false);
   const [scannedText, setScannedText] = useState<string | null>(null);
@@ -45,7 +47,7 @@ const QRCodeScanner = ({
   return (
     <Dialog open={showScanner} onOpenChange={toggleScanner}>
       <DialogTrigger onClick={handleOnClick}>
-        <MainButton text={buttonName} />
+        <MainButton className={className} text={buttonName} />
       </DialogTrigger>
       <DialogContent className="bg-transparent border-none shadow-none px-4 z-50">
         <div className="relative rounded-3xl border-[3px] border-red-800 overflow-hidden">
