@@ -33,7 +33,7 @@ function ScanClaimCard() {
     <div className="absolute bottom-1/4 sm:bottom-1/3 w-full max-w-screen-sm px-3">
       <div className=" bg-background bg-opacity-90 rounded-3xl border-[1px] border-neutral-300 flex px-3 py-3 items-center justify-between shadow-sm">
         <div className="flex items-center">
-          <div className="mx-1">
+          <div className="mr-2">
             <Image
               src="/icons/hourclass.png"
               width={200}
