@@ -27,7 +27,7 @@ function ScanClaimCard() {
 
   const remainingTimeFormatted = remainingTimeSeconds
     ? formatSeconds(remainingTimeSeconds)
-    : "Scan QR to claim";
+    : "filled";
 
   return (
     <div className="absolute bottom-1/4 sm:bottom-1/3 w-full max-w-screen-sm px-3">
