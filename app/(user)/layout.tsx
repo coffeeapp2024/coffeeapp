@@ -30,6 +30,7 @@ import {
   fetchCollectionData,
   getDocumentById,
   getKeyValue,
+  updateDocumentByKeyCondition,
 } from "@/lib/firebaseUtils";
 import Testing from "@/components/Testing";
 import Nav from "@/components/Nav";
@@ -43,7 +44,7 @@ export default function RootLayout({
 }>) {
   const { userData, userId, setRole, setUserData, setUserId } =
     useUserDataStore();
-  const { endTimeMine, startTimeMine, balance } = userData ?? {};
+  const { endTimeMine, startTimeMine, balance, email } = userData ?? {};
   const { setBanner } = useShopStore();
   const { setPosts: setEventPost } = useEventPostStore();
   const { setPosts: setCheckinPost } = useCheckinPostStore();
@@ -231,13 +232,15 @@ export default function RootLayout({
             endTimeMine: null,
           };
           setUserData(newUserData);
+          updateDocumentByKeyCondition("users", "email", email, newUserData);
+          console.log("End time mine reached. User data updated:", newUserData);
         }
       }
     }, 1000);
 
     return () => clearInterval(intervalId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [userData]);
+  }, [endTimeMine]);
 
   return (
     <NextUIProvider>

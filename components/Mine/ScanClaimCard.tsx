@@ -10,16 +10,20 @@ function ScanClaimCard() {
   const { endTimeMine, miningSpeed } = userData ?? {};
 
   useEffect(() => {
-    if (endTimeMine) {
-      const intervalId = setInterval(() => {
+    const updateRemainingTime = () => {
+      if (endTimeMine) {
         const newRemainingTime = calculateRemainingTime(endTimeMine);
         setRemainingTime(newRemainingTime);
-      }, 1000 * 60);
+      } else {
+        setRemainingTime(null);
+      }
+    };
 
-      return () => clearInterval(intervalId);
-    } else {
-      setRemainingTime(null);
-    }
+    updateRemainingTime();
+
+    const intervalId = setInterval(updateRemainingTime, 1000 * 60);
+
+    return () => clearInterval(intervalId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [endTimeMine]);
 
