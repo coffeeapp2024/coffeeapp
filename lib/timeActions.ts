@@ -17,18 +17,16 @@
 //   return remainingTimeSeconds;
 // }
 export function calculateRemainingTime(
-  startTime: string | null,
+  startTime: string,
   fillTime: number
 ): number | null {
-  if (!startTime) return null;
-
   const startDate = new Date(startTime);
   const now = new Date();
 
   const remainingTimeMillis =
     startDate.getTime() + fillTime * (3600 * 1000) - now.getTime();
 
-  return remainingTimeMillis;
+  return Math.max(remainingTimeMillis, 0);
 }
 
 export function formatMillis(seconds: number): string {

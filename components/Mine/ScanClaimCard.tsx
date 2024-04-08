@@ -5,7 +5,7 @@ import { useTimeStore, useUserDataStore } from "@/store/zustand";
 import ClaimCoinScanner from "./ClaimCoinScanner";
 
 function ScanClaimCard() {
-  const { remainingTimeSeconds, setRemainingTimeSeconds } = useTimeStore();
+  const { remainingTime, setRemainingTime } = useTimeStore();
   const { userData } = useUserDataStore();
   const { startTimeMine, fillTime, miningSpeed } = userData ?? {};
 
@@ -16,18 +16,18 @@ function ScanClaimCard() {
           startTimeMine,
           fillTime
         );
-        setRemainingTimeSeconds(newRemainingTime);
+        setRemainingTime(newRemainingTime);
       }, 1000);
 
       return () => clearInterval(intervalId);
     } else {
-      setRemainingTimeSeconds(null);
+      setRemainingTime(null);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [startTimeMine, fillTime]);
 
-  const remainingTimeFormatted = remainingTimeSeconds
-    ? formatMillis(remainingTimeSeconds)
+  const remainingTimeFormatted = remainingTime
+    ? formatMillis(remainingTime)
     : "filled";
 
   return (

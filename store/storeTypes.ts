@@ -55,11 +55,6 @@ export type HomePageContentStore = {
   setHomePageContent: (setHomePageContent: HomePageContent | null) => void;
 };
 
-export type TimeStore = {
-  remainingTimeSeconds: number | null;
-  setRemainingTimeSeconds: (time: number | null) => void;
-};
-
 export type Voucher = {
   id: string;
   imageURL: string;

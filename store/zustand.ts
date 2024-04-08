@@ -3,7 +3,6 @@ import {
   HomePageContentStore,
   PostType,
   PostStore,
-  TimeStore,
   UserDataStore,
   VoucherStore,
   ProductStore,
@@ -30,9 +29,14 @@ export const useHomePageContentStore = create<HomePageContentStore>((set) => ({
   setHomePageContent: (homePageContent) => set({ homePageContent }),
 }));
 
+export type TimeStore = {
+  remainingTime: number | null;
+  setRemainingTime: (time: number | null) => void;
+};
+
 export const useTimeStore = create<TimeStore>((set) => ({
-  remainingTimeSeconds: null,
-  setRemainingTimeSeconds: (time) => set({ remainingTimeSeconds: time }),
+  remainingTime: null,
+  setRemainingTime: (time) => set({ remainingTime: time }),
 }));
 
 export type CurrentBalanceStore = {
