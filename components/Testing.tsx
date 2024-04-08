@@ -358,35 +358,30 @@ const fireplaces = [
 
 const storages = [
   {
-    id: "4HDAjdmoW4MIhON4SVdw",
     name: "Titanium Storage",
     level: 5,
     fillTime: 24,
     price: 100,
   },
   {
-    id: "UnM667KaBeYweNoZ9IQz",
     level: 3,
     price: 10,
     fillTime: 3,
     name: "Modular Storage",
   },
   {
-    id: "j7B7DFtD4G8MEta5eV1u",
     price: 40,
     name: "Liquid Storage",
     level: 4,
     fillTime: 12,
   },
   {
-    id: "uSOwc2Mx24EWb1xEUmq5",
     price: 5,
     fillTime: 4,
     name: "Metal Storage",
     level: 2,
   },
   {
-    id: "vACvJWYF9hTmfKozGmhs",
     price: 0,
     name: "Wooden Storage",
     fillTime: 2,
