@@ -14,7 +14,7 @@ export const calculateEndTimeMine = (now: Date, fillTime: number): string => {
   return endTime.toISOString();
 };
 
-export function formatMillis(seconds: number): string {
+export function formatSeconds(seconds: number): string {
   const hours = Math.floor(seconds / 3600);
   const minutes = Math.floor((seconds % 3600) / 60);
   // const remainingSeconds = seconds % 60;

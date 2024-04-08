@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import Image from "next/image";
-import { calculateRemainingTime, formatMillis } from "@/lib/timeActions";
+import { calculateRemainingTime, formatSeconds } from "@/lib/timeActions";
 import { useTimeStore, useUserDataStore } from "@/store/zustand";
 import ClaimCoinScanner from "./ClaimCoinScanner";
 
@@ -14,7 +14,7 @@ function ScanClaimCard() {
       const intervalId = setInterval(() => {
         const newRemainingTime = calculateRemainingTime(endTimeMine);
         setRemainingTime(newRemainingTime);
-      }, 1000);
+      }, 1000 * 60);
 
       return () => clearInterval(intervalId);
     } else {
@@ -24,7 +24,7 @@ function ScanClaimCard() {
   }, [endTimeMine]);
 
   const remainingTimeFormatted = remainingTime
-    ? formatMillis(remainingTime)
+    ? formatSeconds(remainingTime)
     : "filled";
 
   return (
