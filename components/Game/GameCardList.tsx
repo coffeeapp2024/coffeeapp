@@ -12,7 +12,7 @@ import { useCaseStore } from "@/store/zustand";
 import RandomVoucherDialog from "./RandomVoucherDialog";
 import MainButton from "../MainButton";
 import { useRandomVoucherStore, useUserDataStore } from "@/store/zustand";
-import { updateUserDataAfterPurchase } from "@/lib/coinActions";
+import { updateUserDataAfterPurchase } from "@/lib/userActions";
 import { toast } from "sonner";
 import { Case } from "@/store/storeTypes";
 import CoinIcon from "../Template/CoinIcon";

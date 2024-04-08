@@ -3,7 +3,7 @@
 import React from "react";
 import VoucherCardTemplate from "../Template/VoucherCardTemplate";
 import { useUserDataStore } from "@/store/zustand";
-import { updateUserDataAfterPurchase } from "@/lib/coinActions";
+import { updateUserDataAfterPurchase } from "@/lib/userActions";
 import { toast } from "sonner";
 
 function VoucherCard({ voucherData, isHidden }: any) {

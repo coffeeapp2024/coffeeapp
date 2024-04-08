@@ -13,7 +13,7 @@ import {
 
 import CartItem from "./CartItem";
 import CoinIcon from "@/components/Template/CoinIcon";
-import { updateUserDataAfterPurchase } from "@/lib/coinActions";
+import { updateUserDataAfterPurchase } from "@/lib/userActions";
 import { toast } from "sonner";
 import ShoppingCartIcon from "@/components/Icon/Navbar/Regular/ShoppingCartIcon";
 

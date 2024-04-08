@@ -2,7 +2,7 @@ import React from "react";
 import { FireIcon } from "@heroicons/react/24/outline";
 import BoostDrawer from "./BoostDrawer";
 import { useFireplaceLevelStore, useUserDataStore } from "@/store/zustand";
-import { updateUserDataAfterPurchase } from "@/lib/coinActions";
+import { updateUserDataAfterPurchase } from "@/lib/userActions";
 import { toast } from "sonner";
 
 const iconSize = "w-10 h-10";

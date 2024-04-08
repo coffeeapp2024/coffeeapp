@@ -3,7 +3,7 @@ import { useStorageStore, useUserDataStore } from "@/store/zustand";
 import { BoltIcon } from "@heroicons/react/24/outline";
 import BoostDrawer from "./BoostDrawer";
 import { toast } from "sonner";
-import { updateUserDataAfterPurchase } from "@/lib/coinActions";
+import { updateUserDataAfterPurchase } from "@/lib/userActions";
 
 const iconSize = "w-10 h-10";
 const storageIcons = [

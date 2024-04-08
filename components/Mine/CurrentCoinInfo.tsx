@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import CoinIcon from "../Template/CoinIcon";
-import { calcBalanceInStorage } from "@/lib/coinActions";
+import { calcBalanceInStorage } from "@/lib/userActions";
 import { useUserDataStore } from "@/store/zustand";
 function CurrentCoinInfo() {
   const { userData } = useUserDataStore();
