@@ -192,22 +192,6 @@ export const useFireplaceLevelStore = create<FireplaceLevelStore>((set) => ({
   setFireplaceLevels: (fireplaceLevels) => set({ fireplaceLevels }),
 }));
 
-export type VoucherPageContent = {
-  bannerURL: string;
-};
-
-export type VoucherPageContentStore = {
-  voucherPageContent: VoucherPageContent | null;
-  setVoucherPageContent: (content: VoucherPageContent) => void;
-};
-
-export const useVoucherPageContentStore = create<VoucherPageContentStore>(
-  (set) => ({
-    voucherPageContent: null,
-    setVoucherPageContent: (content) => set({ voucherPageContent: content }),
-  })
-);
-
 export type PriceTypeStore = {
   isPriceInCoins: boolean;
   togglePriceType: () => void;
