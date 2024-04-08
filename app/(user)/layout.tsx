@@ -16,8 +16,6 @@ import {
   useProductTagStore,
   useStorageStore,
   useFireplaceLevelStore,
-  useVoucherPageContentStore,
-  VoucherPageContent,
   useToppingsStore,
 } from "@/store/zustand";
 import {
@@ -52,7 +50,6 @@ export default function RootLayout({
   const { setVouchers } = useVoucherStore();
   const { setHomePageContent } = useHomePageContentStore();
   const { setMinePageContent } = useMinePageContentStore();
-  const { setVoucherPageContent } = useVoucherPageContentStore();
   const { setProducts } = useProductStore();
   const { setProductTags } = useProductTagStore();
   const { setToppings } = useToppingsStore();
@@ -171,15 +168,6 @@ export default function RootLayout({
       setHomePageContent(fetchedHomePageContent);
     };
     fetchHomePageContent();
-
-    const fetchVoucherPageContent = async () => {
-      const voucherPageContent = (await getDocumentById(
-        "contents",
-        "voucherPage"
-      )) as VoucherPageContent;
-      setVoucherPageContent(voucherPageContent);
-    };
-    fetchVoucherPageContent();
 
     // Fetch storageLevels
     const fetchStorageData = async () => {
