@@ -1,14 +1,10 @@
 import { StorageItem } from "@/store/zustand";
 
-export function calculateRemainingTime(
-  startTime: string,
-  fillTime: number
-): number | null {
-  const startDate = new Date(startTime);
+export function calculateRemainingTime(endTime: string): number | null {
+  const endDate = new Date(endTime);
   const now = new Date();
 
-  const remainingTimeMillis =
-    startDate.getTime() + fillTime * (3600 * 1000) - now.getTime();
+  const remainingTimeMillis = endDate.getTime() - now.getTime();
 
   return Math.max(remainingTimeMillis, 0);
 }

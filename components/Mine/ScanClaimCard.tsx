@@ -7,15 +7,12 @@ import ClaimCoinScanner from "./ClaimCoinScanner";
 function ScanClaimCard() {
   const { remainingTime, setRemainingTime } = useTimeStore();
   const { userData } = useUserDataStore();
-  const { startTimeMine, fillTime, miningSpeed } = userData ?? {};
+  const { startTimeMine, endTimeMine, fillTime, miningSpeed } = userData ?? {};
 
   useEffect(() => {
-    if (startTimeMine && fillTime != null) {
+    if (endTimeMine) {
       const intervalId = setInterval(() => {
-        const newRemainingTime = calculateRemainingTime(
-          startTimeMine,
-          fillTime
-        );
+        const newRemainingTime = calculateRemainingTime(endTimeMine);
         setRemainingTime(newRemainingTime);
       }, 1000);
 
