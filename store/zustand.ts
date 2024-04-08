@@ -39,6 +39,18 @@ export const useTimeStore = create<TimeStore>((set) => ({
   setRemainingTime: (time) => set({ remainingTime: time }),
 }));
 
+export type BalanceInStorageStore = {
+  balanceInStorage: number | null;
+  setBalanceInStorage: (balance: number | null) => void;
+};
+
+export const useBalanceInStorageStore = create<BalanceInStorageStore>(
+  (set) => ({
+    balanceInStorage: null,
+    setBalanceInStorage: (balance) => set({ balanceInStorage: balance }),
+  })
+);
+
 export type CurrentBalanceStore = {
   currentBalance: number | null;
   setCurrentBalance: (coin: number | null) => void;

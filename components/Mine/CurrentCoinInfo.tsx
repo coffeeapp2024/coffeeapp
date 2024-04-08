@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import CoinIcon from "../Template/CoinIcon";
 import { calcBalanceInStorage } from "@/lib/userActions";
-import { useUserDataStore } from "@/store/zustand";
+import { useBalanceInStorageStore, useUserDataStore } from "@/store/zustand";
 function CurrentCoinInfo() {
   const { userData } = useUserDataStore();
-  const [balanceInStorage, setBalanceInStorage] = useState(0);
+  const { balanceInStorage, setBalanceInStorage } = useBalanceInStorageStore();
 
   useEffect(() => {
     if (!userData) return;
@@ -15,6 +15,7 @@ function CurrentCoinInfo() {
     }, 1000);
 
     return () => clearInterval(intervalId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userData]);
 
   return (
