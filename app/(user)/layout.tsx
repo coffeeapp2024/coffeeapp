@@ -183,14 +183,14 @@ export default function RootLayout({
 
     // Fetch storageLevels
     const fetchStorageData = async () => {
-      const fetchedStorageLevels = await fetchCollectionData("storageLevels");
+      const fetchedStorageLevels = await fetchCollectionData("storages");
       setStorages(fetchedStorageLevels);
     };
     fetchStorageData();
 
     // Fetch FireplaceLevels
     const fetchFireplaceLevels = async () => {
-      const fetchedBalanceLevels = await fetchCollectionData("fireplaceLevels");
+      const fetchedBalanceLevels = await fetchCollectionData("fireplaces");
       setFireplaceLevels(fetchedBalanceLevels);
     };
     fetchFireplaceLevels();

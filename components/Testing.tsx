@@ -340,7 +340,7 @@ function Testing() {
     //   "miningHourPerQrCodeLevel",
     //   1
     // );
-    // await renameCollection("balanceLevels", "fireplaceLevels");
+    // await renameCollection("fireplaceLevels", "fireplaces");
     // await addDocumentsToCollection("toppings", toppings);
     // await deleteKeyInAllDocuments("balanceLevels", "icon");
     // await fetchCollectionData("balanceLevels");
