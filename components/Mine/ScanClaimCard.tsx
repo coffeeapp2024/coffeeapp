@@ -7,7 +7,7 @@ import ClaimCoinScanner from "./ClaimCoinScanner";
 function ScanClaimCard() {
   const { remainingTime, setRemainingTime } = useTimeStore();
   const { userData } = useUserDataStore();
-  const { startTimeMine, endTimeMine, fillTime, miningSpeed } = userData ?? {};
+  const { endTimeMine, miningSpeed } = userData ?? {};
 
   useEffect(() => {
     if (endTimeMine) {
@@ -21,7 +21,7 @@ function ScanClaimCard() {
       setRemainingTime(null);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [startTimeMine, fillTime]);
+  }, [endTimeMine]);
 
   const remainingTimeFormatted = remainingTime
     ? formatMillis(remainingTime)
