@@ -24,7 +24,7 @@ function Storage() {
   if (!storages) return;
 
   const maxStorageLevel = Math.max(...storages.map((storage) => storage.level));
-  const userStorageLevel = userData?.fillTime;
+  const userStorageLevel = userData?.storageLevel;
   const isMaxLevel = userStorageLevel === maxStorageLevel;
   const nextStorageLevel = userStorageLevel && userStorageLevel + 1;
 

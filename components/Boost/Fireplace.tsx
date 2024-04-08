@@ -25,7 +25,7 @@ function Fireplace() {
   const maxFireplaceLevel = Math.max(
     ...fireplaceLevels.map((fireplaceLevel) => fireplaceLevel.level)
   );
-  const userFireplaceLevel = userData?.balanceLevel;
+  const userFireplaceLevel = userData?.fireplaceLevel;
   const isMaxLevel = userFireplaceLevel === maxFireplaceLevel;
   const nextFireplaceLevel = userFireplaceLevel && userFireplaceLevel + 1;
 
