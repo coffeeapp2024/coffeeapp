@@ -4,9 +4,9 @@ export function calculateRemainingTime(endTime: string): number | null {
   const endDate = new Date(endTime);
   const now = new Date();
 
-  const remainingTimeMillis = endDate.getTime() - now.getTime();
+  const remainingTimeSeconds = (endDate.getTime() - now.getTime()) / 1000;
 
-  return Math.max(remainingTimeMillis, 0);
+  return Math.max(remainingTimeSeconds, 0);
 }
 
 export const calculateEndTimeMine = (now: Date, fillTime: number): string => {
@@ -15,7 +15,7 @@ export const calculateEndTimeMine = (now: Date, fillTime: number): string => {
 };
 
 export function formatMillis(seconds: number): string {
-  const hours = Math.floor(seconds / (3600 * 1000));
+  const hours = Math.floor(seconds / 3600);
   const minutes = Math.floor((seconds % 3600) / 60);
   // const remainingSeconds = seconds % 60;
 
