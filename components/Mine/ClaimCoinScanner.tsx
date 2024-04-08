@@ -7,12 +7,13 @@ import { toast } from "sonner";
 import QRCodeScanner from "../Template/QrCodeScanner";
 import { deleteDocumentByKey, fetchCollectionData } from "@/lib/firebaseUtils";
 import { QrCodeType } from "@/store/storeTypes";
+import { calculateEndTimeMine } from "@/lib/timeActions";
 
 const ClaimCoinScanner = () => {
   const { userData, userId, setUserData } = useUserDataStore();
 
   const handleQrCode = async (text: string) => {
-    if (!userId || !userData) {
+    if (!userId || !userData || !userData.fillTime) {
       toast.warning("Sign in to scan QR Code");
       return;
     }
@@ -21,9 +22,12 @@ const ClaimCoinScanner = () => {
 
     if (keys.some((key) => key.key === text)) {
       const now = new Date();
+      const newEndTimeMine = calculateEndTimeMine(now, userData.fillTime);
+
       const newUserData = {
         ...userData,
         startTimeMine: now.toISOString(),
+        endTimeMine: newEndTimeMine,
       };
 
       setUserData(newUserData);

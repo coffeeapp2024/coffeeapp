@@ -34,6 +34,7 @@ import {
 import Testing from "@/components/Testing";
 import Nav from "@/components/Nav";
 import { NextUIProvider } from "@nextui-org/system";
+import { calcBalanceInStorage } from "@/lib/userActions";
 
 export default function RootLayout({
   children,
@@ -42,6 +43,7 @@ export default function RootLayout({
 }>) {
   const { userData, userId, setRole, setUserData, setUserId } =
     useUserDataStore();
+  const { endTimeMine, startTimeMine, balance } = userData ?? {};
   const { setBanner } = useShopStore();
   const { setPosts: setEventPost } = useEventPostStore();
   const { setPosts: setCheckinPost } = useCheckinPostStore();
@@ -214,6 +216,27 @@ export default function RootLayout({
     fetchToppings();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      if (userData && startTimeMine && endTimeMine && balance) {
+        const now = new Date();
+        const endTime = new Date(endTimeMine);
+        if (now >= endTime) {
+          const balanceInStorage = calcBalanceInStorage(userData);
+          const newUserData = {
+            ...userData,
+            balance: balance + balanceInStorage,
+            startTimeMine: null,
+            endTimeMine: null,
+          };
+          setUserData(newUserData);
+        }
+      }
+    }, 1000);
+
+    return () => clearInterval(intervalId);
+  }, [userData]);
 
   return (
     <NextUIProvider>

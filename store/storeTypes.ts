@@ -22,6 +22,7 @@ export type UserData = {
   storageLevel: number | null;
   fireplaceLevel: number | null;
   startTimeMine: string | null;
+  endTimeMine: string | null;
   voucherIdList: string[] | null;
   collection: CartItem[] | null;
   LikedEventImageIdList: string[] | null;

@@ -1,6 +1,5 @@
 import { UserData } from "@/store/storeTypes";
 import { updateDocumentByKeyCondition } from "./firebaseUtils";
-import { StorageItem } from "@/store/zustand";
 
 export function calcBalanceInStorage(userData: UserData): number {
   const { miningSpeed, startTimeMine } = userData;
@@ -55,13 +54,4 @@ export async function updateUserDataAfterPurchase(
 
   console.log("Updated user data after purchase:", updatedUserData);
   return updatedUserData;
-}
-
-export function findFillTime(
-  storages: StorageItem[],
-  userStoragelevel: number
-): number | undefined {
-  // Use the find method to search for the storage with the matching level
-  return storages.find((storage) => storage.level === userStoragelevel)
-    ?.fillTime;
 }
