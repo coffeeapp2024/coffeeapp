@@ -236,6 +236,7 @@ export default function RootLayout({
     }, 1000);
 
     return () => clearInterval(intervalId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userData]);
 
   return (
