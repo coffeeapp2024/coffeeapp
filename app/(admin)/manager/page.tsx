@@ -6,7 +6,7 @@ function Page() {
   return (
     <div
       style={{
-        backgroundImage: `url("https://i.pinimg.com/564x/50/95/3d/50953d484df645d2bb1061ee6af43c6c.jpg")`,
+        backgroundImage: `url("bg/main-bg.jpg")`,
         backgroundPosition: "left",
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
