@@ -5,7 +5,6 @@ import { usePathname } from "next/navigation";
 import React from "react";
 import HomeIcon from "./Icon/Navbar/Regular/HomeIcon";
 import ShoppingCartIcon from "./Icon/Navbar/Regular/ShoppingCartIcon";
-import VoucherIcon from "./Icon/Navbar/Regular/VoucherIcon";
 import CategoryIcon from "./Icon/Navbar/Regular/CategoryIcon";
 import CurrencyIcon from "./Icon/Navbar/Regular/CurrencyIcon";
 
@@ -15,7 +14,6 @@ function Nav() {
     ["Home", "/home"],
     ["Shop", "/shop"],
     ["Mine", "/"],
-    ["Voucher", "/voucher"],
     ["More", "/more"],
   ];
 
@@ -25,7 +23,6 @@ function Nav() {
     <HomeIcon key={1} className={iconSize} />,
     <ShoppingCartIcon key={2} className={"w-8 h-8"} />,
     <CurrencyIcon key={3} className={iconSize} />,
-    <VoucherIcon key={4} className={"w-8 h-8"} />,
     <CategoryIcon key={5} className={iconSize} />,
   ];
 
