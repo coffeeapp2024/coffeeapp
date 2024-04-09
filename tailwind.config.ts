@@ -39,6 +39,9 @@ const config = {
         foreground: {
           DEFAULT: colors.neutral[950],
         },
+        secondary_text: {
+          DEFAULT: colors.neutral[500],
+        },
         primary: {
           foreground: colors.neutral[800],
         },

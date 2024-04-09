@@ -19,19 +19,21 @@ function CurrentCoinInfo() {
   }, [userData]);
 
   return (
-    <div className="flex items-center justify-center flex-col text-neutral-900 mt-24">
-      <div className="font-semibold">In storage:</div>
-      <div className="flex items-center mb-1 ">
-        <CoinIcon className="w-9 h-9" />
-        <span className="font-extrabold text-4xl rounded-xl">
+    <div className="flex items-center justify-center flex-col mt-24">
+      <div className="font-semibold text-secondary_text">In storage:</div>
+      <div className="flex items-center my-2">
+        <CoinIcon className="w-10 h-10" />
+        <span className="font-extrabold text-5xl rounded-xl">
           {balanceInStorage?.toFixed(5) ?? Number(0).toFixed(5)}
         </span>
       </div>
       <div className="flex items-center justify-center">
-        <span className="text-opacity-70 font-semibold">MIN Balance:</span>
-        <div className="flex items-center">
+        <span className="font-semibold text-secondary_text">MIN Balance:</span>
+        <div className="flex items-center ml-1">
           <CoinIcon className="w-4 h-4 ml-1 " />
-          <span className="font-bold">{userData?.balance.toFixed(5) ?? 0}</span>
+          <span className="font-bold ">
+            {userData?.balance.toFixed(5) ?? 0}
+          </span>
         </div>
       </div>
     </div>
