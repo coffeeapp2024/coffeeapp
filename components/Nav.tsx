@@ -37,7 +37,7 @@ function Nav() {
               key={index}
               className={`${
                 isActive ? "text-neutral-900 bg-pink-300" : "text-neutral-500 "
-              } flex items-center gap-x-1 p-3 rounded-full font-semibold`}
+              } flex items-center gap-x-1 p-3 rounded-full font-semibold transition-all`}
             >
               {icons[index]}
               {isActive && title}
