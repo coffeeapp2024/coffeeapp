@@ -34,7 +34,7 @@ function ScanClaimCard() {
 
   return (
     <div className="absolute bottom-1/4 sm:bottom-1/3 w-full max-w-screen-sm px-3">
-      <div className="relative bg-background bg-opacity-90 rounded-3xl border-[1px] border-neutral-300 flex px-3 pb-3 pt-5 items-center justify-between shadow-sm overflow-hidden">
+      <div className="relative bg-background bg-opacity-content1 rounded-3xl flex px-3 pb-3 pt-5 items-center justify-between shadow-sm overflow-hidden">
         <MiningProgress />
         <div className="flex items-center">
           <div className="mr-2">

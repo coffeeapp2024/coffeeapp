@@ -17,7 +17,7 @@ function ProfileCard() {
   }, []);
 
   return (
-    <div className="mx-3 bg-background bg-opacity-90 rounded-3xl shadow-sm active:scale-[98%] transition-transform">
+    <div className="mx-3 bg-background bg-opacity-content1 rounded-3xl shadow-sm active:scale-[98%] transition-transform">
       {user ? <ProfileDialog user={user} /> : <LoginButton />}
     </div>
   );

@@ -29,9 +29,12 @@ const config = {
         "2px": "2px",
         "1px": "1px",
       },
+      opacity: {
+        content1: "0.8",
+      },
       colors: {
         background: {
-          DEFAULT: colors.neutral[50],
+          DEFAULT: colors.white,
         },
         foreground: {
           DEFAULT: colors.neutral[950],
