@@ -28,7 +28,7 @@ function Nav() {
 
   return (
     <div className="fixed z-50 bottom-0 left-0 w-full">
-      <nav className="px-2 pt-2 pb-2 w-full mx-auto flex justify-around items-center bg-background bg-opacity-95">
+      <nav className="px-2 pt-2 pb-2 w-full mx-auto flex justify-around items-center bg-background bg-opacity-95 rounded-t-2xl shadow-sm">
         {navList.map(([title, url], index) => {
           const isActive = pathname === url;
           return (
