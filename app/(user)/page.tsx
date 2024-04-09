@@ -11,7 +11,7 @@ export default function Home() {
   return (
     <main
       style={{
-        backgroundImage: `url("https://i.pinimg.com/564x/ac/25/b2/ac25b2fa2d18bd53fecd1856fef5376b.jpg")`,
+        backgroundImage: `url("https://i.pinimg.com/736x/c6/52/d7/c652d70a7f8a5d01b461bad0b68f0827.jpg")`,
         backgroundSize: "cover",
       }}
       className="relative h-screen max-w-screen-sm z-10"
