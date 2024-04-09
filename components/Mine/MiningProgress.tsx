@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import * as Progress from "@radix-ui/react-progress";
 
