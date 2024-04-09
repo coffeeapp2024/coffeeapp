@@ -13,7 +13,7 @@ function Nav() {
   const navList = [
     ["Home", "/home"],
     ["Shop", "/shop"],
-    ["Mine", "/"],
+    ["Wallet", "/"],
     ["More", "/more"],
   ];
 
@@ -27,8 +27,8 @@ function Nav() {
   ];
 
   return (
-    <div className="fixed bottom-10 w-screen max-w-screen-sm z-50 shadow-sm px-2">
-      <nav className="flex justify-around items-center px-2 w-fit mx-auto bg-background bg-opacity-[98%] rounded-[40px] border-[1px] border-stone-200 divide-neutral-300">
+    <div className="fixed z-50 bottom-0 w-full">
+      <nav className=" px-2 pt-2 pb-2 w-full mx-auto flex justify-around items-center bg-background bg-opacity-90">
         {navList.map(([title, url], index) => {
           const isActive = pathname === url;
           return (
@@ -36,10 +36,11 @@ function Nav() {
               href={url}
               key={index}
               className={`${
-                isActive ? "text-neutral-900" : "text-neutral-500 "
-              } p-3 rounded-full`}
+                isActive ? "text-neutral-900 bg-pink-300" : "text-neutral-500 "
+              } flex items-center gap-x-1 p-3 rounded-full font-semibold`}
             >
               {icons[index]}
+              {isActive && title}
             </Link>
           );
         })}
