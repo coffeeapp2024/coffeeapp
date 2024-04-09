@@ -31,7 +31,7 @@ function CurrentCoinInfo() {
         <span className="text-opacity-70 font-semibold">MIN Balance:</span>
         <div className="flex items-center">
           <CoinIcon className="w-4 h-4 ml-1 " />
-          <span className="font-bold">{userData?.balance ?? 0}</span>
+          <span className="font-bold">{userData?.balance.toFixed(5) ?? 0}</span>
         </div>
       </div>
     </div>
