@@ -37,7 +37,7 @@ function ScanClaimCard() {
       <div className="relative bg-background bg-opacity-content1 rounded-3xl flex px-3 pb-3 pt-5 items-center justify-between shadow-sm overflow-hidden">
         <MiningProgress />
         <div className="flex items-center">
-          <div className="mr-2">
+          <div className="mr-3 ml-3">
             <Image
               src="/icons/hourclass.png"
               width={200}
@@ -46,12 +46,12 @@ function ScanClaimCard() {
               alt="Time Icon"
             />
           </div>
-          <div className="flex flex-col font-semibold">
-            <span className="text-neutral-800">Storage</span>
-            <span className="text-neutral-500 text-sm">
+          <div className="flex flex-col ">
+            <span className="text-neutral-800 font-bold">Storage</span>
+            <span className="text-secondary_text font-bold text-sm">
               {remainingTimeFormatted}
             </span>
-            <span className="text-neutral-500 text-sm">
+            <span className="text-secondary_text font-semibold text-sm">
               {miningSpeed ?? "0"} MIN/hour
             </span>
           </div>
