@@ -174,7 +174,7 @@ export default function GameCardList() {
             <MainButton className="w-full" text="Open" />
           </button>
         </div>
-        <div className="w-full h-full absolute -bottom-[4px] left-[4px] bg-neutral-900 rounded-3xl -z-50"></div>
+        <div className="w-full h-full absolute -bottom-[4px] left-[4px] bg-neutral-800 rounded-3xl -z-50"></div>
       </div>
       <RandomVoucherDialog />
     </div>
