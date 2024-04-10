@@ -13,7 +13,7 @@ const ClaimCoinScanner = () => {
   const { userData, userId, setUserData } = useUserDataStore();
 
   const handleQrCode = async (text: string) => {
-    if (!userId || !userData || !userData.fillTime) {
+    if (!userId || !userData) {
       toast.warning("Sign in to scan QR Code");
       return;
     }

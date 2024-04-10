@@ -33,7 +33,7 @@ import {
 import Testing from "@/components/Testing";
 import Nav from "@/components/Nav";
 import { NextUIProvider } from "@nextui-org/system";
-import { calcBalanceInStorage } from "@/lib/userActions";
+import { calcFinalBalanceInStorage } from "@/lib/userActions";
 
 export default function RootLayout({
   children,
@@ -208,16 +208,19 @@ export default function RootLayout({
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      if (userData && startTimeMine && endTimeMine && balance) {
+      if (userData && endTimeMine && balance) {
         const now = new Date();
         const endTime = new Date(endTimeMine);
         if (now >= endTime) {
-          const balanceInStorage = calcBalanceInStorage(userData);
-          const newUserData = {
+          const balanceInStorage = calcFinalBalanceInStorage(userData);
+          if (!balanceInStorage) return;
+
+          const newUserData: UserData = {
             ...userData,
             balance: balance + balanceInStorage,
             startTimeMine: null,
             endTimeMine: null,
+            inStorage: null,
           };
           setUserData(newUserData);
           updateDocumentByKeyCondition("users", "email", email, newUserData);

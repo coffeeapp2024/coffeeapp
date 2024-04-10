@@ -2,7 +2,10 @@ import React from "react";
 import { FireIcon } from "@heroicons/react/24/outline";
 import BoostDrawer from "./BoostDrawer";
 import { useFireplaceLevelStore, useUserDataStore } from "@/store/zustand";
-import { updateUserDataAfterPurchase } from "@/lib/userActions";
+import {
+  calcBalanceInStorage,
+  updateUserDataAfterPurchase,
+} from "@/lib/userActions";
 import { toast } from "sonner";
 
 const iconSize = "w-10 h-10";
@@ -53,6 +56,14 @@ function Fireplace() {
 
   const handleUpgradeClick = async () => {
     if (!userData || !nextLevel || !nextPrice) return;
+
+    const balanceInStorage = calcBalanceInStorage(userData);
+
+    if (balanceInStorage)
+      userData.inStorage = {
+        balance: balanceInStorage,
+        timeAt: new Date().toISOString(),
+      };
 
     await toast.promise(
       updateUserDataAfterPurchase(userData, setUserData, nextPrice, [
