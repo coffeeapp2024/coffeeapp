@@ -12,6 +12,8 @@ import { calculateEndTimeMine } from "@/lib/timeActions";
 const ClaimCoinScanner = () => {
   const { userData, userId, setUserData } = useUserDataStore();
 
+  const isDisable = userData?.endTimeMine;
+
   const handleQrCode = async (text: string) => {
     if (!userId || !userData) {
       toast.warning("Sign in to scan QR Code");
@@ -50,11 +52,13 @@ const ClaimCoinScanner = () => {
   };
 
   return (
-    <QRCodeScanner
-      buttonName="Claim MIN"
-      className="!px-3 !text-lg"
-      handleQrCode={handleQrCode}
-    />
+    <div className={isDisable ? "pointer-events-none grayscale" : ""}>
+      <QRCodeScanner
+        buttonName="Claim MIN"
+        className="!px-3 !text-lg "
+        handleQrCode={handleQrCode}
+      />
+    </div>
   );
 };
 
