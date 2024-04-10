@@ -3,14 +3,14 @@ import { updateDocumentByKeyCondition } from "./firebaseUtils";
 
 export function calcBalanceInStorage(userData: UserData): number | null {
   const { miningSpeed, inStorage } = userData;
+  const { timeAt, balance } = inStorage ?? {};
   const now = new Date();
 
-  const startDate = inStorage?.timeAt ? new Date(inStorage?.timeAt) : null;
+  const startDate = timeAt ? new Date(timeAt) : null;
 
-  if (startDate && inStorage?.balance && miningSpeed && now > startDate) {
+  if (startDate && balance && miningSpeed && now > startDate) {
     const timeDiffSeconds = (now.getTime() - startDate.getTime()) / 1000;
-    const balanceInStorage =
-      inStorage?.balance + miningSpeed * (timeDiffSeconds / 3600);
+    const balanceInStorage = balance + miningSpeed * (timeDiffSeconds / 3600);
 
     return parseFloat(balanceInStorage.toFixed(6));
   }
@@ -20,13 +20,13 @@ export function calcBalanceInStorage(userData: UserData): number | null {
 
 export function calcFinalBalanceInStorage(userData: UserData): number | null {
   const { miningSpeed, inStorage, endTimeMine } = userData;
+  const { timeAt, balance } = inStorage ?? {};
   const endDate = endTimeMine ? new Date(endTimeMine) : null;
-  const startDate = inStorage?.timeAt ? new Date(inStorage?.timeAt) : null;
+  const startDate = timeAt ? new Date(timeAt) : null;
 
-  if (startDate && endDate && inStorage?.balance && miningSpeed) {
+  if (startDate && endDate && balance && miningSpeed && endDate > startDate) {
     const timeDiffSeconds = (endDate.getTime() - startDate.getTime()) / 1000;
-    const balanceInStorage =
-      inStorage?.balance + miningSpeed * (timeDiffSeconds / 3600);
+    const balanceInStorage = balance + miningSpeed * (timeDiffSeconds / 3600);
 
     return parseFloat(balanceInStorage.toFixed(6));
   }
