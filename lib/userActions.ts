@@ -8,7 +8,7 @@ export function calcBalanceInStorage(userData: UserData): number | null {
 
   const startDate = timeAt ? new Date(timeAt) : null;
 
-  if (startDate && balance && miningSpeed && now > startDate) {
+  if (startDate && balance !== undefined && miningSpeed && now > startDate) {
     const timeDiffSeconds = (now.getTime() - startDate.getTime()) / 1000;
     const balanceInStorage = balance + miningSpeed * (timeDiffSeconds / 3600);
 
@@ -24,7 +24,13 @@ export function calcFinalBalanceInStorage(userData: UserData): number | null {
   const endDate = endTimeMine ? new Date(endTimeMine) : null;
   const startDate = timeAt ? new Date(timeAt) : null;
 
-  if (startDate && endDate && balance && miningSpeed && endDate > startDate) {
+  if (
+    startDate &&
+    endDate &&
+    balance !== undefined &&
+    miningSpeed &&
+    endDate > startDate
+  ) {
     const timeDiffSeconds = (endDate.getTime() - startDate.getTime()) / 1000;
     const balanceInStorage = balance + miningSpeed * (timeDiffSeconds / 3600);
 
