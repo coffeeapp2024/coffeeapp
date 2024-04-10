@@ -52,11 +52,13 @@ function BoostDrawer({
               }}
             />
             {/* Level */}
-            <div className="flex items-center gap-x-1 -ml-1">
-              <CoinIcon className="w-4 h-4 " />
-              <span className=" font-semibold text-neutral-800">
-                {isMaxLevel ? 0 : nextPrice}
-              </span>
+            <div className="flex items-center gap-x-1 -ml-[2px]">
+              <div className="flex items-center gap-x-[1px]">
+                <CoinIcon className="w-4 h-4 " />
+                <span className=" font-semibold text-neutral-800">
+                  {isMaxLevel ? 0 : nextPrice}
+                </span>
+              </div>
               <div className="w-1 h-1 rounded-full mx-1 bg-neutral-600"></div>
               <span className="font-semibold">L{level}</span>
             </div>
