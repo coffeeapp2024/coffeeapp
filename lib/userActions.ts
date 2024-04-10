@@ -62,11 +62,6 @@ export async function updateUserDataAfterPurchase(
     updatedUserData[key] = value;
   });
 
-  // Check if userData.startTimeMine exists before updating updatedUserData
-  if (userData.startTimeMine) {
-    updatedUserData.startTimeMine = new Date().toISOString();
-  }
-
   await updateDocumentByKeyCondition(
     "users",
     "email",
