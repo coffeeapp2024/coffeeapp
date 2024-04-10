@@ -24,7 +24,7 @@ function CurrentCoinInfo() {
       <div className="flex items-center my-2">
         <CoinIcon className="w-11 h-11" />
         <span className="font-extrabold text-5xl rounded-xl">
-          {balanceInStorage?.toFixed(6) ?? Number(0).toFixed(6)}
+          {balanceInStorage ?? Number(0).toFixed(6)}
         </span>
       </div>
       <div className="flex items-center justify-center">
@@ -32,7 +32,7 @@ function CurrentCoinInfo() {
         <div className="flex items-center ml-1">
           <CoinIcon className="w-4 h-4 ml-1 " />
           <span className="font-bold ">
-            {userData?.balance.toFixed(6) ?? 0}
+            {userData?.balance.toFixed(6) ?? Number(0).toFixed(6)}
           </span>
         </div>
       </div>
