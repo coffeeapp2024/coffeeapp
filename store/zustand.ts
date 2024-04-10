@@ -45,7 +45,7 @@ export type MiningProgressStore = {
 };
 
 export const useMiningProgressStore = create<MiningProgressStore>((set) => ({
-  miningProgressPercentage: 0,
+  miningProgressPercentage: 100,
   setMiningProgressPercentage: (percentage) =>
     set({ miningProgressPercentage: percentage }),
 }));

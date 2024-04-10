@@ -17,7 +17,7 @@ function MiningProgress() {
         startTimeMine,
         endTimeMine
       );
-      setMiningProgressPercentage(percentage);
+      setMiningProgressPercentage(percentage || 100);
     }, 1000);
 
     return () => clearInterval(interval);

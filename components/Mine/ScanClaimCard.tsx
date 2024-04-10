@@ -30,14 +30,14 @@ function ScanClaimCard() {
 
   const remainingTimeFormatted = remainingTime
     ? formatSeconds(remainingTime)
-    : "filled";
+    : "Filled";
 
   return (
     <div className="absolute bottom-1/4 sm:bottom-1/3 w-full max-w-screen-sm px-3">
       <div className="relative bg-background bg-opacity-content1 rounded-3xl flex px-3 pb-3 pt-5 items-center justify-between shadow-sm overflow-hidden">
         <MiningProgress />
         <div className="flex items-center">
-          <div className="mr-3 ml-3">
+          <div className="mr-3 ml-2">
             <Image
               src="/icons/hourclass.png"
               width={200}
@@ -47,7 +47,7 @@ function ScanClaimCard() {
             />
           </div>
           <div className="flex flex-col ">
-            <span className="text-neutral-800 font-bold">Storage</span>
+            <span className="text-neutral-700 font-bold">Storage</span>
             <span className="text-secondary_text font-bold text-sm">
               {remainingTimeFormatted}
             </span>

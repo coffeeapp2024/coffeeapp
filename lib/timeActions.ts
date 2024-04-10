@@ -12,9 +12,9 @@ export function calculateRemainingTime(endTime: string): number | null {
 export function calculateMiningProgressPercentage(
   startTime: string | null | undefined,
   endTime: string | null | undefined
-): number {
+): number | null {
   if (!startTime || !endTime) {
-    return 0;
+    return null;
   }
 
   const startDate = new Date(startTime);
@@ -26,7 +26,7 @@ export function calculateMiningProgressPercentage(
 
   if (elapsedTimeInSeconds < 0 || elapsedTimeInSeconds > totalTimeInSeconds) {
     // Return null if start time is in the future or end time is in the past
-    return 0;
+    return null;
   }
 
   const progressPercentage = (elapsedTimeInSeconds / totalTimeInSeconds) * 100;
