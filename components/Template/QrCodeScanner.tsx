@@ -18,10 +18,6 @@ const QRCodeScanner = ({
 }) => {
   const [showScanner, setShowScanner] = useState(false);
 
-  const toggleScanner = () => {
-    setShowScanner((prevShowScanner) => !prevShowScanner);
-  };
-
   const handleResult = async (text: string) => {
     setShowScanner(false);
 
@@ -38,7 +34,7 @@ const QRCodeScanner = ({
   };
 
   return (
-    <Dialog open={showScanner} onOpenChange={toggleScanner}>
+    <Dialog open={showScanner} onOpenChange={setShowScanner}>
       <DialogTrigger>
         <MainButton className={className} text={buttonName} />
       </DialogTrigger>

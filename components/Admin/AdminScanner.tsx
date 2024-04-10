@@ -23,11 +23,7 @@ const AdminScanner = () => {
 
   return (
     <div className={`${role ? "" : "pointer-events-none grayscale"}`}>
-      <QRCodeScanner
-        buttonName="Scan Me!"
-        handleOnClick={() => {}}
-        handleQrCode={handleQrCode}
-      />
+      <QRCodeScanner buttonName="Scan Me!" handleQrCode={handleQrCode} />
     </div>
   );
 };
