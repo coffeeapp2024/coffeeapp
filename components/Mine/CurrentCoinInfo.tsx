@@ -21,7 +21,7 @@ function CurrentCoinInfo() {
   return (
     <div className="flex items-center justify-center flex-col mt-24">
       <div className="font-semibold text-secondary_text">In storage:</div>
-      <div className="flex items-center my-2 min-w-[295px]">
+      <div className="flex items-center justify-start my-2 min-w-[69%] sm:min-w-fit">
         <CoinIcon className="w-11 h-11" />
         <span className="font-extrabold text-5xl rounded-xl">
           {balanceInStorage?.toFixed(6) ?? Number(0).toFixed(6)}
