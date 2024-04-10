@@ -34,16 +34,14 @@ function BoostDialog() {
             </h3>
             <div className="text-5xl font-extrabold flex items-center mb-6">
               <CoinIcon className="w-11 h-11 mr-1" />
-              <h1>{userData?.balance?.toFixed(5) ?? Number(0).toFixed(5)}</h1>
+              <h1>{userData?.balance?.toFixed(6) ?? Number(0).toFixed(6)}</h1>
             </div>
-            <div>
-              <Dialog>
+            {/* <Dialog>
                 <DialogTrigger>
                   <p className="font-bold text-blue-500">How it work</p>
                 </DialogTrigger>
                 <DialogContentTemplate imageURL="/bg/main-bg.jpg" />
-              </Dialog>
-            </div>
+              </Dialog> */}
           </div>
           <div className="flex flex-col gap-y-3 px-3">
             <Storage />
