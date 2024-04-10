@@ -2,15 +2,16 @@ import { UserData } from "@/store/storeTypes";
 import { updateDocumentByKeyCondition } from "./firebaseUtils";
 
 export function calcBalanceInStorage(userData: UserData): number {
-  const { miningSpeed, startTimeMine } = userData;
+  const { miningSpeed, inStorage } = userData;
   const now = new Date();
-  const startDate = startTimeMine ? new Date(startTimeMine) : null;
+  const startDate = inStorage?.timeAt ? new Date(inStorage?.timeAt) : null;
 
-  if (startDate && miningSpeed && now > startDate) {
+  if (startDate && inStorage?.balance && miningSpeed && now > startDate) {
     const timeDiffSeconds = (now.getTime() - startDate.getTime()) / 1000;
-    const balanceInStorage = miningSpeed * (timeDiffSeconds / 3600);
+    const balanceInStorage =
+      inStorage?.balance + miningSpeed * (timeDiffSeconds / 3600);
 
-    return parseFloat(balanceInStorage.toFixed(5));
+    return parseFloat(balanceInStorage.toFixed(6));
   }
 
   return 0;

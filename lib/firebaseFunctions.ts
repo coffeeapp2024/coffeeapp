@@ -35,6 +35,7 @@ export async function createUserInFirestore(
         fireplaceLevel: 1,
         startTimeMine: null,
         endTimeMine: null,
+        inStorage: null,
         collection: null,
         voucherIdList: [],
         LikedEventImageIdList: [],

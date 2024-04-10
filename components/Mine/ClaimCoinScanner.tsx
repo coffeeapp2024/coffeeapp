@@ -6,7 +6,7 @@ import { useUserDataStore } from "@/store/zustand";
 import { toast } from "sonner";
 import QRCodeScanner from "../Template/QrCodeScanner";
 import { deleteDocumentByKey, fetchCollectionData } from "@/lib/firebaseUtils";
-import { QrCodeType } from "@/store/storeTypes";
+import { QrCodeType, UserData } from "@/store/storeTypes";
 import { calculateEndTimeMine } from "@/lib/timeActions";
 
 const ClaimCoinScanner = () => {
@@ -17,6 +17,10 @@ const ClaimCoinScanner = () => {
       toast.warning("Sign in to scan QR Code");
       return;
     }
+    if (!userData.fillTime) {
+      toast.warning("Fill time is null");
+      return;
+    }
 
     const keys = (await fetchCollectionData("keys")) as QrCodeType[];
 
@@ -24,10 +28,14 @@ const ClaimCoinScanner = () => {
       const now = new Date();
       const newEndTimeMine = calculateEndTimeMine(now, userData.fillTime);
 
-      const newUserData = {
+      const newUserData: UserData = {
         ...userData,
         startTimeMine: now.toISOString(),
         endTimeMine: newEndTimeMine,
+        inStorage: {
+          balance: 0,
+          timeAt: now.toISOString(),
+        },
       };
 
       setUserData(newUserData);
@@ -35,7 +43,7 @@ const ClaimCoinScanner = () => {
 
       await deleteDocumentByKey("keys", "key", text);
 
-      toast.success(`QR Code scanned successfully!`);
+      toast.success("QR Code scanned successfully!");
     } else {
       toast.error("Invalid QR Code. Please try again.");
     }
@@ -45,9 +53,6 @@ const ClaimCoinScanner = () => {
     <QRCodeScanner
       buttonName="Claim MIN"
       className="!px-3 !text-lg"
-      handleOnClick={() => {
-        !userData && toast.warning("Sign in to scan QR Code");
-      }}
       handleQrCode={handleQrCode}
     />
   );

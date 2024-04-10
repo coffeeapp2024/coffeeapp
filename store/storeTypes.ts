@@ -13,6 +13,11 @@ export type Size = {
   isDefault: boolean;
 };
 
+export type InStorage = {
+  balance: number;
+  timeAt: string;
+};
+
 export type UserData = {
   email: string | null;
   displayName: string | null;
@@ -23,6 +28,7 @@ export type UserData = {
   fireplaceLevel: number | null;
   startTimeMine: string | null;
   endTimeMine: string | null;
+  inStorage: InStorage | null;
   voucherIdList: string[] | null;
   collection: CartItem[] | null;
   LikedEventImageIdList: string[] | null;
