@@ -27,8 +27,8 @@ function Nav() {
   ];
 
   return (
-    <div className="fixed z-50 bottom-0 left-0 w-full">
-      <nav className="px-2 pt-2 pb-6 w-full mx-auto flex justify-around items-center bg-background shadow-sm">
+    <div className="fixed z-50 bottom-6 left-0 w-full px-3">
+      <nav className="px-1 pt-2 pb-2 w-full mx-auto flex justify-around items-center bg-background shadow-sm rounded-[26px]">
         {navList.map(([title, url], index) => {
           const isActive = pathname === url;
           return (
@@ -37,7 +37,7 @@ function Nav() {
               key={index}
               className={`${
                 isActive ? "text-white bg-neutral-700" : "text-neutral-500 "
-              } flex h-12 items-center justify-center gap-x-1 py-1 px-3 rounded-full font-semibold transition-transform`}
+              } flex h-12 items-center justify-center gap-x-1 py-1 px-3 rounded-3xl font-semibold transition-transform`}
             >
               {icons[index]}
               {isActive && title}

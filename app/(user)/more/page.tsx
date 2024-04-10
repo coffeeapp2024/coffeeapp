@@ -12,12 +12,12 @@ function Page() {
       }}
       className="bg-neutral-100 min-h-[150vh] pb-40 px-4 pt-4"
     >
-      <div className="grid grid-cols-2 gap-y-6 pb-40">
+      <div className="flex flex-col gap-y-6 pb-40">
         <GameDialog />
         <BoostDialog />
-        <div className=" col-span-2 rounded-3xl bg-background aspect-[3/1] w-full flex items-center justify-center  shadow-sm">
+        {/* <div className="rounded-3xl bg-background bg-opacity-content1 aspect-[3/1] w-full flex items-center justify-center  shadow-sm">
           <p className="text-neutral-400">Coming Soon App</p>
-        </div>
+        </div> */}
       </div>
     </div>
   );
