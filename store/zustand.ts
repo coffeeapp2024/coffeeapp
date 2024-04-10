@@ -39,6 +39,17 @@ export const useTimeStore = create<TimeStore>((set) => ({
   setRemainingTime: (time) => set({ remainingTime: time }),
 }));
 
+export type MiningProgressStore = {
+  miningProgressPercentage: number;
+  setMiningProgressPercentage: (percentage: number) => void;
+};
+
+export const useMiningProgressStore = create<MiningProgressStore>((set) => ({
+  miningProgressPercentage: 0,
+  setMiningProgressPercentage: (percentage) =>
+    set({ miningProgressPercentage: percentage }),
+}));
+
 export type BalanceInStorageStore = {
   balanceInStorage: number | null;
   setBalanceInStorage: (balance: number | null) => void;

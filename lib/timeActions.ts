@@ -9,6 +9,30 @@ export function calculateRemainingTime(endTime: string): number | null {
   return Math.max(remainingTimeSeconds, 0);
 }
 
+export function calculateMiningProgressPercentage(
+  startTime: string | null | undefined,
+  endTime: string | null | undefined
+): number {
+  if (!startTime || !endTime) {
+    return 0;
+  }
+
+  const startDate = new Date(startTime);
+  const endDate = new Date(endTime);
+  const now = new Date();
+
+  const totalTimeInSeconds = (endDate.getTime() - startDate.getTime()) / 1000;
+  const elapsedTimeInSeconds = (now.getTime() - startDate.getTime()) / 1000;
+
+  if (elapsedTimeInSeconds < 0 || elapsedTimeInSeconds > totalTimeInSeconds) {
+    // Return null if start time is in the future or end time is in the past
+    return 0;
+  }
+
+  const progressPercentage = (elapsedTimeInSeconds / totalTimeInSeconds) * 100;
+  return progressPercentage;
+}
+
 export const calculateEndTimeMine = (now: Date, fillTime: number): string => {
   const endTime = new Date(now.getTime() + fillTime * 3600 * 1000);
   return endTime.toISOString();
