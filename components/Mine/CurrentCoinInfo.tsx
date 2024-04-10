@@ -32,7 +32,7 @@ function CurrentCoinInfo() {
         <div className="flex items-center ml-1">
           <CoinIcon className="w-4 h-4 ml-1 " />
           <span className="font-bold ">
-            {userData?.balance.toFixed(5) ?? Number(0).toFixed(6)}
+            {userData?.balance.toFixed(5) ?? Number(0).toFixed(5)}
           </span>
         </div>
       </div>
