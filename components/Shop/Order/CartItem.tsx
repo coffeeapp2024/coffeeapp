@@ -33,7 +33,7 @@ function CartItem({ index }: { index: number }) {
     : cashCartItems[index];
   const { productId, quantity, toppingIds, sizeId, totalPrice, id } = cartItem;
 
-  const { selectedProduct, selectedSize, selectedToppingNames } =
+  const { selectedProduct, selectedSizeName, selectedToppingNames } =
     getSelectedProductDetails(
       products,
       toppings,
@@ -89,7 +89,7 @@ function CartItem({ index }: { index: number }) {
         <div className="mb-2">
           <h4 className="font-bold">{name}</h4>
           <p className="text-nowrap text-neutral-700 text-sm font-semibold ">
-            {selectedSize && ` Size: ${selectedSize}`}
+            {selectedSizeName && ` Size: ${selectedSizeName}`}
           </p>
           <p className="text-nowrap overflow-ellipsis text-neutral-700 text-sm font-semibold">
             {isToppings && `Add ins: ${selectedToppingNames}`}

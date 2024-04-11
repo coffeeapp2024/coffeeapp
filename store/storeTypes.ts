@@ -8,7 +8,7 @@ export type UserVoucherInfo = {
 
 export type Size = {
   id: string;
-  size: string;
+  name: string;
   point: number;
   price: number;
   isDefault: boolean;
