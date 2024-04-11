@@ -251,11 +251,44 @@ const products = [
   },
 ];
 
+const storages = [
+  {
+    name: "Titanium Storage",
+    level: 5,
+    fillTime: 24,
+    price: 100,
+  },
+  {
+    level: 3,
+    price: 10,
+    fillTime: 3,
+    name: "Modular Storage",
+  },
+  {
+    price: 40,
+    name: "Liquid Storage",
+    level: 4,
+    fillTime: 12,
+  },
+  {
+    price: 5,
+    fillTime: 4,
+    name: "Metal Storage",
+    level: 2,
+  },
+  {
+    price: 0,
+    name: "Wooden Storage",
+    fillTime: 2,
+    level: 1,
+  },
+];
+
 function Testing() {
   const { userData } = useUserDataStore();
 
   const handleReset = async () => {
-    await resetCollectionData("storages", products);
+    await resetCollectionData("storages", storages);
     // await updateKeyInDocument(
     //   "users",
     //   "NllhI3c86XTHdDIS0sNL9JfE3rN2",
