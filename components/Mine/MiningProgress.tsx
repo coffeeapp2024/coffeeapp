@@ -17,7 +17,7 @@ function MiningProgress() {
         startTimeMine,
         endTimeMine
       );
-      setMiningProgressPercentage((percentage || 99) + 1);
+      setMiningProgressPercentage((percentage || 97) + 3);
     }, 10000);
 
     // Set initial percentage immediately after component mounts
@@ -25,7 +25,7 @@ function MiningProgress() {
       startTimeMine,
       endTimeMine
     );
-    setMiningProgressPercentage((initialPercentage || 99) + 1);
+    setMiningProgressPercentage((initialPercentage || 97) + 3);
 
     return () => clearInterval(interval);
     // eslint-disable-next-line react-hooks/exhaustive-deps
