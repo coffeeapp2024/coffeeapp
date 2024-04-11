@@ -1,3 +1,4 @@
+import AdminNav from "@/components/Admin/AdminNav";
 import NavGoto from "@/components/Admin/NavGoto";
 import React from "react";
 
@@ -9,6 +10,7 @@ export default function RootLayout({
   return (
     <main className="">
       <NavGoto />
+      {/* <AdminNav /> */}
       {children}
     </main>
   );

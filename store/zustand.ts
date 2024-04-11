@@ -122,7 +122,7 @@ export const useEventPostStore = createPostStore("eventImages", []);
 export const useCheckinPostStore = createPostStore("checkinImages", []);
 
 export const useProductStore = create<ProductStore>((set) => ({
-  products: null,
+  products: [],
   setProducts: (products) => set({ products }),
 }));
 
@@ -204,14 +204,14 @@ export const useFireplaceLevelStore = create<FireplaceLevelStore>((set) => ({
 }));
 
 export type PriceTypeStore = {
-  isPriceInCoins: boolean;
+  isPriceInPoint: boolean;
   togglePriceType: () => void;
 };
 
 export const usePriceTypeStore = create<PriceTypeStore>((set) => ({
-  isPriceInCoins: true,
+  isPriceInPoint: true,
   togglePriceType: () =>
-    set((state) => ({ isPriceInCoins: !state.isPriceInCoins })),
+    set((state) => ({ isPriceInPoint: !state.isPriceInPoint })),
 }));
 
 export type Topping = {
@@ -222,31 +222,33 @@ export type Topping = {
 };
 
 export type ToppingsStore = {
-  toppings: Topping[] | null;
+  toppings: Topping[];
   setToppings: (toppings: Topping[]) => void;
 };
 
 export const useToppingsStore = create<ToppingsStore>((set) => ({
-  toppings: null,
+  toppings: [],
   setToppings: (toppings) => set({ toppings }),
 }));
 
 export type CartItem = {
-  product: Product;
-  size: string;
-  toppings: string[];
+  id: string;
+  productId: string;
+  sizeId: string;
+  toppingIds: string[];
   quantity: number;
   totalPrice: number;
+  priceType: CartType;
 };
+export type CartType = "cash" | "point";
 
 type CartStoreType = {
   cartItems: CartItem[];
   addToCart: (item: CartItem) => void;
-  removeFromCart: (index: number) => void;
+  removeFromCart: (id: string) => void;
   clearCart: () => void;
   setItem: (index: number, newItem: CartItem) => void;
 };
-type CartType = "cash" | "coin";
 
 const createCartStore = (
   cartType: CartType
@@ -257,10 +259,10 @@ const createCartStore = (
       console.log(`Adding item to ${cartType} cart:`, item);
       set((state) => ({ cartItems: [...state.cartItems, item] }));
     },
-    removeFromCart: (index) => {
-      console.log(`Removing item at index ${index} from ${cartType} cart`);
+    removeFromCart: (id) => {
+      console.log(`Removing item with id ${id} from ${cartType} cart`);
       set((state) => ({
-        cartItems: state.cartItems.filter((_, i) => i !== index),
+        cartItems: state.cartItems.filter((item) => item.id !== id),
       }));
     },
     clearCart: () => {
@@ -282,7 +284,7 @@ const createCartStore = (
 };
 
 export const useCashCartStore = createCartStore("cash");
-export const useCoinCartStore = createCartStore("coin");
+export const usePointCartStore = createCartStore("point");
 
 export type QrCodeStore = {
   id: string | null;

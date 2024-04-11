@@ -1,9 +1,10 @@
 "use client";
 
 import {
+  CartType,
   Topping,
   useCashCartStore,
-  useCoinCartStore,
+  usePointCartStore,
   usePriceTypeStore,
   useToppingsStore,
 } from "@/store/zustand";
@@ -14,27 +15,24 @@ import { Drawer, DrawerContent, DrawerTrigger } from "../ui/drawer";
 import { Product, Size } from "@/store/storeTypes";
 import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
 import { toast } from "sonner";
+import { generateUniqueId } from "@/lib/utils";
 
 function ProductCard({ product }: { product: Product }) {
   const [open, setOpen] = useState(false);
-  const { isPriceInCoins } = usePriceTypeStore();
+  const { isPriceInPoint } = usePriceTypeStore();
   const { toppings } = useToppingsStore();
   const { img, name, sizes, toppingIds, info } = product ?? {};
   const [productToppings, setProductToppings] = useState<Topping[] | []>([]);
 
-  const [selectedSize, setSelectedSize] = useState<Size | null>(null);
+  const [selectedSize, setSelectedSize] = useState<Size | undefined>(undefined);
   const [selectedToppings, setSelectedToppings] = useState<Topping[]>([]);
   const [totalPrice, setTotalPrice] = useState<number>(0);
-  const { cartItems: cashCartItems, addToCart: addToCashCart } =
-    useCashCartStore();
-  const { cartItems: coinCartItems, addToCart: addToCoinCart } =
-    useCoinCartStore();
+  const { addToCart: addToCashCart } = useCashCartStore();
+  const { addToCart: addToPointCart } = usePointCartStore();
 
   useEffect(() => {
     const defaultSize = sizes.find((size) => size.isDefault);
-    if (defaultSize) {
-      setSelectedSize(defaultSize);
-    }
+    setSelectedSize(defaultSize);
   }, [sizes]);
 
   useEffect(() => {
@@ -71,21 +69,17 @@ function ProductCard({ product }: { product: Product }) {
     const calculateTotalPrice = (): number => {
       let totalPrice = 0;
       if (selectedSize) {
-        // Add cash price if available
-        if (!isPriceInCoins) {
-          totalPrice += selectedSize.price;
-        } else {
-          // Add point price if available
+        if (isPriceInPoint) {
           totalPrice += selectedSize.point;
+        } else {
+          totalPrice += selectedSize.price;
         }
       }
       selectedToppings.forEach((topping) => {
-        // Add cash price if available
-        if (!isPriceInCoins) {
-          totalPrice += topping.price;
-        } else {
-          // Add point price if available
+        if (isPriceInPoint) {
           totalPrice += topping.point;
+        } else {
+          totalPrice += topping.price;
         }
       });
       totalPrice *= quantity;
@@ -93,18 +87,20 @@ function ProductCard({ product }: { product: Product }) {
     };
 
     setTotalPrice(calculateTotalPrice());
-  }, [selectedSize, selectedToppings, quantity, isPriceInCoins]);
+  }, [selectedSize, selectedToppings, quantity, isPriceInPoint]);
 
   const handleAddToCart = () => {
     const itemToAdd = {
-      product: product,
-      size: selectedSize?.size || "",
-      toppings: selectedToppings.map((topping) => topping.name),
+      id: generateUniqueId(),
+      productId: product.id,
+      sizeId: selectedSize?.id ?? "",
+      toppingIds: selectedToppings.map((topping) => topping.id),
       quantity: quantity,
       totalPrice: totalPrice,
+      priceType: (isPriceInPoint ? "point" : "cash") as CartType,
     };
 
-    isPriceInCoins ? addToCoinCart(itemToAdd) : addToCashCart(itemToAdd);
+    isPriceInPoint ? addToPointCart(itemToAdd) : addToCashCart(itemToAdd);
     setOpen(false);
     toast.success("Item added to cart successfully");
   };
@@ -129,7 +125,7 @@ function ProductCard({ product }: { product: Product }) {
           </h3>
 
           <span className="font-bold text-neutral-800">
-            {isPriceInCoins ? (
+            {isPriceInPoint ? (
               <span className="flex items-center text-base">
                 <CoinIcon className="w-4 h-4 -ml-[1px]" />
                 {sizes.find((size) => size.isDefault)?.point}
@@ -160,7 +156,7 @@ function ProductCard({ product }: { product: Product }) {
                 <div
                   className={`h-10 px-4 ${
                     size.size === selectedSize?.size
-                      ? isPriceInCoins
+                      ? isPriceInPoint
                         ? "bg-secondary-foreground text-white"
                         : "bg-primary-foreground text-white"
                       : "bg-neutral-100 text-neutral-700"
@@ -185,7 +181,7 @@ function ProductCard({ product }: { product: Product }) {
                         selectedToppings.some(
                           (selected) => selected.id === topping.id
                         )
-                          ? isPriceInCoins
+                          ? isPriceInPoint
                             ? "bg-secondary-foreground text-white"
                             : "bg-primary-foreground text-white"
                           : "bg-neutral-100 text-neutral-700"
@@ -223,16 +219,16 @@ function ProductCard({ product }: { product: Product }) {
               <button
                 onClick={() => handleAddToCart()}
                 className={`${
-                  isPriceInCoins
+                  isPriceInPoint
                     ? "bg-secondary-foreground"
                     : "bg-primary-foreground"
                 } basis-3/5 text-white text-lg font-medium h-14 rounded-2xl flex items-center justify-between px-4`}
               >
                 <div>Add to cart</div>
                 <span className="font-semibold flex items-center justify-center">
-                  {isPriceInCoins && <CoinIcon className="w-5 h-5 -ml-1" />}
+                  {isPriceInPoint && <CoinIcon className="w-5 h-5 -ml-1" />}
                   {totalPrice}
-                  {!isPriceInCoins && "k"}
+                  {!isPriceInPoint && "k"}
                 </span>
               </button>
             </div>

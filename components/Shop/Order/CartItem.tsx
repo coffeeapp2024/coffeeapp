@@ -1,95 +1,87 @@
 "use client";
 
 import CoinIcon from "@/components/Template/CoinIcon";
-import { useCashCartStore, useCoinCartStore } from "@/store/zustand";
+import { getSelectedProductDetails } from "@/lib/userActions";
+import {
+  useCashCartStore,
+  usePointCartStore,
+  usePriceTypeStore,
+  useProductStore,
+  useToppingsStore,
+} from "@/store/zustand";
 import { MinusIcon, PlusIcon, TrashIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
-import React, { useState } from "react";
-import { toast } from "sonner";
+import React from "react";
 
-function CartItem({
-  isCoinCartItem,
-  index,
-}: {
-  isCoinCartItem: boolean;
-  index: number;
-}) {
+function CartItem({ index }: { index: number }) {
+  const { isPriceInPoint } = usePriceTypeStore();
+  const { products } = useProductStore();
+  const { toppings } = useToppingsStore();
   const {
     cartItems: cashCartItems,
     setItem: setCashCartItem,
     removeFromCart: removeFromCashCart,
   } = useCashCartStore();
   const {
-    cartItems: coinCartItems,
-    setItem: setCoinCartItem,
-    removeFromCart: removeFromCoinCart,
-  } = useCoinCartStore();
-  const cartItem = isCoinCartItem ? coinCartItems[index] : cashCartItems[index];
-  const { product, quantity, toppings, size, totalPrice } = cartItem;
-  const { img, name } = product;
+    cartItems: PointCartItems,
+    setItem: setPointCartItem,
+    removeFromCart: removeFromPointCart,
+  } = usePointCartStore();
 
-  const handleIncrement = () => {
-    if (cartItem.quantity < 0) {
-      return;
-    }
-    // Increment the quantity of the item in the cart
-    const updatedQuantity = cartItem.quantity + 1;
-    const updatedTotalPrice =
-      (cartItem.totalPrice * updatedQuantity) / cartItem.quantity;
+  const cartItem = isPriceInPoint
+    ? PointCartItems[index]
+    : cashCartItems[index];
+  const { productId, quantity, toppingIds, sizeId, totalPrice, id } = cartItem;
 
-    // Update the cart items in the appropriate store
-    isCoinCartItem
-      ? setCoinCartItem(index, {
-          ...cartItem,
-          quantity: updatedQuantity,
-          totalPrice: updatedTotalPrice,
-        })
-      : setCashCartItem(index, {
-          ...cartItem,
-          quantity: updatedQuantity,
-          totalPrice: updatedTotalPrice,
-        });
-  };
+  const { selectedProduct, selectedSize, selectedToppings } =
+    getSelectedProductDetails(
+      products,
+      toppings,
+      productId,
+      sizeId,
+      toppingIds
+    );
 
-  const handleDecrement = () => {
-    // Ensure the quantity does not go below 0
-    if (cartItem.quantity <= 1) {
-      return;
-    }
-    // Decrement the quantity of the item in the cart
-    const updatedQuantity = cartItem.quantity - 1;
-    const updatedTotalPrice =
-      (cartItem.totalPrice * updatedQuantity) / cartItem.quantity;
+  const { img, name } = selectedProduct ?? {};
 
-    // Update the cart items in the appropriate store
-    isCoinCartItem
-      ? setCoinCartItem(index, {
-          ...cartItem,
-          quantity: updatedQuantity,
-          totalPrice: updatedTotalPrice,
-        })
-      : setCashCartItem(index, {
-          ...cartItem,
-          quantity: updatedQuantity,
-          totalPrice: updatedTotalPrice,
-        });
+  const handleUpdateQuantity = (number: number): void => {
+    if (quantity <= 1) return;
+
+    const updatedQuantity = quantity + number;
+    const updatedTotalPrice = (totalPrice * updatedQuantity) / quantity;
+
+    const updatedCartItem = {
+      ...cartItem,
+      quantity: updatedQuantity,
+      totalPrice: updatedTotalPrice,
+    };
+
+    isPriceInPoint
+      ? setPointCartItem(index, updatedCartItem)
+      : setCashCartItem(index, updatedCartItem);
+
+    return;
   };
 
   const handleDelete = () => {
-    // Remove the item from the cart
-    isCoinCartItem ? removeFromCoinCart(index) : removeFromCashCart(index);
+    isPriceInPoint ? removeFromPointCart(id) : removeFromCashCart(id);
   };
+
+  const isToppings = selectedToppings.length > 0;
+
   return (
     <div className="relative h-32 bg-white bg-opacity-70 w-full p-2 rounded-2xl flex shadow-sm">
       {/* Left */}
       <div className="bg-neutral-200 h-full aspect-square rounded-xl overflow-hidden">
-        <Image
-          src={img}
-          width={300}
-          height={300}
-          alt="Image Voucher"
-          className="w-full h-full object-cover"
-        />
+        {img && (
+          <Image
+            src={img}
+            width={300}
+            height={300}
+            alt="Image Voucher"
+            className="w-full h-full object-cover"
+          />
+        )}
       </div>
 
       {/* Right */}
@@ -97,34 +89,33 @@ function CartItem({
         <div className="mb-2">
           <h4 className="font-bold">{name}</h4>
           <p className="text-wrap text-neutral-700 text-sm font-semibold">
-            {size && ` Size: ${size}`}
+            {selectedSize && ` Size: ${selectedSize}`}
           </p>
           <p className="text-wrap text-neutral-700 text-sm font-semibold">
-            {toppings.length > 0 && `Add ins: ${toppings}`}
+            {isToppings && `Add ins: ${toppings}`}
           </p>
         </div>
 
         {/* Bottom */}
-
         <div className="flex items-center justify-between">
           <span className="flex items-center justify-center w-fit font-semibold">
-            {isCoinCartItem && <CoinIcon className="w-4 h-4 -ml-[1px]" />}
+            {isPriceInPoint && <CoinIcon className="w-4 h-4 -ml-[1px]" />}
             {totalPrice}
-            {!isCoinCartItem && "k"}
+            {!isPriceInPoint && "k"}
           </span>
 
           {/* Quantity */}
           <div className="flex items-center justify-between gap-x-2">
             <button
               className="p-2 rounded-full bg-white bg-opacity-95"
-              onClick={handleDecrement}
+              onClick={() => handleUpdateQuantity(-1)}
             >
               <MinusIcon className="w-4 h-4" />
             </button>
             <span className="font-medium text-sm">{quantity}</span>
             <button
               className="p-2 rounded-full bg-white bg-opacity-80"
-              onClick={handleIncrement}
+              onClick={() => handleUpdateQuantity(1)}
             >
               <PlusIcon className="w-4 h-4" />
             </button>

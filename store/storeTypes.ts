@@ -7,6 +7,7 @@ export type UserVoucherInfo = {
 };
 
 export type Size = {
+  id: string;
   size: string;
   point: number;
   price: number;
@@ -132,7 +133,7 @@ export type Product = {
 };
 
 export type ProductStore = {
-  products: Product[] | null;
+  products: Product[];
   setProducts: (products: Product[]) => void;
 };
 

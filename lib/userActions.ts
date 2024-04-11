@@ -1,5 +1,6 @@
-import { UserData } from "@/store/storeTypes";
+import { Product, Size, UserData } from "@/store/storeTypes";
 import { updateDocumentByKeyCondition } from "./firebaseUtils";
+import { Topping } from "@/store/zustand";
 
 export function calcBalanceInStorage(userData: UserData): number | null {
   const { miningSpeed, inStorage } = userData;
@@ -73,4 +74,22 @@ export async function updateUserDataAfterPurchase(
 
   console.log("Updated user data after purchase:", updatedUserData);
   return updatedUserData;
+}
+
+export function getSelectedProductDetails(
+  products: Product[],
+  toppings: Topping[],
+  productId: string,
+  sizeId: string,
+  toppingIds: string[]
+) {
+  const selectedProduct = products.find((product) => product.id === productId);
+  const selectedSize = selectedProduct?.sizes.find(
+    (size) => size.id === sizeId
+  );
+  const selectedToppings = toppings.filter((topping) =>
+    toppingIds?.includes(topping.id)
+  );
+
+  return { selectedProduct, selectedSize, selectedToppings };
 }
