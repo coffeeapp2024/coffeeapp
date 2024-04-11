@@ -21,18 +21,22 @@ function ProductCard({ product }: { product: Product }) {
   const [open, setOpen] = useState(false);
   const { isPriceInPoint } = usePriceTypeStore();
   const { toppings } = useToppingsStore();
-  const { img, name, sizes, toppingIds, info } = product ?? {};
+
+  const { img, name, sizes, toppingIds, info } = product;
   const [productToppings, setProductToppings] = useState<Topping[] | []>([]);
 
-  const [selectedSize, setSelectedSize] = useState<Size | undefined>(undefined);
+  const [selectedSize, setSelectedSize] = useState<Size>(sizes[0]);
   const [selectedToppings, setSelectedToppings] = useState<Topping[]>([]);
+  const [quantity, setQuantity] = useState(1);
+
   const [totalPrice, setTotalPrice] = useState<number>(0);
+
   const { addToCart: addToCashCart } = useCashCartStore();
   const { addToCart: addToPointCart } = usePointCartStore();
 
   useEffect(() => {
     const defaultSize = sizes.find((size) => size.isDefault);
-    setSelectedSize(defaultSize);
+    setSelectedSize(defaultSize || sizes[0]);
   }, [sizes]);
 
   useEffect(() => {
@@ -43,8 +47,6 @@ function ProductCard({ product }: { product: Product }) {
       setProductToppings(filteredToppings);
     }
   }, [toppings, toppingIds]);
-
-  const [quantity, setQuantity] = useState(1);
 
   const handleUpdateQuantity = (number: -1 | 1) => {
     if (quantity <= 1 && number === -1) return;
@@ -91,7 +93,7 @@ function ProductCard({ product }: { product: Product }) {
     const itemToAdd = {
       id: generateUniqueId(),
       productId: product.id,
-      sizeId: selectedSize?.id ?? "",
+      sizeId: selectedSize?.id,
       toppingIds: selectedToppings.map((topping) => topping.id),
       quantity: quantity,
       totalPrice: totalPrice,
@@ -169,7 +171,7 @@ function ProductCard({ product }: { product: Product }) {
 
             {/* Add ins */}
             {productToppings.length > 0 && (
-              <div>
+              <>
                 <h3 className="font-bold text-xl mb-2">Add ins</h3>
                 <div className="flex items-center justify-start gap-x-2">
                   {productToppings.map((topping, index) => (
@@ -190,7 +192,7 @@ function ProductCard({ product }: { product: Product }) {
                     </button>
                   ))}
                 </div>
-              </div>
+              </>
             )}
 
             <div className="border-t-1px -mx-3 mb-3 mt-6"></div>
