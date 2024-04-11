@@ -55,7 +55,7 @@ const ClaimCoinScanner = () => {
     >
       <QRCodeScanner
         buttonName="Claim MIN"
-        className="!px-3 !text-lg "
+        className="!px-3 !text-lg"
         handleQrCode={handleQrCode}
       />
     </div>
