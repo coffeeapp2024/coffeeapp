@@ -19,7 +19,7 @@ function UserItemCard({ item, index }: { item: CartItem; index: number }) {
 
   const { sizeId, productId, toppingIds, quantity } = item ?? {};
 
-  const { selectedProduct, selectedSize, selectedToppings } =
+  const { selectedProduct, selectedSize, selectedToppingNames } =
     getSelectedProductDetails(
       products,
       toppings,
@@ -61,7 +61,8 @@ function UserItemCard({ item, index }: { item: CartItem; index: number }) {
             {selectedSize && ` Size: ${selectedSize}`}
           </p>
           <p className="text-wrap text-neutral-700 text-sm font-semibold">
-            {selectedToppings.length > 0 && ` Add ins: ${selectedToppings}`}
+            {selectedToppingNames.length > 0 &&
+              ` Add ins: ${selectedToppingNames}`}
           </p>
           <p className="text-wrap text-neutral-700 text-sm font-semibold">
             Quantity: {quantity}

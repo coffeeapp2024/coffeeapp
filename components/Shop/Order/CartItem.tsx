@@ -33,7 +33,7 @@ function CartItem({ index }: { index: number }) {
     : cashCartItems[index];
   const { productId, quantity, toppingIds, sizeId, totalPrice, id } = cartItem;
 
-  const { selectedProduct, selectedSize, selectedToppings } =
+  const { selectedProduct, selectedSize, selectedToppingNames } =
     getSelectedProductDetails(
       products,
       toppings,
@@ -44,8 +44,8 @@ function CartItem({ index }: { index: number }) {
 
   const { img, name } = selectedProduct ?? {};
 
-  const handleUpdateQuantity = (number: number): void => {
-    if (quantity <= 1) return;
+  const handleUpdateQuantity = (number: -1 | 1): void => {
+    if (quantity <= 1 && number === -1) return;
 
     const updatedQuantity = quantity + number;
     const updatedTotalPrice = (totalPrice * updatedQuantity) / quantity;
@@ -67,12 +67,12 @@ function CartItem({ index }: { index: number }) {
     isPriceInPoint ? removeFromPointCart(id) : removeFromCashCart(id);
   };
 
-  const isToppings = selectedToppings.length > 0;
+  const isToppings = selectedToppingNames.length > 0;
 
   return (
     <div className="relative h-32 bg-white bg-opacity-70 w-full p-2 rounded-2xl flex shadow-sm">
       {/* Left */}
-      <div className="bg-neutral-200 h-full aspect-square rounded-xl overflow-hidden">
+      <div className="bg-neutral-200 basis-1/3 h-full aspect-square rounded-xl overflow-hidden">
         {img && (
           <Image
             src={img}
@@ -88,11 +88,11 @@ function CartItem({ index }: { index: number }) {
       <div className="pl-3 pt-1 basis-2/3 flex flex-col justify-between flex-grow">
         <div className="mb-2">
           <h4 className="font-bold">{name}</h4>
-          <p className="text-wrap text-neutral-700 text-sm font-semibold">
+          <p className="text-nowrap text-neutral-700 text-sm font-semibold ">
             {selectedSize && ` Size: ${selectedSize}`}
           </p>
-          <p className="text-wrap text-neutral-700 text-sm font-semibold">
-            {isToppings && `Add ins: ${toppings}`}
+          <p className="text-nowrap overflow-ellipsis text-neutral-700 text-sm font-semibold">
+            {isToppings && `Add ins: ${selectedToppingNames}`}
           </p>
         </div>
 

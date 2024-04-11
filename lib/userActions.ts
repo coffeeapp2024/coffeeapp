@@ -84,12 +84,11 @@ export function getSelectedProductDetails(
   toppingIds: string[]
 ) {
   const selectedProduct = products.find((product) => product.id === productId);
-  const selectedSize = selectedProduct?.sizes.find(
-    (size) => size.id === sizeId
-  );
-  const selectedToppings = toppings.filter((topping) =>
-    toppingIds?.includes(topping.id)
-  );
+  const { size: selectedSize } =
+    selectedProduct?.sizes.find((size) => size.id === sizeId) ?? {};
+  const selectedToppingNames = toppings
+    .filter((topping) => toppingIds?.includes(topping.id))
+    .map((topping) => topping.name);
 
-  return { selectedProduct, selectedSize, selectedToppings };
+  return { selectedProduct, selectedSize, selectedToppingNames };
 }
