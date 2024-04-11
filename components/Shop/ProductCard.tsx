@@ -45,14 +45,11 @@ function ProductCard({ product }: { product: Product }) {
   }, [toppings, toppingIds]);
 
   const [quantity, setQuantity] = useState(1);
-  const increaseQuantity = () => {
-    setQuantity(quantity + 1);
-  };
 
-  const decreaseQuantity = () => {
-    if (quantity > 1) {
-      setQuantity(quantity - 1);
-    }
+  const handleUpdateQuantity = (number: -1 | 1) => {
+    if (quantity <= 1 && number === -1) return;
+
+    setQuantity(quantity + number);
   };
 
   const toggleTopping = (topping: Topping) => {
@@ -87,7 +84,8 @@ function ProductCard({ product }: { product: Product }) {
     };
 
     setTotalPrice(calculateTotalPrice());
-  }, [selectedSize, selectedToppings, quantity, isPriceInPoint]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedSize, selectedToppings, quantity]);
 
   const handleAddToCart = () => {
     const itemToAdd = {
@@ -155,7 +153,7 @@ function ProductCard({ product }: { product: Product }) {
               {sizes.map((size, index) => (
                 <div
                   className={`h-10 px-4 ${
-                    size.size === selectedSize?.size
+                    size.name === selectedSize?.name
                       ? isPriceInPoint
                         ? "bg-secondary-foreground text-white"
                         : "bg-primary-foreground text-white"
@@ -164,7 +162,7 @@ function ProductCard({ product }: { product: Product }) {
                   key={index}
                   onClick={() => setSelectedSize(size)}
                 >
-                  <span className="">{size.size}</span>
+                  <span>{size.name}</span>
                 </div>
               ))}
             </div>
@@ -202,14 +200,14 @@ function ProductCard({ product }: { product: Product }) {
               <div className="basis-2/5 h-14 px-3 bg-neutral-200 rounded-2xl w-full flex items-center justify-between ">
                 <div
                   className="w-8 h-8 rounded-xl flex items-center justify-center cursor-pointer"
-                  onClick={decreaseQuantity}
+                  onClick={() => handleUpdateQuantity(-1)}
                 >
                   <MinusIcon className="w-5 h-5" />
                 </div>
                 <span>{quantity}</span>
                 <div
                   className="w-8 h-8 rounded-xl flex items-center justify-center cursor-pointer"
-                  onClick={increaseQuantity}
+                  onClick={() => handleUpdateQuantity(1)}
                 >
                   <PlusIcon className="w-5 h-5" />
                 </div>
