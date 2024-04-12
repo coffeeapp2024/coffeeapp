@@ -6,7 +6,7 @@ import Image from "next/image";
 import { createUserInFirestore } from "@/lib/firebaseFunctions";
 import { useUserDataStore } from "@/store/zustand";
 import { getDocumentById } from "@/lib/firebaseUtils";
-import { UserData } from "@/store/storeTypes";
+import { UserData } from "@/store/zustand";
 
 export default function LoginButton() {
   const { setUserData, setUserId } = useUserDataStore();
