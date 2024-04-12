@@ -38,7 +38,7 @@ export async function createUserInFirestore(
         endTimeMine: null,
         inStorage: null,
         collection: null,
-        voucherIdList: [],
+        voucherList: [],
         LikedEventImageIdList: [],
         LikedCheckinImageIdList: [],
       };
