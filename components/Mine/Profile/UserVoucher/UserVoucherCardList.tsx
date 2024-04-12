@@ -2,8 +2,9 @@ import React, { useEffect } from "react";
 import { UserData, useQrCodeStore, useUserDataStore } from "@/store/zustand";
 import UserVoucherCard from "./UserVoucherCard";
 import { toast } from "sonner";
-import { listenForKeyChangeInDoc } from "@/lib/firebaseUtils";
+import { listenForKeyChangeInDoc, listenToDocument } from "@/lib/firebaseUtils";
 import { isEqual } from "lodash";
+import { User } from "firebase/auth";
 
 function UserVoucherCardList() {
   const { open, setOpen } = useQrCodeStore();
@@ -15,19 +16,18 @@ function UserVoucherCardList() {
     console.log("UserVoucherCardList effect is running");
 
     if (userId && userData && open) {
-      const unsubscribe = listenForKeyChangeInDoc(
+      const unsubscribe = listenToDocument(
         "users",
         userId,
-        "voucherList",
-        (voucherList) => {
-          if (isEqual(voucherList, userData.voucherList)) {
-            console.log("User voucherIdList remains unchanged");
+        (data: UserData) => {
+          if (isEqual(data.voucherList, userData.voucherList)) {
+            console.log("User voucherList remains unchanged");
             return;
           }
 
           const updatedUserData: UserData = {
             ...userData,
-            voucherList: voucherList,
+            voucherList: data.voucherList,
           };
 
           toast.success("Voucher has been successfully scanned!");

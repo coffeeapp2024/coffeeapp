@@ -509,6 +509,38 @@ export function listenForKeyChangeInDoc(
   }
 }
 
+export function listenToDocument(
+  collectionName: string,
+  docId: string,
+  callback: (data: any) => void
+) {
+  try {
+    // Tạo một tham chiếu đến tài liệu cụ thể
+    const docRef = doc(db, collectionName, docId);
+
+    // Lắng nghe sự thay đổi của tài liệu
+    const unsubscribe = onSnapshot(docRef, (docSnapshot) => {
+      if (docSnapshot.exists()) {
+        // Nếu tài liệu tồn tại, gọi callback với dữ liệu của tài liệu
+        callback(docSnapshot.data());
+      } else {
+        console.error(
+          `Document ${docId} does not exist in collection ${collectionName}`
+        );
+      }
+    });
+
+    // Trả về hàm unsubscribe để dừng lắng nghe khi cần thiết
+    return unsubscribe;
+  } catch (error) {
+    console.error(
+      `Error listening to document ${docId} from collection ${collectionName}:`,
+      error
+    );
+    throw error;
+  }
+}
+
 export async function uploadImageToFirebase(
   file: File,
   folder: string
