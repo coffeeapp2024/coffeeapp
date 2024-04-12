@@ -13,9 +13,7 @@ function UserVoucherCardList() {
   const { voucherList } = userData ?? {};
 
   useEffect(() => {
-    console.log("UserVoucherCardList effect is running");
-
-    if (userId && userData && open) {
+    if (userId && userData) {
       const unsubscribe = listenToDocument(
         "users",
         userId,
@@ -41,10 +39,6 @@ function UserVoucherCardList() {
         }
       );
     }
-
-    return () => {
-      console.log("UserVoucherCardList effect is finished");
-    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
