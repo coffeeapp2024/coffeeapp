@@ -2,11 +2,11 @@
 
 import React from "react";
 import { updateUserInFirestore } from "@/lib/firebaseFunctions";
-import { useUserDataStore } from "@/store/zustand";
+import { UserData, useUserDataStore } from "@/store/zustand";
 import { toast } from "sonner";
 import QRCodeScanner from "../Template/QrCodeScanner";
 import { deleteDocumentByKey, fetchCollectionData } from "@/lib/firebaseUtils";
-import { QrCodeType, UserData } from "@/store/storeTypes";
+import { QrCodeType } from "@/store/storeTypes";
 import { calculateEndTimeMine } from "@/lib/timeActions";
 
 const ClaimCoinScanner = () => {
@@ -40,7 +40,6 @@ const ClaimCoinScanner = () => {
 
       setUserData(newUserData);
       await updateUserInFirestore(userId, newUserData);
-
       await deleteDocumentByKey("keys", "key", text);
 
       toast.success("QR Code scanned successfully!");

@@ -24,8 +24,10 @@ type CartItem = {
   toppingIds: string[];
   quantity: number;
   totalPrice: number;
-  unit: "point" | "cash";
+  priceType: CartType;
 };
+
+type CartType = "cash" | "point";
 
 export type OrderItem = {
   id: string;

@@ -1,20 +1,15 @@
 "use client";
 
-import React, { useMemo, useState } from "react";
+import React, { useState } from "react";
 import { Sheet, SheetTrigger } from "@/components/ui/sheet";
 import SheetContentLayout from "@/components/ui/SheetContentLayout";
-import { ShoppingBagIcon } from "@heroicons/react/24/outline";
 import {
   useCashCartStore,
   usePointCartStore,
   usePriceTypeStore,
-  useUserDataStore,
 } from "@/store/zustand";
 
 import CartItem from "./CartItem";
-import CoinIcon from "@/components/Template/CoinIcon";
-import { updateUserDataAfterPurchase } from "@/lib/userActions";
-import { toast } from "sonner";
 import ShoppingCartIcon from "@/components/Icon/Navbar/Regular/ShoppingCartIcon";
 import Checkout from "./Checkout";
 

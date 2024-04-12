@@ -4,19 +4,42 @@ import QRCodeScanner from "../Template/QrCodeScanner";
 import React from "react";
 import { toast } from "sonner";
 import { useUserDataStore } from "@/store/zustand";
-import { deleteItemFromDocumentArrayByIndex } from "@/lib/firebaseUtils";
+import { removeVoucher } from "@/lib/voucherUtils";
+import {
+  addDocumentsToCollection,
+  deleteKeyInDocument,
+  getKeyValue,
+  updateKeyInDocument,
+} from "@/lib/firebaseUtils";
+import { generateUniqueId } from "@/lib/utils";
 
 const AdminScanner = () => {
   const { role } = useUserDataStore();
 
   const handleQrCode = async (text: string) => {
-    const [userId, arrayKey, indexStr] = text.split("-");
-    const index = parseInt(indexStr);
+    const [userId, arrayKey, id] = text.split("-");
 
-    await deleteItemFromDocumentArrayByIndex("users", userId, arrayKey, index);
+    if (arrayKey === "voucherList") {
+      const userVoucherList = await getKeyValue("users", userId, "voucherList");
+      const updatedVoucherList = await removeVoucher(userVoucherList, id);
+      await updateKeyInDocument(
+        "users",
+        userId,
+        "voucherList",
+        updatedVoucherList
+      );
 
-    if (arrayKey === "voucherIdList")
+      await addDocumentsToCollection("scannedList", [
+        {
+          id: generateUniqueId(),
+          voucherId: id,
+          userId: userId,
+          scannedAt: new Date().toISOString(),
+        },
+      ]);
+
       toast.success("Voucher deleted successfully from the database.");
+    }
     if (arrayKey === "collection")
       toast.success("Product deleted successfully from the database.");
   };

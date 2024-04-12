@@ -1,6 +1,6 @@
-import { Product, Size, UserData } from "@/store/storeTypes";
+import { Product } from "@/store/storeTypes";
 import { updateDocumentByKeyCondition } from "./firebaseUtils";
-import { Topping } from "@/store/zustand";
+import { Topping, UserData } from "@/store/zustand";
 
 export function calcBalanceInStorage(userData: UserData): number | null {
   const { miningSpeed, inStorage } = userData;
@@ -45,7 +45,7 @@ export async function updateUserDataAfterPurchase(
   userData: UserData,
   setUserData: (userData: UserData | null) => void,
   price: number,
-  updates: { key: string; value: any }[]
+  updatedFields: Partial<UserData>
 ): Promise<UserData | null> {
   if (userData.balance < price) {
     throw new Error("Not enough min point");
@@ -56,12 +56,8 @@ export async function updateUserDataAfterPurchase(
   const updatedUserData: UserData = {
     ...userData,
     balance: updatedBalance,
+    ...updatedFields,
   };
-
-  // Apply all updates
-  updates.forEach(({ key, value }) => {
-    updatedUserData[key] = value;
-  });
 
   await updateDocumentByKeyCondition(
     "users",

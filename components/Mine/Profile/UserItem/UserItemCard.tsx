@@ -28,12 +28,12 @@ function UserItemCard({ item, index }: { item: CartItem; index: number }) {
       toppingIds
     );
 
-  const { img, name } = selectedProduct ?? {};
+  const { img, name, id } = selectedProduct ?? {};
 
   const handleOpenQrCode = () => {
     toast.info("Scan this product at the shop to enjoy it.");
 
-    const itemQrCodeId = `${userId}-collection-${index}`;
+    const itemQrCodeId = `${userId}-collection-${id}`;
     setQrCodeId(itemQrCodeId);
     setOpen(true);
   };

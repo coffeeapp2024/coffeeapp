@@ -2,7 +2,7 @@
 
 import React from "react";
 import {
-  useOpenQrVoucherStore,
+  UserVoucher,
   useQrCodeStore,
   useUserDataStore,
   useVoucherStore,
@@ -10,17 +10,11 @@ import {
 import { toast } from "sonner";
 import VoucherCardTemplate from "@/components/Template/VoucherCardTemplate";
 
-function UserVoucherCard({
-  voucherId,
-  index,
-}: {
-  voucherId: string;
-  index: number;
-}) {
+function UserVoucherCard({ userVoucher }: { userVoucher: UserVoucher }) {
   const { userId } = useUserDataStore();
   const { setQrCodeId, setOpen } = useQrCodeStore();
   const { vouchers } = useVoucherStore();
-  const voucher = vouchers?.find((voucher) => voucher.id === voucherId);
+  const voucher = vouchers?.find((voucher) => voucher.id === userVoucher.id);
   if (!voucher) return;
 
   const { imageURL, info, name, id } = voucher;
@@ -28,14 +22,16 @@ function UserVoucherCard({
   const handleOpenQrCode = () => {
     toast.info("Scan this voucher at the shop to claim your offer.");
 
-    const voucherQrCodeId = `${userId}-voucherIdList-${index}`;
+    const voucherQrCodeId = `${userId}-voucherList-${id}`;
     setOpen(true);
     setQrCodeId(voucherQrCodeId);
   };
 
   return (
     <VoucherCardTemplate
-      {...{ imageURL, name, info }}
+      imageURL={imageURL}
+      name={name}
+      details={[info, `quantity: ${userVoucher.quantity}`]}
       nameButton="Scan QR"
       onClick={handleOpenQrCode}
     />

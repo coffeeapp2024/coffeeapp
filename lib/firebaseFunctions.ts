@@ -6,13 +6,14 @@ import {
   addDoc,
   updateDoc,
 } from "firebase/firestore";
-import { UserData, PostType } from "@/store/storeTypes";
+import { PostType } from "@/store/storeTypes";
 import { User } from "firebase/auth";
 import { db } from "./firebase";
 import {
   addDocumentsToCollection,
   uploadImageToFirebase,
 } from "./firebaseUtils";
+import { UserData } from "@/store/zustand";
 
 const usersRef = collection(db, "users");
 
@@ -66,7 +67,7 @@ export async function updateUserInFirestore(
     console.log("User data updated successfully");
   } catch (error) {
     console.error("Error updating user data:", error);
-    throw error; // You may want to handle the error appropriately in your application
+    throw error;
   }
 }
 

@@ -66,16 +66,10 @@ function Fireplace() {
       };
 
     await toast.promise(
-      updateUserDataAfterPurchase(userData, setUserData, nextPrice, [
-        {
-          key: "fireplaceLevel",
-          value: nextLevel,
-        },
-        {
-          key: "miningSpeed",
-          value: nextMiningSpeed,
-        },
-      ]),
+      await updateUserDataAfterPurchase(userData, setUserData, nextPrice, {
+        fireplaceLevel: nextLevel,
+        miningSpeed: nextMiningSpeed,
+      }),
       {
         loading: "Proccessing...",
         success: "Upgrade successful!",

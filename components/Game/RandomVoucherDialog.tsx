@@ -10,7 +10,7 @@ function RandomVoucherDialog() {
 
   const voucher = vouchers?.find((voucher) => voucher.id === randomVoucherId);
 
-  const { imageURL, info, name } = voucher ?? {};
+  const { imageURL } = voucher ?? {};
 
   return (
     <Dialog

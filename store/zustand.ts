@@ -3,7 +3,6 @@ import {
   HomePageContentStore,
   PostType,
   PostStore,
-  UserDataStore,
   VoucherStore,
   ProductStore,
   ProductTagStore,
@@ -11,9 +10,41 @@ import {
   RandomVoucherStore,
   OpenQrVoucherStore,
   MinePageContentStore,
-  Product,
+  InStorage,
 } from "./storeTypes";
 import { create, StoreApi, UseBoundStore } from "zustand";
+
+export type UserVoucher = {
+  id: string;
+  quantity: number;
+};
+
+export type UserData = {
+  email: string | null;
+  displayName: string | null;
+  balance: number;
+  fillTime: number | null;
+  miningSpeed: number | null;
+  storageLevel: number | null;
+  fireplaceLevel: number | null;
+  startTimeMine: string | null;
+  endTimeMine: string | null;
+  inStorage: InStorage | null;
+  voucherList: UserVoucher[] | null;
+  collection: CartItem[] | null;
+  LikedEventImageIdList: string[] | null;
+  LikedCheckinImageIdList: string[] | null;
+  [key: string]: any;
+};
+
+export type UserDataStore = {
+  userData: UserData | null;
+  userId: string | null;
+  role: string | null;
+  setUserData: (userData: UserData | null) => void;
+  setUserId: (userId: string | null) => void;
+  setRole: (Role: string | null) => void;
+};
 
 export const useUserDataStore = create<UserDataStore>((set: any) => ({
   userData: null,

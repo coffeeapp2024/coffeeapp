@@ -54,16 +54,10 @@ function Storage() {
     if (!userData || !nextLevel || !nextPrice) return;
 
     await toast.promise(
-      updateUserDataAfterPurchase(userData, setUserData, nextPrice, [
-        {
-          key: "fillTime",
-          value: nextFillTime,
-        },
-        {
-          key: "storageLevel",
-          value: nextLevel,
-        },
-      ]),
+      updateUserDataAfterPurchase(userData, setUserData, nextPrice, {
+        fillTime: nextFillTime,
+        storageLevel: nextLevel,
+      }),
       {
         loading: "Proccessing...",
         success: "Upgrade successful!",

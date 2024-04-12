@@ -1,18 +1,16 @@
 import React from "react";
 import { useUserDataStore } from "@/store/zustand";
 import UserVoucherCard from "./UserVoucherCard";
-import QrCodeUserVoucher from "./QrCodeUserVoucher";
-import { Dialog } from "@radix-ui/react-dialog";
 
 function UserVoucherCardList() {
   const { userData } = useUserDataStore();
 
-  const { voucherIdList } = userData ?? {};
+  const { voucherList } = userData ?? {};
 
   return (
     <div className="pb-20 flex flex-col gap-y-2">
-      {voucherIdList?.map((voucherId, index) => (
-        <UserVoucherCard key={index} index={index} voucherId={voucherId} />
+      {voucherList?.map((voucher, index) => (
+        <UserVoucherCard key={index} userVoucher={voucher} />
       ))}
     </div>
   );

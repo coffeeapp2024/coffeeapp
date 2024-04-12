@@ -17,6 +17,7 @@ import { toast } from "sonner";
 import { Case } from "@/store/storeTypes";
 import CoinIcon from "../Template/CoinIcon";
 import { updateDocumentByKeyCondition } from "@/lib/firebaseUtils";
+import { addVoucher } from "@/lib/voucherUtils";
 
 export default function GameCardList() {
   const [api, setApi] = React.useState<CarouselApi>();
@@ -78,10 +79,8 @@ export default function GameCardList() {
     const randomIndex = Math.floor(Math.random() * caseVoucherIdList.length);
     const randomVoucherId = caseVoucherIdList[randomIndex];
 
-    const updatedVouchers = [
-      ...(userData.voucherIdList || []),
-      randomVoucherId,
-    ];
+    const updatedVouchers = await addVoucher(userData, randomVoucherId);
+    console.log("updatedVouchers:", updatedVouchers);
 
     const promise = async () => {
       if (!cases || !id || !currentCase) return;
@@ -89,21 +88,16 @@ export default function GameCardList() {
         userData,
         setUserData,
         price,
-        [
-          {
-            key: "voucherIdList",
-            value: updatedVouchers,
-          },
-        ]
+        {
+          voucherList: updatedVouchers,
+        }
       );
 
-      const updatedQuantity = quantity - 1;
-      const updatedCase = { ...currentCase, quantity: updatedQuantity };
-
-      cases[id - 1] = updatedCase; // fix later to find real id
+      const updatedCase = { ...currentCase, quantity: quantity - 1 };
+      cases[id - 1] = updatedCase;
       setCases(cases);
-
       await updateDocumentByKeyCondition("cases", "id", id, updatedCase);
+
       if (updatedUserData) {
         setRandomVoucherId(randomVoucherId);
         setOpen(true);

@@ -8,7 +8,7 @@ import SecondaryButton from "./SecondaryButton";
 type PageProps = {
   imageURL: string;
   name: string;
-  info: string;
+  details: string[];
   nameButton: string;
   price?: number;
   onClick: any;
@@ -17,7 +17,7 @@ type PageProps = {
 function VoucherCardTemplate({
   imageURL,
   name,
-  info,
+  details,
   price,
   nameButton,
   onClick,
@@ -39,7 +39,12 @@ function VoucherCardTemplate({
       <div className="pl-3 pt-1 basis-2/3">
         <div className="mb-2">
           <h3 className="font-bold">{name}</h3>
-          <p className="text-wrap text-sm">{info}</p>
+
+          {details.map((item, index) => (
+            <p key={index} className="text-wrap text-sm">
+              {item}
+            </p>
+          ))}
         </div>
 
         {price && (

@@ -19,33 +19,6 @@ export type InStorage = {
   timeAt: string;
 };
 
-export type UserData = {
-  email: string | null;
-  displayName: string | null;
-  balance: number;
-  fillTime: number | null;
-  miningSpeed: number | null;
-  storageLevel: number | null;
-  fireplaceLevel: number | null;
-  startTimeMine: string | null;
-  endTimeMine: string | null;
-  inStorage: InStorage | null;
-  voucherIdList: string[] | null;
-  collection: CartItem[] | null;
-  LikedEventImageIdList: string[] | null;
-  LikedCheckinImageIdList: string[] | null;
-  [key: string]: any;
-};
-
-export type UserDataStore = {
-  userData: UserData | null;
-  userId: string | null;
-  role: string | null;
-  setUserData: (userData: UserData | null) => void;
-  setUserId: (userId: string | null) => void;
-  setRole: (Role: string | null) => void;
-};
-
 export type HomePageContent = {
   videoURL: string;
   open: string;
