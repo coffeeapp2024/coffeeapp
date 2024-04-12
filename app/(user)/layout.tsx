@@ -17,13 +17,9 @@ import {
   useStorageStore,
   useFireplaceLevelStore,
   useToppingsStore,
-} from "@/store/zustand";
-import {
-  Account,
-  HomePageContent,
-  MinePageContent,
   UserData,
-} from "@/store/storeTypes";
+} from "@/store/zustand";
+import { Account, HomePageContent, MinePageContent } from "@/store/storeTypes";
 import {
   fetchCollectionData,
   getDocumentById,
