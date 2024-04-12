@@ -11,7 +11,7 @@ import Image from "next/image";
 import React from "react";
 import { toast } from "sonner";
 
-function UserItemCard({ item, index }: { item: CartItem; index: number }) {
+function UserItemCard({ item }: { item: CartItem }) {
   const { products } = useProductStore();
   const { toppings } = useToppingsStore();
   const { setOpen, setQrCodeId } = useQrCodeStore();

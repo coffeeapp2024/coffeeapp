@@ -1,10 +1,10 @@
 import React from "react";
 import Image from "next/image";
-import { Sheet, SheetTrigger } from "@/components/ui/sheet";
+import { Sheet } from "@/components/ui/sheet";
 import SheetContentLayout from "@/components/ui/SheetContentLayout";
 import UserItemCardList from "./UserItemCardList";
-import QrCodeUserItem from "./QrCodeUserItem";
 import UserCardTemplate from "@/components/Template/UserCardTemplate";
+import QrcodeDialogTemplate from "@/components/Template/QrcodeDialogTemplate";
 
 function UserItemDialog() {
   return (
@@ -15,7 +15,7 @@ function UserItemDialog() {
         className="-mt-1"
       />
       <SheetContentLayout backgroundImage="/bg/bg3.jpg" className="px-2 pt-20">
-        <QrCodeUserItem />
+        <QrcodeDialogTemplate />
         <UserItemCardList />
       </SheetContentLayout>
     </Sheet>
