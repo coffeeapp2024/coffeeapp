@@ -1,10 +1,9 @@
 import React from "react";
 import UserVoucherCardList from "./UserVoucherCardList";
-import Image from "next/image";
-import { Sheet, SheetTrigger } from "@/components/ui/sheet";
+import { Sheet } from "@/components/ui/sheet";
 import SheetContentLayout from "@/components/ui/SheetContentLayout";
-import QrCodeUserVoucher from "./QrCodeUserVoucher";
 import UserCardTemplate from "@/components/Template/UserCardTemplate";
+import QrcodeDialogTemplate from "@/components/Template/QrcodeDialogTemplate";
 
 function UserVoucherDiaLog() {
   return (
@@ -15,7 +14,7 @@ function UserVoucherDiaLog() {
         className="-mr-2"
       />
       <SheetContentLayout backgroundImage="/bg/bg3.jpg" className="px-2 pt-20">
-        <QrCodeUserVoucher />
+        <QrcodeDialogTemplate />
         <UserVoucherCardList />
       </SheetContentLayout>
     </Sheet>
