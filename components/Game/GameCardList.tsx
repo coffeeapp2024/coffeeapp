@@ -79,8 +79,10 @@ export default function GameCardList() {
     const randomIndex = Math.floor(Math.random() * caseVoucherIdList.length);
     const randomVoucherId = caseVoucherIdList[randomIndex];
 
-    const updatedVouchers = await addVoucher(userData, randomVoucherId);
-    console.log("updatedVouchers:", updatedVouchers);
+    const updatedVouchers = await addVoucher(
+      userData.voucherList,
+      randomVoucherId
+    );
 
     const promise = async () => {
       if (!cases || !id || !currentCase) return;

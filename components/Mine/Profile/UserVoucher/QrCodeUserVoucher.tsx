@@ -1,8 +1,7 @@
 import React, { useEffect } from "react";
-import { useQrCodeStore, useUserDataStore } from "@/store/zustand";
+import { UserData, useQrCodeStore, useUserDataStore } from "@/store/zustand";
 import { toast } from "sonner";
 import { isEqual } from "lodash";
-import { UserData } from "@/store/storeTypes";
 import QrcodeDialogTemplate from "@/components/Template/QrcodeDialogTemplate";
 import { listenForKeyChangeInDoc } from "@/lib/firebaseUtils";
 
@@ -15,22 +14,25 @@ function QrCodeUserVoucher() {
       const unsubscribe = listenForKeyChangeInDoc(
         "users",
         userId,
-        "voucherIdList",
-        (voucherIdList) => {
-          const updatedUserData: UserData = {
-            ...userData,
-            voucherIdList: voucherIdList,
-          };
-          if (isEqual(voucherIdList, userData.voucherIdList)) {
+        "voucherList",
+        (voucherList) => {
+          if (isEqual(voucherList, userData.voucherList)) {
             console.log("User voucherIdList remains unchanged");
             return;
           }
 
+          const updatedUserData: UserData = {
+            ...userData,
+            voucherList: voucherList,
+          };
+
           toast.success("Voucher has been successfully scanned!");
           setOpen(false);
+
           setTimeout(() => {
             setUserData(updatedUserData);
           }, 2000);
+
           return unsubscribe();
         }
       );

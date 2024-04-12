@@ -1,8 +1,11 @@
 import { UserData, UserVoucher } from "@/store/zustand";
 
-export const addVoucher = async (userData: UserData, voucherId: string) => {
+export const addVoucher = async (
+  voucherList: UserVoucher[] | null,
+  voucherId: string
+) => {
   // Nếu userData không tồn tại hoặc voucherList không tồn tại
-  if (!userData || !voucherList) {
+  if (!voucherList) {
     return [{ id: voucherId, quantity: 1 }]; // Trả về một danh sách chứa một voucherId mới
   }
 
