@@ -66,7 +66,7 @@ function Fireplace() {
       };
 
     await toast.promise(
-      await updateUserDataAfterPurchase(userData, setUserData, nextPrice, {
+      updateUserDataAfterPurchase(userData, setUserData, nextPrice, {
         fireplaceLevel: nextLevel,
         miningSpeed: nextMiningSpeed,
       }),
