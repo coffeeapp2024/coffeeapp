@@ -64,7 +64,7 @@ export async function handleProductScan(userId: string, productId: string) {
     };
     await addDocumentsToCollection("orderList", [orderItem]);
 
-    toast.success("Product scanned successfully and added to the order list.");
+    toast.success("Product scanned successfully.");
   } catch (error) {
     console.error("Error handling product scan:", error);
     toast.error("An error occurred while handling the product scan.");
