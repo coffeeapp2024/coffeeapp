@@ -9,7 +9,7 @@ import SheetContentLayout from "@/components/ui/SheetContentLayout";
 import Image from "next/image";
 import SettingPopup from "./SettingPopup";
 import AdminNav from "./AdminNav";
-import UserItemDialog from "./UserItem/UserItemDialog";
+import UserProductDialog from "./UserProduct/UserProductDialog";
 
 function ProfileDialog({ user }: { user: User }) {
   const { role } = useUserDataStore();
@@ -50,7 +50,7 @@ function ProfileDialog({ user }: { user: User }) {
             <UserVoucherDiaLog />
           </div>
           <div className={`${styleCard}`}>
-            <UserItemDialog />
+            <UserProductDialog />
           </div>
           {Array.from({ length: 2 }, (_, index) => (
             <div key={index} className={`${styleCard}`}>

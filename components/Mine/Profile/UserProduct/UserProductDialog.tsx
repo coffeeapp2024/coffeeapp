@@ -1,12 +1,11 @@
 import React from "react";
-import Image from "next/image";
 import { Sheet } from "@/components/ui/sheet";
 import SheetContentLayout from "@/components/ui/SheetContentLayout";
-import UserItemCardList from "./UserItemCardList";
+import UserItemCardList from "./UserProductCardList";
 import UserCardTemplate from "@/components/Template/UserCardTemplate";
 import QrcodeDialogTemplate from "@/components/Template/QrcodeDialogTemplate";
 
-function UserItemDialog() {
+function UserProductDialog() {
   return (
     <Sheet>
       <UserCardTemplate
@@ -22,4 +21,4 @@ function UserItemDialog() {
   );
 }
 
-export default UserItemDialog;
+export default UserProductDialog;

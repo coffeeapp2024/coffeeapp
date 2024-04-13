@@ -10,8 +10,9 @@ import {
 import Image from "next/image";
 import React from "react";
 import { toast } from "sonner";
+import MoreCardPopover from "../Share/MoreCardPopover";
 
-function UserItemCard({ item }: { item: CartItem }) {
+function UserProductCard({ item }: { item: CartItem }) {
   const { products } = useProductStore();
   const { toppings } = useToppingsStore();
   const { setOpen, setQrCodeId } = useQrCodeStore();
@@ -39,7 +40,7 @@ function UserItemCard({ item }: { item: CartItem }) {
   };
 
   return (
-    <div className="relative h-32 bg-white bg-opacity-70 w-full p-2 rounded-2xl flex shadow-sm">
+    <div className="relative h-32 bg-white bg-opacity-70 w-full p-2 rounded-2xl flex shadow-sm overflow-hidden">
       {/* Left */}
       <div className="bg-neutral-200 h-full aspect-square rounded-xl overflow-hidden">
         {img && (
@@ -70,8 +71,10 @@ function UserItemCard({ item }: { item: CartItem }) {
         </div>
       </div>
       <SecondaryButton name="Scan QR" onClick={handleOpenQrCode} />
+
+      <MoreCardPopover />
     </div>
   );
 }
 
-export default UserItemCard;
+export default UserProductCard;

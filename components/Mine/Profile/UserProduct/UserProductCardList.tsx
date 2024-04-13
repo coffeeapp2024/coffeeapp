@@ -1,10 +1,10 @@
 "use client";
 import { UserData, useQrCodeStore, useUserDataStore } from "@/store/zustand";
 import React, { useEffect } from "react";
-import UserItemCard from "./UserItemCard";
+import UserItemCard from "./UserProductCard";
 import { listenKeyChangeInDocument } from "@/lib/firebaseUtils";
 
-function UserItemCardList() {
+function UserProductCardList() {
   const { setOpen } = useQrCodeStore();
   const { userId, userData, setUserData } = useUserDataStore();
   const { collection } = userData ?? {};
@@ -43,4 +43,4 @@ function UserItemCardList() {
   );
 }
 
-export default UserItemCardList;
+export default UserProductCardList;
