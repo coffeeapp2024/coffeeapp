@@ -11,31 +11,11 @@
 }
 
 @layer components {
-  @keyframes zoomOut {
-    from {
-      transform: scale(1);
-    }
-    to {
-      transform: scale(0.95);
-    }
-  }
-
-  .animate-zoom-out {
-    animation: zoomOut 0.5s infinite alternate;
-  }
-
-  .main-button {
-    @apply bg-gradient-to-tr from-amber-300 to-amber-400 flex items-center justify-center rounded-xl text-xl text-neutral-800 font-bold text-nowrap border-[1px] border-neutral-800 -z-10 shadow-lg;
-  }
   .custom-divide {
     @apply border-t-[1px] border-neutral-900 -mx-2 my-4;
   }
-
+  /* 
   .text-shadow {
     @apply [text-shadow:1px_1px_5px_var(--tw-shadow-color)] shadow-neutral-800;
-  }
-
-  .user-item-card {
-    @apply basis-1/2 aspect-[6/7] bg-white border-[1px] rounded-[26px];
-  }
+  } */
 }

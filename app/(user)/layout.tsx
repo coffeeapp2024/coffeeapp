@@ -28,7 +28,6 @@ import {
 } from "@/lib/firebaseUtils";
 import Testing from "@/components/Testing";
 import Nav from "@/components/Nav";
-import { NextUIProvider } from "@nextui-org/system";
 import { calcFinalBalanceInStorage } from "@/lib/userActions";
 
 export default function RootLayout({
@@ -230,12 +229,10 @@ export default function RootLayout({
   }, [endTimeMine]);
 
   return (
-    <NextUIProvider>
-      <main className="relative mx-auto w-full">
-        <Testing />
-        <Nav />
-        {children}
-      </main>
-    </NextUIProvider>
+    <main className="relative mx-auto w-full">
+      <Testing />
+      <Nav />
+      {children}
+    </main>
   );
 }
