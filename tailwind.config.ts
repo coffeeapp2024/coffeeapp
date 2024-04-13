@@ -66,7 +66,7 @@ const config = {
       },
     },
   },
-  plugins: [],
+  plugins: [nextui()],
 } satisfies Config;
 
 export default config;
