@@ -10,7 +10,7 @@ import {
 import Image from "next/image";
 import React from "react";
 import { toast } from "sonner";
-import MoreCardPopover from "../Share/MoreCardPopover";
+import MoreCardPopover from "../More/MoreCardPopover";
 
 function UserProductCard({ item }: { item: CartItem }) {
   const { products } = useProductStore();
