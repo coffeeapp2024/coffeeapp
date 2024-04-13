@@ -9,10 +9,10 @@ import { OrderItem } from "@/store/admin";
 import { UserData } from "@/store/zustand";
 import { toast } from "sonner";
 
-export const removeProduct = async <T extends { id: string }>(
+export const removeProduct = <T extends { id: string }>(
   productList: T[],
   productId: string
-): Promise<T[]> => {
+): T[] => {
   // Lọc ra các sản phẩm khác với productId được chỉ định
   const updatedProductList = productList.filter(
     (product) => product.id !== productId
@@ -42,10 +42,7 @@ export async function handleProductScan(userId: string, productId: string) {
     }
 
     // Loại bỏ sản phẩm đã quét khỏi danh sách sản phẩm của người dùng
-    const updatedUserCollection = await removeProduct(
-      userCollection,
-      productId
-    );
+    const updatedUserCollection = removeProduct(userCollection, productId);
 
     // Cập nhật danh sách sản phẩm mới của người dùng
     await updateKeyInDocument(

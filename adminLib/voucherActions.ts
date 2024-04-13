@@ -13,7 +13,7 @@ type UserVoucher = {
   quantity: number;
 };
 
-export const removeVoucher = async (
+export const removeVoucher = (
   voucherList: UserVoucher[],
   voucherId: string
 ) => {
@@ -60,10 +60,7 @@ export async function handleVoucherScan(userId: string, voucherId: string) {
     }
 
     // Xóa voucher khỏi danh sách voucher của người dùng
-    const updatedUserVoucherList = await removeVoucher(
-      userVoucherList,
-      voucherId
-    );
+    const updatedUserVoucherList = removeVoucher(userVoucherList, voucherId);
 
     // Cập nhật danh sách voucher mới của người dùng
     await updateKeyInDocument(
@@ -74,7 +71,7 @@ export async function handleVoucherScan(userId: string, voucherId: string) {
     );
 
     // Thêm thông tin quét voucher vào danh sách quét
-    await addDocumentsToCollection("scannedList", [
+    await addDocumentsToCollection("scannedVoucherList", [
       {
         id: generateUniqueId(),
         voucherId: voucherId,

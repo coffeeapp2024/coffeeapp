@@ -31,7 +31,7 @@ function UserItemCardList() {
     );
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [userData]);
+  }, [setOpen]);
 
   return (
     <div className="flex flex-col items-center gap-y-3">
