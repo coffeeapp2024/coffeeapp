@@ -28,7 +28,7 @@ function UserItemCard({ item }: { item: CartItem }) {
       toppingIds
     );
 
-  const { img, name, id } = selectedProduct ?? {};
+  const { img, name } = selectedProduct ?? {};
 
   const handleOpenQrCode = () => {
     toast.info("Scan this product at the shop to enjoy it.");
