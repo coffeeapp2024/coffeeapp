@@ -38,7 +38,7 @@ export async function handleProductScan(userId: string, productId: string) {
     );
     if (!scannedProduct) {
       toast.error("Product does not exist.");
-      toast.info(`productId: ${productId}`);
+      // toast.info(`productId: ${productId}`);
       return;
     }
 

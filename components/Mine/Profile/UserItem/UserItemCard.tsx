@@ -33,7 +33,7 @@ function UserItemCard({ item }: { item: CartItem }) {
   const handleOpenQrCode = () => {
     toast.info("Scan this product at the shop to enjoy it.");
 
-    const itemQrCodeId = `${userId}-collection-${id}`;
+    const itemQrCodeId = `${userId}-collection-${item.id}`;
     setQrCodeId(itemQrCodeId);
     setOpen(true);
   };
