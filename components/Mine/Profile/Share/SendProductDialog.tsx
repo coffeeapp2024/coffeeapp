@@ -28,7 +28,7 @@ function SendProductDialog({
         </span>
       </DialogTrigger>
       <PrimaryDialogContent>
-        <div className="flex flex-col h-full w-full justify-between items-center pb-4">
+        <div className="flex flex-col h-full w-full justify-between items-center pb-5">
           <div className="h-2/3">
             <Image
               src="/img/send-love.png"
