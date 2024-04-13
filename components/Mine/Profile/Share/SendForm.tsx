@@ -3,8 +3,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
-
-import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -17,8 +15,8 @@ import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 
 const FormSchema = z.object({
-  email: z.string().min(2, {
-    message: "email ",
+  email: z.string().email({
+    message: "Invalid email format",
   }),
 });
 
@@ -31,7 +29,7 @@ export function SendForm() {
   });
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
-    toast.success(data.email);
+    toast.success("Your gift has been successfully sent to your friend.");
   }
 
   return (
