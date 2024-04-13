@@ -37,7 +37,7 @@ export default function RootLayout({
 }>) {
   const { userData, userId, setRole, setUserData, setUserId } =
     useUserDataStore();
-  const { endTimeMine, startTimeMine, balance, email } = userData ?? {};
+  const { endTimeMine, balance, email } = userData ?? {};
   const { setBanner } = useShopStore();
   const { setPosts: setEventPost } = useEventPostStore();
   const { setPosts: setCheckinPost } = useCheckinPostStore();
@@ -106,7 +106,6 @@ export default function RootLayout({
         return () => unsubscribe();
       }
     };
-
     fetchUserDataAndSetRole();
 
     const fetchMineContent = async () => {
