@@ -4,6 +4,8 @@ import SendIcon from "@/components/Icon/SendIcon";
 import PrimaryDialogContent from "@/components/Template/PrimaryDialogContent";
 import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import React, { useState } from "react";
+import { SendForm } from "./SendForm";
+import Image from "next/image";
 
 function SendProductDialog({
   handlePopoverClose,
@@ -26,8 +28,18 @@ function SendProductDialog({
         </span>
       </DialogTrigger>
       <PrimaryDialogContent>
-        <div className="bg-neutral-300 h-1/3"></div>
-        <div></div>
+        <div className="flex flex-col h-full w-full justify-between items-center pb-4">
+          <div className="h-2/3">
+            <Image
+              src="/img/send-love.png"
+              alt="Send Image"
+              width={400}
+              height={400}
+              className="w-full h-full object-contain"
+            />
+          </div>
+          <SendForm />
+        </div>
       </PrimaryDialogContent>
     </Dialog>
   );
