@@ -47,12 +47,9 @@ function Checkout({ setOpenCart }: { setOpenCart: any }) {
     const updatedCollection = [...(userData.collection || []), ...currentCart];
     const promise = async () => {
       // Add cart items to the user's collection
-      await updateUserDataAfterPurchase(userData, setUserData, totalPrice, [
-        {
-          key: "collection",
-          value: updatedCollection,
-        },
-      ]);
+      await updateUserDataAfterPurchase(userData, setUserData, totalPrice, {
+        collection: updatedCollection,
+      });
 
       // Clear the cart after checkout
       isPriceInPoint ? clearPointCart() : clearCashCart();
