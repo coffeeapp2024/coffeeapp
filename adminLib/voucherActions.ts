@@ -55,7 +55,7 @@ export async function handleVoucherScan(userId: string, voucherId: string) {
 
     // Kiểm tra xem voucher có tồn tại trong danh sách không
     if (!userVoucherList.find((userVoucher) => userVoucher.id === voucherId)) {
-      toast.error("Voucher does not exist in the user's voucher list.");
+      toast.error("Voucher does not exist.");
       return;
     }
 
