@@ -1,17 +1,9 @@
 "use client";
 import QRCodeScanner from "../Template/QrCodeScanner";
-
 import React from "react";
-import { toast } from "sonner";
 import { useUserDataStore } from "@/store/zustand";
-import { removeVoucher } from "@/lib/voucherUtils";
-import {
-  addDocumentsToCollection,
-  deleteKeyInDocument,
-  getKeyValue,
-  updateKeyInDocument,
-} from "@/lib/firebaseUtils";
-import { generateUniqueId } from "@/lib/utils";
+import { handleVoucherScan } from "@/adminLib/voucherActions";
+import { handleProductScan } from "@/adminLib/productActions";
 
 const AdminScanner = () => {
   const { role } = useUserDataStore();
@@ -20,28 +12,11 @@ const AdminScanner = () => {
     const [userId, arrayKey, id] = text.split("-");
 
     if (arrayKey === "voucherList") {
-      const userVoucherList = await getKeyValue("users", userId, "voucherList");
-      const updatedVoucherList = await removeVoucher(userVoucherList, id);
-      await updateKeyInDocument(
-        "users",
-        userId,
-        "voucherList",
-        updatedVoucherList
-      );
-
-      await addDocumentsToCollection("scannedList", [
-        {
-          id: generateUniqueId(),
-          voucherId: id,
-          userId: userId,
-          scannedAt: new Date().toISOString(),
-        },
-      ]);
-
-      toast.success("Voucher deleted successfully from the database.");
+      await handleVoucherScan(userId, id);
     }
-    if (arrayKey === "collection")
-      toast.success("Product deleted successfully from the database.");
+    if (arrayKey === "collection") {
+      await handleProductScan(userId, id);
+    }
   };
 
   return (

@@ -1,6 +1,9 @@
 import { Product } from "@/store/storeTypes";
 import { updateDocumentByKeyCondition } from "./firebaseUtils";
 import { Topping, UserData } from "@/store/zustand";
+import { isEqual } from "lodash";
+import { listenToDocument } from "./firebaseUtils";
+import { useEffect } from "react";
 
 export function calcBalanceInStorage(userData: UserData): number | null {
   const { miningSpeed, inStorage } = userData;

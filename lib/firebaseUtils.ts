@@ -9,13 +9,11 @@ import {
   where,
   onSnapshot,
   writeBatch,
-  FieldValue,
   deleteField,
-  DocumentReference,
-  DocumentData,
 } from "firebase/firestore";
 import { db, storage } from "./firebase";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import { isEqual } from "lodash";
 
 export async function resetCollectionData(
   collectionName: string,
@@ -473,42 +471,6 @@ export async function deleteKeyInAllDocuments(
   }
 }
 
-export function listenForKeyChangeInDoc(
-  collectionName: string,
-  docId: string,
-  keyToWatch: string,
-  callback: (newValue: any) => void
-) {
-  try {
-    const docRef = doc(db, collectionName, docId);
-
-    // Listen for snapshot changes to the document
-    const unsubscribe = onSnapshot(docRef, (docSnapshot) => {
-      if (docSnapshot.exists()) {
-        const data = docSnapshot.data();
-        if (data && data[keyToWatch] !== undefined) {
-          // If the watched key exists in the document, invoke the callback with its new value
-          callback(data[keyToWatch]);
-        }
-      } else {
-        // Document doesn't exist
-        console.error(
-          `Document ${docId} does not exist in collection ${collectionName}`
-        );
-      }
-    });
-
-    // Return the unsubscribe function to stop listening
-    return unsubscribe;
-  } catch (error) {
-    console.error(
-      `Error listening for key ${keyToWatch} change in document ${docId} from collection ${collectionName}:`,
-      error
-    );
-    throw error;
-  }
-}
-
 export function listenToDocument(
   collectionName: string,
   docId: string,
@@ -539,6 +501,25 @@ export function listenToDocument(
     );
     throw error;
   }
+}
+
+export function listenKeyChangeInDocument(
+  collectionName: string,
+  docId: string,
+  oldData: any,
+  keyToWatch: string,
+  onDataChange: (data: any) => void
+) {
+  const unsubscribe = listenToDocument(collectionName, docId, (data: any) => {
+    if (isEqual(data[keyToWatch], oldData[keyToWatch])) return;
+
+    console.log(`Change detected in key ${keyToWatch}:`, data[keyToWatch]);
+    onDataChange(data);
+  });
+
+  console.log("Listening for key changes in document...");
+
+  return unsubscribe;
 }
 
 export async function uploadImageToFirebase(

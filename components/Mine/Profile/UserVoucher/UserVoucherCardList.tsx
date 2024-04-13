@@ -1,10 +1,7 @@
 import React, { useEffect } from "react";
 import { UserData, useQrCodeStore, useUserDataStore } from "@/store/zustand";
 import UserVoucherCard from "./UserVoucherCard";
-import { toast } from "sonner";
-import { listenToDocument } from "@/lib/firebaseUtils";
-import { isEqual } from "lodash";
-import { User } from "firebase/auth";
+import { listenKeyChangeInDocument } from "@/lib/firebaseUtils";
 
 function UserVoucherCardList() {
   const { setOpen } = useQrCodeStore();
@@ -15,26 +12,26 @@ function UserVoucherCardList() {
   useEffect(() => {
     if (!userId || !userData) return;
 
-    const unsubscribe = listenToDocument("users", userId, (data: UserData) => {
-      if (isEqual(data.voucherList, userData.voucherList)) return;
-
+    const onDataChange = (data: UserData) => {
       const updatedUserData: UserData = {
         ...userData,
         voucherList: data.voucherList,
       };
 
-      toast.success("Voucher has been successfully scanned!");
       setOpen(false);
+      setUserData(updatedUserData);
+    };
 
-      setTimeout(() => {
-        setUserData(updatedUserData);
-      }, 2000);
-
-      return unsubscribe();
-    });
+    listenKeyChangeInDocument(
+      "users",
+      userId,
+      userData,
+      "voucherList",
+      onDataChange
+    );
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [userData]);
 
   return (
     <div className="pb-20 flex flex-col gap-y-2">
