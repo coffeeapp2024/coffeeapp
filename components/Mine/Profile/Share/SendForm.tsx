@@ -8,11 +8,11 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
+import { useCurrentUserProductStore } from "@/store/zustand";
 
 const FormSchema = z.object({
   email: z.string().email({
@@ -21,6 +21,10 @@ const FormSchema = z.object({
 });
 
 export function SendForm() {
+  const { currentUserProduct } = useCurrentUserProductStore();
+
+  // console.log("currentUserProduct", currentUserProduct);
+
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {

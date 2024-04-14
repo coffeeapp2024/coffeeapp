@@ -44,7 +44,7 @@ function Checkout({ setOpenCart }: { setOpenCart: any }) {
       return;
     }
 
-    const updatedCollection = [...(userData.collection || []), ...currentCart];
+    const updatedCollection = [...userData.collection, ...currentCart];
     const promise = async () => {
       // Add cart items to the user's collection
       await updateUserDataAfterPurchase(userData, setUserData, totalPrice, {

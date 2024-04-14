@@ -2,6 +2,7 @@ import SecondaryButton from "@/components/Template/SecondaryButton";
 import { getSelectedProductDetails } from "@/lib/userActions";
 import {
   CartItem,
+  useCurrentUserProductStore,
   useProductStore,
   useQrCodeStore,
   useToppingsStore,
@@ -17,6 +18,7 @@ function UserProductCard({ item }: { item: CartItem }) {
   const { toppings } = useToppingsStore();
   const { setOpen, setQrCodeId } = useQrCodeStore();
   const { userId } = useUserDataStore();
+  const { setCurrentUserProduct } = useCurrentUserProductStore();
 
   const { sizeId, productId, toppingIds, quantity } = item ?? {};
 
@@ -37,6 +39,10 @@ function UserProductCard({ item }: { item: CartItem }) {
     const itemQrCodeId = `${userId}-collection-${item.id}`;
     setQrCodeId(itemQrCodeId);
     setOpen(true);
+  };
+
+  const handleOnClickMore = () => {
+    setCurrentUserProduct(item);
   };
 
   return (
@@ -72,7 +78,7 @@ function UserProductCard({ item }: { item: CartItem }) {
       </div>
       <SecondaryButton name="Scan QR" onClick={handleOpenQrCode} />
 
-      <MoreCardPopover />
+      <MoreCardPopover onClick={handleOnClickMore} />
     </div>
   );
 }

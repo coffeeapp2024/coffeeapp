@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/popover";
 import SendProductDialog from "./SendProductDialog";
 
-function MoreCardPopover() {
+function MoreCardPopover({ onClick }: { onClick: () => void }) {
   const [openPopover, setOpenPopover] = useState(false);
   const [isHidden, setIsHidden] = useState(false);
 
@@ -18,9 +18,16 @@ function MoreCardPopover() {
     setOpenPopover(open); // Close the popover
   };
 
+  const handleOpenChange = () => {
+    setOpenPopover(!openPopover);
+  };
+
   return (
-    <Popover open={openPopover} onOpenChange={setOpenPopover}>
-      <PopoverTrigger className="absolute right-0 top-0 w-8 h-8 bg-neutral-100 bg-opacity-50 rounded-bl-lg flex items-center justify-center">
+    <Popover open={openPopover} onOpenChange={handleOpenChange}>
+      <PopoverTrigger
+        onClick={onClick}
+        className="absolute right-0 top-0 w-8 h-8 bg-neutral-100 bg-opacity-50 rounded-bl-lg flex items-center justify-center"
+      >
         <MenuKebabIcon className="w-5 h-5" />
       </PopoverTrigger>
       <PopoverContent

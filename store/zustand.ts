@@ -331,3 +331,16 @@ export const useQrCodeStore = create<QrCodeStore>((set) => ({
   setQrCodeId: (id) => set((state) => ({ ...state, id })),
   setOpen: (open) => set((state) => ({ ...state, open })),
 }));
+
+export type CurrentUserProductStore = {
+  currentUserProduct: CartItem | null;
+  setCurrentUserProduct: (productData: CartItem | null) => void;
+};
+
+export const useCurrentUserProductStore = create<CurrentUserProductStore>(
+  (set) => ({
+    currentUserProduct: null,
+    setCurrentUserProduct: (productData) =>
+      set({ currentUserProduct: productData }),
+  })
+);

@@ -627,3 +627,40 @@ export async function deleteDocumentByKey(
     throw error;
   }
 }
+
+export async function getDocumentByKeyCondition(
+  collectionName: string,
+  key: string,
+  value: any
+) {
+  try {
+    // Create a query to find documents where the specified key matches the specified value
+    const q = query(collection(db, collectionName), where(key, "==", value));
+
+    // Get the documents that match the query
+    const querySnapshot = await getDocs(q);
+
+    // Check if any document matches the query
+    if (!querySnapshot.empty) {
+      // Return the first document found (assuming there's only one document with the specified condition)
+      const docSnapshot = querySnapshot.docs[0];
+      const documentData = { ...docSnapshot.data() };
+
+      console.log(
+        `Document fetched from collection "${collectionName}" with "${key}"="${value}":`,
+        documentData
+      );
+
+      return documentData;
+    } else {
+      // Return null if no document matches the query
+      return null;
+    }
+  } catch (error) {
+    console.error(
+      `Error fetching document from collection ${collectionName} with ${key}=${value}:`,
+      error
+    );
+    throw error;
+  }
+}
