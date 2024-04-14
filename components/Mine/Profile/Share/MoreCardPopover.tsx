@@ -11,19 +11,9 @@ import SendProductDialog from "./SendProductDialog";
 
 function MoreCardPopover({ onClick }: { onClick: () => void }) {
   const [openPopover, setOpenPopover] = useState(false);
-  const [isHidden, setIsHidden] = useState(false);
-
-  const handlePopoverClose = (open: boolean) => {
-    setIsHidden(!isHidden); // Hidden the popover
-    setOpenPopover(open); // Close the popover
-  };
-
-  const handleOpenChange = () => {
-    setOpenPopover(!openPopover);
-  };
 
   return (
-    <Popover open={openPopover} onOpenChange={handleOpenChange}>
+    <Popover open={openPopover} onOpenChange={setOpenPopover}>
       <PopoverTrigger
         onClick={onClick}
         className="absolute right-0 top-0 w-8 h-8 bg-neutral-100 bg-opacity-50 rounded-bl-lg flex items-center justify-center"
@@ -34,9 +24,9 @@ function MoreCardPopover({ onClick }: { onClick: () => void }) {
         align="start"
         side="left"
         sideOffset={-32}
-        className={`${isHidden && "hidden"} w-fit rounded-2xl`}
+        className="w-fit rounded-2xl"
       >
-        <SendProductDialog handlePopoverClose={handlePopoverClose} />
+        <SendProductDialog setOpenPopover={setOpenPopover} />
       </PopoverContent>
     </Popover>
   );

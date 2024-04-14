@@ -13,28 +13,15 @@ import {
   removeProductAndUpdateUser,
 } from "@/lib/productActions";
 
-function SendProductDialog({
-  handlePopoverClose,
-}: {
-  handlePopoverClose: any;
-}) {
+function SendProductDialog({ setOpenPopover }: { setOpenPopover: any }) {
   const { currentUserProduct, setCurrentUserProduct } =
     useCurrentUserProductStore();
-  const { userData, setUserData } = useUserDataStore();
+  const { userData } = useUserDataStore();
   const [open, setOpen] = useState(false);
 
   const onOpenChange = () => {
-    if (!userData || !currentUserProduct) {
-      toast.error("Something went wrong.");
-      return;
-    }
-    if (open) {
-      handlePopoverClose(false);
-      setOpen(false);
-    } else {
-      setOpen(true);
-      handlePopoverClose(true);
-    }
+    setOpenPopover(!open);
+    setOpen(!open);
   };
 
   const handleSendToFriend = async (email: string) => {
