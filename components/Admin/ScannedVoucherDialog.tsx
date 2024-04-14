@@ -1,21 +1,20 @@
 import React from "react";
-import HistoryIcon from "../Icon/HistoryIcon";
 import { Sheet, SheetTrigger } from "../ui/sheet";
 import SheetContentLayout from "../ui/SheetContentLayout";
-import HistoryCardList from "./History/HistoryCardList";
 import MainButton from "../MainButton";
+import ScannedVoucherList from "./History/ScannedVoucherCardList";
 
-function HistoryDialog() {
+function ScannedVoucherDialog() {
   return (
     <Sheet>
       <SheetTrigger>
-        <MainButton text="Order List" />
+        <MainButton text="Vouchers" />
       </SheetTrigger>
       <SheetContentLayout className="pt-20 bg-neutral-50">
-        <HistoryCardList />
+        <ScannedVoucherList />
       </SheetContentLayout>
     </Sheet>
   );
 }
 
-export default HistoryDialog;
+export default ScannedVoucherDialog;

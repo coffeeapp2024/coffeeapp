@@ -1,5 +1,6 @@
 import AdminScanner from "@/components/Admin/AdminScanner";
-import HistoryDialog from "@/components/Admin/HistoryDialog";
+import OrderDialog from "@/components/Admin/OrderDialog";
+import ScannedVoucherDialog from "@/components/Admin/ScannedVoucherDialog";
 
 function Page() {
   return (
@@ -14,7 +15,8 @@ function Page() {
     >
       <div className="flex flex-col items-center justify-center pt-48 gap-y-4">
         <AdminScanner />
-        <HistoryDialog />
+        <OrderDialog />
+        <ScannedVoucherDialog />
       </div>
     </div>
   );

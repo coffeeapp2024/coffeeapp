@@ -9,6 +9,7 @@ import {
 import { generateUniqueId } from "@/lib/utils";
 import { ScannedVoucher } from "@/store/admin";
 import { toast } from "sonner";
+import { Voucher } from "@/store/storeTypes";
 
 export const addVoucher = (
   voucherList: UserVoucher[] | null,
@@ -172,4 +173,11 @@ export const removeUserVoucherById = async (
     userData.email,
     updatedUserData
   );
+};
+
+export const findVoucherById = (
+  vouchers: Voucher[],
+  voucherId: string
+): Voucher | undefined => {
+  return vouchers.find((voucher) => voucher.id === voucherId);
 };

@@ -12,6 +12,7 @@ import {
 import { toast } from "sonner";
 import PrimaryCard from "@/components/Template/PrimaryCard";
 import MenuCardPopover from "../Share/MenuCardPopover";
+import { findVoucherById } from "@/lib/voucherActions";
 
 function UserVoucherCard({ userVoucher }: { userVoucher: UserVoucher }) {
   const { userId } = useUserDataStore();
@@ -20,7 +21,7 @@ function UserVoucherCard({ userVoucher }: { userVoucher: UserVoucher }) {
   const { setItemType } = useSendItemTypeStore();
 
   const { vouchers } = useVoucherStore();
-  const voucher = vouchers?.find((voucher) => voucher.id === userVoucher.id);
+  const voucher = findVoucherById(vouchers || [], userVoucher.id);
   if (!voucher) return;
 
   const { imageURL, info, name, id } = voucher;

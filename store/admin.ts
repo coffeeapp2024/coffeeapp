@@ -2,9 +2,9 @@ import { create } from "zustand";
 
 export type ScannedVoucher = {
   id: string;
-  voucherId?: string;
+  voucherId: string;
   userId: string;
-  scannedAt: string;
+  createdAt: string;
 };
 
 export type ScannedVouchersStore = {

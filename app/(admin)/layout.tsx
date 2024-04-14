@@ -2,7 +2,11 @@
 import NavGoto from "@/components/Admin/NavGoto";
 import { fetchCollectionData } from "@/lib/firebaseUtils";
 import { useOrderItemsStore, useScannedVouchersStore } from "@/store/admin";
-import { useProductStore, useToppingsStore } from "@/store/zustand";
+import {
+  useProductStore,
+  useToppingsStore,
+  useVoucherStore,
+} from "@/store/zustand";
 import React, { useEffect } from "react";
 
 export default function RootLayout({
@@ -12,6 +16,7 @@ export default function RootLayout({
 }>) {
   const { setProducts } = useProductStore();
   const { setToppings } = useToppingsStore();
+  const { setVouchers } = useVoucherStore();
   const { setOrderItems } = useOrderItemsStore();
   const { setScannedVouchers } = useScannedVouchersStore();
 
@@ -45,7 +50,14 @@ export default function RootLayout({
       setToppings(fetchedToppings);
     };
     fetchToppings();
-    return () => {};
+
+    // Fetch vouchers
+    const fetchVouchers = async () => {
+      const fetchedVouchers = await fetchCollectionData("vouchers");
+      setVouchers(fetchedVouchers);
+    };
+    fetchVouchers();
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

@@ -10,7 +10,7 @@ import {
   useUserDataStore,
 } from "@/store/zustand";
 import PrimaryCard from "@/components/Template/PrimaryCard";
-import { getProductDetails } from "@/lib/productActions";
+import { getProductDetails, getProductDetails2 } from "@/lib/productActions";
 import MenuCardPopover from "../Share/MenuCardPopover";
 
 function UserProductCard({ item }: { item: CartItem }) {
@@ -21,13 +21,11 @@ function UserProductCard({ item }: { item: CartItem }) {
   const { setCurrentUserProduct } = useCurrentUserProductStore();
   const { setItemType } = useSendItemTypeStore();
 
-  const { sizeId, productId, toppingIds, quantity } = item ?? {};
-
-  const { selectedProduct, selectedSizeName, selectedToppingNames } =
-    getProductDetails(products, toppings, productId, sizeId, toppingIds);
-
-  const { img, name } = selectedProduct ?? {};
-  if (!name) return;
+  const { imageURL, name, details } = getProductDetails2(
+    products,
+    toppings,
+    item
+  );
 
   const handleOpenQrCode = () => {
     toast.info("Scan this product at the shop to enjoy it.");
@@ -42,16 +40,10 @@ function UserProductCard({ item }: { item: CartItem }) {
     setItemType("product");
   };
 
-  const details = [];
-  if (selectedSizeName) details.push(`Size: ${selectedSizeName}`);
-  if (selectedToppingNames.length > 0)
-    details.push(`Add ins: ${selectedToppingNames.join(", ")}`);
-  details.push(`Quantity: ${quantity}`);
-
   return (
     <PrimaryCard
-      imageURL={img}
-      title={name}
+      imageURL={imageURL}
+      title={name || ""}
       details={details}
       buttonText="Scan QR"
       onButtonClick={handleOpenQrCode}

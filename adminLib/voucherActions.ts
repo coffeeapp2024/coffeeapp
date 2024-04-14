@@ -79,7 +79,7 @@ export async function handleVoucherScan(
       id: generateUniqueId(),
       voucherId: voucherId,
       userId: userId,
-      scannedAt: new Date().toISOString(),
+      createdAt: new Date().toISOString(),
     };
 
     // Thêm thông tin quét voucher vào danh sách quét

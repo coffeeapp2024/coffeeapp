@@ -2,6 +2,7 @@ import {
   getDocumentByKeyCondition,
   updateDocumentByKeyCondition,
 } from "@/lib/firebaseUtils";
+import { OrderItem } from "@/store/admin";
 import { Product } from "@/store/storeTypes";
 import { CartItem, Topping, UserData } from "@/store/zustand";
 import { toast } from "sonner";
@@ -103,3 +104,27 @@ export function getProductDetails(
 
   return { selectedProduct, selectedSizeName, selectedToppingNames };
 }
+
+export const getProductDetails2 = (
+  products: Product[],
+  toppings: Topping[],
+  orderItem: CartItem
+) => {
+  const { quantity, toppingIds, productId, sizeId } = orderItem;
+
+  const product = products.find((product) => product.id === productId);
+  const { name: selectedSizeName } =
+    product?.sizes.find((size) => size.id === sizeId) ?? {};
+  const toppingNames = toppings
+    .filter((topping) => toppingIds?.includes(topping.id))
+    .map((topping) => topping.name);
+
+  const { img: imageURL, name } = product ?? {};
+
+  const details = [];
+  if (selectedSizeName) details.push(`Size: ${selectedSizeName}`);
+  if (toppingNames.length > 0)
+    details.push(`Add ins: ${toppingNames.join(", ")}`);
+  details.push(`Quantity: ${quantity}`);
+  return { name, imageURL, details };
+};
