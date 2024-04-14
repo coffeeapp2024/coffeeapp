@@ -13,7 +13,10 @@ function UserProductDialog() {
         name="Collection"
         className="-mt-1"
       />
-      <SheetContentLayout backgroundImage="/bg/bg3.jpg" className="px-2 pt-20">
+      <SheetContentLayout
+        backgroundImage="/bg/main-bg.jpg"
+        className="px-2 pt-20"
+      >
         <QrcodeDialogTemplate />
         <UserItemCardList />
       </SheetContentLayout>

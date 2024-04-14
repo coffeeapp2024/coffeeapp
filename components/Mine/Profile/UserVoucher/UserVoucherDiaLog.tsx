@@ -13,7 +13,10 @@ function UserVoucherDiaLog() {
         name="Vouchers"
         className="-mr-2"
       />
-      <SheetContentLayout backgroundImage="/bg/bg3.jpg" className="px-2 pt-20">
+      <SheetContentLayout
+        backgroundImage="/bg/main-bg.jpg"
+        className="px-2 pt-20"
+      >
         <QrcodeDialogTemplate />
         <UserVoucherCardList />
       </SheetContentLayout>

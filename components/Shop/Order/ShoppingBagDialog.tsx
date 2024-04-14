@@ -35,7 +35,7 @@ function ShoppingBagDialog() {
           </span>
         </div>
       </SheetTrigger>
-      <SheetContentLayout backgroundImage="/bg/bg3.jpg" className="pt-24">
+      <SheetContentLayout backgroundImage="/bg/main-bg.jpg" className="pt-24">
         <div className="absolute top-6 left-1/2 -translate-x-1/2">
           <h2 className="text-center font-semibold text-xl">My Cart</h2>
         </div>

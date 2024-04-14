@@ -10,7 +10,7 @@ function Page() {
       style={{
         backgroundImage: 'url("/bg/main-bg.jpg")',
       }}
-      className="min-h-[150vh] pb-40 px-4 pt-4"
+      className="pb-40 px-4 pt-4"
     >
       <div className="flex flex-col gap-y-6 pb-40">
         <GameDialog />
