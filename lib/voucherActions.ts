@@ -98,7 +98,7 @@ export async function handleRemoveVoucher(userId: string, voucherId: string) {
         id: generateUniqueId(),
         voucherId: voucherId,
         userId: userId,
-        scannedAt: new Date().toISOString(),
+        createdAt: new Date().toISOString(),
       },
     ] as ScannedVoucher[]);
 
