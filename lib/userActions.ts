@@ -72,7 +72,7 @@ export async function updateUserDataAfterPurchase(
   return updatedUserData;
 }
 
-export function getSelectedProductDetails(
+export function getProductDetails(
   products: Product[],
   toppings: Topping[],
   productId: string,

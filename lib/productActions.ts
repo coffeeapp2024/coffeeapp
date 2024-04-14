@@ -23,7 +23,7 @@ export const getProductById = <T extends { id: string }>(
   return productList.find((product) => product.id === productId);
 };
 
-export async function removeProductAndUpdateUser(
+export async function removeUserProductById(
   userData: UserData,
   productId: string
 ) {
@@ -87,7 +87,7 @@ export const addProductToUserByEmail = async (
   }
 };
 
-export function getSelectedProductDetails(
+export function getProductDetails(
   products: Product[],
   toppings: Topping[],
   productId: string,

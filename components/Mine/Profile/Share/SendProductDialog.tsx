@@ -10,7 +10,7 @@ import { toast } from "sonner";
 import { useCurrentUserProductStore, useUserDataStore } from "@/store/zustand";
 import {
   addProductToUserByEmail,
-  removeProductAndUpdateUser,
+  removeUserProductById,
 } from "@/lib/productActions";
 
 function SendProductDialog({ setOpenPopover }: { setOpenPopover: any }) {
@@ -40,7 +40,7 @@ function SendProductDialog({ setOpenPopover }: { setOpenPopover: any }) {
     );
     if (!isProductAdded) return;
 
-    await removeProductAndUpdateUser(userData, currentUserProduct.id);
+    await removeUserProductById(userData, currentUserProduct.id);
     setCurrentUserProduct(null);
     setOpen(false);
   };

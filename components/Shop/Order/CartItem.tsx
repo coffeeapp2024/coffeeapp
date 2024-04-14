@@ -1,7 +1,7 @@
 "use client";
 
 import CoinIcon from "@/components/Template/CoinIcon";
-import { getSelectedProductDetails } from "@/lib/userActions";
+import { getProductDetails } from "@/lib/userActions";
 import {
   useCashCartStore,
   usePointCartStore,
@@ -34,13 +34,7 @@ function CartItem({ index }: { index: number }) {
   const { productId, quantity, toppingIds, sizeId, totalPrice, id } = cartItem;
 
   const { selectedProduct, selectedSizeName, selectedToppingNames } =
-    getSelectedProductDetails(
-      products,
-      toppings,
-      productId,
-      sizeId,
-      toppingIds
-    );
+    getProductDetails(products, toppings, productId, sizeId, toppingIds);
 
   const { img, name } = selectedProduct ?? {};
 

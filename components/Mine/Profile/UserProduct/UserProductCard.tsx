@@ -1,5 +1,5 @@
 import SecondaryButton from "@/components/Template/SecondaryButton";
-import { getSelectedProductDetails } from "@/lib/userActions";
+import { getProductDetails } from "@/lib/userActions";
 import {
   CartItem,
   useCurrentUserProductStore,
@@ -23,13 +23,7 @@ function UserProductCard({ item }: { item: CartItem }) {
   const { sizeId, productId, toppingIds, quantity } = item ?? {};
 
   const { selectedProduct, selectedSizeName, selectedToppingNames } =
-    getSelectedProductDetails(
-      products,
-      toppings,
-      productId,
-      sizeId,
-      toppingIds
-    );
+    getProductDetails(products, toppings, productId, sizeId, toppingIds);
 
   const { img, name } = selectedProduct ?? {};
 

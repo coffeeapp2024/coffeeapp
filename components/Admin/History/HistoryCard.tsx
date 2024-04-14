@@ -1,5 +1,5 @@
 import { getKeyValue } from "@/lib/firebaseUtils";
-import { getSelectedProductDetails } from "@/lib/productActions";
+import { getProductDetails } from "@/lib/productActions";
 import { formatISOStringToTimeAndDate } from "@/lib/timeActions";
 import { OrderItem } from "@/store/admin";
 import { useProductStore, useToppingsStore } from "@/store/zustand";
@@ -33,13 +33,7 @@ function HistoryCard({ orderItem }: { orderItem: OrderItem }) {
   const { quantity, toppingIds, productId, sizeId } = cartItems[0];
 
   const { selectedProduct, selectedSizeName, selectedToppingNames } =
-    getSelectedProductDetails(
-      products,
-      toppings,
-      productId,
-      sizeId,
-      toppingIds
-    );
+    getProductDetails(products, toppings, productId, sizeId, toppingIds);
 
   const { img, name } = selectedProduct ?? {};
 
