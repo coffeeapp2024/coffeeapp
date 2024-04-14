@@ -31,8 +31,8 @@ function SendToEmailDialog({ setOpenPopover }: { setOpenPopover: any }) {
   const { itemType } = useSendItemTypeStore();
 
   const onOpenChange = () => {
-    setOpenPopover(!open);
     setOpen(!open);
+    setOpenPopover(!open);
   };
 
   const handleSendProductToEmail = async (email: string) => {
@@ -73,6 +73,7 @@ function SendToEmailDialog({ setOpenPopover }: { setOpenPopover: any }) {
 
     await removeUserVoucherById(userData, currentUserVoucher.id);
     setOpen(false);
+    setOpenPopover(false);
   };
 
   return (
