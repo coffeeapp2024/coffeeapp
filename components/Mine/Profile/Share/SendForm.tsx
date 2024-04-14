@@ -12,7 +12,11 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
-import { useCurrentUserProductStore } from "@/store/zustand";
+import { useCurrentUserProductStore, useUserDataStore } from "@/store/zustand";
+import {
+  addProductToUserByEmail,
+  removeProductAndUpdateUser,
+} from "@/lib/productActions";
 
 const FormSchema = z.object({
   email: z.string().email({
@@ -22,6 +26,7 @@ const FormSchema = z.object({
 
 export function SendForm() {
   const { currentUserProduct } = useCurrentUserProductStore();
+  const { userData, setUserData } = useUserDataStore();
 
   // console.log("currentUserProduct", currentUserProduct);
 
@@ -32,8 +37,27 @@ export function SendForm() {
     },
   });
 
-  function onSubmit(data: z.infer<typeof FormSchema>) {
-    toast.success("Your gift has been successfully sent to your friend.");
+  async function onSubmit(data: z.infer<typeof FormSchema>) {
+    if (!userData || !currentUserProduct) {
+      toast.error("Something went wrong.");
+      return;
+    }
+    if (userData.email === data.email) {
+      toast.error("You cannot send a gift to yourself!");
+      return;
+    }
+
+    const isProductAdded = await addProductToUserByEmail(
+      data.email,
+      currentUserProduct
+    );
+    if (!isProductAdded) return;
+
+    await removeProductAndUpdateUser(
+      userData,
+      setUserData,
+      currentUserProduct.id
+    );
   }
 
   return (

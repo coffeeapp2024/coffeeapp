@@ -3,6 +3,7 @@ import {
   updateDocumentByKeyCondition,
 } from "@/lib/firebaseUtils";
 import { CartItem, UserData } from "@/store/zustand";
+import { toast } from "sonner";
 
 export const discardProductById = <T extends { id: string }>(
   productList: T[],
@@ -23,7 +24,7 @@ export const getProductById = <T extends { id: string }>(
 
 export async function removeProductAndUpdateUser(
   userData: UserData,
-  setUserData: React.Dispatch<React.SetStateAction<UserData>>,
+  setUserData: (userData: UserData | null) => void,
   productId: string
 ) {
   const updatedUserCollection = discardProductById(
@@ -43,6 +44,7 @@ export async function removeProductAndUpdateUser(
     userData.email,
     updatedUserData
   );
+  await toast.success("Your gift has been successfully sent to your friend.");
 }
 
 export const addProductToUserByEmail = async (
@@ -58,27 +60,28 @@ export const addProductToUserByEmail = async (
     )) as UserData;
 
     // Check if user data exists
-    if (userData) {
-      // Create a new collection with the added product
-      const updatedUserCollection = [...userData.collection, product];
-
-      // Create updated user data with the new collection
-      const updatedUserData: UserData = {
-        ...userData,
-        collection: updatedUserCollection,
-      };
-
-      // Update the Firestore document
-      await updateDocumentByKeyCondition(
-        "users",
-        "email",
-        userEmail,
-        updatedUserData
-      );
-    } else {
-      console.error("User not found!");
-      // Handle error - User not found
+    if (!userData) {
+      toast.error("User not found!");
+      return false;
     }
+    // Create a new collection with the added product
+    const updatedUserCollection = [...userData.collection, product];
+
+    // Create updated user data with the new collection
+    const updatedUserData: UserData = {
+      ...userData,
+      collection: updatedUserCollection,
+    };
+
+    // Update the Firestore document
+    await updateDocumentByKeyCondition(
+      "users",
+      "email",
+      userEmail,
+      updatedUserData
+    );
+
+    return true;
   } catch (error) {
     console.error("Error adding product to user:", error);
     // Handle error gracefully, e.g., show a toast/notification to the user
