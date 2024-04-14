@@ -4,15 +4,21 @@ import CloseDialogButton from "./CloseDialogButton";
 
 function PrimaryDialogContent({
   children,
+  className,
+  isShowCloseButton = true,
 }: Readonly<{
   children: React.ReactNode;
+  className?: string;
+  isShowCloseButton?: boolean;
 }>) {
   return (
-    <DialogContent className="max-w-screen-sm aspect-square p-4 w-full bg-transparent shadow-none border-none">
+    <DialogContent
+      className={`${className} max-w-screen-sm aspect-square p-4 w-full bg-transparent shadow-none border-none`}
+    >
       <div className="overflow-hidden rounded-2xl bg-background">
         {children}
       </div>
-      <CloseDialogButton />
+      {isShowCloseButton && <CloseDialogButton />}
     </DialogContent>
   );
 }
