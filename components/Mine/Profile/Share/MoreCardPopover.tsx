@@ -20,7 +20,7 @@ function MoreCardPopover() {
 
   return (
     <Popover open={openPopover} onOpenChange={setOpenPopover}>
-      <PopoverTrigger className="absolute right-0 top-0 w-8 h-8 bg-neutral-200 bg-opacity-50 rounded-bl-lg flex items-center justify-center">
+      <PopoverTrigger className="absolute right-0 top-0 w-8 h-8 bg-neutral-100 bg-opacity-50 rounded-bl-lg flex items-center justify-center">
         <MenuKebabIcon className="w-5 h-5" />
       </PopoverTrigger>
       <PopoverContent
