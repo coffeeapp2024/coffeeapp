@@ -30,8 +30,8 @@ export type UserData = {
   startTimeMine: string | null;
   endTimeMine: string | null;
   inStorage: InStorage | null;
-  voucherList: UserVoucher[] | null;
-  collection: CartItem[] | null;
+  voucherList: UserVoucher[];
+  collection: CartItem[];
   LikedEventImageIdList: string[] | null;
   LikedCheckinImageIdList: string[] | null;
   [key: string]: any;

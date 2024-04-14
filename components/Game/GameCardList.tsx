@@ -17,7 +17,7 @@ import { toast } from "sonner";
 import { Case } from "@/store/storeTypes";
 import CoinIcon from "../Template/CoinIcon";
 import { updateDocumentByKeyCondition } from "@/lib/firebaseUtils";
-import { addVoucher } from "@/lib/voucherUtils";
+import { addVoucher } from "@/lib/voucherActions";
 
 export default function GameCardList() {
   const [api, setApi] = React.useState<CarouselApi>();
