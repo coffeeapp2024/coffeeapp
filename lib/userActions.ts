@@ -1,6 +1,7 @@
-import { Product } from "@/store/storeTypes";
-import { updateDocumentByKeyCondition } from "./firebaseUtils";
+import { Account, Product } from "@/store/storeTypes";
+import { getDocumentById, updateDocumentByKeyCondition } from "./firebaseUtils";
 import { Topping, UserData } from "@/store/zustand";
+import { auth } from "@/lib/firebase";
 
 export function calcBalanceInStorage(userData: UserData): number | null {
   const { miningSpeed, inStorage } = userData;
@@ -71,3 +72,58 @@ export async function updateUserDataAfterPurchase(
   console.log("Updated user data after purchase:", updatedUserData);
   return updatedUserData;
 }
+
+export const fetchUserDataAndSetRole = async (
+  setUserData: any,
+  setUserId: any,
+  setRole: any
+) => {
+  const unsubscribe = auth.onAuthStateChanged(async (user) => {
+    if (user && user.email) {
+      try {
+        const fetchedUserData = (await getDocumentById(
+          "users",
+          user.uid
+        )) as UserData;
+
+        // Fetch admin accounts
+        const fetchedAccounts = (await getDocumentById(
+          "admin",
+          "accounts"
+        )) as Account;
+
+        // Determine user role based on fetched accounts data
+        const { staff, manager, testing } = fetchedAccounts;
+        const role = testing
+          ? "manager"
+          : staff?.includes(user.email)
+          ? "staff"
+          : manager?.includes(user.email)
+          ? "manager"
+          : null;
+        console.log("User role:", role);
+
+        // Set user role and ID
+        setRole(role);
+        setUserId(user.uid);
+
+        // Add 100 min to balance if in testing mode
+        if (testing && fetchedUserData) {
+          fetchedUserData.balance += 100;
+          console.log("Testing Mode! +100 min");
+        }
+
+        // Set user data
+        console.log("Fetched user data:", fetchedUserData);
+        setUserData(fetchedUserData);
+        console.log("Login successfully");
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    } else {
+      setUserData(null);
+    }
+  });
+
+  return () => unsubscribe();
+};

@@ -1,6 +1,7 @@
 "use client";
 import NavGoto from "@/components/Admin/NavGoto";
-import { fetchCollectionData, getDocumentById } from "@/lib/firebaseUtils";
+import { fetchCollectionData } from "@/lib/firebaseUtils";
+import { fetchUserDataAndSetRole } from "@/lib/userActions";
 import { useOrderItemsStore, useScannedVouchersStore } from "@/store/admin";
 import {
   useProductStore,
@@ -9,7 +10,6 @@ import {
   useVoucherStore,
 } from "@/store/zustand";
 import React, { useEffect } from "react";
-import { fetchUserDataAndSetRole } from "../(user)/layout";
 
 export default function RootLayout({
   children,
