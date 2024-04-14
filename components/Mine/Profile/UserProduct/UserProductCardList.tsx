@@ -33,7 +33,7 @@ function UserProductCardList() {
     return unsubscribe;
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [userData?.collection]);
 
   return (
     <div className="flex flex-col gap-y-2">

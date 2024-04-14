@@ -32,7 +32,7 @@ function UserVoucherCardList() {
 
     return unsubscribe;
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [userData?.voucherList]);
 
   return (
     <div className="flex flex-col gap-y-2">
