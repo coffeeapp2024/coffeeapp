@@ -6,17 +6,56 @@ import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import React, { useState } from "react";
 import { SendForm } from "./SendForm";
 import Image from "next/image";
+import { toast } from "sonner";
+import { useCurrentUserProductStore, useUserDataStore } from "@/store/zustand";
+import {
+  addProductToUserByEmail,
+  removeProductAndUpdateUser,
+} from "@/lib/productActions";
 
 function SendProductDialog({
   handlePopoverClose,
 }: {
   handlePopoverClose: any;
 }) {
+  const { currentUserProduct, setCurrentUserProduct } =
+    useCurrentUserProductStore();
+  const { userData, setUserData } = useUserDataStore();
   const [open, setOpen] = useState(false);
 
   const onOpenChange = () => {
-    handlePopoverClose(!open);
-    setOpen(!open);
+    if (!userData || !currentUserProduct) {
+      toast.error("Something went wrong.");
+      return;
+    }
+    if (open) {
+      handlePopoverClose(false);
+      setOpen(false);
+    } else {
+      setOpen(true);
+      handlePopoverClose(true);
+    }
+  };
+
+  const handleSendToFriend = async (email: string) => {
+    if (!userData || !currentUserProduct) {
+      toast.error("Something went wrong.");
+      return;
+    }
+    if (userData.email === email) {
+      toast.error("You cannot send a gift to yourself!");
+      return;
+    }
+
+    const isProductAdded = await addProductToUserByEmail(
+      email,
+      currentUserProduct
+    );
+    if (!isProductAdded) return;
+
+    await removeProductAndUpdateUser(userData, currentUserProduct.id);
+    setCurrentUserProduct(null);
+    setOpen(false);
   };
 
   return (
@@ -38,7 +77,7 @@ function SendProductDialog({
               className="w-full h-full object-contain"
             />
           </div>
-          <SendForm />
+          <SendForm handleSendToFriend={handleSendToFriend} />
         </div>
       </PrimaryDialogContent>
     </Dialog>

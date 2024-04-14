@@ -22,7 +22,7 @@ function UserVoucherCardList() {
       setUserData(updatedUserData);
     };
 
-    listenKeyChangeInDocument(
+    const unsubscribe = listenKeyChangeInDocument(
       "users",
       userId,
       userData,
@@ -30,8 +30,9 @@ function UserVoucherCardList() {
       onDataChange
     );
 
+    return unsubscribe;
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [setOpen]);
+  }, []);
 
   return (
     <div className="pb-20 flex flex-col gap-y-2">

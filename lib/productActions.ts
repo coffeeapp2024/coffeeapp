@@ -25,7 +25,6 @@ export const getProductById = <T extends { id: string }>(
 
 export async function removeProductAndUpdateUser(
   userData: UserData,
-  setUserData: (userData: UserData | null) => void,
   productId: string
 ) {
   const updatedUserCollection = discardProductById(
@@ -37,7 +36,6 @@ export async function removeProductAndUpdateUser(
     ...userData,
     collection: updatedUserCollection,
   };
-  setUserData(updatedUserData);
 
   await updateDocumentByKeyCondition(
     "users",

@@ -11,12 +11,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { toast } from "sonner";
-import { useCurrentUserProductStore, useUserDataStore } from "@/store/zustand";
-import {
-  addProductToUserByEmail,
-  removeProductAndUpdateUser,
-} from "@/lib/productActions";
 
 const FormSchema = z.object({
   email: z.string().email({
@@ -24,12 +18,11 @@ const FormSchema = z.object({
   }),
 });
 
-export function SendForm() {
-  const { currentUserProduct } = useCurrentUserProductStore();
-  const { userData, setUserData } = useUserDataStore();
-
-  // console.log("currentUserProduct", currentUserProduct);
-
+export function SendForm({
+  handleSendToFriend,
+}: {
+  handleSendToFriend: (email: string) => void;
+}) {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -38,26 +31,7 @@ export function SendForm() {
   });
 
   async function onSubmit(data: z.infer<typeof FormSchema>) {
-    if (!userData || !currentUserProduct) {
-      toast.error("Something went wrong.");
-      return;
-    }
-    if (userData.email === data.email) {
-      toast.error("You cannot send a gift to yourself!");
-      return;
-    }
-
-    const isProductAdded = await addProductToUserByEmail(
-      data.email,
-      currentUserProduct
-    );
-    if (!isProductAdded) return;
-
-    await removeProductAndUpdateUser(
-      userData,
-      setUserData,
-      currentUserProduct.id
-    );
+    handleSendToFriend(data.email);
   }
 
   return (

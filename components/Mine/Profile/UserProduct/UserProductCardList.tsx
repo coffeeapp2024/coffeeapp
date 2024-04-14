@@ -22,7 +22,7 @@ function UserProductCardList() {
       setUserData(updatedUserData);
     };
 
-    listenKeyChangeInDocument(
+    const unsubscribe = listenKeyChangeInDocument(
       "users",
       userId,
       userData,
@@ -30,8 +30,10 @@ function UserProductCardList() {
       onDataChange
     );
 
+    return unsubscribe;
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [setOpen]);
+  }, []);
 
   return (
     <div className="flex flex-col items-center gap-y-3">

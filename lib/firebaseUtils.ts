@@ -510,14 +510,14 @@ export function listenKeyChangeInDocument(
   keyToWatch: string,
   onDataChange: (data: any) => void
 ) {
+  console.log("Listening for key changes in document...");
+
   const unsubscribe = listenToDocument(collectionName, docId, (data: any) => {
     if (isEqual(data[keyToWatch], oldData[keyToWatch])) return;
 
     console.log(`Change detected in key ${keyToWatch}:`, data[keyToWatch]);
     onDataChange(data);
   });
-
-  console.log("Listening for key changes in document...");
 
   return unsubscribe;
 }
