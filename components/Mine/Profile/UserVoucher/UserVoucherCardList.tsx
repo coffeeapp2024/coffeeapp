@@ -31,7 +31,7 @@ function UserVoucherCardList() {
     );
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [userData?.voucherList]);
+  }, [setOpen]);
 
   return (
     <div className="pb-20 flex flex-col gap-y-2">
