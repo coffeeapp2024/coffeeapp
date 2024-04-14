@@ -10,7 +10,7 @@ import { generateUniqueId } from "@/lib/utils";
 import { ScannedVoucher } from "@/store/admin";
 import { toast } from "sonner";
 
-export const addVoucher = async (
+export const addVoucher = (
   voucherList: UserVoucher[] | null,
   voucherId: string
 ) => {
@@ -129,6 +129,8 @@ export const addVoucherToUserByEmail = async (
     // Add the voucher to the user's voucher list
     const updatedVoucherList = addVoucher(userData.voucherList, voucherId);
 
+    console.log("updatedVoucherList", updatedVoucherList);
+
     // Update the Firestore document with the updated voucher list
     await updateDocumentByKeyCondition("users", "email", userEmail, {
       voucherList: updatedVoucherList,
@@ -159,10 +161,15 @@ export const removeUserVoucherById = async (
     voucherId
   );
 
+  const updatedUserData: UserData = {
+    ...userData,
+    voucherList: updatedUserVoucherList,
+  };
+
   await updateDocumentByKeyCondition(
     "users",
     "email",
     userData.email,
-    updatedUserVoucherList
+    updatedUserData
   );
 };

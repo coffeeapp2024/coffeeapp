@@ -36,7 +36,7 @@ function UserProductCardList() {
   }, []);
 
   return (
-    <div className="flex flex-col items-center gap-y-2">
+    <div className="flex flex-col gap-y-2">
       {collection &&
         collection.map((item, index) => (
           <UserItemCard key={index} item={item} />

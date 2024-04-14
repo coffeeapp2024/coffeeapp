@@ -65,11 +65,11 @@ function SendToEmailDialog({ setOpenPopover }: { setOpenPopover: any }) {
       return;
     }
 
-    const isProductAdded = await addVoucherToUserByEmail(
+    const isVoucherAdded = await addVoucherToUserByEmail(
       email,
       currentUserVoucher.id
     );
-    if (!isProductAdded) return;
+    if (!isVoucherAdded) return;
 
     await removeUserVoucherById(userData, currentUserVoucher.id);
     setOpen(false);
