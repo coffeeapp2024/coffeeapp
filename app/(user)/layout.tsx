@@ -36,8 +36,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const { userData, userId, setRole, setUserData, setUserId } =
-    useUserDataStore();
+  const { userData, setRole, setUserData, setUserId } = useUserDataStore();
   const { endTimeMine, balance, email } = userData ?? {};
   const { setBanner } = useShopStore();
   const { setPosts: setEventPost } = useEventPostStore();
