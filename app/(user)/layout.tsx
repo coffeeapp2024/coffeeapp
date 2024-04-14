@@ -67,7 +67,6 @@ export const fetchUserDataAndSetRole = async (
         // Add 100 min to balance if in testing mode
         if (testing && fetchedUserData) {
           fetchedUserData.balance += 100;
-          toast.info("Testing Mode! +100 min");
           console.log("Testing Mode! +100 min");
         }
 
