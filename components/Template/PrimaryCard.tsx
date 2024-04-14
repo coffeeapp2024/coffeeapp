@@ -42,7 +42,7 @@ const PrimaryCard: React.FC<VoucherCardProps> = ({
           <h3 className="font-bold">{title}</h3>
 
           {details.map((item, index) => (
-            <p key={index} className="text-neutral-700 text-sm font-semibold">
+            <p key={index} className="text-neutral-700 text-xs font-medium">
               {item}
             </p>
           ))}
