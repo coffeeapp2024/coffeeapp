@@ -36,7 +36,7 @@ function ScannedCard({
     fetchUserName();
   }, [userId]);
 
-  details.push(`Name: ${userName}`);
+  if (userName) details.push(`Name: ${userName}`);
   const formattedCreateAt = formatISOStringToTimeAndDate(createdAt);
 
   return (
