@@ -44,10 +44,10 @@ function HistoryCard({ orderItem }: { orderItem: OrderItem }) {
   const { img, name } = selectedProduct ?? {};
 
   const details = [
-    `size: ${selectedSizeName}`,
-    `add Ins: ${selectedToppingNames}`,
-    `quantity: ${quantity}`,
-    `name: ${userName}`,
+    `Size: ${selectedSizeName}`,
+    `Add Ins: ${selectedToppingNames}`,
+    `Quantity: ${quantity}`,
+    `Name: ${userName}`,
   ];
 
   const formattedCreateAt = formatISOStringToTimeAndDate(createdAt);
@@ -71,7 +71,10 @@ function HistoryCard({ orderItem }: { orderItem: OrderItem }) {
         <div className="mb-2">
           <h3 className="font-bold">{name}</h3>
           {details.map((item, index) => (
-            <p key={index} className="text-wrap text-sm">
+            <p
+              key={index}
+              className="text-wrap text-xs text-neutral-800 font-medium"
+            >
               {item}
             </p>
           ))}
