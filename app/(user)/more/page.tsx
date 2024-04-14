@@ -8,7 +8,7 @@ function Page() {
   return (
     <div
       style={{
-        backgroundImage: 'url("/bg/main-bg.jpg")',
+        backgroundImage: 'url("/bg/more-bg.jpg")',
       }}
       className="pb-40 px-4 pt-4"
     >
