@@ -30,7 +30,7 @@ const QRCodeScanner = ({
   };
 
   const handleError = (error: Error) => {
-    toast.error(error?.message);
+    // toast.error(error?.message);
   };
 
   return (
