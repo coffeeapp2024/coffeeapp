@@ -1,7 +1,7 @@
 "use client";
 
 import CoinIcon from "@/components/Template/CoinIcon";
-import { getProductDetails } from "@/lib/userActions";
+import { getProductDetails } from "@/lib/productActions";
 import {
   useCashCartStore,
   usePointCartStore,

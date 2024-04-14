@@ -16,7 +16,7 @@ export const discardProductById = <T extends { id: string }>(
   return updatedProductList;
 };
 
-export const getProductById = <T extends { id: string }>(
+const getProductById = <T extends { id: string }>(
   productList: T[],
   productId: string
 ): T | undefined => {

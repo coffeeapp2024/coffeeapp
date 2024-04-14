@@ -8,7 +8,7 @@ import {
   useVoucherStore,
 } from "@/store/zustand";
 import { toast } from "sonner";
-import VoucherCardTemplate from "@/components/Template/VoucherCardTemplate";
+import PrimaryCard from "@/components/Template/PrimaryCard";
 
 function UserVoucherCard({ userVoucher }: { userVoucher: UserVoucher }) {
   const { userId } = useUserDataStore();
@@ -28,12 +28,13 @@ function UserVoucherCard({ userVoucher }: { userVoucher: UserVoucher }) {
   };
 
   return (
-    <VoucherCardTemplate
+    <PrimaryCard
       imageURL={imageURL}
-      name={name}
+      title={name}
       details={[info, `quantity: ${userVoucher.quantity}`]}
-      nameButton="Scan QR"
-      onClick={handleOpenQrCode}
+      buttonText="Scan QR"
+      onButtonClick={handleOpenQrCode}
+      onMenuClick={() => {}}
     />
   );
 }
