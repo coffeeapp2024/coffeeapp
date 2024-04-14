@@ -324,7 +324,6 @@ export type QrCodeStore = {
   setOpen: (open: boolean) => void;
 };
 
-// Tạo store
 export const useQrCodeStore = create<QrCodeStore>((set) => ({
   id: null,
   open: false,
@@ -344,3 +343,27 @@ export const useCurrentUserProductStore = create<CurrentUserProductStore>(
       set({ currentUserProduct: productData }),
   })
 );
+
+export type CurrentUserVoucherStore = {
+  currentUserVoucher: UserVoucher | null;
+  setCurrentUserVoucher: (voucher: UserVoucher | null) => void;
+};
+
+export const useCurrentUserVoucherStore = create<CurrentUserVoucherStore>(
+  (set) => ({
+    currentUserVoucher: null,
+    setCurrentUserVoucher: (voucher) => set({ currentUserVoucher: voucher }),
+  })
+);
+
+export type SendItemType = "product" | "voucher";
+
+export type SendItemTypeStore = {
+  itemType: SendItemType | null;
+  setItemType: (type: SendItemType | null) => void;
+};
+
+export const useSendItemTypeStore = create<SendItemTypeStore>((set) => ({
+  itemType: null,
+  setItemType: (type) => set({ itemType: type }),
+}));

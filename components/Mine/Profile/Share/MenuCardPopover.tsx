@@ -7,9 +7,9 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import SendProductDialog from "./SendProductDialog";
+import SendToEmailDialog from "./SendToEmailDialog";
 
-function MoreCardPopover({ onClick }: { onClick: () => void }) {
+function MenuCardPopover({ onClick }: { onClick: () => void }) {
   const [openPopover, setOpenPopover] = useState(false);
 
   return (
@@ -26,10 +26,10 @@ function MoreCardPopover({ onClick }: { onClick: () => void }) {
         sideOffset={-32}
         className="w-fit rounded-2xl"
       >
-        <SendProductDialog setOpenPopover={setOpenPopover} />
+        <SendToEmailDialog setOpenPopover={setOpenPopover} />
       </PopoverContent>
     </Popover>
   );
 }
 
-export default MoreCardPopover;
+export default MenuCardPopover;

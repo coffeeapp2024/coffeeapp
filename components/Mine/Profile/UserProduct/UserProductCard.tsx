@@ -5,11 +5,13 @@ import {
   useCurrentUserProductStore,
   useProductStore,
   useQrCodeStore,
+  useSendItemTypeStore,
   useToppingsStore,
   useUserDataStore,
 } from "@/store/zustand";
 import PrimaryCard from "@/components/Template/PrimaryCard";
 import { getProductDetails } from "@/lib/productActions";
+import MenuCardPopover from "../Share/MenuCardPopover";
 
 function UserProductCard({ item }: { item: CartItem }) {
   const { products } = useProductStore();
@@ -17,6 +19,7 @@ function UserProductCard({ item }: { item: CartItem }) {
   const { setOpen, setQrCodeId } = useQrCodeStore();
   const { userId } = useUserDataStore();
   const { setCurrentUserProduct } = useCurrentUserProductStore();
+  const { setItemType } = useSendItemTypeStore();
 
   const { sizeId, productId, toppingIds, quantity } = item ?? {};
 
@@ -34,6 +37,11 @@ function UserProductCard({ item }: { item: CartItem }) {
     setOpen(true);
   };
 
+  const handleClickMenu = () => {
+    setCurrentUserProduct(item);
+    setItemType("product");
+  };
+
   const details = [];
   if (selectedSizeName) details.push(`Size: ${selectedSizeName}`);
   if (selectedToppingNames.length > 0)
@@ -47,8 +55,9 @@ function UserProductCard({ item }: { item: CartItem }) {
       details={details}
       buttonText="Scan QR"
       onButtonClick={handleOpenQrCode}
-      onMenuClick={() => setCurrentUserProduct(item)}
-    />
+    >
+      <MenuCardPopover onClick={handleClickMenu} />
+    </PrimaryCard>
   );
 }
 

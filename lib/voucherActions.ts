@@ -2,6 +2,8 @@ import { UserData, UserVoucher } from "@/store/zustand";
 import {
   addDocumentsToCollection,
   getDocumentById,
+  getDocumentByKeyCondition,
+  updateDocumentByKeyCondition,
   updateKeyInDocument,
 } from "@/lib/firebaseUtils";
 import { generateUniqueId } from "@/lib/utils";
@@ -32,10 +34,7 @@ export const addVoucher = async (
   return [...voucherList, { id: voucherId, quantity: 1 }];
 };
 
-export const removeVoucher = (
-  voucherList: UserVoucher[],
-  voucherId: string
-) => {
+const discardVoucherById = (voucherList: UserVoucher[], voucherId: string) => {
   // Tìm chỉ mục của voucher trong danh sách
   const existingVoucherIndex = voucherList.findIndex(
     (voucher) => voucher.id === voucherId
@@ -79,7 +78,10 @@ export async function handleRemoveVoucher(userId: string, voucherId: string) {
     }
 
     // Xóa voucher khỏi danh sách voucher của người dùng
-    const updatedUserVoucherList = removeVoucher(userVoucherList, voucherId);
+    const updatedUserVoucherList = discardVoucherById(
+      userVoucherList,
+      voucherId
+    );
 
     // Cập nhật danh sách voucher mới của người dùng
     await updateKeyInDocument(
@@ -105,3 +107,62 @@ export async function handleRemoveVoucher(userId: string, voucherId: string) {
     toast.error("An error occurred while handling the voucher scan.");
   }
 }
+
+export const addVoucherToUserByEmail = async (
+  userEmail: string,
+  voucherId: string
+) => {
+  try {
+    // Retrieve user data based on email
+    const userData = (await getDocumentByKeyCondition(
+      "users",
+      "email",
+      userEmail
+    )) as UserData;
+
+    // Check if user data exists
+    if (!userData) {
+      toast.error("User not found!");
+      return false;
+    }
+
+    // Add the voucher to the user's voucher list
+    const updatedVoucherList = addVoucher(userData.voucherList, voucherId);
+
+    // Update the Firestore document with the updated voucher list
+    await updateDocumentByKeyCondition("users", "email", userEmail, {
+      voucherList: updatedVoucherList,
+    });
+
+    toast.success("Voucher added successfully!");
+    return true;
+  } catch (error) {
+    console.error("Error adding voucher to user:", error);
+    toast.error("An error occurred while adding the voucher to the user.");
+    return false;
+  }
+};
+
+export const removeUserVoucherById = async (
+  userData: UserData,
+  voucherId: string
+) => {
+  if (
+    !userData.voucherList.find((userVoucher) => userVoucher.id === voucherId)
+  ) {
+    toast.error("Voucher does not exist.");
+    return;
+  }
+
+  const updatedUserVoucherList = discardVoucherById(
+    userData.voucherList,
+    voucherId
+  );
+
+  await updateDocumentByKeyCondition(
+    "users",
+    "email",
+    userData.email,
+    updatedUserVoucherList
+  );
+};

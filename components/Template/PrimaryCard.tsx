@@ -3,7 +3,6 @@
 import React from "react";
 import Image from "next/image";
 import SecondaryButton from "./SecondaryButton";
-import MoreCardPopover from "../Mine/Profile/Share/MoreCardPopover";
 
 type VoucherCardProps = {
   imageURL: string | null | undefined;
@@ -11,7 +10,7 @@ type VoucherCardProps = {
   details: string[];
   buttonText: string;
   onButtonClick: () => void;
-  onMenuClick: () => void; // Renamed to onMenuClick
+  children?: React.ReactNode;
 };
 
 const PrimaryCard: React.FC<VoucherCardProps> = ({
@@ -20,7 +19,7 @@ const PrimaryCard: React.FC<VoucherCardProps> = ({
   details,
   buttonText,
   onButtonClick,
-  onMenuClick, // Renamed to onMenuClick
+  children, // Renamed to onMenuClick
 }: VoucherCardProps) => {
   return (
     <div className="relative h-32 bg-white bg-opacity-70 w-full py-2 pl-2 pr-4 rounded-2xl flex shadow-sm">
@@ -54,7 +53,8 @@ const PrimaryCard: React.FC<VoucherCardProps> = ({
       <div className="flex flex-col justify-between items-end">
         <SecondaryButton name={buttonText} onClick={onButtonClick} />
       </div>
-      <MoreCardPopover onClick={onMenuClick} />
+
+      {children}
     </div>
   );
 };

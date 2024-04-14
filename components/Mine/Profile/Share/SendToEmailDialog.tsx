@@ -7,24 +7,35 @@ import React, { useState } from "react";
 import { SendForm } from "./SendForm";
 import Image from "next/image";
 import { toast } from "sonner";
-import { useCurrentUserProductStore, useUserDataStore } from "@/store/zustand";
+import {
+  useCurrentUserProductStore,
+  useCurrentUserVoucherStore,
+  useSendItemTypeStore,
+  useUserDataStore,
+} from "@/store/zustand";
 import {
   addProductToUserByEmail,
   removeUserProductById,
 } from "@/lib/productActions";
+import {
+  addVoucherToUserByEmail,
+  removeUserVoucherById,
+} from "@/lib/voucherActions";
 
-function SendProductDialog({ setOpenPopover }: { setOpenPopover: any }) {
-  const { currentUserProduct, setCurrentUserProduct } =
-    useCurrentUserProductStore();
+function SendToEmailDialog({ setOpenPopover }: { setOpenPopover: any }) {
   const { userData } = useUserDataStore();
   const [open, setOpen] = useState(false);
+
+  const { currentUserProduct } = useCurrentUserProductStore();
+  const { currentUserVoucher } = useCurrentUserVoucherStore();
+  const { itemType } = useSendItemTypeStore();
 
   const onOpenChange = () => {
     setOpenPopover(!open);
     setOpen(!open);
   };
 
-  const handleSendToFriend = async (email: string) => {
+  const handleSendProductToEmail = async (email: string) => {
     if (!userData || !currentUserProduct) {
       toast.error("Something went wrong.");
       return;
@@ -41,7 +52,26 @@ function SendProductDialog({ setOpenPopover }: { setOpenPopover: any }) {
     if (!isProductAdded) return;
 
     await removeUserProductById(userData, currentUserProduct.id);
-    setCurrentUserProduct(null);
+    setOpen(false);
+  };
+
+  const handleSendVoucherToEmail = async (email: string) => {
+    if (!userData || !currentUserVoucher) {
+      toast.error("Something went wrong.");
+      return;
+    }
+    if (userData.email === email) {
+      toast.error("You cannot send a gift to yourself!");
+      return;
+    }
+
+    const isProductAdded = await addVoucherToUserByEmail(
+      email,
+      currentUserVoucher.id
+    );
+    if (!isProductAdded) return;
+
+    await removeUserVoucherById(userData, currentUserVoucher.id);
     setOpen(false);
   };
 
@@ -64,11 +94,17 @@ function SendProductDialog({ setOpenPopover }: { setOpenPopover: any }) {
               className="w-full h-full object-contain"
             />
           </div>
-          <SendForm handleSendToFriend={handleSendToFriend} />
+          <SendForm
+            handleSendToFriend={
+              itemType === "product"
+                ? handleSendProductToEmail
+                : handleSendVoucherToEmail
+            }
+          />
         </div>
       </PrimaryDialogContent>
     </Dialog>
   );
 }
 
-export default SendProductDialog;
+export default SendToEmailDialog;
