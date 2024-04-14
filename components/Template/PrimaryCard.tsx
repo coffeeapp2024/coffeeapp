@@ -22,7 +22,7 @@ const PrimaryCard: React.FC<VoucherCardProps> = ({
   children, // Renamed to onMenuClick
 }: VoucherCardProps) => {
   return (
-    <div className="relative h-32 bg-white bg-opacity-70 w-full py-2 pl-2 pr-4 rounded-2xl flex shadow-sm">
+    <div className="relative h-32 bg-white bg-opacity-70 w-full py-2 pl-2 pr-4 rounded-2xl flex shadow-sm overflow-hidden">
       {/* Left */}
       <div className="bg-background h-full aspect-square rounded-xl overflow-hidden">
         {imageURL && (
