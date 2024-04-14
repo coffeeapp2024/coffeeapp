@@ -11,7 +11,7 @@ function Page() {
       style={{
         backgroundImage: 'url("/bg/main-bg.jpg")',
       }}
-      className="relative min-h-[200vh] w-full bg-background"
+      className="relative pb-40 w-full bg-background"
     >
       <BannerProductPage />
       <RecommendProductCards />
