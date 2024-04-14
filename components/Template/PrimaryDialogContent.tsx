@@ -13,7 +13,7 @@ function PrimaryDialogContent({
 }>) {
   return (
     <DialogContent
-      className={`${className} max-w-screen-sm aspect-square p-4 w-full bg-transparent shadow-none border-none`}
+      className={`${className} top-[40%] max-w-screen-sm aspect-square p-4 w-full bg-transparent shadow-none border-none`}
     >
       <div className="overflow-hidden rounded-2xl bg-background">
         {children}

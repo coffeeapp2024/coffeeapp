@@ -27,7 +27,7 @@ function SendProductDialog({
           Send to your friend
         </span>
       </DialogTrigger>
-      <PrimaryDialogContent isShowCloseButton={false} className="top-[40%]">
+      <PrimaryDialogContent isShowCloseButton={false}>
         <div className="flex flex-col h-full w-full justify-between items-center pb-5">
           <div className="h-2/3">
             <Image
