@@ -20,7 +20,12 @@ export const removeProduct = <T extends { id: string }>(
   return updatedProductList;
 };
 
-export async function handleProductScan(userId: string, productId: string) {
+export async function handleProductScan(
+  orderItems: OrderItem[],
+  setOrderItems: (items: OrderItem[]) => void,
+  userId: string,
+  productId: string
+) {
   try {
     // Kiểm tra xem người dùng có tồn tại không
     const userData = (await getDocumentById("users", userId)) as UserData;
@@ -54,13 +59,15 @@ export async function handleProductScan(userId: string, productId: string) {
     );
 
     // Tạo một đơn hàng mới với sản phẩm quét được và thêm vào danh sách đơn hàng
-    const orderItem: OrderItem = {
+    const newOrderItem: OrderItem = {
       id: generateUniqueId(),
       userId: userId,
       cartItems: [scannedProduct],
       createdAt: new Date().toISOString(),
     };
-    await addDocumentsToCollection("orderList", [orderItem]);
+    await addDocumentsToCollection("orderList", [newOrderItem]);
+
+    setOrderItems([...orderItems, newOrderItem]);
 
     toast.success("Product scanned successfully.");
   } catch (error) {

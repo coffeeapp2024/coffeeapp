@@ -2,7 +2,8 @@ import {
   getDocumentByKeyCondition,
   updateDocumentByKeyCondition,
 } from "@/lib/firebaseUtils";
-import { CartItem, UserData } from "@/store/zustand";
+import { Product } from "@/store/storeTypes";
+import { CartItem, Topping, UserData } from "@/store/zustand";
 import { toast } from "sonner";
 
 export const discardProductById = <T extends { id: string }>(
@@ -87,3 +88,20 @@ export const addProductToUserByEmail = async (
     // Handle error gracefully, e.g., show a toast/notification to the user
   }
 };
+
+export function getSelectedProductDetails(
+  products: Product[],
+  toppings: Topping[],
+  productId: string,
+  sizeId: string,
+  toppingIds: string[]
+) {
+  const selectedProduct = products.find((product) => product.id === productId);
+  const { name: selectedSizeName } =
+    selectedProduct?.sizes.find((size) => size.id === sizeId) ?? {};
+  const selectedToppingNames = toppings
+    .filter((topping) => toppingIds?.includes(topping.id))
+    .map((topping) => topping.name);
+
+  return { selectedProduct, selectedSizeName, selectedToppingNames };
+}

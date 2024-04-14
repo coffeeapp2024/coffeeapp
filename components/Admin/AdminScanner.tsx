@@ -4,18 +4,21 @@ import React from "react";
 import { useUserDataStore } from "@/store/zustand";
 import { handleVoucherScan } from "@/adminLib/voucherActions";
 import { handleProductScan } from "@/adminLib/productActions";
+import { useOrderItemsStore, useScannedVouchersStore } from "@/store/admin";
 
 const AdminScanner = () => {
   const { role } = useUserDataStore();
+  const { orderItems, setOrderItems } = useOrderItemsStore();
+  const { scannedVouchers, setScannedVouchers } = useScannedVouchersStore();
 
   const handleQrCode = async (text: string) => {
     const [userId, arrayKey, id] = text.split("-");
 
     if (arrayKey === "voucherList") {
-      await handleVoucherScan(userId, id);
+      await handleVoucherScan(scannedVouchers, setScannedVouchers, userId, id);
     }
     if (arrayKey === "collection") {
-      await handleProductScan(userId, id);
+      await handleProductScan(orderItems, setOrderItems, userId, id);
     }
   };
 

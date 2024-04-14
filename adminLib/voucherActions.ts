@@ -41,7 +41,12 @@ export const removeVoucher = (
   return updatedVoucherList;
 };
 
-export async function handleVoucherScan(userId: string, voucherId: string) {
+export async function handleVoucherScan(
+  scannedVouchers: ScannedVoucher[],
+  setScannedVouchers: (vouchers: ScannedVoucher[]) => void,
+  userId: string,
+  voucherId: string
+) {
   try {
     // Kiểm tra xem người dùng có tồn tại không
     const userData = (await getDocumentById("users", userId)) as UserData;
@@ -70,15 +75,19 @@ export async function handleVoucherScan(userId: string, voucherId: string) {
       updatedUserVoucherList
     );
 
+    const newScannedVoucher = {
+      id: generateUniqueId(),
+      voucherId: voucherId,
+      userId: userId,
+      scannedAt: new Date().toISOString(),
+    };
+
     // Thêm thông tin quét voucher vào danh sách quét
     await addDocumentsToCollection("scannedVoucherList", [
-      {
-        id: generateUniqueId(),
-        voucherId: voucherId,
-        userId: userId,
-        scannedAt: new Date().toISOString(),
-      },
+      newScannedVoucher,
     ] as ScannedVoucher[]);
+
+    setScannedVouchers([...scannedVouchers, newScannedVoucher]);
 
     toast.success("Voucher scanned successfully.");
   } catch (error) {
