@@ -1,6 +1,6 @@
 {
-  "name": "Coffee Coin App",
-  "short_name": "Coffee Coin",
+  "name": "Min Coffee",
+  "short_name": "Min Coffee",
   "description": "",
   "start_url": "/",
   "display": "standalone",
@@ -34,11 +34,5 @@
       "type": "image/png"
     }
   ],
-  "screenshots": [
-    {
-      "src": "/bg/bg1.jpg",
-      "sizes": "736x1472",
-      "type": "image/jpeg"
-    }
-  ]
+  "screenshots": []
 }
