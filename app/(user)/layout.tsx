@@ -2,7 +2,6 @@
 
 import React, { useEffect } from "react";
 import { auth } from "@/lib/firebase";
-import { toast } from "sonner";
 import {
   useUserDataStore,
   useShopStore,
