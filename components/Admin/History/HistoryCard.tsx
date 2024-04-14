@@ -1,15 +1,34 @@
+import { getKeyValue } from "@/lib/firebaseUtils";
 import { getSelectedProductDetails } from "@/lib/productActions";
 import { formatISOStringToTimeAndDate } from "@/lib/timeActions";
 import { OrderItem } from "@/store/admin";
 import { useProductStore, useToppingsStore } from "@/store/zustand";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 function HistoryCard({ orderItem }: { orderItem: OrderItem }) {
   const { products } = useProductStore();
   const { toppings } = useToppingsStore();
 
+  const [userName, setUserName] = useState<string>("");
+
   const { cartItems, createdAt, userId } = orderItem;
+
+  useEffect(() => {
+    async function fetchUserName() {
+      try {
+        const fetchedUserName = await getKeyValue(
+          "users",
+          userId,
+          "displayName"
+        );
+        setUserName(fetchedUserName);
+      } catch (error) {
+        console.error("Error fetching user name:", error);
+      }
+    }
+    fetchUserName();
+  }, [userId]);
 
   const { quantity, toppingIds, productId, sizeId } = cartItems[0];
 
@@ -28,6 +47,7 @@ function HistoryCard({ orderItem }: { orderItem: OrderItem }) {
     `size: ${selectedSizeName}`,
     `add Ins: ${selectedToppingNames}`,
     `quantity: ${quantity}`,
+    `name: ${userName}`,
   ];
 
   const formattedCreateAt = formatISOStringToTimeAndDate(createdAt);
