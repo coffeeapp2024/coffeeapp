@@ -1,19 +1,23 @@
 "use client";
 import NavGoto from "@/components/Admin/NavGoto";
-import { fetchCollectionData } from "@/lib/firebaseUtils";
+import { fetchCollectionData, getDocumentById } from "@/lib/firebaseUtils";
 import { useOrderItemsStore, useScannedVouchersStore } from "@/store/admin";
 import {
   useProductStore,
   useToppingsStore,
+  useUserDataStore,
   useVoucherStore,
 } from "@/store/zustand";
 import React, { useEffect } from "react";
+import { fetchUserDataAndSetRole } from "../(user)/layout";
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const { userData, userId, setRole, setUserData, setUserId } =
+    useUserDataStore();
   const { setProducts } = useProductStore();
   const { setToppings } = useToppingsStore();
   const { setVouchers } = useVoucherStore();
@@ -21,6 +25,8 @@ export default function RootLayout({
   const { setScannedVouchers } = useScannedVouchersStore();
 
   useEffect(() => {
+    fetchUserDataAndSetRole(setUserData, setUserId, setRole);
+
     // Fetch scanned vouchers
     const fetchScannedVouchers = async () => {
       const fetchedScannedVouchers = await fetchCollectionData(
